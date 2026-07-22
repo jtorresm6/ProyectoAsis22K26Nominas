@@ -7,6 +7,7 @@ namespace ProyectoAsis22K26Nominas
     {
         public Form1()
         {
+            ///hola mundo
             InitializeComponent();
         }
     }

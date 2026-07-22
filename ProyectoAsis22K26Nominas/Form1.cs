@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -6,6 +7,7 @@ namespace ProyectoAsis22K26Nominas
     {
         public Form1()
         {
+            ///hola mundo
             InitializeComponent();
         }
     }

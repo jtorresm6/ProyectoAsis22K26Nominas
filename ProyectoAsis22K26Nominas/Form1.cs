@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -178,6 +179,11 @@ namespace ProyectoAsis22K26Nominas
         {
             AbrirFormHijo(new Formhelp());
             hideSubMenu();
+
+        }
+
+        private void Pnl_contenedor_Paint(object sender, PaintEventArgs e)
+        {
 
         }
     }

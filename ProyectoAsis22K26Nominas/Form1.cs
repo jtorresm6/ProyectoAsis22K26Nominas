@@ -22,7 +22,6 @@ namespace ProyectoAsis22K26Nominas
 
         public Form1()
         {
-            ///hola mundo
             InitializeComponent();
             customizeDesign();
 
@@ -49,7 +48,7 @@ namespace ProyectoAsis22K26Nominas
             Pnl_nomina.Visible = false;
             Pnl_vacaciones.Visible = false;
             Pnl_pagos.Visible = false;
-            Pnl_asistencia.Visible= false;
+            Pnl_asistencia.Visible = false;
         }
 
         private void hideSubMenu()
@@ -100,7 +99,12 @@ namespace ProyectoAsis22K26Nominas
             formHijo.Show();
         }
 
-        private void Form1_Load(object sender, EventArgs e) { }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Aplica los permisos del usuario logueado en cuanto carga el Form1
+            AplicarPermisos();
+        }
+
         private void panel1_Paint(object sender, PaintEventArgs e) { }
 
         // Menús principales
@@ -175,12 +179,9 @@ namespace ProyectoAsis22K26Nominas
 
         private void Pnl_cont1_Paint(object sender, PaintEventArgs e) { }
 
-        // Opción: Ayuda / Help
-       
         private void Btn_asistencia_Click_1(object sender, EventArgs e)
         {
             showSubMenu(Pnl_asistencia);
-
         }
 
         private void Pnl_contenedor_Paint(object sender, PaintEventArgs e)
@@ -192,6 +193,48 @@ namespace ProyectoAsis22K26Nominas
         {
             AbrirFormHijo(new Formasistencia());
             hideSubMenu();
+        }
+
+        // ==========================================
+        // 🔐 MÉTODO PARA APLICAR PERMISOS SEGÚN ROL
+        // ==========================================
+        private void AplicarPermisos()
+        {
+            string rol = SesionUsuario.Rol;
+
+            if (rol == "Secretaria")
+            {
+                // ❌ Oculta los módulos que no corresponden a Secretaría
+                Btn_empleado.Visible = false;
+                btn_nomina.Visible = false;
+                Btn_vacacioness.Visible = false; // Módulo Vacaciones
+                Btn_pagos.Visible = false;
+
+                // Si la secretaria no necesita el menú desplegable, se puede abrir directamente el Formasistencia:
+                AbrirFormHijo(new Formasistencia());
+            }
+            else if (rol == "RRHH")
+            {
+                // RRHH ve gestión de personal, nómina y vacaciones, pero no el módulo de pagos
+                Btn_empleado.Visible = true;
+                btn_nomina.Visible = true;
+                Btn_vacacioness.Visible = true;
+                Btn_pagos.Visible = false;
+            }
+            else if (rol == "Admin")
+            {
+                // El administrador tiene acceso a todo el sistema
+                Btn_empleado.Visible = true;
+                btn_nomina.Visible = true;
+                Btn_vacacioness.Visible = true;
+                Btn_pagos.Visible = true;
+            }
+        }
+
+        private void Btn_exit_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
         }
     }
 }

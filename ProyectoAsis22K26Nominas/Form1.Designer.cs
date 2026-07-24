@@ -30,46 +30,46 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Pnl_SideM = new System.Windows.Forms.Panel();
-            this.Btn_exit = new System.Windows.Forms.Button();
-            this.Btn_asistencias = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.Pnl_asistencia = new System.Windows.Forms.Panel();
+            this.Btn_asistencia = new System.Windows.Forms.Button();
             this.Pnl_emplaeado = new System.Windows.Forms.Panel();
             this.Btn_mantempleado = new System.Windows.Forms.Button();
             this.Btn_directempleado = new System.Windows.Forms.Button();
             this.Btn_nuevempleado = new System.Windows.Forms.Button();
-            this.Btn_empleado = new System.Windows.Forms.Button();
             this.Pnl_pagos = new System.Windows.Forms.Panel();
             this.Btn_histpagos = new System.Windows.Forms.Button();
             this.Btn_luiquidrecibos = new System.Windows.Forms.Button();
-            this.Btn_pagos = new System.Windows.Forms.Button();
             this.Pnl_vacaciones = new System.Windows.Forms.Panel();
             this.Btn_histconstancias = new System.Windows.Forms.Button();
             this.Btn_ctrlsaldos = new System.Windows.Forms.Button();
             this.Btn_nvsolicitud = new System.Windows.Forms.Button();
-            this.Btn_vacacioness = new System.Windows.Forms.Button();
             this.Pnl_nomina = new System.Windows.Forms.Panel();
             this.Btn_histreportes = new System.Windows.Forms.Button();
             this.Btn_genplanilla = new System.Windows.Forms.Button();
             this.Btn_movplanilla = new System.Windows.Forms.Button();
-            this.btn_nomina = new System.Windows.Forms.Button();
             this.Pnl_Logo = new System.Windows.Forms.Panel();
-            this.Pic_naro2 = new System.Windows.Forms.PictureBox();
             this.Pnl_contenedor = new System.Windows.Forms.Panel();
             this.Pic_naro = new System.Windows.Forms.PictureBox();
-            this.Pnl_asistencia = new System.Windows.Forms.Panel();
-            this.Btn_asistencia = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.Btn_exit = new System.Windows.Forms.Button();
             this.Btn_Help = new System.Windows.Forms.Button();
+            this.Btn_asistencias = new System.Windows.Forms.Button();
+            this.Btn_empleado = new System.Windows.Forms.Button();
+            this.Btn_pagos = new System.Windows.Forms.Button();
+            this.Btn_vacacioness = new System.Windows.Forms.Button();
+            this.btn_nomina = new System.Windows.Forms.Button();
+            this.Pic_naro2 = new System.Windows.Forms.PictureBox();
             this.Pnl_SideM.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.Pnl_asistencia.SuspendLayout();
             this.Pnl_emplaeado.SuspendLayout();
             this.Pnl_pagos.SuspendLayout();
             this.Pnl_vacaciones.SuspendLayout();
             this.Pnl_nomina.SuspendLayout();
             this.Pnl_Logo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_naro2)).BeginInit();
             this.Pnl_contenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_naro)).BeginInit();
-            this.Pnl_asistencia.SuspendLayout();
-            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_naro2)).BeginInit();
             this.SuspendLayout();
             // 
             // Pnl_SideM
@@ -95,38 +95,41 @@
             this.Pnl_SideM.TabIndex = 0;
             this.Pnl_SideM.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // Btn_exit
+            // panel1
             // 
-            this.Btn_exit.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_exit.FlatAppearance.BorderSize = 0;
-            this.Btn_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_exit.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_exit.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.Exit;
-            this.Btn_exit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_exit.Location = new System.Drawing.Point(0, 1028);
-            this.Btn_exit.Name = "Btn_exit";
-            this.Btn_exit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.Btn_exit.Size = new System.Drawing.Size(229, 57);
-            this.Btn_exit.TabIndex = 13;
-            this.Btn_exit.Text = "Exit";
-            this.Btn_exit.UseVisualStyleBackColor = true;
+            this.panel1.Controls.Add(this.Btn_Help);
+            this.panel1.Controls.Add(this.Pnl_asistencia);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 870);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(229, 158);
+            this.panel1.TabIndex = 12;
             // 
-            // Btn_asistencias
+            // Pnl_asistencia
             // 
-            this.Btn_asistencias.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_asistencias.FlatAppearance.BorderSize = 0;
-            this.Btn_asistencias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_asistencias.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_asistencias.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.asistencia;
-            this.Btn_asistencias.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_asistencias.Location = new System.Drawing.Point(0, 813);
-            this.Btn_asistencias.Name = "Btn_asistencias";
-            this.Btn_asistencias.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.Btn_asistencias.Size = new System.Drawing.Size(229, 57);
-            this.Btn_asistencias.TabIndex = 11;
-            this.Btn_asistencias.Text = "Asistencias";
-            this.Btn_asistencias.UseVisualStyleBackColor = true;
-            this.Btn_asistencias.Click += new System.EventHandler(this.Btn_asistencia_Click_1);
+            this.Pnl_asistencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
+            this.Pnl_asistencia.Controls.Add(this.Btn_asistencia);
+            this.Pnl_asistencia.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pnl_asistencia.Location = new System.Drawing.Point(0, 0);
+            this.Pnl_asistencia.Name = "Pnl_asistencia";
+            this.Pnl_asistencia.Size = new System.Drawing.Size(229, 57);
+            this.Pnl_asistencia.TabIndex = 9;
+            // 
+            // Btn_asistencia
+            // 
+            this.Btn_asistencia.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_asistencia.FlatAppearance.BorderSize = 0;
+            this.Btn_asistencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_asistencia.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_asistencia.Location = new System.Drawing.Point(0, 0);
+            this.Btn_asistencia.Name = "Btn_asistencia";
+            this.Btn_asistencia.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
+            this.Btn_asistencia.Size = new System.Drawing.Size(229, 53);
+            this.Btn_asistencia.TabIndex = 0;
+            this.Btn_asistencia.Text = "Control de Asistencia";
+            this.Btn_asistencia.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_asistencia.UseVisualStyleBackColor = true;
+            this.Btn_asistencia.Click += new System.EventHandler(this.Btn_asistencia_Click);
             // 
             // Pnl_emplaeado
             // 
@@ -187,23 +190,6 @@
             this.Btn_nuevempleado.UseVisualStyleBackColor = true;
             this.Btn_nuevempleado.Click += new System.EventHandler(this.Btn_nuevempleado_Click);
             // 
-            // Btn_empleado
-            // 
-            this.Btn_empleado.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_empleado.FlatAppearance.BorderSize = 0;
-            this.Btn_empleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_empleado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_empleado.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.Empleado__1_;
-            this.Btn_empleado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_empleado.Location = new System.Drawing.Point(0, 629);
-            this.Btn_empleado.Name = "Btn_empleado";
-            this.Btn_empleado.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.Btn_empleado.Size = new System.Drawing.Size(229, 45);
-            this.Btn_empleado.TabIndex = 9;
-            this.Btn_empleado.Text = "Empleado";
-            this.Btn_empleado.UseVisualStyleBackColor = true;
-            this.Btn_empleado.Click += new System.EventHandler(this.Btn_empleado_Click);
-            // 
             // Pnl_pagos
             // 
             this.Pnl_pagos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
@@ -246,23 +232,6 @@
             this.Btn_luiquidrecibos.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Btn_luiquidrecibos.UseVisualStyleBackColor = true;
             this.Btn_luiquidrecibos.Click += new System.EventHandler(this.Btn_luiquidrecibos_Click);
-            // 
-            // Btn_pagos
-            // 
-            this.Btn_pagos.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_pagos.FlatAppearance.BorderSize = 0;
-            this.Btn_pagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_pagos.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_pagos.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.PAGOS__1_;
-            this.Btn_pagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_pagos.Location = new System.Drawing.Point(0, 484);
-            this.Btn_pagos.Name = "Btn_pagos";
-            this.Btn_pagos.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.Btn_pagos.Size = new System.Drawing.Size(229, 45);
-            this.Btn_pagos.TabIndex = 7;
-            this.Btn_pagos.Text = "Pagos";
-            this.Btn_pagos.UseVisualStyleBackColor = true;
-            this.Btn_pagos.Click += new System.EventHandler(this.Btn_pagos_Click);
             // 
             // Pnl_vacaciones
             // 
@@ -324,23 +293,6 @@
             this.Btn_nvsolicitud.UseVisualStyleBackColor = true;
             this.Btn_nvsolicitud.Click += new System.EventHandler(this.Btn_nvsolicitud_Click);
             // 
-            // Btn_vacacioness
-            // 
-            this.Btn_vacacioness.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_vacacioness.FlatAppearance.BorderSize = 0;
-            this.Btn_vacacioness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_vacacioness.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_vacacioness.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.Vacaciones__1_;
-            this.Btn_vacacioness.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_vacacioness.Location = new System.Drawing.Point(0, 294);
-            this.Btn_vacacioness.Name = "Btn_vacacioness";
-            this.Btn_vacacioness.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.Btn_vacacioness.Size = new System.Drawing.Size(229, 45);
-            this.Btn_vacacioness.TabIndex = 5;
-            this.Btn_vacacioness.Text = "Vacaciones";
-            this.Btn_vacacioness.UseVisualStyleBackColor = true;
-            this.Btn_vacacioness.Click += new System.EventHandler(this.Button5_Click);
-            // 
             // Pnl_nomina
             // 
             this.Pnl_nomina.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
@@ -401,23 +353,6 @@
             this.Btn_movplanilla.UseVisualStyleBackColor = true;
             this.Btn_movplanilla.Click += new System.EventHandler(this.Btn_movplanilla_Click);
             // 
-            // btn_nomina
-            // 
-            this.btn_nomina.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_nomina.FlatAppearance.BorderSize = 0;
-            this.btn_nomina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_nomina.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btn_nomina.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.nomina__1_1;
-            this.btn_nomina.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_nomina.Location = new System.Drawing.Point(0, 105);
-            this.btn_nomina.Name = "btn_nomina";
-            this.btn_nomina.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.btn_nomina.Size = new System.Drawing.Size(229, 45);
-            this.btn_nomina.TabIndex = 3;
-            this.btn_nomina.Text = "Nomina";
-            this.btn_nomina.UseVisualStyleBackColor = true;
-            this.btn_nomina.Click += new System.EventHandler(this.btn_nomina_Click);
-            // 
             // Pnl_Logo
             // 
             this.Pnl_Logo.Controls.Add(this.Pic_naro2);
@@ -427,16 +362,6 @@
             this.Pnl_Logo.Size = new System.Drawing.Size(229, 105);
             this.Pnl_Logo.TabIndex = 0;
             // 
-            // Pic_naro2
-            // 
-            this.Pic_naro2.Image = ((System.Drawing.Image)(resources.GetObject("Pic_naro2.Image")));
-            this.Pic_naro2.Location = new System.Drawing.Point(25, 0);
-            this.Pic_naro2.Name = "Pic_naro2";
-            this.Pic_naro2.Size = new System.Drawing.Size(153, 102);
-            this.Pic_naro2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Pic_naro2.TabIndex = 0;
-            this.Pic_naro2.TabStop = false;
-            // 
             // Pnl_contenedor
             // 
             this.Pnl_contenedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
@@ -444,55 +369,36 @@
             this.Pnl_contenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Pnl_contenedor.Location = new System.Drawing.Point(250, 0);
             this.Pnl_contenedor.Name = "Pnl_contenedor";
-            this.Pnl_contenedor.Size = new System.Drawing.Size(700, 553);
+            this.Pnl_contenedor.Size = new System.Drawing.Size(754, 553);
             this.Pnl_contenedor.TabIndex = 1;
             this.Pnl_contenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.Pnl_contenedor_Paint);
             // 
             // Pic_naro
             // 
             this.Pic_naro.Image = ((System.Drawing.Image)(resources.GetObject("Pic_naro.Image")));
-            this.Pic_naro.Location = new System.Drawing.Point(137, 64);
+            this.Pic_naro.Location = new System.Drawing.Point(156, 75);
             this.Pic_naro.Name = "Pic_naro";
             this.Pic_naro.Size = new System.Drawing.Size(308, 309);
             this.Pic_naro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Pic_naro.TabIndex = 0;
             this.Pic_naro.TabStop = false;
             // 
-            // Pnl_asistencia
+            // Btn_exit
             // 
-            this.Pnl_asistencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
-            this.Pnl_asistencia.Controls.Add(this.Btn_asistencia);
-            this.Pnl_asistencia.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Pnl_asistencia.Location = new System.Drawing.Point(0, 0);
-            this.Pnl_asistencia.Name = "Pnl_asistencia";
-            this.Pnl_asistencia.Size = new System.Drawing.Size(229, 57);
-            this.Pnl_asistencia.TabIndex = 9;
-            // 
-            // Btn_asistencia
-            // 
-            this.Btn_asistencia.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_asistencia.FlatAppearance.BorderSize = 0;
-            this.Btn_asistencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_asistencia.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_asistencia.Location = new System.Drawing.Point(0, 0);
-            this.Btn_asistencia.Name = "Btn_asistencia";
-            this.Btn_asistencia.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.Btn_asistencia.Size = new System.Drawing.Size(229, 53);
-            this.Btn_asistencia.TabIndex = 0;
-            this.Btn_asistencia.Text = "Control de Asistencia";
-            this.Btn_asistencia.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_asistencia.UseVisualStyleBackColor = true;
-            this.Btn_asistencia.Click += new System.EventHandler(this.Btn_asistencia_Click);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.Btn_Help);
-            this.panel1.Controls.Add(this.Pnl_asistencia);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 870);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(229, 158);
-            this.panel1.TabIndex = 12;
+            this.Btn_exit.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_exit.FlatAppearance.BorderSize = 0;
+            this.Btn_exit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_exit.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_exit.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.Exit;
+            this.Btn_exit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_exit.Location = new System.Drawing.Point(0, 1028);
+            this.Btn_exit.Name = "Btn_exit";
+            this.Btn_exit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Btn_exit.Size = new System.Drawing.Size(229, 57);
+            this.Btn_exit.TabIndex = 13;
+            this.Btn_exit.Text = "Exit";
+            this.Btn_exit.UseVisualStyleBackColor = true;
+            this.Btn_exit.Click += new System.EventHandler(this.Btn_exit_Click);
             // 
             // Btn_Help
             // 
@@ -510,12 +416,107 @@
             this.Btn_Help.Text = "Help";
             this.Btn_Help.UseVisualStyleBackColor = true;
             // 
+            // Btn_asistencias
+            // 
+            this.Btn_asistencias.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_asistencias.FlatAppearance.BorderSize = 0;
+            this.Btn_asistencias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_asistencias.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_asistencias.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.asistencia;
+            this.Btn_asistencias.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_asistencias.Location = new System.Drawing.Point(0, 813);
+            this.Btn_asistencias.Name = "Btn_asistencias";
+            this.Btn_asistencias.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Btn_asistencias.Size = new System.Drawing.Size(229, 57);
+            this.Btn_asistencias.TabIndex = 11;
+            this.Btn_asistencias.Text = "Asistencias";
+            this.Btn_asistencias.UseVisualStyleBackColor = true;
+            this.Btn_asistencias.Click += new System.EventHandler(this.Btn_asistencia_Click_1);
+            // 
+            // Btn_empleado
+            // 
+            this.Btn_empleado.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_empleado.FlatAppearance.BorderSize = 0;
+            this.Btn_empleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_empleado.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_empleado.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.empleados2;
+            this.Btn_empleado.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_empleado.Location = new System.Drawing.Point(0, 629);
+            this.Btn_empleado.Name = "Btn_empleado";
+            this.Btn_empleado.Padding = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.Btn_empleado.Size = new System.Drawing.Size(229, 45);
+            this.Btn_empleado.TabIndex = 9;
+            this.Btn_empleado.Text = "Empleado";
+            this.Btn_empleado.UseVisualStyleBackColor = true;
+            this.Btn_empleado.Click += new System.EventHandler(this.Btn_empleado_Click);
+            // 
+            // Btn_pagos
+            // 
+            this.Btn_pagos.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_pagos.FlatAppearance.BorderSize = 0;
+            this.Btn_pagos.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_pagos.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_pagos.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.PAGOS__1_;
+            this.Btn_pagos.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_pagos.Location = new System.Drawing.Point(0, 484);
+            this.Btn_pagos.Name = "Btn_pagos";
+            this.Btn_pagos.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Btn_pagos.Size = new System.Drawing.Size(229, 45);
+            this.Btn_pagos.TabIndex = 7;
+            this.Btn_pagos.Text = "Pagos";
+            this.Btn_pagos.UseVisualStyleBackColor = true;
+            this.Btn_pagos.Click += new System.EventHandler(this.Btn_pagos_Click);
+            // 
+            // Btn_vacacioness
+            // 
+            this.Btn_vacacioness.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_vacacioness.FlatAppearance.BorderSize = 0;
+            this.Btn_vacacioness.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_vacacioness.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_vacacioness.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.Vacaciones__1_;
+            this.Btn_vacacioness.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_vacacioness.Location = new System.Drawing.Point(0, 294);
+            this.Btn_vacacioness.Name = "Btn_vacacioness";
+            this.Btn_vacacioness.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Btn_vacacioness.Size = new System.Drawing.Size(229, 45);
+            this.Btn_vacacioness.TabIndex = 5;
+            this.Btn_vacacioness.Text = "Vacaciones";
+            this.Btn_vacacioness.UseVisualStyleBackColor = true;
+            this.Btn_vacacioness.Click += new System.EventHandler(this.Button5_Click);
+            // 
+            // btn_nomina
+            // 
+            this.btn_nomina.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btn_nomina.FlatAppearance.BorderSize = 0;
+            this.btn_nomina.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_nomina.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btn_nomina.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.nomina__1_1;
+            this.btn_nomina.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_nomina.Location = new System.Drawing.Point(0, 105);
+            this.btn_nomina.Name = "btn_nomina";
+            this.btn_nomina.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.btn_nomina.Size = new System.Drawing.Size(229, 45);
+            this.btn_nomina.TabIndex = 3;
+            this.btn_nomina.Text = "Nomina";
+            this.btn_nomina.UseVisualStyleBackColor = true;
+            this.btn_nomina.Click += new System.EventHandler(this.btn_nomina_Click);
+            // 
+            // Pic_naro2
+            // 
+            this.Pic_naro2.Image = ((System.Drawing.Image)(resources.GetObject("Pic_naro2.Image")));
+            this.Pic_naro2.Location = new System.Drawing.Point(25, 0);
+            this.Pic_naro2.Name = "Pic_naro2";
+            this.Pic_naro2.Size = new System.Drawing.Size(153, 102);
+            this.Pic_naro2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Pic_naro2.TabIndex = 0;
+            this.Pic_naro2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(950, 553);
+            this.ClientSize = new System.Drawing.Size(1004, 553);
             this.Controls.Add(this.Pnl_contenedor);
             this.Controls.Add(this.Pnl_SideM);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -526,17 +527,17 @@
             this.Text = "Sistema de Nominas";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Pnl_SideM.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.Pnl_asistencia.ResumeLayout(false);
             this.Pnl_emplaeado.ResumeLayout(false);
             this.Pnl_pagos.ResumeLayout(false);
             this.Pnl_vacaciones.ResumeLayout(false);
             this.Pnl_nomina.ResumeLayout(false);
             this.Pnl_Logo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Pic_naro2)).EndInit();
             this.Pnl_contenedor.ResumeLayout(false);
             this.Pnl_contenedor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_naro)).EndInit();
-            this.Pnl_asistencia.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Pic_naro2)).EndInit();
             this.ResumeLayout(false);
 
         }

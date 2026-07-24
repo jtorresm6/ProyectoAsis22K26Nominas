@@ -218,6 +218,9 @@
     <EmbeddedResource Include="FormLiquidacionRecibo.resx">
       <DependentUpon>FormLiquidacionRecibo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMantenimientoEmpleado.resx">
       <DependentUpon>FormMantenimientoEmpleado.cs</DependentUpon>
     </EmbeddedResource>
@@ -295,6 +298,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="imagenes\asistencia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\red1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\Empleado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\empleados.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

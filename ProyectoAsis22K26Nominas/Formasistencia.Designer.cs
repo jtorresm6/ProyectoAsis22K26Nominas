@@ -1,6 +1,6 @@
 ﻿namespace ProyectoAsis22K26Nominas
 {
-    partial class Formhelp
+    partial class Formasistencia
     {
         /// <summary>
         /// Required designer variable.

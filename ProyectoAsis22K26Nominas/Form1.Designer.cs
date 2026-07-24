@@ -31,8 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.Pnl_SideM = new System.Windows.Forms.Panel();
             this.Btn_exit = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.Btn_help = new System.Windows.Forms.Button();
+            this.Btn_asistencias = new System.Windows.Forms.Button();
             this.Pnl_emplaeado = new System.Windows.Forms.Panel();
             this.Btn_mantempleado = new System.Windows.Forms.Button();
             this.Btn_directempleado = new System.Windows.Forms.Button();
@@ -56,6 +55,10 @@
             this.Pic_naro2 = new System.Windows.Forms.PictureBox();
             this.Pnl_contenedor = new System.Windows.Forms.Panel();
             this.Pic_naro = new System.Windows.Forms.PictureBox();
+            this.Pnl_asistencia = new System.Windows.Forms.Panel();
+            this.Btn_asistencia = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.Btn_Help = new System.Windows.Forms.Button();
             this.Pnl_SideM.SuspendLayout();
             this.Pnl_emplaeado.SuspendLayout();
             this.Pnl_pagos.SuspendLayout();
@@ -65,6 +68,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.Pic_naro2)).BeginInit();
             this.Pnl_contenedor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_naro)).BeginInit();
+            this.Pnl_asistencia.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Pnl_SideM
@@ -73,7 +78,7 @@
             this.Pnl_SideM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
             this.Pnl_SideM.Controls.Add(this.Btn_exit);
             this.Pnl_SideM.Controls.Add(this.panel1);
-            this.Pnl_SideM.Controls.Add(this.Btn_help);
+            this.Pnl_SideM.Controls.Add(this.Btn_asistencias);
             this.Pnl_SideM.Controls.Add(this.Pnl_emplaeado);
             this.Pnl_SideM.Controls.Add(this.Btn_empleado);
             this.Pnl_SideM.Controls.Add(this.Pnl_pagos);
@@ -98,7 +103,7 @@
             this.Btn_exit.ForeColor = System.Drawing.Color.Gainsboro;
             this.Btn_exit.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.Exit;
             this.Btn_exit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_exit.Location = new System.Drawing.Point(0, 997);
+            this.Btn_exit.Location = new System.Drawing.Point(0, 1028);
             this.Btn_exit.Name = "Btn_exit";
             this.Btn_exit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.Btn_exit.Size = new System.Drawing.Size(229, 57);
@@ -106,30 +111,22 @@
             this.Btn_exit.Text = "Exit";
             this.Btn_exit.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // Btn_asistencias
             // 
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 870);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(229, 127);
-            this.panel1.TabIndex = 12;
-            // 
-            // Btn_help
-            // 
-            this.Btn_help.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_help.FlatAppearance.BorderSize = 0;
-            this.Btn_help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_help.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_help.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.help__1_;
-            this.Btn_help.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_help.Location = new System.Drawing.Point(0, 813);
-            this.Btn_help.Name = "Btn_help";
-            this.Btn_help.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.Btn_help.Size = new System.Drawing.Size(229, 57);
-            this.Btn_help.TabIndex = 11;
-            this.Btn_help.Text = "Help";
-            this.Btn_help.UseVisualStyleBackColor = true;
-            this.Btn_help.Click += new System.EventHandler(this.Btn_help_Click_1);
+            this.Btn_asistencias.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_asistencias.FlatAppearance.BorderSize = 0;
+            this.Btn_asistencias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_asistencias.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_asistencias.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.asistencia;
+            this.Btn_asistencias.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_asistencias.Location = new System.Drawing.Point(0, 813);
+            this.Btn_asistencias.Name = "Btn_asistencias";
+            this.Btn_asistencias.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Btn_asistencias.Size = new System.Drawing.Size(229, 57);
+            this.Btn_asistencias.TabIndex = 11;
+            this.Btn_asistencias.Text = "Asistencias";
+            this.Btn_asistencias.UseVisualStyleBackColor = true;
+            this.Btn_asistencias.Click += new System.EventHandler(this.Btn_asistencia_Click_1);
             // 
             // Pnl_emplaeado
             // 
@@ -461,6 +458,58 @@
             this.Pic_naro.TabIndex = 0;
             this.Pic_naro.TabStop = false;
             // 
+            // Pnl_asistencia
+            // 
+            this.Pnl_asistencia.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(32)))), ((int)(((byte)(39)))));
+            this.Pnl_asistencia.Controls.Add(this.Btn_asistencia);
+            this.Pnl_asistencia.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Pnl_asistencia.Location = new System.Drawing.Point(0, 0);
+            this.Pnl_asistencia.Name = "Pnl_asistencia";
+            this.Pnl_asistencia.Size = new System.Drawing.Size(229, 57);
+            this.Pnl_asistencia.TabIndex = 9;
+            // 
+            // Btn_asistencia
+            // 
+            this.Btn_asistencia.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_asistencia.FlatAppearance.BorderSize = 0;
+            this.Btn_asistencia.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_asistencia.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_asistencia.Location = new System.Drawing.Point(0, 0);
+            this.Btn_asistencia.Name = "Btn_asistencia";
+            this.Btn_asistencia.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
+            this.Btn_asistencia.Size = new System.Drawing.Size(229, 53);
+            this.Btn_asistencia.TabIndex = 0;
+            this.Btn_asistencia.Text = "Control de Asistencia";
+            this.Btn_asistencia.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_asistencia.UseVisualStyleBackColor = true;
+            this.Btn_asistencia.Click += new System.EventHandler(this.Btn_asistencia_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.Btn_Help);
+            this.panel1.Controls.Add(this.Pnl_asistencia);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 870);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(229, 158);
+            this.panel1.TabIndex = 12;
+            // 
+            // Btn_Help
+            // 
+            this.Btn_Help.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_Help.FlatAppearance.BorderSize = 0;
+            this.Btn_Help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Help.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_Help.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.help__1_1;
+            this.Btn_Help.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_Help.Location = new System.Drawing.Point(0, 57);
+            this.Btn_Help.Name = "Btn_Help";
+            this.Btn_Help.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Btn_Help.Size = new System.Drawing.Size(229, 57);
+            this.Btn_Help.TabIndex = 14;
+            this.Btn_Help.Text = "Help";
+            this.Btn_Help.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -486,6 +535,8 @@
             this.Pnl_contenedor.ResumeLayout(false);
             this.Pnl_contenedor.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic_naro)).EndInit();
+            this.Pnl_asistencia.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -514,10 +565,13 @@
         private System.Windows.Forms.Button Btn_mantempleado;
         private System.Windows.Forms.Button Btn_directempleado;
         private System.Windows.Forms.Button Btn_nuevempleado;
-        private System.Windows.Forms.Button Btn_help;
+        private System.Windows.Forms.Button Btn_asistencias;
         private System.Windows.Forms.Panel Pnl_Logo;
         private System.Windows.Forms.PictureBox Pic_naro2;
         private System.Windows.Forms.Button Btn_exit;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button Btn_Help;
+        private System.Windows.Forms.Panel Pnl_asistencia;
+        private System.Windows.Forms.Button Btn_asistencia;
     }
 }

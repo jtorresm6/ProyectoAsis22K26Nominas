@@ -63,6 +63,16 @@ namespace ProyectoAsis22K26Nominas.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap asistencia {
+            get {
+                object obj = ResourceManager.GetObject("asistencia", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Empleado__1_ {
             get {
                 object obj = ResourceManager.GetObject("Empleado (1)", resourceCulture);

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
-    public partial class Formhelp : Form
+    public partial class Formasistencia : Form
     {
-        public Formhelp()
+        public Formasistencia()
         {
             InitializeComponent();
         }

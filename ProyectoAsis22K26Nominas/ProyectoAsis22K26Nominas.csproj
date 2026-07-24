@@ -117,11 +117,11 @@
     <Compile Include="FormGenerarPlanilla.Designer.cs">
       <DependentUpon>FormGenerarPlanilla.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formhelp.cs">
+    <Compile Include="Formasistencia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formhelp.Designer.cs">
-      <DependentUpon>Formhelp.cs</DependentUpon>
+    <Compile Include="Formasistencia.Designer.cs">
+      <DependentUpon>Formasistencia.cs</DependentUpon>
     </Compile>
     <Compile Include="FormHistorialNomina.cs">
       <SubType>Form</SubType>
@@ -196,8 +196,8 @@
     <EmbeddedResource Include="FormGenerarPlanilla.resx">
       <DependentUpon>FormGenerarPlanilla.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formhelp.resx">
-      <DependentUpon>Formhelp.cs</DependentUpon>
+    <EmbeddedResource Include="Formasistencia.resx">
+      <DependentUpon>Formasistencia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormHistorialNomina.resx">
       <DependentUpon>FormHistorialNomina.cs</DependentUpon>
@@ -285,6 +285,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="imagenes\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\asistencia.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

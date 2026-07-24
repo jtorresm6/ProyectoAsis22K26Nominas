@@ -49,6 +49,7 @@ namespace ProyectoAsis22K26Nominas
             Pnl_nomina.Visible = false;
             Pnl_vacaciones.Visible = false;
             Pnl_pagos.Visible = false;
+            Pnl_asistencia.Visible= false;
         }
 
         private void hideSubMenu()
@@ -57,6 +58,7 @@ namespace ProyectoAsis22K26Nominas
             if (Pnl_nomina.Visible) Pnl_nomina.Visible = false;
             if (Pnl_vacaciones.Visible) Pnl_vacaciones.Visible = false;
             if (Pnl_pagos.Visible) Pnl_pagos.Visible = false;
+            if (Pnl_asistencia.Visible) Pnl_asistencia.Visible = false;
         }
 
         private void showSubMenu(Panel subMenu)
@@ -175,16 +177,21 @@ namespace ProyectoAsis22K26Nominas
 
         // Opción: Ayuda / Help
        
-        private void Btn_help_Click_1(object sender, EventArgs e)
+        private void Btn_asistencia_Click_1(object sender, EventArgs e)
         {
-            AbrirFormHijo(new Formhelp());
-            hideSubMenu();
+            showSubMenu(Pnl_asistencia);
 
         }
 
         private void Pnl_contenedor_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void Btn_asistencia_Click(object sender, EventArgs e)
+        {
+            AbrirFormHijo(new Formasistencia());
+            hideSubMenu();
         }
     }
 }

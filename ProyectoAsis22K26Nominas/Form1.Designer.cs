@@ -513,22 +513,7 @@
             this.Pic_naro.TabIndex = 0;
             this.Pic_naro.TabStop = false;
             // 
-            // Btn_ayuda
-            // 
-            this.Btn_ayuda.Dock = System.Windows.Forms.DockStyle.Top;
-            this.Btn_ayuda.FlatAppearance.BorderSize = 0;
-            this.Btn_ayuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_ayuda.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_ayuda.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.help__1_1;
-            this.Btn_ayuda.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_ayuda.Location = new System.Drawing.Point(0, 57);
-            this.Btn_ayuda.Name = "Btn_ayuda";
-            this.Btn_ayuda.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
-            this.Btn_ayuda.Size = new System.Drawing.Size(229, 57);
-            this.Btn_ayuda.TabIndex = 12;
-            this.Btn_ayuda.Text = "Help";
-            this.Btn_ayuda.UseVisualStyleBackColor = true;
-            this.Btn_ayuda.Click += new System.EventHandler(this.Btn_ayuda_Click);
+        
             // 
             // Form1
             // 

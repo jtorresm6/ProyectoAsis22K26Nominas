@@ -105,7 +105,7 @@ namespace ProyectoAsis22K26Nominas
             AplicarPermisos();
         }
 
-        private void Pnl_paint(object sender, PaintEventArgs e) { }
+        private void panel1_Paint(object sender, PaintEventArgs e) { }
 
         // Menús principales
         private void Btn_empleado_Click(object sender, EventArgs e) => showSubMenu(Pnl_emplaeado);
@@ -243,11 +243,9 @@ namespace ProyectoAsis22K26Nominas
             this.Close();
         }
 
-       
-
-        private void Btn_ayuda_Click(object sender, EventArgs e)
+        private void Btn_Help_Click(object sender, EventArgs e)
         {
- 
+            AbrirFormHijo(new Formhelp());
         }
     }
 }

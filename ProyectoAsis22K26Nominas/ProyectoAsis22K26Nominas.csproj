@@ -123,6 +123,12 @@
     <Compile Include="Formasistencia.Designer.cs">
       <DependentUpon>Formasistencia.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formhelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formhelp.Designer.cs">
+      <DependentUpon>Formhelp.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormHistorialNomina.cs">
       <SubType>Form</SubType>
     </Compile>

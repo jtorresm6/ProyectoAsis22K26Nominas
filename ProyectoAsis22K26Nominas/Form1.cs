@@ -245,7 +245,7 @@ namespace ProyectoAsis22K26Nominas
 
         private void Btn_Help_Click(object sender, EventArgs e)
         {
-            AbrirFormHijo(new help());
+            AbrirFormHijo(new Formhelp());
         }
     }
 }

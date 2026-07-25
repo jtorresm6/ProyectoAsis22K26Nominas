@@ -93,7 +93,7 @@
             this.Pnl_SideM.Name = "Pnl_SideM";
             this.Pnl_SideM.Size = new System.Drawing.Size(250, 553);
             this.Pnl_SideM.TabIndex = 0;
-            this.Pnl_SideM.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.Pnl_SideM.Paint += new System.Windows.Forms.PaintEventHandler(this.Pnl_paint);
             // 
             // Btn_exit
             // 

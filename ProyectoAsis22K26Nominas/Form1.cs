@@ -105,7 +105,7 @@ namespace ProyectoAsis22K26Nominas
             AplicarPermisos();
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e) { }
+        private void Pnl_paint(object sender, PaintEventArgs e) { }
 
         // Menús principales
         private void Btn_empleado_Click(object sender, EventArgs e) => showSubMenu(Pnl_emplaeado);

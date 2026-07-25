@@ -38,6 +38,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "FormHistorialPagos";
             this.Text = "FormHistorialPagos";
+            this.Load += new System.EventHandler(this.FormHistorialPagos_Load);
             this.ResumeLayout(false);
 
         }

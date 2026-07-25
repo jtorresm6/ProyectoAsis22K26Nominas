@@ -243,9 +243,11 @@ namespace ProyectoAsis22K26Nominas
             this.Close();
         }
 
-        private void Btn_Help_Click(object sender, EventArgs e)
+       
+
+        private void Btn_ayuda_Click(object sender, EventArgs e)
         {
-            AbrirFormHijo(new help());
+            AbrirFormHijo(new FormHelps());
         }
     }
 }

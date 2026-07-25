@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
-    public partial class FormMantenimientoEmpleado : Form
+    public partial class help : Form
     {
-        public FormMantenimientoEmpleado()
+        public help()
         {
             InitializeComponent();
-        }
-
-        private void FormMantenimientoEmpleado_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

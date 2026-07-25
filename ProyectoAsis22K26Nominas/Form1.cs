@@ -125,6 +125,12 @@ namespace ProyectoAsis22K26Nominas
             AbrirFormHijo(new FormDirectorioEmpleados());
             hideSubMenu();
         }
+        private void Btn_mantempleado_Click(object sender, EventArgs e)
+        {
+            AbrirFormHijo(new FormMantenimientoEmpleado());
+            hideSubMenu();
+
+        }
 
         // Subopciones: Nómina 
         private void Btn_movplanilla_Click(object sender, EventArgs e)
@@ -235,6 +241,11 @@ namespace ProyectoAsis22K26Nominas
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void Btn_Help_Click(object sender, EventArgs e)
+        {
+            AbrirFormHijo(new help());
         }
     }
 }

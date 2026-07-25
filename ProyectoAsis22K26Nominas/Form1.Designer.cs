@@ -32,6 +32,7 @@
             this.Pnl_SideM = new System.Windows.Forms.Panel();
             this.Btn_exit = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.Btn_Help = new System.Windows.Forms.Button();
             this.Pnl_asistencia = new System.Windows.Forms.Panel();
             this.Btn_asistencia = new System.Windows.Forms.Button();
             this.Btn_asistencias = new System.Windows.Forms.Button();
@@ -58,7 +59,6 @@
             this.Pic_naro2 = new System.Windows.Forms.PictureBox();
             this.Pnl_contenedor = new System.Windows.Forms.Panel();
             this.Pic_naro = new System.Windows.Forms.PictureBox();
-            this.Btn_ayuda = new System.Windows.Forms.Button();
             this.Pnl_SideM.SuspendLayout();
             this.panel1.SuspendLayout();
             this.Pnl_asistencia.SuspendLayout();
@@ -93,7 +93,7 @@
             this.Pnl_SideM.Name = "Pnl_SideM";
             this.Pnl_SideM.Size = new System.Drawing.Size(250, 553);
             this.Pnl_SideM.TabIndex = 0;
-            this.Pnl_SideM.Paint += new System.Windows.Forms.PaintEventHandler(this.Pnl_paint);
+            this.Pnl_SideM.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // Btn_exit
             // 
@@ -103,7 +103,7 @@
             this.Btn_exit.ForeColor = System.Drawing.Color.Gainsboro;
             this.Btn_exit.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.Exit;
             this.Btn_exit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Btn_exit.Location = new System.Drawing.Point(0, 1052);
+            this.Btn_exit.Location = new System.Drawing.Point(0, 1028);
             this.Btn_exit.Name = "Btn_exit";
             this.Btn_exit.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.Btn_exit.Size = new System.Drawing.Size(229, 57);
@@ -114,13 +114,30 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.Btn_ayuda);
+            this.panel1.Controls.Add(this.Btn_Help);
             this.panel1.Controls.Add(this.Pnl_asistencia);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 870);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(229, 182);
+            this.panel1.Size = new System.Drawing.Size(229, 158);
             this.panel1.TabIndex = 12;
+            // 
+            // Btn_Help
+            // 
+            this.Btn_Help.Dock = System.Windows.Forms.DockStyle.Top;
+            this.Btn_Help.FlatAppearance.BorderSize = 0;
+            this.Btn_Help.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Help.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Btn_Help.Image = global::ProyectoAsis22K26Nominas.Properties.Resources.help__1_1;
+            this.Btn_Help.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Btn_Help.Location = new System.Drawing.Point(0, 57);
+            this.Btn_Help.Name = "Btn_Help";
+            this.Btn_Help.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+            this.Btn_Help.Size = new System.Drawing.Size(229, 57);
+            this.Btn_Help.TabIndex = 14;
+            this.Btn_Help.Text = "Help";
+            this.Btn_Help.UseVisualStyleBackColor = true;
+            this.Btn_Help.Click += new System.EventHandler(this.Btn_Help_Click);
             // 
             // Pnl_asistencia
             // 
@@ -544,7 +561,7 @@
 
         }
 
-        #endregion
+        #endregion  ``
 
         private System.Windows.Forms.Panel Pnl_SideM;
         private System.Windows.Forms.Panel Pnl_pagos;
@@ -573,8 +590,8 @@
         private System.Windows.Forms.PictureBox Pic_naro2;
         private System.Windows.Forms.Button Btn_exit;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button Btn_Help;
         private System.Windows.Forms.Panel Pnl_asistencia;
         private System.Windows.Forms.Button Btn_asistencia;
-        private System.Windows.Forms.Button Btn_ayuda;
     }
 }

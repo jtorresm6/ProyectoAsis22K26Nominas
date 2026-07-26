@@ -12,6 +12,21 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -84,15 +99,145 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormControlSaldos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormControlSaldos.Designer.cs">
+      <DependentUpon>FormControlSaldos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormDirectorioEmpleados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormDirectorioEmpleados.Designer.cs">
+      <DependentUpon>FormDirectorioEmpleados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGenerarPlanilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGenerarPlanilla.Designer.cs">
+      <DependentUpon>FormGenerarPlanilla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formasistencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formasistencia.Designer.cs">
+      <DependentUpon>Formasistencia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formhelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formhelp.Designer.cs">
+      <DependentUpon>Formhelp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHistorialNomina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHistorialNomina.Designer.cs">
+      <DependentUpon>FormHistorialNomina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHistorialPagos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHistorialPagos.Designer.cs">
+      <DependentUpon>FormHistorialPagos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormHistorialVacaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormHistorialVacaciones.Designer.cs">
+      <DependentUpon>FormHistorialVacaciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLiquidacionRecibo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLiquidacionRecibo.Designer.cs">
+      <DependentUpon>FormLiquidacionRecibo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMantenimientoEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMantenimientoEmpleado.Designer.cs">
+      <DependentUpon>FormMantenimientoEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMovimientosPlanilla.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMovimientosPlanilla.Designer.cs">
+      <DependentUpon>FormMovimientosPlanilla.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNuevoEmpleado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNuevoEmpleado.Designer.cs">
+      <DependentUpon>FormNuevoEmpleado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormNuevoregistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormNuevoregistro.Designer.cs">
+      <DependentUpon>FormNuevoregistro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSolicitudVacaciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSolicitudVacaciones.Designer.cs">
+      <DependentUpon>FormSolicitudVacaciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="materialform.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SesionUsuario.cs" />
     <EmbeddedResource Include="CrystalReport2.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormControlSaldos.resx">
+      <DependentUpon>FormControlSaldos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormDirectorioEmpleados.resx">
+      <DependentUpon>FormDirectorioEmpleados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGenerarPlanilla.resx">
+      <DependentUpon>FormGenerarPlanilla.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formasistencia.resx">
+      <DependentUpon>Formasistencia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHistorialNomina.resx">
+      <DependentUpon>FormHistorialNomina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHistorialPagos.resx">
+      <DependentUpon>FormHistorialPagos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormHistorialVacaciones.resx">
+      <DependentUpon>FormHistorialVacaciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLiquidacionRecibo.resx">
+      <DependentUpon>FormLiquidacionRecibo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMantenimientoEmpleado.resx">
+      <DependentUpon>FormMantenimientoEmpleado.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMovimientosPlanilla.resx">
+      <DependentUpon>FormMovimientosPlanilla.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormNuevoregistro.resx">
+      <DependentUpon>FormNuevoregistro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSolicitudVacaciones.resx">
+      <DependentUpon>FormSolicitudVacaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,6 +247,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Manual_Ayuda.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -122,6 +268,51 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\nomina.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\nomina %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\Vacaciones %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\PAGOS %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\Empleado %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\help %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\asistencia.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\red1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\Empleado.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\empleados.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

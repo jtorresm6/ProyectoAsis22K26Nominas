@@ -200,7 +200,7 @@
             this.Btn_mantempleado.FlatAppearance.BorderSize = 0;
             this.Btn_mantempleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_mantempleado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_mantempleado.Location = new System.Drawing.Point(0, 90);
+            this.Btn_mantempleado.Location = new System.Drawing.Point(0, 98);
             this.Btn_mantempleado.Name = "Btn_mantempleado";
             this.Btn_mantempleado.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.Btn_mantempleado.Size = new System.Drawing.Size(229, 49);
@@ -216,7 +216,7 @@
             this.Btn_directempleado.FlatAppearance.BorderSize = 0;
             this.Btn_directempleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_directempleado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_directempleado.Location = new System.Drawing.Point(0, 45);
+            this.Btn_directempleado.Location = new System.Drawing.Point(0, 53);
             this.Btn_directempleado.Name = "Btn_directempleado";
             this.Btn_directempleado.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.Btn_directempleado.Size = new System.Drawing.Size(229, 45);
@@ -235,7 +235,7 @@
             this.Btn_nuevempleado.Location = new System.Drawing.Point(0, 0);
             this.Btn_nuevempleado.Name = "Btn_nuevempleado";
             this.Btn_nuevempleado.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.Btn_nuevempleado.Size = new System.Drawing.Size(229, 45);
+            this.Btn_nuevempleado.Size = new System.Drawing.Size(229, 53);
             this.Btn_nuevempleado.TabIndex = 0;
             this.Btn_nuevempleado.Text = "Nuevo Empleado";
             this.Btn_nuevempleado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -512,8 +512,6 @@
             this.Pic_naro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.Pic_naro.TabIndex = 0;
             this.Pic_naro.TabStop = false;
-            // 
-        
             // 
             // Form1
             // 

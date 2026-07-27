@@ -136,11 +136,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="ConexionBD.cs" />
-
-    <Compile Include="Class1.cs" />
-
     <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -306,9 +302,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Content Include="Manuales\Nominas.pdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Manual_Ayuda.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -228,7 +228,7 @@ namespace ProyectoAsis22K26Nominas
             // 
             // Btn_Guardar
             // 
-            this.Btn_Guardar.Location = new System.Drawing.Point(785, 316);
+            this.Btn_Guardar.Location = new System.Drawing.Point(783, 321);
             this.Btn_Guardar.Name = "Btn_Guardar";
             this.Btn_Guardar.Size = new System.Drawing.Size(95, 36);
             this.Btn_Guardar.TabIndex = 36;

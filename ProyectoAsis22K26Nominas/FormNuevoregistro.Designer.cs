@@ -54,6 +54,9 @@
             this.Btn_eliminar = new System.Windows.Forms.Button();
             this.Txt_idempleado = new System.Windows.Forms.TextBox();
             this.Lbl_idregistro = new System.Windows.Forms.Label();
+            this.Btn_limpiar = new System.Windows.Forms.Button();
+            this.Txt_idpuesto = new System.Windows.Forms.TextBox();
+            this.Lbl_idpusto = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Txt_nombre
@@ -169,7 +172,7 @@
             // 
             // Btn_guardar
             // 
-            this.Btn_guardar.Location = new System.Drawing.Point(585, 315);
+            this.Btn_guardar.Location = new System.Drawing.Point(521, 319);
             this.Btn_guardar.Name = "Btn_guardar";
             this.Btn_guardar.Size = new System.Drawing.Size(75, 23);
             this.Btn_guardar.TabIndex = 14;
@@ -269,7 +272,7 @@
             // 
             // Btn_eliminar
             // 
-            this.Btn_eliminar.Location = new System.Drawing.Point(585, 392);
+            this.Btn_eliminar.Location = new System.Drawing.Point(521, 379);
             this.Btn_eliminar.Name = "Btn_eliminar";
             this.Btn_eliminar.Size = new System.Drawing.Size(75, 23);
             this.Btn_eliminar.TabIndex = 25;
@@ -295,12 +298,43 @@
             this.Lbl_idregistro.TabIndex = 27;
             this.Lbl_idregistro.Text = "Id empleado";
             // 
+            // Btn_limpiar
+            // 
+            this.Btn_limpiar.Location = new System.Drawing.Point(646, 379);
+            this.Btn_limpiar.Name = "Btn_limpiar";
+            this.Btn_limpiar.Size = new System.Drawing.Size(75, 23);
+            this.Btn_limpiar.TabIndex = 28;
+            this.Btn_limpiar.Text = "Limpiar";
+            this.Btn_limpiar.UseVisualStyleBackColor = true;
+            this.Btn_limpiar.Click += new System.EventHandler(this.Btn_limpiar_Click);
+            // 
+            // Txt_idpuesto
+            // 
+            this.Txt_idpuesto.Location = new System.Drawing.Point(348, 285);
+            this.Txt_idpuesto.Name = "Txt_idpuesto";
+            this.Txt_idpuesto.Size = new System.Drawing.Size(132, 22);
+            this.Txt_idpuesto.TabIndex = 29;
+            this.Txt_idpuesto.TextChanged += new System.EventHandler(this.Txt_idpuesto_TextChanged);
+            // 
+            // Lbl_idpusto
+            // 
+            this.Lbl_idpusto.AutoSize = true;
+            this.Lbl_idpusto.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Lbl_idpusto.Location = new System.Drawing.Point(386, 258);
+            this.Lbl_idpusto.Name = "Lbl_idpusto";
+            this.Lbl_idpusto.Size = new System.Drawing.Size(62, 16);
+            this.Lbl_idpusto.TabIndex = 30;
+            this.Lbl_idpusto.Text = "Id puesto";
+            // 
             // FormNuevoregistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Lbl_idpusto);
+            this.Controls.Add(this.Txt_idpuesto);
+            this.Controls.Add(this.Btn_limpiar);
             this.Controls.Add(this.Lbl_idregistro);
             this.Controls.Add(this.Txt_idempleado);
             this.Controls.Add(this.Btn_eliminar);
@@ -363,5 +397,8 @@
         private System.Windows.Forms.Button Btn_eliminar;
         private System.Windows.Forms.TextBox Txt_idempleado;
         private System.Windows.Forms.Label Lbl_idregistro;
+        private System.Windows.Forms.Button Btn_limpiar;
+        private System.Windows.Forms.TextBox Txt_idpuesto;
+        private System.Windows.Forms.Label Lbl_idpusto;
     }
 }

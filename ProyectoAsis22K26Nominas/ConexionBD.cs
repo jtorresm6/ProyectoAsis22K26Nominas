@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace ProyectoAsis22K26Nominas
 {

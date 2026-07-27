@@ -1,10 +1,9 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -27,7 +26,6 @@ namespace ProyectoAsis22K26Nominas
 
         #region Configuración de Estado y Controles
 
-        // Carga opciones predeterminadas en los ComboBoxes
         private void CargarComboboxes()
         {
             // Puestos
@@ -46,7 +44,6 @@ namespace ProyectoAsis22K26Nominas
             Cbo_Departamento.SelectedIndex = 0;
         }
 
-        // Bloquea o desbloquea todos los controles excepto el ID de búsqueda
         private void BloquearControles(bool bloquear)
         {
             bool habilitado = !bloquear;
@@ -58,6 +55,7 @@ namespace ProyectoAsis22K26Nominas
             Txt_direccion.Enabled = habilitado;
             Txt_correo.Enabled = habilitado;
             Txt_salario.Enabled = habilitado;
+            Txt_idpuesto.Enabled = habilitado;
 
             Cbo_Departamento.Enabled = habilitado;
             Cbo_puesto.Enabled = habilitado;
@@ -68,7 +66,6 @@ namespace ProyectoAsis22K26Nominas
             Btn_guardar.Enabled = habilitado;
         }
 
-        // Estado inicial al abrir o limpiar el formulario
         private void EstablecerEstadoInicial()
         {
             esEdicion = false;
@@ -93,6 +90,7 @@ namespace ProyectoAsis22K26Nominas
             Txt_direccion.Clear();
             Txt_correo.Clear();
             Txt_salario.Clear();
+            Txt_idpuesto.Clear();
 
             Dtp_fechnacimiento.Value = DateTime.Now;
             Dtp_fechcontratacion.Value = DateTime.Now;
@@ -136,12 +134,15 @@ namespace ProyectoAsis22K26Nominas
                         {
                             if (await reader.ReadAsync())
                             {
-                                Txt_idempleado.Text = reader["cmp_id_empleado"].ToString();
+                                int idEmpleadoObtenido = Convert.ToInt32(reader["cmp_id_empleado"]);
+
+                                Txt_idempleado.Text = idEmpleadoObtenido.ToString();
                                 Txt_identificacion.Text = reader["cmp_dpi"].ToString();
                                 Txt_nombre.Text = reader["cmp_nombre"].ToString();
                                 Txt_apellidos.Text = reader["cmp_apellido"].ToString();
                                 Txt_direccion.Text = reader["cmp_direccion"].ToString();
                                 Txt_salario.Text = reader["cmp_salario_base"].ToString();
+                                Txt_idpuesto.Text = reader["cmp_id_puesto"].ToString();
 
                                 if (reader["cmp_fecha_nacimiento"] != DBNull.Value)
                                     Dtp_fechnacimiento.Value = Convert.ToDateTime(reader["cmp_fecha_nacimiento"]);
@@ -149,17 +150,15 @@ namespace ProyectoAsis22K26Nominas
                                 if (reader["cmp_fecha_contratacion"] != DBNull.Value)
                                     Dtp_fechcontratacion.Value = Convert.ToDateTime(reader["cmp_fecha_contratacion"]);
 
-                                // Seleccionar Puesto y Departamento
                                 string nombrePuesto = reader["puesto"].ToString();
                                 string nombreDepto = reader["departamento"].ToString();
 
                                 if (Cbo_puesto.Items.Contains(nombrePuesto)) Cbo_puesto.SelectedItem = nombrePuesto;
                                 if (Cbo_Departamento.Items.Contains(nombreDepto)) Cbo_Departamento.SelectedItem = nombreDepto;
 
-                                // Cargar Teléfono y Correo si existen
-                                await CargarContactoEmpleadoAsync(Convert.ToInt32(reader["cmp_id_empleado"]));
+                                // Cargar teléfono y correo vinculados por la llave foránea cmp_id_empleado
+                                await CargarContactoEmpleadoAsync(idEmpleadoObtenido);
 
-                                // Bloquear campos y activar opciones de edición/eliminación
                                 BloquearControles(true);
                                 Txt_idempleado.Enabled = false;
                                 Btn_actualizar.Enabled = true;
@@ -188,15 +187,15 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // Carga de teléfono y correo
+        // Carga teléfono y correo mediante la Foreign Key
         private async Task CargarContactoEmpleadoAsync(int idEmpleado)
         {
             using (MySqlConnection con = ConexionBD.ObtenerConexion())
             {
                 await con.OpenAsync();
 
-                // Teléfono
-                string queryTel = "SELECT cmp_telefono FROM tbl_Telefonos WHERE cmp_id_empleado = @id LIMIT 1";
+                // Cargar Teléfono
+                string queryTel = "SELECT cmp_telefono FROM tbl_Telefonos WHERE cmp_id_empleado = @id ORDER BY cmp_id_telefono DESC LIMIT 1";
                 using (MySqlCommand cmd = new MySqlCommand(queryTel, con))
                 {
                     cmd.Parameters.AddWithValue("@id", idEmpleado);
@@ -204,8 +203,8 @@ namespace ProyectoAsis22K26Nominas
                     Txt_telefono.Text = res != null ? res.ToString() : "";
                 }
 
-                // Correo
-                string queryCor = "SELECT cmp_correo FROM tbl_Correos WHERE cmp_id_empleado = @id LIMIT 1";
+                // Cargar Correo
+                string queryCor = "SELECT cmp_correo FROM tbl_Correos WHERE cmp_id_empleado = @id ORDER BY cmp_id_correo DESC LIMIT 1";
                 using (MySqlCommand cmd = new MySqlCommand(queryCor, con))
                 {
                     cmd.Parameters.AddWithValue("@id", idEmpleado);
@@ -215,7 +214,6 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // Habilita modo nuevo registro
         private void HabilitarModoNuevo()
         {
             string idIngresado = Txt_idempleado.Text.Trim();
@@ -231,7 +229,7 @@ namespace ProyectoAsis22K26Nominas
             Btn_eliminar.Enabled = false;
         }
 
-        // 2. HABILITAR EDICIÓN
+        // 2. ACTIVAR MODO EDICIÓN
         private void Btn_actualizar_Click(object sender, EventArgs e)
         {
             BloquearControles(false);
@@ -271,7 +269,7 @@ namespace ProyectoAsis22K26Nominas
                 {
                     await con.OpenAsync();
 
-                    // Verificar si el DPI ya existe
+                    // Verificar duplicado por DPI
                     string queryCheck = "SELECT COUNT(*) FROM tbl_Empleados WHERE cmp_dpi = @dpi";
                     using (MySqlCommand cmdCheck = new MySqlCommand(queryCheck, con))
                     {
@@ -280,12 +278,18 @@ namespace ProyectoAsis22K26Nominas
 
                         if (count > 0)
                         {
-                            MessageBox.Show("Ya existe un empleado registrado con ese DPI. Ingrese uno diferente.", "Registro Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show("Ya existe un empleado registrado con ese DPI.", "Registro Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             return;
                         }
                     }
 
-                    // Insertar nuevo empleado
+                    int idPuesto = 1;
+                    if (!int.TryParse(Txt_idpuesto.Text.Trim(), out idPuesto))
+                    {
+                        idPuesto = Cbo_puesto.SelectedIndex + 1;
+                    }
+
+                    // Insertar Empleado y obtener ID generado
                     string queryInsert = @"INSERT INTO tbl_Empleados 
                                            (cmp_dpi, cmp_nombre, cmp_apellido, cmp_fecha_nacimiento, cmp_direccion, cmp_fecha_contratacion, cmp_id_departamento, cmp_id_puesto) 
                                            VALUES (@dpi, @nombre, @apellido, @fNac, @direccion, @fCont, @idDepto, @idPuesto);
@@ -301,12 +305,12 @@ namespace ProyectoAsis22K26Nominas
                         cmd.Parameters.AddWithValue("@direccion", Txt_direccion.Text.Trim());
                         cmd.Parameters.AddWithValue("@fCont", Dtp_fechcontratacion.Value.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@idDepto", Cbo_Departamento.SelectedIndex + 1);
-                        cmd.Parameters.AddWithValue("@idPuesto", Cbo_puesto.SelectedIndex + 1);
+                        cmd.Parameters.AddWithValue("@idPuesto", idPuesto);
 
                         nuevoId = Convert.ToInt32(await cmd.ExecuteScalarAsync());
                     }
 
-                    // Guardar contacto
+                    // Guardar Teléfono y Correo vinculando la FK cmp_id_empleado
                     await GuardarContactoAsync(con, nuevoId);
 
                     MessageBox.Show($"Empleado guardado exitosamente con ID: {nuevoId}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -328,6 +332,14 @@ namespace ProyectoAsis22K26Nominas
                 {
                     await con.OpenAsync();
 
+                    int idEmpleado = Convert.ToInt32(Txt_idempleado.Text.Trim());
+
+                    int idPuesto = 1;
+                    if (!int.TryParse(Txt_idpuesto.Text.Trim(), out idPuesto))
+                    {
+                        idPuesto = Cbo_puesto.SelectedIndex + 1;
+                    }
+
                     string queryUpdate = @"UPDATE tbl_Empleados 
                                            SET cmp_dpi = @dpi,
                                                cmp_nombre = @nombre,
@@ -348,11 +360,14 @@ namespace ProyectoAsis22K26Nominas
                         cmd.Parameters.AddWithValue("@direccion", Txt_direccion.Text.Trim());
                         cmd.Parameters.AddWithValue("@fCont", Dtp_fechcontratacion.Value.ToString("yyyy-MM-dd"));
                         cmd.Parameters.AddWithValue("@idDepto", Cbo_Departamento.SelectedIndex + 1);
-                        cmd.Parameters.AddWithValue("@idPuesto", Cbo_puesto.SelectedIndex + 1);
-                        cmd.Parameters.AddWithValue("@id", Convert.ToInt32(Txt_idempleado.Text));
+                        cmd.Parameters.AddWithValue("@idPuesto", idPuesto);
+                        cmd.Parameters.AddWithValue("@id", idEmpleado);
 
                         await cmd.ExecuteNonQueryAsync();
                     }
+
+                    // Sincronizar cambios en Teléfonos y Correos por la Foreign Key
+                    await ActualizarContactoAsync(con, idEmpleado);
 
                     MessageBox.Show("Información del empleado actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     EstablecerEstadoInicial();
@@ -364,6 +379,7 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
+        // Guarda registros en tbl_Telefonos y tbl_Correos
         private async Task GuardarContactoAsync(MySqlConnection con, int idEmpleado)
         {
             if (!string.IsNullOrEmpty(Txt_telefono.Text.Trim()))
@@ -389,13 +405,33 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // 4. ELIMINAR REGISTRO CON CONFIRMACIÓN
+        // Reemplaza teléfono y correo al actualizar
+        private async Task ActualizarContactoAsync(MySqlConnection con, int idEmpleado)
+        {
+            // Eliminar antiguos registros de contacto vinculados al idEmpleado
+            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_Telefonos WHERE cmp_id_empleado = @id", con))
+            {
+                cmd.Parameters.AddWithValue("@id", idEmpleado);
+                await cmd.ExecuteNonQueryAsync();
+            }
+
+            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_Correos WHERE cmp_id_empleado = @id", con))
+            {
+                cmd.Parameters.AddWithValue("@id", idEmpleado);
+                await cmd.ExecuteNonQueryAsync();
+            }
+
+            // Insertar de nuevo los contactos actualizados
+            await GuardarContactoAsync(con, idEmpleado);
+        }
+
+        // 4. ELIMINAR REGISTRO Y SUS LLAVES FORÁNEAS
         private async void Btn_eliminar_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(Txt_idempleado.Text.Trim())) return;
 
             DialogResult confirmacion = MessageBox.Show(
-                $"¿Está seguro de que desea eliminar al empleado con ID {Txt_idempleado.Text}?\nEsta acción no se puede deshacer.",
+                $"¿Está seguro de que desea eliminar al empleado con ID {Txt_idempleado.Text}?\nSe eliminarán también sus teléfonos y correos asociados.",
                 "Confirmar Eliminación",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
@@ -410,6 +446,7 @@ namespace ProyectoAsis22K26Nominas
 
                         int idEmpleado = Convert.ToInt32(Txt_idempleado.Text.Trim());
 
+                        // 1. Eliminar dependencias con FK
                         using (MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_Telefonos WHERE cmp_id_empleado = @id", con))
                         {
                             cmd.Parameters.AddWithValue("@id", idEmpleado);
@@ -421,6 +458,7 @@ namespace ProyectoAsis22K26Nominas
                             await cmd.ExecuteNonQueryAsync();
                         }
 
+                        // 2. Eliminar el registro del empleado
                         string queryDelete = "DELETE FROM tbl_Empleados WHERE cmp_id_empleado = @id";
                         using (MySqlCommand cmd = new MySqlCommand(queryDelete, con))
                         {
@@ -428,15 +466,21 @@ namespace ProyectoAsis22K26Nominas
                             await cmd.ExecuteNonQueryAsync();
                         }
 
-                        MessageBox.Show("Empleado eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Empleado y sus contactos asociados se eliminaron correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         EstablecerEstadoInicial();
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("No se puede eliminar el empleado porque posee registros vinculados.\nDetalle: " + ex.Message, "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No se puede eliminar el empleado porque posee otros registros vinculados (asistencias, nómina, etc.).\nDetalle: " + ex.Message, "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        // 5. LIMPIAR CAMPOS
+        private void Btn_limpiar_Click(object sender, EventArgs e)
+        {
+            EstablecerEstadoInicial();
         }
 
         #endregion
@@ -451,6 +495,7 @@ namespace ProyectoAsis22K26Nominas
         private void Txt_direccion_TextChanged(object sender, EventArgs e) { }
         private void Txt_correo_TextChanged(object sender, EventArgs e) { }
         private void Txt_salario_TextChanged(object sender, EventArgs e) { }
+        private void Txt_idpuesto_TextChanged(object sender, EventArgs e) { }
         private void Cbo_Departamento_SelectedIndexChanged(object sender, EventArgs e) { }
         private void Cbo_puesto_SelectedIndexChanged(object sender, EventArgs e) { }
         private void Dtp_fechnacimiento_ValueChanged(object sender, EventArgs e) { }

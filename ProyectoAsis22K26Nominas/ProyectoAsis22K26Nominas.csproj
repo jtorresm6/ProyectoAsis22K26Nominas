@@ -136,7 +136,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="ConexionBD.cs" />
+=======
+>>>>>>> origin/NataliMontenegro-09019-23-10017
     <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

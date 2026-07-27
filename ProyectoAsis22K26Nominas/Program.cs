@@ -24,7 +24,7 @@ namespace ProyectoAsis22K26Nominas
                 if (login.ShowDialog() == DialogResult.OK)
                 {
                     // Si el login fue exitoso, abrimos el Form1 principal
-                    Application.Run(new Form1());
+                    Application.Run(new FormMovimientosPlanilla());
                 }
                 else
                 {

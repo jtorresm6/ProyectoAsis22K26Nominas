@@ -499,7 +499,7 @@
             this.Pnl_contenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Pnl_contenedor.Location = new System.Drawing.Point(250, 0);
             this.Pnl_contenedor.Name = "Pnl_contenedor";
-            this.Pnl_contenedor.Size = new System.Drawing.Size(754, 553);
+            this.Pnl_contenedor.Size = new System.Drawing.Size(924, 553);
             this.Pnl_contenedor.TabIndex = 1;
             this.Pnl_contenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.Pnl_contenedor_Paint);
             // 
@@ -518,7 +518,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1004, 553);
+            this.ClientSize = new System.Drawing.Size(1174, 553);
             this.Controls.Add(this.Pnl_contenedor);
             this.Controls.Add(this.Pnl_SideM);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;

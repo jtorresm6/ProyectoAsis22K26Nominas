@@ -302,6 +302,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Manuales\Nominas.pdf" />
     <None Include="Manual_Ayuda.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

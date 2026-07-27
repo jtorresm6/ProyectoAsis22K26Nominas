@@ -50,9 +50,13 @@ namespace ProyectoAsis22K26Nominas
             this.Btn_Guardar = new System.Windows.Forms.Button();
             this.Btn_Eliminar = new System.Windows.Forms.Button();
             this.Btn_Modificar = new System.Windows.Forms.Button();
-            this.Dgv_Movimientos = new System.Windows.Forms.DataGridView();
+            this.Data_Movimientos = new System.Windows.Forms.DataGridView();
             this.Cbo_Buscar_Campo = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.Dgv_Movimientos)).BeginInit();
+            this.Txt_Observacion = new System.Windows.Forms.TextBox();
+            this.Lbl_Observacion = new System.Windows.Forms.Label();
+            this.Lbl_Id_Empleado = new System.Windows.Forms.Label();
+            this.Txt_Id_Empleado = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.Data_Movimientos)).BeginInit();
             this.SuspendLayout();
             // 
             // Lbl_Empleado
@@ -252,16 +256,16 @@ namespace ProyectoAsis22K26Nominas
             this.Btn_Modificar.UseVisualStyleBackColor = true;
             this.Btn_Modificar.Click += new System.EventHandler(this.Btn_Modificar_Click);
             // 
-            // Dgv_Movimientos
+            // Data_Movimientos
             // 
-            this.Dgv_Movimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgv_Movimientos.Location = new System.Drawing.Point(43, 351);
-            this.Dgv_Movimientos.Name = "Dgv_Movimientos";
-            this.Dgv_Movimientos.RowHeadersWidth = 51;
-            this.Dgv_Movimientos.RowTemplate.Height = 24;
-            this.Dgv_Movimientos.Size = new System.Drawing.Size(459, 150);
-            this.Dgv_Movimientos.TabIndex = 39;
-            this.Dgv_Movimientos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Data_Movimientos_CellClick);
+            this.Data_Movimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Data_Movimientos.Location = new System.Drawing.Point(43, 351);
+            this.Data_Movimientos.Name = "Data_Movimientos";
+            this.Data_Movimientos.RowHeadersWidth = 51;
+            this.Data_Movimientos.RowTemplate.Height = 24;
+            this.Data_Movimientos.Size = new System.Drawing.Size(459, 150);
+            this.Data_Movimientos.TabIndex = 39;
+            this.Data_Movimientos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Data_Movimientos_CellClick);
             // 
             // Cbo_Buscar_Campo
             // 
@@ -272,19 +276,59 @@ namespace ProyectoAsis22K26Nominas
             this.Cbo_Buscar_Campo.Size = new System.Drawing.Size(121, 24);
             this.Cbo_Buscar_Campo.TabIndex = 40;
             // 
+            // Txt_Observacion
+            // 
+            this.Txt_Observacion.Location = new System.Drawing.Point(857, 244);
+            this.Txt_Observacion.Name = "Txt_Observacion";
+            this.Txt_Observacion.Size = new System.Drawing.Size(127, 22);
+            this.Txt_Observacion.TabIndex = 34;
+            // 
+            // Lbl_Observacion
+            // 
+            this.Lbl_Observacion.AutoSize = true;
+            this.Lbl_Observacion.BackColor = System.Drawing.Color.White;
+            this.Lbl_Observacion.ForeColor = System.Drawing.Color.Black;
+            this.Lbl_Observacion.Location = new System.Drawing.Point(691, 250);
+            this.Lbl_Observacion.Name = "Lbl_Observacion";
+            this.Lbl_Observacion.Size = new System.Drawing.Size(84, 16);
+            this.Lbl_Observacion.TabIndex = 31;
+            this.Lbl_Observacion.Text = "Observacion";
+            // 
+            // Lbl_Id_Empleado
+            // 
+            this.Lbl_Id_Empleado.AutoSize = true;
+            this.Lbl_Id_Empleado.BackColor = System.Drawing.Color.White;
+            this.Lbl_Id_Empleado.ForeColor = System.Drawing.Color.Black;
+            this.Lbl_Id_Empleado.Location = new System.Drawing.Point(691, 37);
+            this.Lbl_Id_Empleado.Name = "Lbl_Id_Empleado";
+            this.Lbl_Id_Empleado.Size = new System.Drawing.Size(86, 16);
+            this.Lbl_Id_Empleado.TabIndex = 41;
+            this.Lbl_Id_Empleado.Text = "ID Empleado";
+            // 
+            // Txt_Id_Empleado
+            // 
+            this.Txt_Id_Empleado.Location = new System.Drawing.Point(857, 37);
+            this.Txt_Id_Empleado.Name = "Txt_Id_Empleado";
+            this.Txt_Id_Empleado.Size = new System.Drawing.Size(208, 22);
+            this.Txt_Id_Empleado.TabIndex = 42;
+            // 
             // FormMovimientosPlanilla
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(1090, 532);
+            this.Controls.Add(this.Txt_Id_Empleado);
+            this.Controls.Add(this.Lbl_Id_Empleado);
             this.Controls.Add(this.Cbo_Buscar_Campo);
-            this.Controls.Add(this.Dgv_Movimientos);
+            this.Controls.Add(this.Data_Movimientos);
             this.Controls.Add(this.Btn_Eliminar);
             this.Controls.Add(this.Btn_Modificar);
             this.Controls.Add(this.Btn_Guardar);
+            this.Controls.Add(this.Txt_Observacion);
             this.Controls.Add(this.Txt_Monto);
             this.Controls.Add(this.Txt_Cantidad);
+            this.Controls.Add(this.Lbl_Observacion);
             this.Controls.Add(this.Lbl_Monto);
             this.Controls.Add(this.Txt_Descripcion);
             this.Controls.Add(this.Lbl_Cantidad);
@@ -304,7 +348,7 @@ namespace ProyectoAsis22K26Nominas
             this.Name = "FormMovimientosPlanilla";
             this.Text = "FormMovimientosPlanilla";
             this.Load += new System.EventHandler(this.FormMovimientosPlanilla_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.Dgv_Movimientos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Data_Movimientos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -332,7 +376,11 @@ namespace ProyectoAsis22K26Nominas
         private System.Windows.Forms.Button Btn_Guardar;
         private System.Windows.Forms.Button Btn_Eliminar;
         private System.Windows.Forms.Button Btn_Modificar;
-        private System.Windows.Forms.DataGridView Dgv_Movimientos;
+        private System.Windows.Forms.DataGridView Data_Movimientos;
         private System.Windows.Forms.ComboBox Cbo_Buscar_Campo;
+        private System.Windows.Forms.TextBox Txt_Observacion;
+        private System.Windows.Forms.Label Lbl_Observacion;
+        private System.Windows.Forms.Label Lbl_Id_Empleado;
+        private System.Windows.Forms.TextBox Txt_Id_Empleado;
     }
 }

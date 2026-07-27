@@ -4,10 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
+using MySql.Data.MySqlClient;
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -73,7 +74,7 @@ namespace ProyectoAsis22K26Nominas
                 SesionUsuario.Usuario = user;
                 SesionUsuario.Rol = "Admin";
 
-                this.DialogResult = DialogResult.OK; 
+                this.DialogResult = DialogResult.OK;
             }
             else if (user == "secre" && pass == "123")
             {
@@ -95,12 +96,6 @@ namespace ProyectoAsis22K26Nominas
             {
                 MessageBox.Show("Usuario o contraseña incorrectos.", "Error de Autenticación", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void Btn_salir_Click(object sender, EventArgs e)
-        {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
         }
     }
 }

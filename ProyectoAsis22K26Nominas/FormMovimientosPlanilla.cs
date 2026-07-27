@@ -165,10 +165,10 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
                 tabla = new DataTable();
                 adaptador.Fill(tabla);
 
-                Dgv_Movimientos.DataSource = tabla;
-                Dgv_Movimientos.Columns["cmp_id_movimiento"].Visible = false;
-                Dgv_Movimientos.Columns["cmp_cantidad"].Visible = false;
-                Dgv_Movimientos.Columns["cmp_id_tipo_movimiento"].Visible = false;
+                Data_Movimientos.DataSource = tabla;
+                Data_Movimientos.Columns["cmp_id_movimiento"].Visible = false;
+                Data_Movimientos.Columns["cmp_cantidad"].Visible = false;
+                Data_Movimientos.Columns["cmp_id_tipo_movimiento"].Visible = false;
                 conexion.Close();
             }
             catch (Exception ex)
@@ -423,7 +423,7 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
         {
             if (e.RowIndex >= 0)
             {
-                DataGridViewRow fila = Dgv_Movimientos.Rows[e.RowIndex];
+                DataGridViewRow fila = Data_Movimientos.Rows[e.RowIndex];
 
                 idMovimientoSeleccionado = Convert.ToInt32(
                     fila.Cells["cmp_id_movimiento"].Value

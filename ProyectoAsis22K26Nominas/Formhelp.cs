@@ -36,11 +36,8 @@ namespace ProyectoAsis22K26Nominas
 
         //Creación de los botones de ayuda que presenta información resumida de lo que se encuentra en cada formulario
         //del sistema, además de un botón que permite abrir el manual en PDF.
-        private void Trv_Sistema_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-
+        private void Trv_Sistema_AfterSelect(object sender, TreeViewEventArgs e) {
             Rtb_Info.Clear();
-
             switch (e.Node.Text) {
                 case "Gestión de Empleados":
 

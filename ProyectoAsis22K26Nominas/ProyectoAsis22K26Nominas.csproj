@@ -221,12 +221,6 @@
     <Compile Include="FormMovimientosPlanilla.Designer.cs">
       <DependentUpon>FormMovimientosPlanilla.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormNuevoEmpleado.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormNuevoEmpleado.Designer.cs">
-      <DependentUpon>FormNuevoEmpleado.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormNuevoregistro.cs">
       <SubType>Form</SubType>
     </Compile>

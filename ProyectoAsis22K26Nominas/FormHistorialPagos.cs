@@ -3,6 +3,10 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+//Parte trabajada por Diego Alejandro Cheng Peña - carné: 0901-22-8091
+//Curso:Análisis de sistemas II
+//Fecha de creación: 24-07-2026
+//Fecha de última modificación 27-07-2026
 
 namespace ProyectoAsis22K26Nominas
 {

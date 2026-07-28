@@ -4,6 +4,12 @@ using System.Data;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+//Parte trabajada por: Jose Javier Torres Martinez - Carné: 0901-23-1091
+//Curso:Análisis de Sistemas II
+//Fecha de creación: 23-07-2026
+//Fecha de última modificación: 27-07-2026
+
 namespace ProyectoAsis22K26Nominas
 {
     public partial class Formasistencia : Form
@@ -15,10 +21,10 @@ namespace ProyectoAsis22K26Nominas
 
         private async void Formasistencia_Load(object sender, EventArgs e)
         {
-            // 1. Iniciar el Timer si existe
+
             timer_reloj.Start();
 
-            // 2. Llenar el ComboBox de Tipo de Registro
+       
             Cbo_tipregistro.Items.Clear();
             Cbo_tipregistro.Items.Add("Entrada Normal");
             Cbo_tipregistro.Items.Add("Salida Normal");
@@ -26,16 +32,16 @@ namespace ProyectoAsis22K26Nominas
             Cbo_tipregistro.Items.Add("Permiso / Justificado");
             Cbo_tipregistro.SelectedIndex = 0;
 
-            // 3. Cargar historial de asistencias desde la BD
+  
             await CargarTablaAsistenciasAsync();
         }
 
         private void timer_reloj_Tick(object sender, EventArgs e)
         {
-            // Evento de timer libre de controles Lbl
+          
         }
 
-        // --- CARGAR HISTORIAL DESDE MYSQL ---
+
         private async Task CargarTablaAsistenciasAsync()
         {
             try
@@ -76,7 +82,7 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // --- BÚSQUEDA DE EMPLEADO EN BASE DE DATOS ---
+  
         private async void Btn_buscar_Click(object sender, EventArgs e)
         {
             await BuscarEmpleadoAsync();
@@ -133,7 +139,7 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // --- REGISTRO DE ENTRADA O SALIDA EN MYSQL ---
+    
         private async void Btn_registrar_Click_1(object sender, EventArgs e)
         {
             string codigoTxt = Txt_codempleado.Text.Trim();
@@ -154,7 +160,6 @@ namespace ProyectoAsis22K26Nominas
                 {
                     await con.OpenAsync();
 
-                    // 1. Validar que el empleado exista
                     string qCheckEmp = "SELECT COUNT(*) FROM tbl_Empleados WHERE cmp_id_empleado = @idEmp;";
                     using (MySqlCommand cmdCheck = new MySqlCommand(qCheckEmp, con))
                     {
@@ -167,7 +172,7 @@ namespace ProyectoAsis22K26Nominas
                         }
                     }
 
-                    // 2. Verificar si ya existe un registro en la fecha elegida
+             
                     string qExiste = "SELECT cmp_id_asistencia, cmp_hora_entrada FROM tbl_Asistencias WHERE cmp_id_empleado = @idEmp AND cmp_fecha = @fecha LIMIT 1;";
 
                     int idAsistenciaExistente = 0;
@@ -191,7 +196,7 @@ namespace ProyectoAsis22K26Nominas
                         }
                     }
 
-                    // 3. CASO SALIDA: Se actualiza el registro existente
+    
                     if (tipoRegistro == "Salida Normal")
                     {
                         if (idAsistenciaExistente == 0)
@@ -200,7 +205,7 @@ namespace ProyectoAsis22K26Nominas
                             return;
                         }
 
-                        // Cálculo de horas trabajadas y extras
+        
                         double totalHoras = (horaActual - horaEntradaExistente).TotalHours;
                         decimal horasTrabajadas = (decimal)Math.Max(0, Math.Round(totalHoras, 2));
                         decimal horasExtra = (decimal)Math.Max(0, Math.Round(totalHoras > 8 ? totalHoras - 8 : 0, 2));
@@ -217,13 +222,13 @@ namespace ProyectoAsis22K26Nominas
                             cmdUpd.Parameters.AddWithValue("@hSalida", horaActual);
                             cmdUpd.Parameters.AddWithValue("@hTrab", horasTrabajadas);
                             cmdUpd.Parameters.AddWithValue("@hExtra", horasExtra);
-                            cmdUpd.Parameters.AddWithValue("@obs", tipoRegistro); // Parámetro asignado correctamente
+                            cmdUpd.Parameters.AddWithValue("@obs", tipoRegistro);
                             cmdUpd.Parameters.AddWithValue("@idAsis", idAsistenciaExistente);
 
                             await cmdUpd.ExecuteNonQueryAsync();
                         }
                     }
-                    // 4. CASO ENTRADA: Se crea un nuevo registro
+
                     else
                     {
                         if (idAsistenciaExistente > 0)
@@ -232,7 +237,6 @@ namespace ProyectoAsis22K26Nominas
                             return;
                         }
 
-                        // Cálculo de minutos de tardanza (Hora límite 08:00 AM)
                         int minutosTardanza = 0;
                         TimeSpan horaLimite = new TimeSpan(8, 0, 0);
 
@@ -250,7 +254,7 @@ namespace ProyectoAsis22K26Nominas
                             cmdIns.Parameters.AddWithValue("@fecha", fechaSel);
                             cmdIns.Parameters.AddWithValue("@hEntrada", horaActual);
                             cmdIns.Parameters.AddWithValue("@minTardanza", minutosTardanza);
-                            cmdIns.Parameters.AddWithValue("@obs", tipoRegistro); // Parámetro asignado correctamente
+                            cmdIns.Parameters.AddWithValue("@obs", tipoRegistro); 
                             cmdIns.Parameters.AddWithValue("@idEmp", idEmpleado);
 
                             await cmdIns.ExecuteNonQueryAsync();
@@ -269,7 +273,7 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // --- BOTÓN LIMPIAR ---
+   
         private void Btn_limpiar_Click_1(object sender, EventArgs e)
         {
             LimpiarCampos();

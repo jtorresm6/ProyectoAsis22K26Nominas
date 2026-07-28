@@ -54,9 +54,10 @@
             // Txt_Empleado
             // 
             this.Txt_Empleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_Empleado.Location = new System.Drawing.Point(318, 52);
+            this.Txt_Empleado.Location = new System.Drawing.Point(283, 42);
+            this.Txt_Empleado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txt_Empleado.Name = "Txt_Empleado";
-            this.Txt_Empleado.Size = new System.Drawing.Size(168, 32);
+            this.Txt_Empleado.Size = new System.Drawing.Size(150, 28);
             this.Txt_Empleado.TabIndex = 7;
             // 
             // Btn_Buscar
@@ -66,10 +67,9 @@
             this.Btn_Buscar.FlatAppearance.BorderSize = 3;
             this.Btn_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Buscar.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_Buscar.Location = new System.Drawing.Point(547, 45);
-            this.Btn_Buscar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Btn_Buscar.Location = new System.Drawing.Point(486, 36);
             this.Btn_Buscar.Name = "Btn_Buscar";
-            this.Btn_Buscar.Size = new System.Drawing.Size(127, 50);
+            this.Btn_Buscar.Size = new System.Drawing.Size(113, 40);
             this.Btn_Buscar.TabIndex = 6;
             this.Btn_Buscar.Text = "Buscar";
             this.Btn_Buscar.UseVisualStyleBackColor = false;
@@ -80,9 +80,9 @@
             this.Lbl_Empleado.AutoSize = true;
             this.Lbl_Empleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Empleado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Lbl_Empleado.Location = new System.Drawing.Point(24, 55);
+            this.Lbl_Empleado.Location = new System.Drawing.Point(21, 44);
             this.Lbl_Empleado.Name = "Lbl_Empleado";
-            this.Lbl_Empleado.Size = new System.Drawing.Size(275, 26);
+            this.Lbl_Empleado.Size = new System.Drawing.Size(238, 24);
             this.Lbl_Empleado.TabIndex = 5;
             this.Lbl_Empleado.Text = "Ingrese el ID del Empleado";
             // 
@@ -106,14 +106,15 @@
             this.cmp_fecha_pago,
             this.cmp_estado,
             this.cmp_observaciones});
-            this.Dgv_Liquidacion_Recibo.Location = new System.Drawing.Point(29, 168);
+            this.Dgv_Liquidacion_Recibo.Location = new System.Drawing.Point(26, 134);
+            this.Dgv_Liquidacion_Recibo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dgv_Liquidacion_Recibo.Name = "Dgv_Liquidacion_Recibo";
             this.Dgv_Liquidacion_Recibo.ReadOnly = true;
             this.Dgv_Liquidacion_Recibo.RowHeadersVisible = false;
             this.Dgv_Liquidacion_Recibo.RowHeadersWidth = 62;
             this.Dgv_Liquidacion_Recibo.RowTemplate.Height = 28;
             this.Dgv_Liquidacion_Recibo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Dgv_Liquidacion_Recibo.Size = new System.Drawing.Size(749, 163);
+            this.Dgv_Liquidacion_Recibo.Size = new System.Drawing.Size(666, 130);
             this.Dgv_Liquidacion_Recibo.TabIndex = 8;
             // 
             // cmp_id_liquidacion
@@ -262,17 +263,17 @@
             // 
             // FormLiquidacionRecibo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(900, 562);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.Dgv_Liquidacion_Recibo);
             this.Controls.Add(this.Txt_Empleado);
             this.Controls.Add(this.Btn_Buscar);
             this.Controls.Add(this.Lbl_Empleado);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormLiquidacionRecibo";
             this.Text = "FormLiquidacionRecibo";
+            this.Load += new System.EventHandler(this.FormLiquidacionRecibo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Liquidacion_Recibo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

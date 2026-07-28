@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
+
+
+// Roger Yankhel de Jesús Herrera Alcántara 0901-23-2429 
+// Fecha de creacion: 25/07/2026
+// Fecha de finalizacion: 27/07/2026
+
 namespace ProyectoAsis22K26Nominas
 {
     public partial class FormGenerarPlanilla : Form
@@ -156,6 +162,11 @@ namespace ProyectoAsis22K26Nominas
 
             // Limpiar tabla
             Dgv_Detalle_Planilla.Rows.Clear();
+        }
+
+        private void FormGenerarPlanilla_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

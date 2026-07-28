@@ -190,6 +190,7 @@
             this.Controls.Add(this.Lbl_Periodo);
             this.Name = "FormGenerarPlanilla";
             this.Text = "FormGenerarPlanilla";
+            this.Load += new System.EventHandler(this.FormGenerarPlanilla_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Detalle_Planilla)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

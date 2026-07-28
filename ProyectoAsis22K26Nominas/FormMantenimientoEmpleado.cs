@@ -126,7 +126,6 @@ namespace ProyectoAsis22K26Nominas
                 return;
             }
 
-            // Correcto:
             MySqlConnection conexion = ConexionBD.ObtenerConexion();
 
             try
@@ -206,7 +205,6 @@ namespace ProyectoAsis22K26Nominas
                 "left join tbl_Correos c on e.cmp_id_empleado = c.cmp_id_empleado " +
                 "where " + campo + " = @dato";
 
-            // Correcto:
             MySqlConnection conexion = ConexionBD.ObtenerConexion();
 
             try
@@ -303,6 +301,7 @@ namespace ProyectoAsis22K26Nominas
                 return;
             }
 
+            // Subconsultas ajustadas con LIMIT 1 para evitar el error de MySQL
             string sqlEmpleado =
                 "update tbl_Empleados set " +
                 "cmp_dpi = @dpi, " +
@@ -312,11 +311,10 @@ namespace ProyectoAsis22K26Nominas
                 "cmp_fecha_nacimiento = @fechaNacimiento, " +
                 "cmp_direccion = @direccion, " +
                 "cmp_fecha_contratacion = @fechaContratacion, " +
-                "cmp_id_departamento = (select cmp_id_departamento from tbl_Departamentos where cmp_nombre = @departamento), " +
-                "cmp_id_puesto = (select cmp_id_puesto from tbl_Puestos where cmp_nombre = @puesto) " +
+                "cmp_id_departamento = (select cmp_id_departamento from tbl_Departamentos where cmp_nombre = @departamento limit 1), " +
+                "cmp_id_puesto = (select cmp_id_puesto from tbl_Puestos where cmp_nombre = @puesto limit 1) " +
                 "where cmp_id_empleado = @codigo";
 
-            // Correcto:
             MySqlConnection conexion = ConexionBD.ObtenerConexion();
 
             try
@@ -398,7 +396,7 @@ namespace ProyectoAsis22K26Nominas
             {
                 return;
             }
-            // Correcto:
+
             MySqlConnection conexion = ConexionBD.ObtenerConexion();
 
             try

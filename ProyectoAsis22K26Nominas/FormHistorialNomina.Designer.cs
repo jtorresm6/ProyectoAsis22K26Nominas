@@ -49,9 +49,9 @@
             this.Lbl_Usuario.AutoSize = true;
             this.Lbl_Usuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Usuario.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Lbl_Usuario.Location = new System.Drawing.Point(24, 55);
+            this.Lbl_Usuario.Location = new System.Drawing.Point(21, 44);
             this.Lbl_Usuario.Name = "Lbl_Usuario";
-            this.Lbl_Usuario.Size = new System.Drawing.Size(251, 26);
+            this.Lbl_Usuario.Size = new System.Drawing.Size(215, 24);
             this.Lbl_Usuario.TabIndex = 0;
             this.Lbl_Usuario.Text = "Ingrese el ID del Usuario";
             // 
@@ -62,10 +62,9 @@
             this.Btn_Buscar.FlatAppearance.BorderSize = 3;
             this.Btn_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Buscar.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_Buscar.Location = new System.Drawing.Point(547, 45);
-            this.Btn_Buscar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Btn_Buscar.Location = new System.Drawing.Point(486, 36);
             this.Btn_Buscar.Name = "Btn_Buscar";
-            this.Btn_Buscar.Size = new System.Drawing.Size(127, 50);
+            this.Btn_Buscar.Size = new System.Drawing.Size(113, 40);
             this.Btn_Buscar.TabIndex = 3;
             this.Btn_Buscar.Text = "Buscar";
             this.Btn_Buscar.UseVisualStyleBackColor = false;
@@ -74,9 +73,10 @@
             // Txt_Usuario
             // 
             this.Txt_Usuario.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_Usuario.Location = new System.Drawing.Point(318, 52);
+            this.Txt_Usuario.Location = new System.Drawing.Point(283, 42);
+            this.Txt_Usuario.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txt_Usuario.Name = "Txt_Usuario";
-            this.Txt_Usuario.Size = new System.Drawing.Size(168, 32);
+            this.Txt_Usuario.Size = new System.Drawing.Size(150, 28);
             this.Txt_Usuario.TabIndex = 4;
             // 
             // Dgv_Historial_Nomina
@@ -92,14 +92,15 @@
             this.cmp_total_descuentos,
             this.cmp_total_pagar,
             this.cmp_observaciones});
-            this.Dgv_Historial_Nomina.Location = new System.Drawing.Point(29, 168);
+            this.Dgv_Historial_Nomina.Location = new System.Drawing.Point(26, 134);
+            this.Dgv_Historial_Nomina.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Dgv_Historial_Nomina.Name = "Dgv_Historial_Nomina";
             this.Dgv_Historial_Nomina.ReadOnly = true;
             this.Dgv_Historial_Nomina.RowHeadersVisible = false;
             this.Dgv_Historial_Nomina.RowHeadersWidth = 62;
             this.Dgv_Historial_Nomina.RowTemplate.Height = 28;
             this.Dgv_Historial_Nomina.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Dgv_Historial_Nomina.Size = new System.Drawing.Size(693, 163);
+            this.Dgv_Historial_Nomina.Size = new System.Drawing.Size(616, 130);
             this.Dgv_Historial_Nomina.TabIndex = 5;
             // 
             // cmp_id_planilla
@@ -185,17 +186,17 @@
             // 
             // FormHistorialNomina
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(891, 562);
+            this.ClientSize = new System.Drawing.Size(792, 450);
             this.Controls.Add(this.Dgv_Historial_Nomina);
             this.Controls.Add(this.Txt_Usuario);
             this.Controls.Add(this.Btn_Buscar);
             this.Controls.Add(this.Lbl_Usuario);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormHistorialNomina";
             this.Text = "FormHistorialNomina";
+            this.Load += new System.EventHandler(this.FormHistorialNomina_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Historial_Nomina)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

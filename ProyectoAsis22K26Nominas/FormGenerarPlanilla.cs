@@ -13,9 +13,6 @@ namespace ProyectoAsis22K26Nominas
 {
     public partial class FormGenerarPlanilla : Form
     {
-
-        Conexion cn = new Conexion();
-
         MySqlConnection conexion;
         MySqlCommand comando;
         MySqlDataAdapter adaptador;
@@ -23,13 +20,12 @@ namespace ProyectoAsis22K26Nominas
 
         int idPlanillaSeleccionada = 0;
 
-
         public FormGenerarPlanilla()
         {
             InitializeComponent();
-
             CrearColumnas();
         }
+
         private void CrearColumnas()
         {
             Dgv_Detalle_Planilla.Columns.Clear();
@@ -44,27 +40,27 @@ namespace ProyectoAsis22K26Nominas
 
             Dgv_Detalle_Planilla.Columns["ID"].Visible = false;
         }
+
         private void FormGenerarPlanilla_Load(object sender, EventArgs e)
         {
-  
-
             Txt_Total_Ingresos.ReadOnly = true;
             Txt_Total_Descuentos.ReadOnly = true;
             Txt_Total_Paga.ReadOnly = true;
 
             Dgv_Detalle_Planilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
             Dgv_Detalle_Planilla.AllowUserToAddRows = false;
             Dgv_Detalle_Planilla.ReadOnly = true;
             Dgv_Detalle_Planilla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
+
         private void GenerarPlanilla()
         {
             try
             {
                 Dgv_Detalle_Planilla.Rows.Clear();
 
-                conexion = cn.AbrirConexion();
+                conexion = ConexionBD.ObtenerConexion();
+                conexion.Open();
 
                 string consulta = @"
         SELECT
@@ -85,31 +81,21 @@ namespace ProyectoAsis22K26Nominas
                 decimal totalDescuentos = 0;
                 decimal totalPagar = 0;
 
-
                 while (lector.Read())
                 {
                     int idEmpleado = Convert.ToInt32(lector["cmp_id_empleado"]);
-
                     string empleado = lector["Empleado"].ToString();
-
                     string puesto = lector["Puesto"].ToString();
-
-                    decimal salarioBase =
-                        Convert.ToDecimal(lector["cmp_salario_base"]);
-
+                    decimal salarioBase = Convert.ToDecimal(lector["cmp_salario_base"]);
 
                     // CALCULOS
                     decimal ingresos = salarioBase;
-
                     decimal descuentos = 0;
-
                     decimal salarioNeto = ingresos - descuentos;
-
 
                     totalIngresos += ingresos;
                     totalDescuentos += descuentos;
                     totalPagar += salarioNeto;
-
 
                     Dgv_Detalle_Planilla.Rows.Add(
                         idEmpleado,
@@ -122,39 +108,32 @@ namespace ProyectoAsis22K26Nominas
                     );
                 }
 
-
                 lector.Close();
                 conexion.Close();
 
-
                 Txt_Total_Ingresos.Text = totalIngresos.ToString("N2");
-
                 Txt_Total_Descuentos.Text = totalDescuentos.ToString("N2");
-
                 Txt_Total_Paga.Text = totalPagar.ToString("N2");
-
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
 
-                if (conexion != null)
+                if (conexion != null && conexion.State == ConnectionState.Open)
                     conexion.Close();
             }
         }
+
         private void Dpt_Fecha_Inicio_ValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void Lbl_Empleado_Click(object sender, EventArgs e)
         {
-
         }
+
         private void Btn_Generar_Click(object sender, EventArgs e)
         {
-          
             if (Dtp_Fecha_Inicio.Value.Date > Dtp_Fecha_Fin.Value.Date)
             {
                 MessageBox.Show("La fecha de inicio no puede ser mayor a la fecha final.");
@@ -166,13 +145,9 @@ namespace ProyectoAsis22K26Nominas
 
         private void Btn_Limpiar_Click(object sender, EventArgs e)
         {
-
-
             // Reiniciar fechas
             Dtp_Fecha_Inicio.Value = DateTime.Now;
             Dtp_Fecha_Fin.Value = DateTime.Now;
-
-  
 
             // Limpiar totales
             Txt_Total_Ingresos.Text = "0.00";

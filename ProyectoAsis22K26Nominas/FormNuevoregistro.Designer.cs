@@ -1,4 +1,6 @@
-﻿namespace ProyectoAsis22K26Nominas
+﻿using System;
+
+namespace ProyectoAsis22K26Nominas
 {
     partial class FormNuevoregistro
     {
@@ -39,8 +41,7 @@
             this.Dtp_fechcontratacion = new System.Windows.Forms.DateTimePicker();
             this.Cbo_Departamento = new System.Windows.Forms.ComboBox();
             this.Cbo_puesto = new System.Windows.Forms.ComboBox();
-            this.Btn_Buscar = new System.Windows.Forms.Button();
-            this.Btn_actualizar = new System.Windows.Forms.Button();
+            this.Btn_agregar = new System.Windows.Forms.Button();
             this.Btn_guardar = new System.Windows.Forms.Button();
             this.Lbl_nombre = new System.Windows.Forms.Label();
             this.Lbl_apellidos = new System.Windows.Forms.Label();
@@ -51,12 +52,21 @@
             this.Lbl_salario = new System.Windows.Forms.Label();
             this.Lbl_Departamento = new System.Windows.Forms.Label();
             this.Lbl_puesto = new System.Windows.Forms.Label();
-            this.Btn_eliminar = new System.Windows.Forms.Button();
             this.Txt_idempleado = new System.Windows.Forms.TextBox();
             this.Lbl_idregistro = new System.Windows.Forms.Label();
             this.Btn_limpiar = new System.Windows.Forms.Button();
             this.Txt_idpuesto = new System.Windows.Forms.TextBox();
             this.Lbl_idpusto = new System.Windows.Forms.Label();
+            this.Dgv_empleados = new System.Windows.Forms.DataGridView();
+            this.Txt_iddepartamento = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Lbl_fechnacimiento = new System.Windows.Forms.Label();
+            this.Lbl_fechcontartacion = new System.Windows.Forms.Label();
+            this.Cbo_estado = new System.Windows.Forms.ComboBox();
+            this.Lbl_estado = new System.Windows.Forms.Label();
+            this.Txt_nit = new System.Windows.Forms.TextBox();
+            this.Lbl_nit = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.Dgv_empleados)).BeginInit();
             this.SuspendLayout();
             // 
             // Txt_nombre
@@ -117,7 +127,7 @@
             // 
             // Dtp_fechnacimiento
             // 
-            this.Dtp_fechnacimiento.Location = new System.Drawing.Point(521, 88);
+            this.Dtp_fechnacimiento.Location = new System.Drawing.Point(552, 49);
             this.Dtp_fechnacimiento.Name = "Dtp_fechnacimiento";
             this.Dtp_fechnacimiento.Size = new System.Drawing.Size(200, 22);
             this.Dtp_fechnacimiento.TabIndex = 7;
@@ -125,7 +135,7 @@
             // 
             // Dtp_fechcontratacion
             // 
-            this.Dtp_fechcontratacion.Location = new System.Drawing.Point(521, 171);
+            this.Dtp_fechcontratacion.Location = new System.Drawing.Point(552, 121);
             this.Dtp_fechcontratacion.Name = "Dtp_fechcontratacion";
             this.Dtp_fechcontratacion.Size = new System.Drawing.Size(200, 22);
             this.Dtp_fechcontratacion.TabIndex = 8;
@@ -149,30 +159,19 @@
             this.Cbo_puesto.TabIndex = 11;
             this.Cbo_puesto.SelectedIndexChanged += new System.EventHandler(this.Cbo_puesto_SelectedIndexChanged);
             // 
-            // Btn_Buscar
+            // Btn_agregar
             // 
-            this.Btn_Buscar.Location = new System.Drawing.Point(521, 348);
-            this.Btn_Buscar.Name = "Btn_Buscar";
-            this.Btn_Buscar.Size = new System.Drawing.Size(75, 23);
-            this.Btn_Buscar.TabIndex = 12;
-            this.Btn_Buscar.Text = "Buscar";
-            this.Btn_Buscar.UseVisualStyleBackColor = true;
-            this.Btn_Buscar.UseWaitCursor = true;
-            this.Btn_Buscar.Click += new System.EventHandler(this.Btn_Buscar_Click);
-            // 
-            // Btn_actualizar
-            // 
-            this.Btn_actualizar.Location = new System.Drawing.Point(646, 348);
-            this.Btn_actualizar.Name = "Btn_actualizar";
-            this.Btn_actualizar.Size = new System.Drawing.Size(75, 23);
-            this.Btn_actualizar.TabIndex = 13;
-            this.Btn_actualizar.Text = "Actualizar";
-            this.Btn_actualizar.UseVisualStyleBackColor = true;
-            this.Btn_actualizar.Click += new System.EventHandler(this.Btn_actualizar_Click);
+            this.Btn_agregar.Location = new System.Drawing.Point(726, 352);
+            this.Btn_agregar.Name = "Btn_agregar";
+            this.Btn_agregar.Size = new System.Drawing.Size(75, 23);
+            this.Btn_agregar.TabIndex = 13;
+            this.Btn_agregar.Text = "Agregar";
+            this.Btn_agregar.UseVisualStyleBackColor = true;
+            this.Btn_agregar.Click += new System.EventHandler(this.Btn_agregar_Click);
             // 
             // Btn_guardar
             // 
-            this.Btn_guardar.Location = new System.Drawing.Point(521, 319);
+            this.Btn_guardar.Location = new System.Drawing.Point(579, 351);
             this.Btn_guardar.Name = "Btn_guardar";
             this.Btn_guardar.Size = new System.Drawing.Size(75, 23);
             this.Btn_guardar.TabIndex = 14;
@@ -270,16 +269,6 @@
             this.Lbl_puesto.TabIndex = 24;
             this.Lbl_puesto.Text = "Puesto";
             // 
-            // Btn_eliminar
-            // 
-            this.Btn_eliminar.Location = new System.Drawing.Point(521, 379);
-            this.Btn_eliminar.Name = "Btn_eliminar";
-            this.Btn_eliminar.Size = new System.Drawing.Size(75, 23);
-            this.Btn_eliminar.TabIndex = 25;
-            this.Btn_eliminar.Text = "Eliminar";
-            this.Btn_eliminar.UseVisualStyleBackColor = true;
-            this.Btn_eliminar.Click += new System.EventHandler(this.Btn_eliminar_Click);
-            // 
             // Txt_idempleado
             // 
             this.Txt_idempleado.Location = new System.Drawing.Point(34, 378);
@@ -300,7 +289,7 @@
             // 
             // Btn_limpiar
             // 
-            this.Btn_limpiar.Location = new System.Drawing.Point(646, 379);
+            this.Btn_limpiar.Location = new System.Drawing.Point(650, 400);
             this.Btn_limpiar.Name = "Btn_limpiar";
             this.Btn_limpiar.Size = new System.Drawing.Size(75, 23);
             this.Btn_limpiar.TabIndex = 28;
@@ -326,18 +315,113 @@
             this.Lbl_idpusto.TabIndex = 30;
             this.Lbl_idpusto.Text = "Id puesto";
             // 
+            // Dgv_empleados
+            // 
+            this.Dgv_empleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Dgv_empleados.Location = new System.Drawing.Point(508, 159);
+            this.Dgv_empleados.Name = "Dgv_empleados";
+            this.Dgv_empleados.RowHeadersWidth = 51;
+            this.Dgv_empleados.RowTemplate.Height = 24;
+            this.Dgv_empleados.Size = new System.Drawing.Size(612, 150);
+            this.Dgv_empleados.TabIndex = 31;
+            this.Dgv_empleados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_empleados_CellContentClick);
+            // 
+            // Txt_iddepartamento
+            // 
+            this.Txt_iddepartamento.Location = new System.Drawing.Point(348, 378);
+            this.Txt_iddepartamento.Name = "Txt_iddepartamento";
+            this.Txt_iddepartamento.Size = new System.Drawing.Size(132, 22);
+            this.Txt_iddepartamento.TabIndex = 32;
+            this.Txt_iddepartamento.TextChanged += new System.EventHandler(this.Txt_iddepartamento_TextChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.ForeColor = System.Drawing.Color.Gainsboro;
+            this.label1.Location = new System.Drawing.Point(372, 355);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 16);
+            this.label1.TabIndex = 33;
+            this.label1.Text = "Id Departamento";
+            this.label1.Click += new System.EventHandler(this.Lbl_departamento);
+            // 
+            // Lbl_fechnacimiento
+            // 
+            this.Lbl_fechnacimiento.AutoSize = true;
+            this.Lbl_fechnacimiento.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Lbl_fechnacimiento.Location = new System.Drawing.Point(595, 30);
+            this.Lbl_fechnacimiento.Name = "Lbl_fechnacimiento";
+            this.Lbl_fechnacimiento.Size = new System.Drawing.Size(108, 16);
+            this.Lbl_fechnacimiento.TabIndex = 34;
+            this.Lbl_fechnacimiento.Text = "fecha nacimiento";
+            // 
+            // Lbl_fechcontartacion
+            // 
+            this.Lbl_fechcontartacion.AutoSize = true;
+            this.Lbl_fechcontartacion.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Lbl_fechcontartacion.Location = new System.Drawing.Point(595, 102);
+            this.Lbl_fechcontartacion.Name = "Lbl_fechcontartacion";
+            this.Lbl_fechcontartacion.Size = new System.Drawing.Size(123, 16);
+            this.Lbl_fechcontartacion.TabIndex = 35;
+            this.Lbl_fechcontartacion.Text = "Fecha Contratacion";
+            // 
+            // Cbo_estado
+            // 
+            this.Cbo_estado.FormattingEnabled = true;
+            this.Cbo_estado.Location = new System.Drawing.Point(41, 468);
+            this.Cbo_estado.Name = "Cbo_estado";
+            this.Cbo_estado.Size = new System.Drawing.Size(125, 24);
+            this.Cbo_estado.TabIndex = 36;
+            this.Cbo_estado.SelectedIndexChanged += new System.EventHandler(this.Cbo_estado_SelectedIndexChanged);
+            // 
+            // Lbl_estado
+            // 
+            this.Lbl_estado.AutoSize = true;
+            this.Lbl_estado.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Lbl_estado.Location = new System.Drawing.Point(70, 439);
+            this.Lbl_estado.Name = "Lbl_estado";
+            this.Lbl_estado.Size = new System.Drawing.Size(50, 16);
+            this.Lbl_estado.TabIndex = 37;
+            this.Lbl_estado.Text = "Estado";
+            // 
+            // Txt_nit
+            // 
+            this.Txt_nit.Location = new System.Drawing.Point(194, 468);
+            this.Txt_nit.Name = "Txt_nit";
+            this.Txt_nit.Size = new System.Drawing.Size(132, 22);
+            this.Txt_nit.TabIndex = 38;
+            this.Txt_nit.TextChanged += new System.EventHandler(this.Txt_nit_TextChanged);
+            // 
+            // Lbl_nit
+            // 
+            this.Lbl_nit.AutoSize = true;
+            this.Lbl_nit.ForeColor = System.Drawing.Color.Gainsboro;
+            this.Lbl_nit.Location = new System.Drawing.Point(249, 439);
+            this.Lbl_nit.Name = "Lbl_nit";
+            this.Lbl_nit.Size = new System.Drawing.Size(23, 16);
+            this.Lbl_nit.TabIndex = 39;
+            this.Lbl_nit.Text = "Nit";
+            // 
             // FormNuevoregistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1169, 549);
+            this.Controls.Add(this.Lbl_nit);
+            this.Controls.Add(this.Txt_nit);
+            this.Controls.Add(this.Lbl_estado);
+            this.Controls.Add(this.Cbo_estado);
+            this.Controls.Add(this.Lbl_fechcontartacion);
+            this.Controls.Add(this.Lbl_fechnacimiento);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Txt_iddepartamento);
+            this.Controls.Add(this.Dgv_empleados);
             this.Controls.Add(this.Lbl_idpusto);
             this.Controls.Add(this.Txt_idpuesto);
             this.Controls.Add(this.Btn_limpiar);
             this.Controls.Add(this.Lbl_idregistro);
             this.Controls.Add(this.Txt_idempleado);
-            this.Controls.Add(this.Btn_eliminar);
             this.Controls.Add(this.Lbl_puesto);
             this.Controls.Add(this.Lbl_Departamento);
             this.Controls.Add(this.Lbl_salario);
@@ -348,8 +432,7 @@
             this.Controls.Add(this.Lbl_apellidos);
             this.Controls.Add(this.Lbl_nombre);
             this.Controls.Add(this.Btn_guardar);
-            this.Controls.Add(this.Btn_actualizar);
-            this.Controls.Add(this.Btn_Buscar);
+            this.Controls.Add(this.Btn_agregar);
             this.Controls.Add(this.Cbo_puesto);
             this.Controls.Add(this.Cbo_Departamento);
             this.Controls.Add(this.Dtp_fechcontratacion);
@@ -364,10 +447,13 @@
             this.Name = "FormNuevoregistro";
             this.Text = "FormNuevoregistro";
             this.Load += new System.EventHandler(this.FormNuevoregistro_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.Dgv_empleados)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+     
 
         #endregion
 
@@ -382,8 +468,7 @@
         private System.Windows.Forms.DateTimePicker Dtp_fechcontratacion;
         private System.Windows.Forms.ComboBox Cbo_Departamento;
         private System.Windows.Forms.ComboBox Cbo_puesto;
-        private System.Windows.Forms.Button Btn_Buscar;
-        private System.Windows.Forms.Button Btn_actualizar;
+        private System.Windows.Forms.Button Btn_agregar;
         private System.Windows.Forms.Button Btn_guardar;
         private System.Windows.Forms.Label Lbl_nombre;
         private System.Windows.Forms.Label Lbl_apellidos;
@@ -394,11 +479,19 @@
         private System.Windows.Forms.Label Lbl_salario;
         private System.Windows.Forms.Label Lbl_Departamento;
         private System.Windows.Forms.Label Lbl_puesto;
-        private System.Windows.Forms.Button Btn_eliminar;
         private System.Windows.Forms.TextBox Txt_idempleado;
         private System.Windows.Forms.Label Lbl_idregistro;
         private System.Windows.Forms.Button Btn_limpiar;
         private System.Windows.Forms.TextBox Txt_idpuesto;
         private System.Windows.Forms.Label Lbl_idpusto;
+        private System.Windows.Forms.DataGridView Dgv_empleados;
+        private System.Windows.Forms.TextBox Txt_iddepartamento;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label Lbl_fechnacimiento;
+        private System.Windows.Forms.Label Lbl_fechcontartacion;
+        private System.Windows.Forms.ComboBox Cbo_estado;
+        private System.Windows.Forms.Label Lbl_estado;
+        private System.Windows.Forms.TextBox Txt_nit;
+        private System.Windows.Forms.Label Lbl_nit;
     }
 }

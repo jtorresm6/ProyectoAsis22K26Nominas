@@ -9,16 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-//Roger Yankhel de Jesús Herrera Alcántara 0901-23-2429 
-//Fecha de creacion: 25/07/2026
-//Fecha de finalizacion: 27/07/2026
-
+// Roger Yankhel de Jesús Herrera Alcántara 0901-23-2429 
+// Fecha de creacion: 25/07/2026
+// Fecha de finalizacion: 27/07/2026
 
 namespace ProyectoAsis22K26Nominas
 {
     public partial class FormMovimientosPlanilla : Form
     {
-        Conexion cn = new Conexion();
         MySqlConnection conexion;
         MySqlCommand comando;
         MySqlDataAdapter adaptador;
@@ -30,6 +28,7 @@ namespace ProyectoAsis22K26Nominas
         {
             InitializeComponent();
         }
+
         private void FormMovimientosPlanilla_Load(object sender, EventArgs e)
         {
             CargarTipoMovimiento();
@@ -42,11 +41,13 @@ namespace ProyectoAsis22K26Nominas
 
             Txt_Nombre_Empleado.ReadOnly = true;
         }
+
         private void CargarTipoMovimiento()
         {
             try
             {
-                conexion = cn.AbrirConexion();
+                conexion = ConexionBD.ObtenerConexion();
+                conexion.Open();
 
                 string consulta = @"SELECT 
                     cmp_id_tipo_movimiento,
@@ -68,13 +69,17 @@ namespace ProyectoAsis22K26Nominas
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar tipos de movimiento: " + ex.Message);
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                    conexion.Close();
             }
         }
+
         private void BuscarEmpleado()
         {
             try
             {
-                conexion = cn.AbrirConexion();
+                conexion = ConexionBD.ObtenerConexion();
+                conexion.Open();
 
                 string campo = "";
 
@@ -91,7 +96,6 @@ namespace ProyectoAsis22K26Nominas
                     campo = "cmp_nit";
                 }
 
-
                 string consulta = $@"SELECT 
                             cmp_id_empleado,
                             cmp_nombre,
@@ -99,14 +103,10 @@ namespace ProyectoAsis22K26Nominas
                             FROM tbl_Empleados
                             WHERE {campo} = @dato";
 
-
                 comando = new MySqlCommand(consulta, conexion);
-
                 comando.Parameters.AddWithValue("@dato", Txt_Campo.Text);
 
-
                 MySqlDataReader lector = comando.ExecuteReader();
-
 
                 if (lector.Read())
                 {
@@ -123,20 +123,23 @@ namespace ProyectoAsis22K26Nominas
                     Txt_Nombre_Empleado.Clear();
                 }
 
-
+                lector.Close();
                 conexion.Close();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al buscar empleado: " + ex.Message);
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                    conexion.Close();
             }
         }
+
         private void CargarMovimientos()
         {
             try
             {
-                conexion = cn.AbrirConexion();
+                conexion = ConexionBD.ObtenerConexion();
+                conexion.Open();
 
                 string consulta = @"SELECT 
 m.cmp_id_movimiento,
@@ -154,6 +157,7 @@ ON m.cmp_id_tipo_movimiento = tm.cmp_id_tipo_movimiento
 
 WHERE m.cmp_id_empleado = @empleado
 AND m.cmp_fecha BETWEEN @inicio AND @fin";
+
                 comando = new MySqlCommand(consulta, conexion);
 
                 comando.Parameters.AddWithValue("@empleado", idEmpleadoSeleccionado);
@@ -169,13 +173,17 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
                 Dgv_Movimientos.Columns["cmp_id_movimiento"].Visible = false;
                 Dgv_Movimientos.Columns["cmp_cantidad"].Visible = false;
                 Dgv_Movimientos.Columns["cmp_id_tipo_movimiento"].Visible = false;
+
                 conexion.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al consultar movimientos: " + ex.Message);
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                    conexion.Close();
             }
         }
+
         private void GuardarMovimiento()
         {
             try
@@ -186,9 +194,8 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
                     return;
                 }
 
-
-                conexion = cn.AbrirConexion();
-
+                conexion = ConexionBD.ObtenerConexion();
+                conexion.Open();
 
                 string consulta = @"INSERT INTO tbl_Movimientos_Planilla
         (
@@ -211,40 +218,33 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
         @usuario
         )";
 
-
                 comando = new MySqlCommand(consulta, conexion);
-
 
                 comando.Parameters.AddWithValue("@fecha", Dpt_Fecha_Inicio.Value.Date);
                 comando.Parameters.AddWithValue("@cantidad", Txt_Cantidad.Text);
                 comando.Parameters.AddWithValue("@monto", Txt_Monto.Text);
                 comando.Parameters.AddWithValue("@descripcion", Txt_Descripcion.Text);
-
                 comando.Parameters.AddWithValue("@empleado", idEmpleadoSeleccionado);
-
-                comando.Parameters.AddWithValue("@tipo",
-                Cbo_Tipo_Movimiento.SelectedValue);
-
+                comando.Parameters.AddWithValue("@tipo", Cbo_Tipo_Movimiento.SelectedValue);
                 comando.Parameters.AddWithValue("@usuario", 1);
-
 
                 comando.ExecuteNonQuery();
 
-
                 MessageBox.Show("Movimiento guardado");
-
 
                 conexion.Close();
 
                 CargarMovimientos();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                    conexion.Close();
                 LimpiarCampos();
             }
         }
+
         private void ModificarMovimiento()
         {
             try
@@ -255,9 +255,8 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
                     return;
                 }
 
-
-                conexion = cn.AbrirConexion();
-
+                conexion = ConexionBD.ObtenerConexion();
+                conexion.Open();
 
                 string consulta = @"UPDATE tbl_Movimientos_Planilla
                             SET 
@@ -267,9 +266,7 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
                             cmp_id_tipo_movimiento=@tipo
                             WHERE cmp_id_movimiento=@id";
 
-
                 comando = new MySqlCommand(consulta, conexion);
-
 
                 comando.Parameters.AddWithValue("@cantidad", Txt_Cantidad.Text);
                 comando.Parameters.AddWithValue("@monto", Txt_Monto.Text);
@@ -277,24 +274,22 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
                 comando.Parameters.AddWithValue("@tipo", Cbo_Tipo_Movimiento.SelectedValue);
                 comando.Parameters.AddWithValue("@id", idMovimientoSeleccionado);
 
-
                 comando.ExecuteNonQuery();
-
 
                 MessageBox.Show("Movimiento modificado correctamente");
 
-
                 conexion.Close();
 
-
                 CargarMovimientos();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al modificar: " + ex.Message);
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                    conexion.Close();
             }
         }
+
         private void EliminarMovimiento()
         {
             try
@@ -305,52 +300,41 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
                     return;
                 }
 
-
                 DialogResult respuesta = MessageBox.Show(
                     "¿Desea eliminar este movimiento?",
                     "Confirmar",
                     MessageBoxButtons.YesNo
                 );
 
-
                 if (respuesta == DialogResult.No)
                     return;
 
-
-
-                conexion = cn.AbrirConexion();
-
+                conexion = ConexionBD.ObtenerConexion();
+                conexion.Open();
 
                 string consulta = @"DELETE FROM tbl_Movimientos_Planilla
                             WHERE cmp_id_movimiento=@id";
 
-
                 comando = new MySqlCommand(consulta, conexion);
-
-
                 comando.Parameters.AddWithValue("@id", idMovimientoSeleccionado);
-
 
                 comando.ExecuteNonQuery();
 
-
                 MessageBox.Show("Movimiento eliminado");
-
 
                 conexion.Close();
 
-
                 CargarMovimientos();
-
-
                 LimpiarCampos();
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error al eliminar: " + ex.Message);
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                    conexion.Close();
             }
         }
+
         private void LimpiarCampos()
         {
             Txt_Cantidad.Clear();
@@ -359,6 +343,7 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
 
             idMovimientoSeleccionado = 0;
         }
+
         private void label5_Click(object sender, EventArgs e)
         {
 
@@ -419,6 +404,7 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
         {
             EliminarMovimiento();
         }
+
         private void Data_Movimientos_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -429,13 +415,9 @@ AND m.cmp_fecha BETWEEN @inicio AND @fin";
                     fila.Cells["cmp_id_movimiento"].Value
                 );
 
-
                 Txt_Monto.Text = fila.Cells["Monto"].Value.ToString();
-
                 Txt_Descripcion.Text = fila.Cells["Descripcion"].Value.ToString();
-
                 Txt_Cantidad.Text = fila.Cells["cmp_cantidad"].Value.ToString();
-
 
                 Cbo_Tipo_Movimiento.SelectedValue =
                 fila.Cells["cmp_id_tipo_movimiento"].Value;

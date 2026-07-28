@@ -35,9 +35,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(849, 491);
             this.Name = "FormHistorialNomina";
             this.Text = "FormHistorialNomina";
+            this.Load += new System.EventHandler(this.FormHistorialNomina_Load);
             this.ResumeLayout(false);
 
         }

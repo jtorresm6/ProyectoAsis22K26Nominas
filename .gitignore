@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ProyectoAsis22K26Nominas/FormHistorialPagos.cs
+/ProyectoAsis22K26Nominas/FormHistorialVacaciones.cs
+/.gitignore
+/.gitignore

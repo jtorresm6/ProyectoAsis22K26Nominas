@@ -11,24 +11,21 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 //Parte trabajada por: Natali Sofia Montenegro Portillo - Carné: 0901-23-10017
-//Curso:Análsis de Sistemas II
+//Curso:Análisis de Sistemas II
 //Fecha de creación: 25-07-2026
 //Fecha de última modificación: 27-07-2026
 
-
 namespace ProyectoAsis22K26Nominas
 {
-        public partial class FormMantenimientoEmpleado : Form
+    public partial class FormMantenimientoEmpleado : Form
     {
         private int codigoEmpleado = 0;
+
         public FormMantenimientoEmpleado()
         {
             InitializeComponent();
         }
 
-        // Colocar características a los elementos del formulario al momento de cargarlo, para que por ejemplo
-        // los botones de modificar o guardar no puedan ser presionados hasta que se busque un empleado
-        // o se tenga información en los campos.
         private void FormMantenimientoEmpleado_Load(object sender, EventArgs e)
         {
             Cbo_Busqueda.Items.Clear();
@@ -52,28 +49,24 @@ namespace ProyectoAsis22K26Nominas
             Btn_Reactivar.Enabled = false;
 
             Txt_Estado.ReadOnly = true;
-
         }
 
-            private void label1_Click(object sender, EventArgs e)
-            {
-            }
+        private void label1_Click(object sender, EventArgs e)
+        {
+        }
 
-            private void label3_Click(object sender, EventArgs e)
-            {
-            }
+        private void label3_Click(object sender, EventArgs e)
+        {
+        }
 
-            private void label4_Click(object sender, EventArgs e)
-            {
-            }
+        private void label4_Click(object sender, EventArgs e)
+        {
+        }
 
-          private void dataGridView1_CellContentClick_1(
-                object sender,
-                DataGridViewCellEventArgs e)
-            {
-            }
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+        }
 
-        //Habilitar campos o mostrarlos cuando se presiona el botón de buscar
         private void button2_Click(object sender, EventArgs e)
         {
             if (codigoEmpleado == 0)
@@ -94,11 +87,8 @@ namespace ProyectoAsis22K26Nominas
             Txt_Dep.Enabled = true;
             Txt_Puesto.Enabled = true;
 
-            // Estos campos no se pueden modificar, aparecerán deshabilitados. 
-            // Solo estado puede ser modificado mediante los botones de dar de baja o reactivar.
             Txt_Cod.Enabled = false;
             Txt_Estado.Enabled = false;
-
 
             Btn_Guardar.Enabled = true;
             Btn_Actu.Enabled = false;
@@ -110,9 +100,6 @@ namespace ProyectoAsis22K26Nominas
             MessageBox.Show("Ahora se pueden modificar los datos del empleado.");
         }
 
-
-        //Este botón ayuda a editar el estado del empleado a "Activo" cuando se presiona el botón de reactivar,
-        //en vez de escribirlo manual.
         private void button4_Click(object sender, EventArgs e)
         {
             if (codigoEmpleado == 0)
@@ -139,7 +126,7 @@ namespace ProyectoAsis22K26Nominas
                 return;
             }
 
-            MySqlConnection conexion = ConexionBD.GetConnection();
+            MySqlConnection conexion = ConexionBD.ObtenerConexion();
 
             try
             {
@@ -150,27 +137,18 @@ namespace ProyectoAsis22K26Nominas
                     "SET cmp_estado = 'Activo' " +
                     "WHERE cmp_id_empleado = @codigo";
 
-                MySqlCommand comando =
-                    new MySqlCommand(sql, conexion);
-
-                comando.Parameters.AddWithValue(
-                    "@codigo",
-                    codigoEmpleado
-                );
+                MySqlCommand comando = new MySqlCommand(sql, conexion);
+                comando.Parameters.AddWithValue("@codigo", codigoEmpleado);
 
                 comando.ExecuteNonQuery();
 
                 Txt_Estado.Text = "Activo";
 
-                MessageBox.Show(
-                    "Empleado reactivado correctamente."
-                );
+                MessageBox.Show("Empleado reactivado correctamente.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error al reactivar: " + ex.Message
-                );
+                MessageBox.Show("Error al reactivar: " + ex.Message);
             }
             finally
             {
@@ -178,7 +156,6 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // Funcion para bloquear campos y que no puedan ser modificados hasta que se presione el botón de modificar.
         private void BloquearCampos()
         {
             Txt_Cod.Enabled = false;
@@ -196,12 +173,6 @@ namespace ProyectoAsis22K26Nominas
             Txt_Estado.Enabled = false;
         }
 
-
-        // Este botón ayuda a buscar un empleado mostrando sus datos que estén almacenados en la BD.
-        // Para que funcione se debe seleccionar el tipo de dato que se desea buscar y manda a llamar un select a la BD
-        // para que muestre los datos en los campos correspondientes. 
-
-        //SI NO HAY DATOS QUE COINCIDAN CON BD, MUESTRA MENSAJE DE ERROR.
         private void Btn_Buscar_Click(object sender, EventArgs e)
         {
             if (Txt_Datos.Text.Trim() == "")
@@ -234,7 +205,7 @@ namespace ProyectoAsis22K26Nominas
                 "left join tbl_Correos c on e.cmp_id_empleado = c.cmp_id_empleado " +
                 "where " + campo + " = @dato";
 
-            MySqlConnection conexion = ConexionBD.GetConnection();
+            MySqlConnection conexion = ConexionBD.ObtenerConexion();
 
             try
             {
@@ -247,53 +218,21 @@ namespace ProyectoAsis22K26Nominas
 
                 if (lector.Read())
                 {
-                    codigoEmpleado = Convert.ToInt32(
-                        lector["cmp_id_empleado"]
-                    );
+                    codigoEmpleado = Convert.ToInt32(lector["cmp_id_empleado"]);
 
-                    Txt_Cod.Text =
-                        lector["cmp_id_empleado"].ToString();
-
-                    Txt_DPI.Text =
-                        lector["cmp_dpi"].ToString();
-
-                    Txt_NIT.Text =
-                        lector["cmp_nit"].ToString();
-
-                    Txt_Nombre.Text =
-                        lector["cmp_nombre"].ToString();
-
-                    Txt_Apellido.Text =
-                        lector["cmp_apellido"].ToString();
-
-                    Dtp_Fecha_Nac.Value =
-                        Convert.ToDateTime(
-                        lector["cmp_fecha_nacimiento"]
-                        );
-
-                    Txt_Dir.Text =
-                        lector["cmp_direccion"].ToString();
-
-                    Txt_Tel.Text =
-                        lector["Telefono"].ToString();
-
-                    Txt_Corr.Text =
-                        lector["Correo"].ToString();
-
-                    Dtp_Fecha_Cont.Value =
-                        Convert.ToDateTime(
-                        lector["cmp_fecha_contratacion"]
-                    );
-
-                    Txt_Dep.Text =
-                        lector["Departamento"].ToString();
-
-                    Txt_Puesto.Text =
-                        lector["Puesto"].ToString();
-
-                    Txt_Estado.Text =
-                        lector["cmp_estado"].ToString();
-
+                    Txt_Cod.Text = lector["cmp_id_empleado"].ToString();
+                    Txt_DPI.Text = lector["cmp_dpi"].ToString();
+                    Txt_NIT.Text = lector["cmp_nit"].ToString();
+                    Txt_Nombre.Text = lector["cmp_nombre"].ToString();
+                    Txt_Apellido.Text = lector["cmp_apellido"].ToString();
+                    Dtp_Fecha_Nac.Value = Convert.ToDateTime(lector["cmp_fecha_nacimiento"]);
+                    Txt_Dir.Text = lector["cmp_direccion"].ToString();
+                    Txt_Tel.Text = lector["Telefono"].ToString();
+                    Txt_Corr.Text = lector["Correo"].ToString();
+                    Dtp_Fecha_Cont.Value = Convert.ToDateTime(lector["cmp_fecha_contratacion"]);
+                    Txt_Dep.Text = lector["Departamento"].ToString();
+                    Txt_Puesto.Text = lector["Puesto"].ToString();
+                    Txt_Estado.Text = lector["cmp_estado"].ToString();
 
                     BloquearCampos();
 
@@ -311,18 +250,13 @@ namespace ProyectoAsis22K26Nominas
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error al buscar al empleado: " + ex.Message
-                );
+                MessageBox.Show("Error al buscar al empleado: " + ex.Message);
             }
             finally
             {
                 conexion.Close();
             }
         }
-
-        // Boton que permite guardar los cambios realizados en los campos del formulario y de igualmanera
-        // se modifica tambien en la BD.
 
         private void Btn_Guardar_Click(object sender, EventArgs e)
         {
@@ -367,6 +301,7 @@ namespace ProyectoAsis22K26Nominas
                 return;
             }
 
+            // Subconsultas ajustadas con LIMIT 1 para evitar el error de MySQL
             string sqlEmpleado =
                 "update tbl_Empleados set " +
                 "cmp_dpi = @dpi, " +
@@ -376,76 +311,34 @@ namespace ProyectoAsis22K26Nominas
                 "cmp_fecha_nacimiento = @fechaNacimiento, " +
                 "cmp_direccion = @direccion, " +
                 "cmp_fecha_contratacion = @fechaContratacion, " +
-                "cmp_id_departamento = (select cmp_id_departamento from tbl_Departamentos where cmp_nombre = @departamento), " +
-                "cmp_id_puesto = (select cmp_id_puesto from tbl_Puestos where cmp_nombre = @puesto) " +
+                "cmp_id_departamento = (select cmp_id_departamento from tbl_Departamentos where cmp_nombre = @departamento limit 1), " +
+                "cmp_id_puesto = (select cmp_id_puesto from tbl_Puestos where cmp_nombre = @puesto limit 1) " +
                 "where cmp_id_empleado = @codigo";
 
-            MySqlConnection conexion = ConexionBD.GetConnection();
+            MySqlConnection conexion = ConexionBD.ObtenerConexion();
 
             try
             {
                 conexion.Open();
 
-                MySqlCommand comando =
-                    new MySqlCommand(sqlEmpleado, conexion);
+                MySqlCommand comando = new MySqlCommand(sqlEmpleado, conexion);
 
-                comando.Parameters.AddWithValue(
-                    "@dpi",
-                    Txt_DPI.Text.Trim()
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@nit",
-                    Txt_NIT.Text.Trim()
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@nombre",
-                    Txt_Nombre.Text.Trim()
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@apellido",
-                    Txt_Apellido.Text.Trim()
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@fechaNacimiento",
-                    Dtp_Fecha_Nac.Value.Date
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@direccion",
-                    Txt_Dir.Text.Trim()
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@fechaContratacion",
-                    Dtp_Fecha_Cont.Value.Date
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@departamento",
-                    Txt_Dep.Text.Trim()
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@puesto",
-                    Txt_Puesto.Text.Trim()
-                );
-
-                comando.Parameters.AddWithValue(
-                    "@codigo",
-                    codigoEmpleado
-                );
+                comando.Parameters.AddWithValue("@dpi", Txt_DPI.Text.Trim());
+                comando.Parameters.AddWithValue("@nit", Txt_NIT.Text.Trim());
+                comando.Parameters.AddWithValue("@nombre", Txt_Nombre.Text.Trim());
+                comando.Parameters.AddWithValue("@apellido", Txt_Apellido.Text.Trim());
+                comando.Parameters.AddWithValue("@fechaNacimiento", Dtp_Fecha_Nac.Value.Date);
+                comando.Parameters.AddWithValue("@direccion", Txt_Dir.Text.Trim());
+                comando.Parameters.AddWithValue("@fechaContratacion", Dtp_Fecha_Cont.Value.Date);
+                comando.Parameters.AddWithValue("@departamento", Txt_Dep.Text.Trim());
+                comando.Parameters.AddWithValue("@puesto", Txt_Puesto.Text.Trim());
+                comando.Parameters.AddWithValue("@codigo", codigoEmpleado);
 
                 int filasModificadas = comando.ExecuteNonQuery();
 
                 if (filasModificadas > 0)
                 {
-                    MessageBox.Show(
-                        "Datos personales y laborales actualizados correctamente."
-                    );
+                    MessageBox.Show("Datos personales y laborales actualizados correctamente.");
 
                     BloquearCampos();
 
@@ -465,16 +358,12 @@ namespace ProyectoAsis22K26Nominas
                 }
                 else
                 {
-                    MessageBox.Show(
-                        "No se modificó ningún registro."
-                    );
+                    MessageBox.Show("No se modificó ningún registro.");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error al guardar los cambios: " + ex.Message
-                );
+                MessageBox.Show("Error al guardar los cambios: " + ex.Message);
             }
             finally
             {
@@ -482,8 +371,6 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        //Este botón, a diferencia, ayuda a editar el estado del empleado a "Inactivo" cuando se presiona el botón de dar de baja,
-        //en vez de escribirlo manual.
         private void Btn_Bajas_Click(object sender, EventArgs e)
         {
             if (codigoEmpleado == 0)
@@ -510,7 +397,7 @@ namespace ProyectoAsis22K26Nominas
                 return;
             }
 
-            MySqlConnection conexion = ConexionBD.GetConnection();
+            MySqlConnection conexion = ConexionBD.ObtenerConexion();
 
             try
             {
@@ -521,27 +408,18 @@ namespace ProyectoAsis22K26Nominas
                     "SET cmp_estado = 'Inactivo' " +
                     "WHERE cmp_id_empleado = @codigo";
 
-                MySqlCommand comando =
-                    new MySqlCommand(sql, conexion);
-
-                comando.Parameters.AddWithValue(
-                    "@codigo",
-                    codigoEmpleado
-                );
+                MySqlCommand comando = new MySqlCommand(sql, conexion);
+                comando.Parameters.AddWithValue("@codigo", codigoEmpleado);
 
                 comando.ExecuteNonQuery();
 
                 Txt_Estado.Text = "Inactivo";
 
-                MessageBox.Show(
-                    "Empleado dado de baja correctamente."
-                );
+                MessageBox.Show("Empleado dado de baja correctamente.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(
-                    "Error al dar de baja: " + ex.Message
-                );
+                MessageBox.Show("Error al dar de baja: " + ex.Message);
             }
             finally
             {
@@ -549,10 +427,8 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        //Cancela la edición de los campos por si ocurre un error o no se deseaba cambiar los datos.
         private void Btn_Cancelar_Click(object sender, EventArgs e)
         {
-            BloquearCampos();
             BloquearCampos();
 
             Btn_Guardar.Enabled = false;
@@ -572,7 +448,6 @@ namespace ProyectoAsis22K26Nominas
             MessageBox.Show("Edición cancelada.");
         }
 
-        //Limpia todos los campos del formulario y reinicia el estado de los botones.
         private void Btn_Limpiar_Click(object sender, EventArgs e)
         {
             Txt_Datos.Clear();
@@ -599,81 +474,19 @@ namespace ProyectoAsis22K26Nominas
             Txt_Datos.Focus();
         }
 
-        private void Txt_Dir_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_Tel_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_Cod_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_Dep_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Dtp_Fecha_Nac_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_Nombre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_Corr_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_DPI_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_Apellido_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_Puesto_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_Estado_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Dtp_Fecha_Cont_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Txt_NIT_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Lbl_Info_Laboral_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void Txt_Dir_TextChanged(object sender, EventArgs e) { }
+        private void Txt_Tel_TextChanged(object sender, EventArgs e) { }
+        private void Txt_Cod_TextChanged(object sender, EventArgs e) { }
+        private void Txt_Dep_TextChanged(object sender, EventArgs e) { }
+        private void Dtp_Fecha_Nac_ValueChanged(object sender, EventArgs e) { }
+        private void Txt_Nombre_TextChanged(object sender, EventArgs e) { }
+        private void Txt_Corr_TextChanged(object sender, EventArgs e) { }
+        private void Txt_DPI_TextChanged(object sender, EventArgs e) { }
+        private void Txt_Apellido_TextChanged(object sender, EventArgs e) { }
+        private void Txt_Puesto_TextChanged(object sender, EventArgs e) { }
+        private void Txt_Estado_TextChanged(object sender, EventArgs e) { }
+        private void Dtp_Fecha_Cont_ValueChanged(object sender, EventArgs e) { }
+        private void Txt_NIT_TextChanged(object sender, EventArgs e) { }
+        private void Lbl_Info_Laboral_Click(object sender, EventArgs e) { }
     }
- }
-    
-
-
-
-      
-
-    
+}

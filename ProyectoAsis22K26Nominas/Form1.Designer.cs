@@ -200,7 +200,7 @@
             this.Btn_mantempleado.FlatAppearance.BorderSize = 0;
             this.Btn_mantempleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_mantempleado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_mantempleado.Location = new System.Drawing.Point(0, 90);
+            this.Btn_mantempleado.Location = new System.Drawing.Point(0, 98);
             this.Btn_mantempleado.Name = "Btn_mantempleado";
             this.Btn_mantempleado.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.Btn_mantempleado.Size = new System.Drawing.Size(229, 49);
@@ -216,7 +216,7 @@
             this.Btn_directempleado.FlatAppearance.BorderSize = 0;
             this.Btn_directempleado.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_directempleado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_directempleado.Location = new System.Drawing.Point(0, 45);
+            this.Btn_directempleado.Location = new System.Drawing.Point(0, 53);
             this.Btn_directempleado.Name = "Btn_directempleado";
             this.Btn_directempleado.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
             this.Btn_directempleado.Size = new System.Drawing.Size(229, 45);
@@ -235,7 +235,7 @@
             this.Btn_nuevempleado.Location = new System.Drawing.Point(0, 0);
             this.Btn_nuevempleado.Name = "Btn_nuevempleado";
             this.Btn_nuevempleado.Padding = new System.Windows.Forms.Padding(35, 0, 0, 0);
-            this.Btn_nuevempleado.Size = new System.Drawing.Size(229, 45);
+            this.Btn_nuevempleado.Size = new System.Drawing.Size(229, 53);
             this.Btn_nuevempleado.TabIndex = 0;
             this.Btn_nuevempleado.Text = "Nuevo Empleado";
             this.Btn_nuevempleado.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -499,7 +499,7 @@
             this.Pnl_contenedor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Pnl_contenedor.Location = new System.Drawing.Point(250, 0);
             this.Pnl_contenedor.Name = "Pnl_contenedor";
-            this.Pnl_contenedor.Size = new System.Drawing.Size(754, 553);
+            this.Pnl_contenedor.Size = new System.Drawing.Size(924, 553);
             this.Pnl_contenedor.TabIndex = 1;
             this.Pnl_contenedor.Paint += new System.Windows.Forms.PaintEventHandler(this.Pnl_contenedor_Paint);
             // 
@@ -513,14 +513,12 @@
             this.Pic_naro.TabIndex = 0;
             this.Pic_naro.TabStop = false;
             // 
-        
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1004, 553);
+            this.ClientSize = new System.Drawing.Size(1174, 553);
             this.Controls.Add(this.Pnl_contenedor);
             this.Controls.Add(this.Pnl_SideM);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;

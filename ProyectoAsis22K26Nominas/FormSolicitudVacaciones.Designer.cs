@@ -38,7 +38,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "FormSolicitudVacaciones";
             this.Text = "FormSolicitudVacaciones";
-            this.Load += new System.EventHandler(this.FormSolicitudVacaciones_Load);
             this.ResumeLayout(false);
 
         }

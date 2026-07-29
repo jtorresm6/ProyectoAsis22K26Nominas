@@ -30,13 +30,17 @@
         {
             this.components = new System.ComponentModel.Container();
             this.Txt_codempleado = new System.Windows.Forms.TextBox();
+            this.Btn_buscar = new System.Windows.Forms.Button();
+            this.Lbl_nombempleado = new System.Windows.Forms.Label();
+            this.Lbl_reloj = new System.Windows.Forms.Label();
             this.Dpt_fecha = new System.Windows.Forms.DateTimePicker();
             this.Cbo_tipregistro = new System.Windows.Forms.ComboBox();
+            this.Txt_observaciones = new System.Windows.Forms.TextBox();
             this.Btn_registrar = new System.Windows.Forms.Button();
             this.Btn_limpiar = new System.Windows.Forms.Button();
             this.Dgv_asistenicas = new System.Windows.Forms.DataGridView();
             this.timer_reloj = new System.Windows.Forms.Timer(this.components);
-            this.Lbl_idempelado = new System.Windows.Forms.Label();
+            this.Lbl_observaciones = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_asistenicas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,6 +50,37 @@
             this.Txt_codempleado.Name = "Txt_codempleado";
             this.Txt_codempleado.Size = new System.Drawing.Size(127, 22);
             this.Txt_codempleado.TabIndex = 0;
+            // 
+            // Btn_buscar
+            // 
+            this.Btn_buscar.Location = new System.Drawing.Point(42, 185);
+            this.Btn_buscar.Name = "Btn_buscar";
+            this.Btn_buscar.Size = new System.Drawing.Size(127, 36);
+            this.Btn_buscar.TabIndex = 1;
+            this.Btn_buscar.Text = "Buscar";
+            this.Btn_buscar.UseVisualStyleBackColor = true;
+            // 
+            // Lbl_nombempleado
+            // 
+            this.Lbl_nombempleado.AutoSize = true;
+            this.Lbl_nombempleado.BackColor = System.Drawing.Color.White;
+            this.Lbl_nombempleado.ForeColor = System.Drawing.Color.Black;
+            this.Lbl_nombempleado.Location = new System.Drawing.Point(47, 89);
+            this.Lbl_nombempleado.Name = "Lbl_nombempleado";
+            this.Lbl_nombempleado.Size = new System.Drawing.Size(122, 16);
+            this.Lbl_nombempleado.TabIndex = 2;
+            this.Lbl_nombempleado.Text = "Nombre Empleado";
+            // 
+            // Lbl_reloj
+            // 
+            this.Lbl_reloj.AutoSize = true;
+            this.Lbl_reloj.BackColor = System.Drawing.Color.White;
+            this.Lbl_reloj.ForeColor = System.Drawing.Color.Black;
+            this.Lbl_reloj.Location = new System.Drawing.Point(524, 360);
+            this.Lbl_reloj.Name = "Lbl_reloj";
+            this.Lbl_reloj.Size = new System.Drawing.Size(39, 16);
+            this.Lbl_reloj.TabIndex = 3;
+            this.Lbl_reloj.Text = "Reloj";
             // 
             // Dpt_fecha
             // 
@@ -57,14 +92,21 @@
             // Cbo_tipregistro
             // 
             this.Cbo_tipregistro.FormattingEnabled = true;
-            this.Cbo_tipregistro.Location = new System.Drawing.Point(77, 262);
+            this.Cbo_tipregistro.Location = new System.Drawing.Point(424, 250);
             this.Cbo_tipregistro.Name = "Cbo_tipregistro";
             this.Cbo_tipregistro.Size = new System.Drawing.Size(240, 24);
             this.Cbo_tipregistro.TabIndex = 5;
             // 
+            // Txt_observaciones
+            // 
+            this.Txt_observaciones.Location = new System.Drawing.Point(231, 136);
+            this.Txt_observaciones.Name = "Txt_observaciones";
+            this.Txt_observaciones.Size = new System.Drawing.Size(128, 22);
+            this.Txt_observaciones.TabIndex = 6;
+            // 
             // Btn_registrar
             // 
-            this.Btn_registrar.Location = new System.Drawing.Point(41, 182);
+            this.Btn_registrar.Location = new System.Drawing.Point(231, 185);
             this.Btn_registrar.Name = "Btn_registrar";
             this.Btn_registrar.Size = new System.Drawing.Size(128, 36);
             this.Btn_registrar.TabIndex = 7;
@@ -85,36 +127,41 @@
             // Dgv_asistenicas
             // 
             this.Dgv_asistenicas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgv_asistenicas.Location = new System.Drawing.Point(397, 25);
+            this.Dgv_asistenicas.Location = new System.Drawing.Point(387, 71);
             this.Dgv_asistenicas.Name = "Dgv_asistenicas";
             this.Dgv_asistenicas.RowHeadersWidth = 51;
             this.Dgv_asistenicas.RowTemplate.Height = 24;
-            this.Dgv_asistenicas.Size = new System.Drawing.Size(888, 276);
+            this.Dgv_asistenicas.Size = new System.Drawing.Size(318, 150);
             this.Dgv_asistenicas.TabIndex = 9;
             this.Dgv_asistenicas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_asistenicas_CellContentClick);
             // 
-            // Lbl_idempelado
+            // Lbl_observaciones
             // 
-            this.Lbl_idempelado.AutoSize = true;
-            this.Lbl_idempelado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Lbl_idempelado.Location = new System.Drawing.Point(58, 107);
-            this.Lbl_idempelado.Name = "Lbl_idempelado";
-            this.Lbl_idempelado.Size = new System.Drawing.Size(83, 16);
-            this.Lbl_idempelado.TabIndex = 48;
-            this.Lbl_idempelado.Text = "Id empleado";
+            this.Lbl_observaciones.AutoSize = true;
+            this.Lbl_observaciones.BackColor = System.Drawing.Color.White;
+            this.Lbl_observaciones.ForeColor = System.Drawing.Color.Black;
+            this.Lbl_observaciones.Location = new System.Drawing.Point(244, 89);
+            this.Lbl_observaciones.Name = "Lbl_observaciones";
+            this.Lbl_observaciones.Size = new System.Drawing.Size(99, 16);
+            this.Lbl_observaciones.TabIndex = 10;
+            this.Lbl_observaciones.Text = "Observaciones";
             // 
             // Formasistencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(1265, 450);
-            this.Controls.Add(this.Lbl_idempelado);
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Lbl_observaciones);
             this.Controls.Add(this.Dgv_asistenicas);
             this.Controls.Add(this.Btn_limpiar);
             this.Controls.Add(this.Btn_registrar);
+            this.Controls.Add(this.Txt_observaciones);
             this.Controls.Add(this.Cbo_tipregistro);
             this.Controls.Add(this.Dpt_fecha);
+            this.Controls.Add(this.Lbl_reloj);
+            this.Controls.Add(this.Lbl_nombempleado);
+            this.Controls.Add(this.Btn_buscar);
             this.Controls.Add(this.Txt_codempleado);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "Formasistencia";
@@ -129,12 +176,16 @@
         #endregion
 
         private System.Windows.Forms.TextBox Txt_codempleado;
+        private System.Windows.Forms.Button Btn_buscar;
+        private System.Windows.Forms.Label Lbl_nombempleado;
+        private System.Windows.Forms.Label Lbl_reloj;
         private System.Windows.Forms.DateTimePicker Dpt_fecha;
         private System.Windows.Forms.ComboBox Cbo_tipregistro;
+        private System.Windows.Forms.TextBox Txt_observaciones;
         private System.Windows.Forms.Button Btn_registrar;
         private System.Windows.Forms.Button Btn_limpiar;
         private System.Windows.Forms.DataGridView Dgv_asistenicas;
         private System.Windows.Forms.Timer timer_reloj;
-        private System.Windows.Forms.Label Lbl_idempelado;
+        private System.Windows.Forms.Label Lbl_observaciones;
     }
 }

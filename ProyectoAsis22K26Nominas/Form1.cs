@@ -9,20 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-
-//Parte trabajada por: Jose Javier Torres Martinez - Carné: 0901-23-1091
-//Curso:Análisis de Sistemas II
-//Fecha de creación: 23-07-2026
-//Fecha de última modificación: 27-07-2026
-
 namespace ProyectoAsis22K26Nominas
 {
     public partial class Form1 : Form
     {
-        
+        // DECLARACIÓN OBLIGATORIA (Debe estar dentro de la clase Form1, pero FUERA de cualquier función)
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
+        // VARIABLE PARA CONTROLAR EL FORMULARIO HIJO ACTIVO
         private Form formActivo = null;
 
         public Form1()
@@ -30,16 +25,20 @@ namespace ProyectoAsis22K26Nominas
             InitializeComponent();
             customizeDesign();
 
+            // Modo oscuro barra título
+            // 1. Activa el modo oscuro base
             int useDarkMode = 1;
             DwmSetWindowAttribute(this.Handle, 20, ref useDarkMode, sizeof(int));
 
-         
+            // 2. Asigna el color RGB (11, 7, 17) a la Barra de Título
             int captionColor = ColorTranslator.ToWin32(Color.FromArgb(11, 7, 17));
             DwmSetWindowAttribute(this.Handle, 35, ref captionColor, sizeof(int));
 
+            // 3. Pone el texto de la barra de título en color Blanco para contrastar
             int textColor = ColorTranslator.ToWin32(Color.White);
             DwmSetWindowAttribute(this.Handle, 36, ref textColor, sizeof(int));
 
+            // 4. Aplica también el color al fondo de la ventana principal
             this.BackColor = Color.FromArgb(11, 7, 17);
         }
 
@@ -74,10 +73,10 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-      
+        // MÉTODO ÚNICO PARA ABRIR FORMULARIOS HIJOS
         private void AbrirFormHijo(Form formHijo)
         {
-         
+            // 1. Cierra la pantalla anterior liberando memoria
             if (formActivo != null)
             {
                 formActivo.Close();
@@ -85,22 +84,24 @@ namespace ProyectoAsis22K26Nominas
 
             formActivo = formHijo;
 
+            // 2. Configura el formulario
             formHijo.TopLevel = false;
             formHijo.FormBorderStyle = FormBorderStyle.None;
             formHijo.Dock = DockStyle.Fill;
 
-          
+            // 3. Carga en el panel contenedor
             Pnl_contenedor.Controls.Clear();
             Pnl_contenedor.Controls.Add(formHijo);
             Pnl_contenedor.Tag = formHijo;
 
+            // 4. Muestra la pantalla
             formHijo.BringToFront();
             formHijo.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-     
+            // Aplica los permisos del usuario logueado en cuanto carga el Form1
             AplicarPermisos();
         }
 
@@ -200,25 +201,27 @@ namespace ProyectoAsis22K26Nominas
             hideSubMenu();
         }
 
-    
+        // ==========================================
+        // 🔐 MÉTODO PARA APLICAR PERMISOS SEGÚN ROL
+        // ==========================================
         private void AplicarPermisos()
         {
             string rol = SesionUsuario.Rol;
 
             if (rol == "Secretaria")
             {
-    
+                // ❌ Oculta los módulos que no corresponden a Secretaría
                 Btn_empleado.Visible = false;
                 btn_nomina.Visible = false;
-                Btn_vacacioness.Visible = false; 
+                Btn_vacacioness.Visible = false; // Módulo Vacaciones
                 Btn_pagos.Visible = false;
 
-           
+                // Si la secretaria no necesita el menú desplegable, se puede abrir directamente el Formasistencia:
                 AbrirFormHijo(new Formasistencia());
             }
             else if (rol == "RRHH")
             {
-                
+                // RRHH ve gestión de personal, nómina y vacaciones, pero no el módulo de pagos
                 Btn_empleado.Visible = true;
                 btn_nomina.Visible = true;
                 Btn_vacacioness.Visible = true;
@@ -226,7 +229,7 @@ namespace ProyectoAsis22K26Nominas
             }
             else if (rol == "Admin")
             {
-               
+                // El administrador tiene acceso a todo el sistema
                 Btn_empleado.Visible = true;
                 btn_nomina.Visible = true;
                 Btn_vacacioness.Visible = true;

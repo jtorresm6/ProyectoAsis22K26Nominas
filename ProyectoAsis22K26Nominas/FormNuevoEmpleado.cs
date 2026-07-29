@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
-    public partial class FormSolicitudVacaciones : Form
+    public partial class FormNuevoEmpleado : Form
     {
-        public FormSolicitudVacaciones()
+        public FormNuevoEmpleado()
         {
             InitializeComponent();
         }

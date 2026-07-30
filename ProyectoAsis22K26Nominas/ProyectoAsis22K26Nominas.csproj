@@ -136,7 +136,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="ConexionBD.cs" />
+=======
+    <Compile Include="Class1.cs" />
+>>>>>>> Quite clase de BD
     <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

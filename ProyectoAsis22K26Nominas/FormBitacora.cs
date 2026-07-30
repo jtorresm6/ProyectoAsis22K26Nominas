@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
-    public partial class FormControlSaldos : Form
+    public partial class FormBitacora : Form
     {
-        public FormControlSaldos()
+        public FormBitacora()
         {
             InitializeComponent();
-        }
-
-        private void FormControlSaldos_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

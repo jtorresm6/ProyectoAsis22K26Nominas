@@ -244,5 +244,11 @@ namespace ProyectoAsis22K26Nominas
         {
             AbrirFormHijo(new Formhelp());
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AbrirFormHijo(new FormBitacora());
+            hideSubMenu();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace ProyectoAsis22K26Nominas
 {
-    partial class FormControlSaldos
+    partial class FormBitacora
     {
         /// <summary>
         /// Required designer variable.
@@ -28,19 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // FormControlSaldos
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "FormControlSaldos";
-            this.Text = "FormControlSaldos";
-            this.Load += new System.EventHandler(this.FormControlSaldos_Load);
-            this.ResumeLayout(false);
-
+            this.Text = "FormBitacora";
         }
 
         #endregion

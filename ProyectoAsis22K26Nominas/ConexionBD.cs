@@ -13,7 +13,6 @@ namespace ProyectoAsis22K26Nominas
 
         private static string cadenaConexion = "Server=192.168.1.115;Port=3306;Database=BD_ProyectoNominas;Uid=usuprueba;Pwd=1234;";
 
-        // Método estático accesible directamente como ConexionBD.ObtenerConexion()
         public static MySqlConnection ObtenerConexion()
         {
             return new MySqlConnection(cadenaConexion);

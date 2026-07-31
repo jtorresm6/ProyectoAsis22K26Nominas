@@ -1,33 +1,27 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace ProyectoAsis22K26Nominas
-
-
-//Parte trabajada por Diego Alejandro Cheng Peña - carné: 0901-22-8091
-//Curso:Análisis de sistemas II
-//Fecha de creación: 24-07-2026
-//Fecha de última modificación 27-07-2026
 {
     public partial class FormHistorialVacaciones : Form
     {
         private DataGridView dgvHistorialVacaciones;
         private Button btnGenerarConstancia;
 
+        private string conexion = "server=localhost;database=db_sistema_nominas;uid=root;pwd=;";
+
+
         public FormHistorialVacaciones()
         {
             InitializeComponent();
             InicializarControles();
-        }
-
-        private void FormHistorialVacaciones_Load(object sender, EventArgs e)
-        {
             CargarHistorialVacaciones();
         }
+
 
         private void InicializarControles()
         {
@@ -35,6 +29,7 @@ namespace ProyectoAsis22K26Nominas
 
             dgvHistorialVacaciones = new DataGridView();
             btnGenerarConstancia = new Button();
+
 
             dgvHistorialVacaciones.Location = new Point(20, 20);
             dgvHistorialVacaciones.Size = new Size(760, 380);
@@ -50,11 +45,13 @@ namespace ProyectoAsis22K26Nominas
             dgvHistorialVacaciones.RowHeadersVisible = false;
             dgvHistorialVacaciones.EnableHeadersVisualStyles = false;
 
+
             dgvHistorialVacaciones.ColumnHeadersHeight = 35;
             dgvHistorialVacaciones.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(235, 22, 86);
             dgvHistorialVacaciones.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvHistorialVacaciones.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             dgvHistorialVacaciones.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
 
             dgvHistorialVacaciones.DefaultCellStyle.BackColor = Color.FromArgb(40, 37, 54);
             dgvHistorialVacaciones.DefaultCellStyle.ForeColor = Color.WhiteSmoke;
@@ -64,6 +61,8 @@ namespace ProyectoAsis22K26Nominas
 
             dgvHistorialVacaciones.RowsDefaultCellStyle.BackColor = Color.FromArgb(40, 37, 54);
             dgvHistorialVacaciones.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(48, 45, 62);
+
+
 
             btnGenerarConstancia.Name = "btnGenerarConstancia";
             btnGenerarConstancia.Text = "Generar Constancia";
@@ -75,19 +74,24 @@ namespace ProyectoAsis22K26Nominas
             btnGenerarConstancia.FlatAppearance.BorderSize = 0;
             btnGenerarConstancia.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             btnGenerarConstancia.Cursor = Cursors.Hand;
+
             btnGenerarConstancia.Click += BtnGenerarConstancia_Click;
+
 
             Controls.Add(dgvHistorialVacaciones);
             Controls.Add(btnGenerarConstancia);
         }
 
+
+
         private void CargarHistorialVacaciones()
         {
             try
             {
-                using (MySqlConnection cn = ConexionBD.ObtenerConexion())
+                using (MySqlConnection cn = new MySqlConnection(conexion))
                 {
                     cn.Open();
+
 
                     string query = @"
                     SELECT
@@ -96,11 +100,12 @@ namespace ProyectoAsis22K26Nominas
                         v.cmp_cantidad_dias AS 'Días',
                         v.cmp_motivo AS 'Motivo',
                         v.cmp_estado AS 'Estado'
-                    FROM tbl_Vacaciones v
+                    FROM tbl_vacaciones v
                     ORDER BY v.cmp_fecha_inicio DESC";
 
-                    MySqlCommand cmd = new MySqlCommand(query, cn);
-                    MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+
+                    MySqlDataAdapter da = new MySqlDataAdapter(query, cn);
+
                     DataTable dt = new DataTable();
 
                     da.Fill(dt);
@@ -112,11 +117,13 @@ namespace ProyectoAsis22K26Nominas
             {
                 MessageBox.Show(
                     ex.Message,
-                    "Error de conexión con la base de datos",
+                    "Error de conexión",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
+
+
 
         private void BtnGenerarConstancia_Click(object sender, EventArgs e)
         {
@@ -131,7 +138,9 @@ namespace ProyectoAsis22K26Nominas
                 return;
             }
 
+
             DataGridViewRow fila = dgvHistorialVacaciones.SelectedRows[0];
+
 
             string contenido =
                 "CONSTANCIA DE VACACIONES\n" +
@@ -143,13 +152,20 @@ namespace ProyectoAsis22K26Nominas
                 "Estado: " + fila.Cells["Estado"].Value.ToString() + "\n\n" +
                 "Sistema de Nóminas";
 
+
             SaveFileDialog guardar = new SaveFileDialog();
+
             guardar.Filter = "Archivo de texto (*.txt)|*.txt";
             guardar.FileName = "Constancia_Vacaciones.txt";
 
+
             if (guardar.ShowDialog() == DialogResult.OK)
             {
-                File.WriteAllText(guardar.FileName, contenido);
+                System.IO.File.WriteAllText(
+                    guardar.FileName,
+                    contenido
+                );
+
 
                 MessageBox.Show(
                     "Constancia descargada correctamente.",

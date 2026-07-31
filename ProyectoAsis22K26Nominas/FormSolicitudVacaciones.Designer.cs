@@ -30,22 +30,22 @@
         {
             this.Lbl_Titulo = new System.Windows.Forms.Label();
             this.Gbo_Empleado = new System.Windows.Forms.GroupBox();
-            this.Lbl_Empleado = new System.Windows.Forms.Label();
-            this.Cbo_Empleado = new System.Windows.Forms.ComboBox();
-            this.Lbl_Texto_Dias = new System.Windows.Forms.Label();
             this.Lbl_Dias_Disponibles = new System.Windows.Forms.Label();
+            this.Lbl_Texto_Dias = new System.Windows.Forms.Label();
+            this.Cbo_Empleado = new System.Windows.Forms.ComboBox();
+            this.Lbl_Empleado = new System.Windows.Forms.Label();
             this.Gbo_Solicitud = new System.Windows.Forms.GroupBox();
-            this.Lbl_Inicio = new System.Windows.Forms.Label();
-            this.Dtp_Fecha_Inicio = new System.Windows.Forms.DateTimePicker();
-            this.Lbl_Fin = new System.Windows.Forms.Label();
-            this.Dtp_Fecha_Fin = new System.Windows.Forms.DateTimePicker();
-            this.Lbl_Dias_Solicitados = new System.Windows.Forms.Label();
-            this.Txt_Dias_Solicitados = new System.Windows.Forms.TextBox();
-            this.Lbl_Motivo = new System.Windows.Forms.Label();
             this.Txt_Motivo = new System.Windows.Forms.TextBox();
+            this.Lbl_Motivo = new System.Windows.Forms.Label();
+            this.Txt_Dias_Solicitados = new System.Windows.Forms.TextBox();
+            this.Lbl_Dias_Solicitados = new System.Windows.Forms.Label();
+            this.Dtp_Fecha_Fin = new System.Windows.Forms.DateTimePicker();
+            this.Lbl_Fin = new System.Windows.Forms.Label();
+            this.Dtp_Fecha_Inicio = new System.Windows.Forms.DateTimePicker();
+            this.Lbl_Inicio = new System.Windows.Forms.Label();
             this.Btn_Guardar = new System.Windows.Forms.Button();
             this.Btn_Aprobar = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.Btn_Rechazar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Dgv_Solicitudes = new System.Windows.Forms.DataGridView();
             this.Col_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -86,24 +86,15 @@
             this.Gbo_Empleado.Text = "Información del Empleado";
             this.Gbo_Empleado.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // Lbl_Empleado
+            // Lbl_Dias_Disponibles
             // 
-            this.Lbl_Empleado.AutoSize = true;
-            this.Lbl_Empleado.Location = new System.Drawing.Point(26, 35);
-            this.Lbl_Empleado.Name = "Lbl_Empleado";
-            this.Lbl_Empleado.Size = new System.Drawing.Size(76, 16);
-            this.Lbl_Empleado.TabIndex = 0;
-            this.Lbl_Empleado.Text = "Empleado: ";
-            this.Lbl_Empleado.Click += new System.EventHandler(this.label1_Click_1);
-            // 
-            // Cbo_Empleado
-            // 
-            this.Cbo_Empleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cbo_Empleado.FormattingEnabled = true;
-            this.Cbo_Empleado.Location = new System.Drawing.Point(120, 32);
-            this.Cbo_Empleado.Name = "Cbo_Empleado";
-            this.Cbo_Empleado.Size = new System.Drawing.Size(350, 24);
-            this.Cbo_Empleado.TabIndex = 1;
+            this.Lbl_Dias_Disponibles.AutoSize = true;
+            this.Lbl_Dias_Disponibles.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Dias_Disponibles.Location = new System.Drawing.Point(148, 81);
+            this.Lbl_Dias_Disponibles.Name = "Lbl_Dias_Disponibles";
+            this.Lbl_Dias_Disponibles.Size = new System.Drawing.Size(49, 16);
+            this.Lbl_Dias_Disponibles.TabIndex = 3;
+            this.Lbl_Dias_Disponibles.Text = "0 días";
             // 
             // Lbl_Texto_Dias
             // 
@@ -114,15 +105,23 @@
             this.Lbl_Texto_Dias.TabIndex = 2;
             this.Lbl_Texto_Dias.Text = "Días Disponibles: ";
             // 
-            // Lbl_Dias_Disponibles
+            // Cbo_Empleado
             // 
-            this.Lbl_Dias_Disponibles.AutoSize = true;
-            this.Lbl_Dias_Disponibles.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Dias_Disponibles.Location = new System.Drawing.Point(148, 81);
-            this.Lbl_Dias_Disponibles.Name = "Lbl_Dias_Disponibles";
-            this.Lbl_Dias_Disponibles.Size = new System.Drawing.Size(49, 16);
-            this.Lbl_Dias_Disponibles.TabIndex = 3;
-            this.Lbl_Dias_Disponibles.Text = "0 días";
+            this.Cbo_Empleado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Cbo_Empleado.FormattingEnabled = true;
+            this.Cbo_Empleado.Location = new System.Drawing.Point(120, 32);
+            this.Cbo_Empleado.Name = "Cbo_Empleado";
+            this.Cbo_Empleado.Size = new System.Drawing.Size(350, 24);
+            this.Cbo_Empleado.TabIndex = 1;
+            // 
+            // Lbl_Empleado
+            // 
+            this.Lbl_Empleado.AutoSize = true;
+            this.Lbl_Empleado.Location = new System.Drawing.Point(26, 35);
+            this.Lbl_Empleado.Name = "Lbl_Empleado";
+            this.Lbl_Empleado.Size = new System.Drawing.Size(76, 16);
+            this.Lbl_Empleado.TabIndex = 0;
+            this.Lbl_Empleado.Text = "Empleado: ";
             // 
             // Gbo_Solicitud
             // 
@@ -140,61 +139,15 @@
             this.Gbo_Solicitud.TabIndex = 2;
             this.Gbo_Solicitud.TabStop = false;
             this.Gbo_Solicitud.Text = "Información Solicitud";
-            this.Gbo_Solicitud.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // Lbl_Inicio
+            // Txt_Motivo
             // 
-            this.Lbl_Inicio.AutoSize = true;
-            this.Lbl_Inicio.Location = new System.Drawing.Point(30, 43);
-            this.Lbl_Inicio.Name = "Lbl_Inicio";
-            this.Lbl_Inicio.Size = new System.Drawing.Size(85, 16);
-            this.Lbl_Inicio.TabIndex = 0;
-            this.Lbl_Inicio.Text = "Fecha Inicio: ";
-            this.Lbl_Inicio.Click += new System.EventHandler(this.label1_Click_2);
-            // 
-            // Dtp_Fecha_Inicio
-            // 
-            this.Dtp_Fecha_Inicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.Dtp_Fecha_Inicio.Location = new System.Drawing.Point(149, 37);
-            this.Dtp_Fecha_Inicio.Name = "Dtp_Fecha_Inicio";
-            this.Dtp_Fecha_Inicio.Size = new System.Drawing.Size(200, 22);
-            this.Dtp_Fecha_Inicio.TabIndex = 1;
-            this.Dtp_Fecha_Inicio.ValueChanged += new System.EventHandler(this.Dtp_Fecha_Inicio_ValueChanged);
-            // 
-            // Lbl_Fin
-            // 
-            this.Lbl_Fin.AutoSize = true;
-            this.Lbl_Fin.Location = new System.Drawing.Point(30, 83);
-            this.Lbl_Fin.Name = "Lbl_Fin";
-            this.Lbl_Fin.Size = new System.Drawing.Size(72, 16);
-            this.Lbl_Fin.TabIndex = 2;
-            this.Lbl_Fin.Text = "Fecha Fin: ";
-            this.Lbl_Fin.Click += new System.EventHandler(this.label1_Click_3);
-            // 
-            // Dtp_Fecha_Fin
-            // 
-            this.Dtp_Fecha_Fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.Dtp_Fecha_Fin.Location = new System.Drawing.Point(149, 78);
-            this.Dtp_Fecha_Fin.Name = "Dtp_Fecha_Fin";
-            this.Dtp_Fecha_Fin.Size = new System.Drawing.Size(200, 22);
-            this.Dtp_Fecha_Fin.TabIndex = 3;
-            // 
-            // Lbl_Dias_Solicitados
-            // 
-            this.Lbl_Dias_Solicitados.AutoSize = true;
-            this.Lbl_Dias_Solicitados.Location = new System.Drawing.Point(30, 129);
-            this.Lbl_Dias_Solicitados.Name = "Lbl_Dias_Solicitados";
-            this.Lbl_Dias_Solicitados.Size = new System.Drawing.Size(108, 16);
-            this.Lbl_Dias_Solicitados.TabIndex = 4;
-            this.Lbl_Dias_Solicitados.Text = "Días Solicitados:";
-            // 
-            // Txt_Dias_Solicitados
-            // 
-            this.Txt_Dias_Solicitados.Location = new System.Drawing.Point(149, 123);
-            this.Txt_Dias_Solicitados.Name = "Txt_Dias_Solicitados";
-            this.Txt_Dias_Solicitados.Size = new System.Drawing.Size(100, 22);
-            this.Txt_Dias_Solicitados.TabIndex = 5;
-            this.Txt_Dias_Solicitados.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Txt_Motivo.Location = new System.Drawing.Point(38, 190);
+            this.Txt_Motivo.Multiline = true;
+            this.Txt_Motivo.Name = "Txt_Motivo";
+            this.Txt_Motivo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.Txt_Motivo.Size = new System.Drawing.Size(500, 80);
+            this.Txt_Motivo.TabIndex = 7;
             // 
             // Lbl_Motivo
             // 
@@ -205,14 +158,57 @@
             this.Lbl_Motivo.TabIndex = 6;
             this.Lbl_Motivo.Text = "Motivo:";
             // 
-            // Txt_Motivo
+            // Txt_Dias_Solicitados
             // 
-            this.Txt_Motivo.Location = new System.Drawing.Point(38, 190);
-            this.Txt_Motivo.Multiline = true;
-            this.Txt_Motivo.Name = "Txt_Motivo";
-            this.Txt_Motivo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.Txt_Motivo.Size = new System.Drawing.Size(500, 80);
-            this.Txt_Motivo.TabIndex = 7;
+            this.Txt_Dias_Solicitados.Location = new System.Drawing.Point(149, 123);
+            this.Txt_Dias_Solicitados.Name = "Txt_Dias_Solicitados";
+            this.Txt_Dias_Solicitados.ReadOnly = true;
+            this.Txt_Dias_Solicitados.Size = new System.Drawing.Size(100, 22);
+            this.Txt_Dias_Solicitados.TabIndex = 5;
+            this.Txt_Dias_Solicitados.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // Lbl_Dias_Solicitados
+            // 
+            this.Lbl_Dias_Solicitados.AutoSize = true;
+            this.Lbl_Dias_Solicitados.Location = new System.Drawing.Point(30, 129);
+            this.Lbl_Dias_Solicitados.Name = "Lbl_Dias_Solicitados";
+            this.Lbl_Dias_Solicitados.Size = new System.Drawing.Size(108, 16);
+            this.Lbl_Dias_Solicitados.TabIndex = 4;
+            this.Lbl_Dias_Solicitados.Text = "Días Solicitados:";
+            // 
+            // Dtp_Fecha_Fin
+            // 
+            this.Dtp_Fecha_Fin.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.Dtp_Fecha_Fin.Location = new System.Drawing.Point(149, 78);
+            this.Dtp_Fecha_Fin.Name = "Dtp_Fecha_Fin";
+            this.Dtp_Fecha_Fin.Size = new System.Drawing.Size(200, 22);
+            this.Dtp_Fecha_Fin.TabIndex = 3;
+            // 
+            // Lbl_Fin
+            // 
+            this.Lbl_Fin.AutoSize = true;
+            this.Lbl_Fin.Location = new System.Drawing.Point(30, 83);
+            this.Lbl_Fin.Name = "Lbl_Fin";
+            this.Lbl_Fin.Size = new System.Drawing.Size(72, 16);
+            this.Lbl_Fin.TabIndex = 2;
+            this.Lbl_Fin.Text = "Fecha Fin: ";
+            // 
+            // Dtp_Fecha_Inicio
+            // 
+            this.Dtp_Fecha_Inicio.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.Dtp_Fecha_Inicio.Location = new System.Drawing.Point(149, 37);
+            this.Dtp_Fecha_Inicio.Name = "Dtp_Fecha_Inicio";
+            this.Dtp_Fecha_Inicio.Size = new System.Drawing.Size(200, 22);
+            this.Dtp_Fecha_Inicio.TabIndex = 1;
+            // 
+            // Lbl_Inicio
+            // 
+            this.Lbl_Inicio.AutoSize = true;
+            this.Lbl_Inicio.Location = new System.Drawing.Point(30, 43);
+            this.Lbl_Inicio.Name = "Lbl_Inicio";
+            this.Lbl_Inicio.Size = new System.Drawing.Size(85, 16);
+            this.Lbl_Inicio.TabIndex = 0;
+            this.Lbl_Inicio.Text = "Fecha Inicio: ";
             // 
             // Btn_Guardar
             // 
@@ -232,15 +228,15 @@
             this.Btn_Aprobar.Text = "Aprobar";
             this.Btn_Aprobar.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // Btn_Rechazar
             // 
-            this.button1.Location = new System.Drawing.Point(338, 503);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 45);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Rechazar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Btn_Rechazar.Location = new System.Drawing.Point(338, 503);
+            this.Btn_Rechazar.Name = "Btn_Rechazar";
+            this.Btn_Rechazar.Size = new System.Drawing.Size(120, 45);
+            this.Btn_Rechazar.TabIndex = 5;
+            this.Btn_Rechazar.Text = "Rechazar";
+            this.Btn_Rechazar.UseVisualStyleBackColor = true;
+            this.Btn_Rechazar.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
             // 
@@ -339,7 +335,7 @@
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(890, 953);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.Btn_Rechazar);
             this.Controls.Add(this.Btn_Aprobar);
             this.Controls.Add(this.Btn_Guardar);
             this.Controls.Add(this.Gbo_Solicitud);
@@ -381,7 +377,7 @@
         private System.Windows.Forms.TextBox Txt_Motivo;
         private System.Windows.Forms.Button Btn_Guardar;
         private System.Windows.Forms.Button Btn_Aprobar;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button Btn_Rechazar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView Dgv_Solicitudes;
         private System.Windows.Forms.DataGridViewTextBoxColumn Col_ID;

@@ -140,9 +140,6 @@
     <Compile Include="GestionarPermisos.cs" />
     <Compile Include="Permisos.cs" />
     <Compile Include="ConexionBD.cs" />
-=======
-    <Compile Include="Class1.cs" />
->>>>>>> Quite clase de BD
     <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -154,6 +151,12 @@
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormBitacora.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormBitacora.Designer.cs">
+      <DependentUpon>FormBitacora.cs</DependentUpon>
     </Compile>
     <Compile Include="FormControlSaldos.cs">
       <SubType>Form</SubType>

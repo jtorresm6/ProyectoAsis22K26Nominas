@@ -48,13 +48,8 @@
             this.Btn_Rechazar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Dgv_Solicitudes = new System.Windows.Forms.DataGridView();
-            this.Col_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Dias = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Motivo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Btn_Refrescar = new System.Windows.Forms.Button();
+            this.Btn_Limpiar = new System.Windows.Forms.Button();
             this.Gbo_Empleado.SuspendLayout();
             this.Gbo_Solicitud.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -70,7 +65,6 @@
             this.Lbl_Titulo.Size = new System.Drawing.Size(251, 25);
             this.Lbl_Titulo.TabIndex = 0;
             this.Lbl_Titulo.Text = "SOLICITUD DE VACACIONES";
-            this.Lbl_Titulo.Click += new System.EventHandler(this.label1_Click);
             // 
             // Gbo_Empleado
             // 
@@ -84,7 +78,6 @@
             this.Gbo_Empleado.TabIndex = 1;
             this.Gbo_Empleado.TabStop = false;
             this.Gbo_Empleado.Text = "Información del Empleado";
-            this.Gbo_Empleado.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // Lbl_Dias_Disponibles
             // 
@@ -162,7 +155,6 @@
             // 
             this.Txt_Dias_Solicitados.Location = new System.Drawing.Point(149, 123);
             this.Txt_Dias_Solicitados.Name = "Txt_Dias_Solicitados";
-            this.Txt_Dias_Solicitados.ReadOnly = true;
             this.Txt_Dias_Solicitados.Size = new System.Drawing.Size(100, 22);
             this.Txt_Dias_Solicitados.TabIndex = 5;
             this.Txt_Dias_Solicitados.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -236,7 +228,6 @@
             this.Btn_Rechazar.TabIndex = 5;
             this.Btn_Rechazar.Text = "Rechazar";
             this.Btn_Rechazar.UseVisualStyleBackColor = true;
-            this.Btn_Rechazar.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox1
             // 
@@ -247,7 +238,6 @@
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Solicitudes Registradas";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter_1);
             // 
             // Dgv_Solicitudes
             // 
@@ -259,14 +249,6 @@
             this.Dgv_Solicitudes.BackgroundColor = System.Drawing.Color.White;
             this.Dgv_Solicitudes.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Dgv_Solicitudes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgv_Solicitudes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Col_ID,
-            this.Col_Empleado,
-            this.Col_Inicio,
-            this.Col_Fin,
-            this.Col_Dias,
-            this.Col_Motivo,
-            this.Col_Estado});
             this.Dgv_Solicitudes.Location = new System.Drawing.Point(22, 30);
             this.Dgv_Solicitudes.MultiSelect = false;
             this.Dgv_Solicitudes.Name = "Dgv_Solicitudes";
@@ -278,54 +260,25 @@
             this.Dgv_Solicitudes.Size = new System.Drawing.Size(800, 260);
             this.Dgv_Solicitudes.TabIndex = 0;
             // 
-            // Col_ID
+            // Btn_Refrescar
             // 
-            this.Col_ID.HeaderText = "ID";
-            this.Col_ID.MinimumWidth = 6;
-            this.Col_ID.Name = "Col_ID";
-            this.Col_ID.ReadOnly = true;
+            this.Btn_Refrescar.Location = new System.Drawing.Point(477, 503);
+            this.Btn_Refrescar.Name = "Btn_Refrescar";
+            this.Btn_Refrescar.Size = new System.Drawing.Size(150, 45);
+            this.Btn_Refrescar.TabIndex = 7;
+            this.Btn_Refrescar.Text = "Refrescar";
+            this.Btn_Refrescar.UseVisualStyleBackColor = true;
+            //this.Btn_Refrescar.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Col_Empleado
+            // Btn_Limpiar
             // 
-            this.Col_Empleado.HeaderText = "Empleado";
-            this.Col_Empleado.MinimumWidth = 6;
-            this.Col_Empleado.Name = "Col_Empleado";
-            this.Col_Empleado.ReadOnly = true;
-            // 
-            // Col_Inicio
-            // 
-            this.Col_Inicio.HeaderText = "Inicio";
-            this.Col_Inicio.MinimumWidth = 6;
-            this.Col_Inicio.Name = "Col_Inicio";
-            this.Col_Inicio.ReadOnly = true;
-            // 
-            // Col_Fin
-            // 
-            this.Col_Fin.HeaderText = "Fin";
-            this.Col_Fin.MinimumWidth = 6;
-            this.Col_Fin.Name = "Col_Fin";
-            this.Col_Fin.ReadOnly = true;
-            // 
-            // Col_Dias
-            // 
-            this.Col_Dias.HeaderText = "Días";
-            this.Col_Dias.MinimumWidth = 6;
-            this.Col_Dias.Name = "Col_Dias";
-            this.Col_Dias.ReadOnly = true;
-            // 
-            // Col_Motivo
-            // 
-            this.Col_Motivo.HeaderText = "Motivo";
-            this.Col_Motivo.MinimumWidth = 6;
-            this.Col_Motivo.Name = "Col_Motivo";
-            this.Col_Motivo.ReadOnly = true;
-            // 
-            // Col_Estado
-            // 
-            this.Col_Estado.HeaderText = "Estado";
-            this.Col_Estado.MinimumWidth = 6;
-            this.Col_Estado.Name = "Col_Estado";
-            this.Col_Estado.ReadOnly = true;
+            this.Btn_Limpiar.Location = new System.Drawing.Point(654, 503);
+            this.Btn_Limpiar.Name = "Btn_Limpiar";
+            this.Btn_Limpiar.Size = new System.Drawing.Size(145, 45);
+            this.Btn_Limpiar.TabIndex = 8;
+            this.Btn_Limpiar.Text = "Limpiar";
+            this.Btn_Limpiar.UseVisualStyleBackColor = true;
+            //this.Btn_Limpiar.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // FormSolicitudVacaciones
             // 
@@ -334,6 +287,8 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(890, 953);
+            this.Controls.Add(this.Btn_Limpiar);
+            this.Controls.Add(this.Btn_Refrescar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.Btn_Rechazar);
             this.Controls.Add(this.Btn_Aprobar);
@@ -380,12 +335,7 @@
         private System.Windows.Forms.Button Btn_Rechazar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.DataGridView Dgv_Solicitudes;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Empleado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Inicio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Fin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Dias;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Motivo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Estado;
+        private System.Windows.Forms.Button Btn_Refrescar;
+        private System.Windows.Forms.Button Btn_Limpiar;
     }
 }

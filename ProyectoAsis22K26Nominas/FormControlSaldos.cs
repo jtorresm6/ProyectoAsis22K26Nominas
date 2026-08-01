@@ -12,42 +12,24 @@ using MySql.Data.MySqlClient;
 //Parte trabajada por: Julio Roberto Rosales Mejía - Carné: 0901-23-1426
 //Curso:Análisis de Sistemas II
 //Fecha de creación: 27/07/2026
-//Fecha de última modificación: 29/07/2026
+//Fecha de última modificación: 31/07/2026
 
 
 namespace ProyectoAsis22K26Nominas
 {
     public partial class FormControlSaldos : Form
     {
-        
-        // VARIABLES GLOBALES
-        
-        MySqlConnection conexion;
-        MySqlCommand comando;
-        MySqlDataAdapter adaptador;
-        DataTable tabla;
+        // Variables globales
+        private int idEmpleadoSeleccionado = 0;
 
-        
-        // CONSTRUCTOR
-        
         public FormControlSaldos()
         {
             InitializeComponent();
 
             // Configurar propiedades iniciales
             Dtp_Dia_Vacaciones.Value = DateTime.Today;
-            ConfigurarDataGridView();
 
-            // Suscribir eventos
-            Cbo_Buscar_Empleado.SelectedIndexChanged += Cbo_Buscar_Empleado_SelectedIndexChanged;
-            Dtp_Dia_Vacaciones.ValueChanged += Dtp_Dia_Vacaciones_ValueChanged;
-        }
-
-        
-        // CONFIGURAR DATAGRIDVIEW
-        
-        private void ConfigurarDataGridView()
-        {
+            // Configurar DataGridView
             Dgv_Saldo_Vacaciones.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Dgv_Saldo_Vacaciones.ReadOnly = true;
             Dgv_Saldo_Vacaciones.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -55,168 +37,172 @@ namespace ProyectoAsis22K26Nominas
             Dgv_Saldo_Vacaciones.AllowUserToAddRows = false;
             Dgv_Saldo_Vacaciones.RowHeadersVisible = false;
 
-            // Configurar colores de las columnas
-            if (Dgv_Saldo_Vacaciones.Columns.Contains("Días Pendientes"))
+            // Configurar eventos
+            this.Cbo_Buscar_Empleado.SelectedIndexChanged += new EventHandler(Cbo_Buscar_Empleado_SelectedIndexChanged);
+            this.Dtp_Dia_Vacaciones.ValueChanged += new EventHandler(Dtp_Dia_Vacaciones_ValueChanged);
+            this.Btn_Refrescar.Click += new EventHandler(Btn_Refrescar_Click);
+        }
+
+        private void FormControlSaldos_Load(object sender, EventArgs e)
+        {
+            try
             {
-                Dgv_Saldo_Vacaciones.Columns["Días Pendientes"].DefaultCellStyle.Font =
-                    new Font(Dgv_Saldo_Vacaciones.Font, FontStyle.Bold);
+                this.StartPosition = FormStartPosition.CenterScreen;
+                CargarEmpleados();
+                CargarSaldos(Dtp_Dia_Vacaciones.Value);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar el formulario: " + ex.Message);
             }
         }
 
         
-        // EVENTO LOAD
-        
-        private void FormControlSaldos_Load(object sender, EventArgs e)
-        {
-            // Centrar formulario
-            this.StartPosition = FormStartPosition.CenterScreen;
-
-            // Cargar empleados en el ComboBox
-            CargarEmpleados();
-
-            // Cargar saldos con la fecha actual
-            CargarSaldos(Dtp_Dia_Vacaciones.Value);
-        }
-
-        
-        // CARGAR EMPLEADOS
+        // 1. CARGAR EMPLEADOS (CON OPCIÓN "TODOS")
         
         private void CargarEmpleados()
         {
             try
             {
-                conexion = ConexionBD.ObtenerConexion();
-                conexion.Open();
+                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
+                {
+                    string consulta = @"SELECT 
+                                        cmp_id_empleado,
+                                        CONCAT(cmp_nombre, ' ', cmp_apellido) AS NombreCompleto
+                                        FROM tbl_empleados
+                                        WHERE cmp_estado = 'activo'
+                                        ORDER BY cmp_nombre, cmp_apellido";
 
-                string consulta = @"SELECT 
-                                    cmp_id_empleado,
-                                    CONCAT(cmp_nombre, ' ', cmp_apellido) AS NombreCompleto
-                                    FROM tbl_empleados
-                                    WHERE cmp_estado = 'activo'
-                                    ORDER BY cmp_nombre, cmp_apellido";
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(consulta, conexion);
+                    DataTable tabla = new DataTable();
+                    adaptador.Fill(tabla);
 
-                comando = new MySqlCommand(consulta, conexion);
-                adaptador = new MySqlDataAdapter(comando);
+                    // Agregar opción "Todos" al inicio
+                    DataRow row = tabla.NewRow();
+                    row["cmp_id_empleado"] = 0;
+                    row["NombreCompleto"] = "--- Todos los empleados ---";
+                    tabla.Rows.InsertAt(row, 0);
 
-                tabla = new DataTable();
-                adaptador.Fill(tabla);
-
-                // Agregar opción "Todos" al inicio
-                DataRow row = tabla.NewRow();
-                row["cmp_id_empleado"] = 0;
-                row["NombreCompleto"] = "--- Todos los empleados ---";
-                tabla.Rows.InsertAt(row, 0);
-
-                Cbo_Buscar_Empleado.DataSource = tabla;
-                Cbo_Buscar_Empleado.DisplayMember = "NombreCompleto";
-                Cbo_Buscar_Empleado.ValueMember = "cmp_id_empleado";
-                Cbo_Buscar_Empleado.SelectedIndex = 0;
-
-                conexion.Close();
+                    Cbo_Buscar_Empleado.DataSource = tabla;
+                    Cbo_Buscar_Empleado.DisplayMember = "NombreCompleto";
+                    Cbo_Buscar_Empleado.ValueMember = "cmp_id_empleado";
+                    Cbo_Buscar_Empleado.SelectedIndex = 0;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar empleados: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (conexion != null && conexion.State == ConnectionState.Open)
-                    conexion.Close();
+                MessageBox.Show("Error al cargar empleados: " + ex.Message);
             }
         }
 
         
-        // CARGAR SALDOS
+        // 2. OBTENER ID DEL EMPLEADO SELECCIONADO
         
+        private int ObtenerIdEmpleadoSeleccionado()
+        {
+            try
+            {
+                if (Cbo_Buscar_Empleado.SelectedIndex == -1 || Cbo_Buscar_Empleado.SelectedItem == null)
+                    return 0;
+
+                DataRowView rowView = Cbo_Buscar_Empleado.SelectedItem as DataRowView;
+                if (rowView != null)
+                {
+                    return Convert.ToInt32(rowView["cmp_id_empleado"]);
+                }
+
+                return Convert.ToInt32(Cbo_Buscar_Empleado.SelectedValue);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+       
+        // 3. CARGAR SALDOS - CORREGIDO
+       
         private void CargarSaldos(DateTime fechaReferencia)
         {
             try
             {
-                int idEmpleado = Convert.ToInt32(Cbo_Buscar_Empleado.SelectedValue);
+                int idEmpleado = ObtenerIdEmpleadoSeleccionado();
 
-                conexion = ConexionBD.ObtenerConexion();
-                conexion.Open();
-
-                string consulta = @"
-                    SELECT 
-                        v.cmp_id_vacacion AS ID,
-                        CONCAT(e.cmp_nombre, ' ', e.cmp_apellido) AS Empleado,
-                        v.cmp_fecha_inicio AS Inicio,
-                        v.cmp_fecha_fin AS Fin,
-                        v.cmp_cantidad_dias AS 'Días Totales',
-                        CASE 
-                            WHEN @fechaReferencia < v.cmp_fecha_inicio THEN 0
-                            WHEN @fechaReferencia > v.cmp_fecha_fin THEN v.cmp_cantidad_dias
-                            ELSE DATEDIFF(@fechaReferencia, v.cmp_fecha_inicio) + 1
-                        END AS 'Días Gozados',
-                        CASE 
-                            WHEN @fechaReferencia < v.cmp_fecha_inicio THEN v.cmp_cantidad_dias
-                            WHEN @fechaReferencia > v.cmp_fecha_fin THEN 0
-                            ELSE v.cmp_cantidad_dias - (DATEDIFF(@fechaReferencia, v.cmp_fecha_inicio) + 1)
-                        END AS 'Días Pendientes'
-                    FROM tbl_vacaciones v
-                    INNER JOIN tbl_empleados e 
-                        ON v.cmp_id_empleado = e.cmp_id_empleado
-                    WHERE v.cmp_estado = 'aprobada'";
-
-                // Si se seleccionó un empleado específico, filtrar
-                if (idEmpleado > 0)
+                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
                 {
-                    consulta += " AND v.cmp_id_empleado = @idEmpleado";
-                }
+                    string consulta = @"
+                        SELECT 
+                            v.cmp_id_vacacion AS ID,
+                            CONCAT(e.cmp_nombre, ' ', e.cmp_apellido) AS Empleado,
+                            v.cmp_fecha_inicio AS Inicio,
+                            v.cmp_fecha_fin AS Fin,
+                            v.cmp_cantidad_dias AS 'Días Totales',
+                            CASE 
+                                WHEN @fechaReferencia < v.cmp_fecha_inicio THEN 0
+                                WHEN @fechaReferencia > v.cmp_fecha_fin THEN v.cmp_cantidad_dias
+                                ELSE DATEDIFF(@fechaReferencia, v.cmp_fecha_inicio) + 1
+                            END AS 'Días Gozados',
+                            CASE 
+                                WHEN @fechaReferencia < v.cmp_fecha_inicio THEN v.cmp_cantidad_dias
+                                WHEN @fechaReferencia > v.cmp_fecha_fin THEN 0
+                                ELSE v.cmp_cantidad_dias - (DATEDIFF(@fechaReferencia, v.cmp_fecha_inicio) + 1)
+                            END AS 'Días Pendientes'
+                        FROM tbl_vacaciones v
+                        INNER JOIN tbl_empleados e 
+                            ON v.cmp_id_empleado = e.cmp_id_empleado
+                        WHERE v.cmp_estado = 'aprobada'";
 
-                consulta += " ORDER BY e.cmp_nombre, e.cmp_apellido, v.cmp_fecha_inicio";
+                    if (idEmpleado > 0)
+                    {
+                        consulta += " AND v.cmp_id_empleado = @idEmpleado";
+                    }
 
-                comando = new MySqlCommand(consulta, conexion);
-                comando.Parameters.AddWithValue("@fechaReferencia", fechaReferencia.Date);
-                if (idEmpleado > 0)
-                {
-                    comando.Parameters.AddWithValue("@idEmpleado", idEmpleado);
-                }
+                    consulta += " ORDER BY e.cmp_nombre, e.cmp_apellido, v.cmp_fecha_inicio";
 
-                adaptador = new MySqlDataAdapter(comando);
-                tabla = new DataTable();
-                adaptador.Fill(tabla);
+                    MySqlCommand comando = new MySqlCommand(consulta, conexion);
+                    comando.Parameters.AddWithValue("@fechaReferencia", fechaReferencia.Date);
+                    if (idEmpleado > 0)
+                    {
+                        comando.Parameters.AddWithValue("@idEmpleado", idEmpleado);
+                    }
 
-                Dgv_Saldo_Vacaciones.DataSource = tabla;
+                    MySqlDataAdapter adaptador = new MySqlDataAdapter(comando);
+                    DataTable tabla = new DataTable();
+                    adaptador.Fill(tabla);
 
-                // Configurar columnas después de cargar datos
-                ConfigurarColumnas();
+                    Dgv_Saldo_Vacaciones.DataSource = tabla;
+                    ConfigurarColumnas();
+                    AplicarColoresPorPendientes();
+                    Dgv_Saldo_Vacaciones.Refresh();
 
-                // Aplicar colores según días pendientes
-                AplicarColoresPorPendientes();
-
-                conexion.Close();
-
-                // Mostrar mensaje si no hay datos
-                if (tabla.Rows.Count == 0)
-                {
-                    string mensaje = idEmpleado > 0 ?
-                        "El empleado seleccionado no tiene vacaciones aprobadas." :
-                        "No hay vacaciones aprobadas registradas.";
-                    MessageBox.Show(mensaje, "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (tabla.Rows.Count == 0)
+                    {
+                        string mensaje = idEmpleado > 0 ?
+                            "El empleado seleccionado no tiene vacaciones aprobadas." :
+                            "No hay vacaciones aprobadas registradas.";
+                        // Mostrar mensaje solo si no es la primera carga (opcional)
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar saldos: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (conexion != null && conexion.State == ConnectionState.Open)
-                    conexion.Close();
+                MessageBox.Show("Error al cargar saldos: " + ex.Message);
             }
         }
 
-        // CONFIGURAR COLUMNAS
+        
+        // 4. CONFIGURAR COLUMNAS
         
         private void ConfigurarColumnas()
         {
             if (Dgv_Saldo_Vacaciones.Columns.Count == 0)
                 return;
 
-            // Configurar cabeceras y anchos
+            // Ocultar ID
             if (Dgv_Saldo_Vacaciones.Columns.Contains("ID"))
-            {
-                Dgv_Saldo_Vacaciones.Columns["ID"].HeaderText = "ID";
-                Dgv_Saldo_Vacaciones.Columns["ID"].Width = 50;
-                Dgv_Saldo_Vacaciones.Columns["ID"].Visible = false; // Ocultar ID
-            }
+                Dgv_Saldo_Vacaciones.Columns["ID"].Visible = false;
 
+            // Configurar cabeceras y anchos
             if (Dgv_Saldo_Vacaciones.Columns.Contains("Empleado"))
             {
                 Dgv_Saldo_Vacaciones.Columns["Empleado"].HeaderText = "Empleado";
@@ -249,8 +235,6 @@ namespace ProyectoAsis22K26Nominas
                 Dgv_Saldo_Vacaciones.Columns["Días Gozados"].HeaderText = "Días Gozados";
                 Dgv_Saldo_Vacaciones.Columns["Días Gozados"].Width = 100;
                 Dgv_Saldo_Vacaciones.Columns["Días Gozados"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                Dgv_Saldo_Vacaciones.Columns["Días Gozados"].DefaultCellStyle.Font =
-                    new Font(Dgv_Saldo_Vacaciones.Font, FontStyle.Regular);
             }
 
             if (Dgv_Saldo_Vacaciones.Columns.Contains("Días Pendientes"))
@@ -258,8 +242,7 @@ namespace ProyectoAsis22K26Nominas
                 Dgv_Saldo_Vacaciones.Columns["Días Pendientes"].HeaderText = "Días Pendientes";
                 Dgv_Saldo_Vacaciones.Columns["Días Pendientes"].Width = 100;
                 Dgv_Saldo_Vacaciones.Columns["Días Pendientes"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                Dgv_Saldo_Vacaciones.Columns["Días Pendientes"].DefaultCellStyle.Font =
-                    new Font(Dgv_Saldo_Vacaciones.Font, FontStyle.Bold);
+                Dgv_Saldo_Vacaciones.Columns["Días Pendientes"].DefaultCellStyle.Font = new Font(Dgv_Saldo_Vacaciones.Font, FontStyle.Bold);
             }
 
             // Ajustar el modo de llenado
@@ -271,7 +254,8 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // APLICAR COLORES SEGÚN DÍAS PENDIENTES
+        
+        // 5. APLICAR COLORES SEGÚN DÍAS PENDIENTES
         
         private void AplicarColoresPorPendientes()
         {
@@ -300,14 +284,15 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // ACTUALIZAR SALDOS
+        
+        // 6. ACTUALIZAR SALDOS
         
         private void ActualizarSaldos()
         {
             CargarSaldos(Dtp_Dia_Vacaciones.Value);
         }
 
-        
+       
         // EVENTOS DE CONTROLES
         
 
@@ -335,7 +320,7 @@ namespace ProyectoAsis22K26Nominas
 
         
         // EVENTOS VACÍOS (Compatibilidad con el diseñador)
-       
+        
         private void Lbl_Titulo_Saldos_Click(object sender, EventArgs e) { }
         private void Lbl_Buscar_Click(object sender, EventArgs e) { }
         private void Gb_Busqueda_Trabajador_Enter(object sender, EventArgs e) { }

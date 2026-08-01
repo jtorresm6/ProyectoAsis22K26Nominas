@@ -36,13 +36,6 @@
             this.Dgv_Saldo_Vacaciones = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.Dtp_Dia_Vacaciones = new System.Windows.Forms.DateTimePicker();
-            this.Col_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Empleado = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Inicio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Fin = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Dias_Totales = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Dias_Gozados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Col_Dias_Pendientes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Btn_Refrescar = new System.Windows.Forms.Button();
             this.Gbo_Busqueda_Trabajador.SuspendLayout();
             this.Gbo_Saldo_Vacaciones.SuspendLayout();
@@ -58,7 +51,6 @@
             this.label1.Size = new System.Drawing.Size(335, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "CONTROL DE SALDO DE VACACIONES";
-            //this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Gbo_Busqueda_Trabajador
             // 
@@ -70,7 +62,6 @@
             this.Gbo_Busqueda_Trabajador.TabIndex = 1;
             this.Gbo_Busqueda_Trabajador.TabStop = false;
             this.Gbo_Busqueda_Trabajador.Text = "Búsqueda de Trabajador";
-            //this.Gbo_Busqueda_Trabajador.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // Cbo_Buscar_Empleado
             // 
@@ -89,7 +80,6 @@
             this.Lbl_Buscar_Empleado.Size = new System.Drawing.Size(52, 16);
             this.Lbl_Buscar_Empleado.TabIndex = 0;
             this.Lbl_Buscar_Empleado.Text = "Buscar:";
-            //this.Lbl_Buscar_Empleado.Click += new System.EventHandler(this.Lbl_Buscar_Empleado_Click);
             // 
             // Gbo_Saldo_Vacaciones
             // 
@@ -100,7 +90,6 @@
             this.Gbo_Saldo_Vacaciones.TabIndex = 2;
             this.Gbo_Saldo_Vacaciones.TabStop = false;
             this.Gbo_Saldo_Vacaciones.Text = "Saldo de Vacaciones";
-            //this.Gbo_Saldo_Vacaciones.Enter += new System.EventHandler(this.groupBox1_Enter_1);
             // 
             // Dgv_Saldo_Vacaciones
             // 
@@ -112,14 +101,6 @@
             this.Dgv_Saldo_Vacaciones.BackgroundColor = System.Drawing.Color.White;
             this.Dgv_Saldo_Vacaciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Dgv_Saldo_Vacaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgv_Saldo_Vacaciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Col_ID,
-            this.Col_Empleado,
-            this.Col_Inicio,
-            this.Col_Fin,
-            this.Col_Dias_Totales,
-            this.Col_Dias_Gozados,
-            this.Col_Dias_Pendientes});
             this.Dgv_Saldo_Vacaciones.Location = new System.Drawing.Point(15, 36);
             this.Dgv_Saldo_Vacaciones.MultiSelect = false;
             this.Dgv_Saldo_Vacaciones.Name = "Dgv_Saldo_Vacaciones";
@@ -139,7 +120,6 @@
             this.label2.Size = new System.Drawing.Size(147, 16);
             this.label2.TabIndex = 3;
             this.label2.Text = "Seleccione una Fecha: ";
-            // this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Dtp_Dia_Vacaciones
             // 
@@ -149,55 +129,6 @@
             this.Dtp_Dia_Vacaciones.Size = new System.Drawing.Size(200, 22);
             this.Dtp_Dia_Vacaciones.TabIndex = 4;
             // 
-            // Col_ID
-            // 
-            this.Col_ID.HeaderText = "ID";
-            this.Col_ID.MinimumWidth = 6;
-            this.Col_ID.Name = "Col_ID";
-            this.Col_ID.ReadOnly = true;
-            // 
-            // Col_Empleado
-            // 
-            this.Col_Empleado.HeaderText = "Empleado";
-            this.Col_Empleado.MinimumWidth = 6;
-            this.Col_Empleado.Name = "Col_Empleado";
-            this.Col_Empleado.ReadOnly = true;
-            // 
-            // Col_Inicio
-            // 
-            this.Col_Inicio.HeaderText = "Inicio";
-            this.Col_Inicio.MinimumWidth = 6;
-            this.Col_Inicio.Name = "Col_Inicio";
-            this.Col_Inicio.ReadOnly = true;
-            // 
-            // Col_Fin
-            // 
-            this.Col_Fin.HeaderText = "Fin";
-            this.Col_Fin.MinimumWidth = 6;
-            this.Col_Fin.Name = "Col_Fin";
-            this.Col_Fin.ReadOnly = true;
-            // 
-            // Col_Dias_Totales
-            // 
-            this.Col_Dias_Totales.HeaderText = "Días Totales";
-            this.Col_Dias_Totales.MinimumWidth = 6;
-            this.Col_Dias_Totales.Name = "Col_Dias_Totales";
-            this.Col_Dias_Totales.ReadOnly = true;
-            // 
-            // Col_Dias_Gozados
-            // 
-            this.Col_Dias_Gozados.HeaderText = "Días Gozados";
-            this.Col_Dias_Gozados.MinimumWidth = 6;
-            this.Col_Dias_Gozados.Name = "Col_Dias_Gozados";
-            this.Col_Dias_Gozados.ReadOnly = true;
-            // 
-            // Col_Dias_Pendientes
-            // 
-            this.Col_Dias_Pendientes.HeaderText = "Días Pendientes";
-            this.Col_Dias_Pendientes.MinimumWidth = 6;
-            this.Col_Dias_Pendientes.Name = "Col_Dias_Pendientes";
-            this.Col_Dias_Pendientes.ReadOnly = true;
-            // 
             // Btn_Refrescar
             // 
             this.Btn_Refrescar.Location = new System.Drawing.Point(394, 160);
@@ -206,7 +137,6 @@
             this.Btn_Refrescar.TabIndex = 5;
             this.Btn_Refrescar.Text = "Refrescar";
             this.Btn_Refrescar.UseVisualStyleBackColor = true;
-            //this.Btn_Refrescar.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormControlSaldos
             // 
@@ -245,13 +175,6 @@
         private System.Windows.Forms.DataGridView Dgv_Saldo_Vacaciones;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DateTimePicker Dtp_Dia_Vacaciones;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Empleado;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Inicio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Fin;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Dias_Totales;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Dias_Gozados;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Col_Dias_Pendientes;
         private System.Windows.Forms.Button Btn_Refrescar;
     }
 }

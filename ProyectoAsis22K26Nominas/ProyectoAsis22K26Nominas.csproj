@@ -137,6 +137,12 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    <Compile Include="Class1.cs" />
+    <Compile Include="GestionarPermisos.cs" />
+    <Compile Include="Permisos.cs" />
+>>>>>>> c538409 (Actualización completa de permisos, clases para los usuarios, permisos y bitacora)
     <Compile Include="ConexionBD.cs" />
 =======
     <Compile Include="Class1.cs" />
@@ -247,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBitacora.resx">
+      <DependentUpon>FormBitacora.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormControlSaldos.resx">
       <DependentUpon>FormControlSaldos.cs</DependentUpon>

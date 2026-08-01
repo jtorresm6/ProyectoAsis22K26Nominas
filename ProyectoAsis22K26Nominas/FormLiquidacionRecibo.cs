@@ -71,10 +71,22 @@ namespace ProyectoAsis22K26Nominas
                         if (dt.Rows.Count > 0)
                         {
                             Dgv_Liquidacion_Recibo.DataSource = dt;
+
+                            Bitacora.Registrar(
+                                "Consulta de liquidación",
+                                SesionUsuario.Usuario +
+                                " consultó la liquidación del empleado ID " +
+                                Txt_Empleado.Text.Trim() + "."
+                            );
                         }
                         else
                         {
-                            MessageBox.Show("No se encontraron registros de liquidación para este ID de empleado.", "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show(
+                                "No se encontraron registros de liquidación para este ID de empleado.",
+                                "Sin resultados",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information
+                            );
                         }
                     }
                 }
@@ -87,6 +99,17 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormLiquidacionRecibo_Load(object sender, EventArgs e)
         {
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso(this.Name);
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_Buscar.Enabled = permiso.Ver;
 
         }
     }

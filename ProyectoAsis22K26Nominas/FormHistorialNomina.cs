@@ -79,7 +79,19 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormHistorialNomina_Load(object sender, EventArgs e)
         {
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso("FormMovimientosPlanilla"
+            );
 
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_Buscar.Enabled = permiso.Ver;
         }
     }
+    
 }

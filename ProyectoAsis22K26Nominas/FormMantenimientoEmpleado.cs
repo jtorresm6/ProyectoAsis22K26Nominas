@@ -19,6 +19,7 @@ namespace ProyectoAsis22K26Nominas
 {
     public partial class FormMantenimientoEmpleado : Form
     {
+        private FormularioPermisos permisoActual;
         private int codigoEmpleado = 0;
 
         public FormMantenimientoEmpleado()
@@ -28,7 +29,33 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormMantenimientoEmpleado_Load(object sender, EventArgs e)
         {
-            Cbo_Busqueda.Items.Clear();
+                permisoActual =
+                    GestionarPermisos.ObtenerPermiso(
+                        "FormMantenimientoEmpleado"
+                    );
+
+                if (!permisoActual.Ver)
+                {
+                    MessageBox.Show(
+                        "No tiene permiso para ingresar a este formulario.",
+                        "Acceso denegado",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+
+                    Close();
+                    return;
+                }
+
+                Btn_Actu.Enabled =
+                    permisoActual.Modificar;
+
+                Btn_Bajas.Enabled =
+                    permisoActual.Eliminar;
+
+                Btn_Reactivar.Enabled =
+                    permisoActual.Eliminar;
+                Cbo_Busqueda.Items.Clear();
 
             Cbo_Busqueda.Items.Add("Código");
             Cbo_Busqueda.Items.Add("DPI");
@@ -43,12 +70,40 @@ namespace ProyectoAsis22K26Nominas
             Dtp_Fecha_Cont.Format = DateTimePickerFormat.Custom;
             Dtp_Fecha_Cont.CustomFormat = "yyyy-MM-dd";
 
-            Btn_Actu.Enabled = false;
+            Btn_Actu.Enabled = permisoActual.Modificar;
             Btn_Guardar.Enabled = false;
-            Btn_Bajas.Enabled = false;
-            Btn_Reactivar.Enabled = false;
+            Btn_Bajas.Enabled = permisoActual.Eliminar;
+            Btn_Reactivar.Enabled = permisoActual.Eliminar;
 
             Txt_Estado.ReadOnly = true;
+
+            AplicarPermisos();
+        }
+
+        //Agregacion de método para el inicio de sesión y permisos de usuario.
+        private void AplicarPermisos()
+        {
+            FormularioPermisos permiso =
+              GestionarPermisos.ObtenerPermiso( "FormMantenimientoEmpleado"
+              );
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show(
+                    "No tiene permiso para ingresar a este formulario.",
+                    "Acceso denegado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                Close();
+                return;
+            }
+
+            Btn_Guardar.Enabled = permiso.Modificar;
+            Btn_Actu.Enabled = permiso.Modificar;
+            Btn_Reactivar.Enabled = permiso.Modificar;
+            Btn_Bajas.Enabled = permiso.Eliminar;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -102,6 +157,19 @@ namespace ProyectoAsis22K26Nominas
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (!permisoActual.Eliminar)
+            {
+                MessageBox.Show(
+                    "Solo el gerente puede reactivar empleados.",
+                    "Acceso denegado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            // Aquí continúa tu código actual de reactivación
             if (codigoEmpleado == 0)
             {
                 MessageBox.Show("Primero debe buscar un empleado.");
@@ -140,7 +208,18 @@ namespace ProyectoAsis22K26Nominas
                 MySqlCommand comando = new MySqlCommand(sql, conexion);
                 comando.Parameters.AddWithValue("@codigo", codigoEmpleado);
 
-                comando.ExecuteNonQuery();
+                int filasAfectadas = comando.ExecuteNonQuery();
+
+                if (filasAfectadas > 0)
+                {
+                    Bitacora.Registrar(
+                        "Reactivación de empleado",
+                        SesionUsuario.Usuario +
+                        " reactivó al empleado seleccionado."
+                    );
+
+                    MessageBox.Show("Empleado reactivado correctamente.");
+                }
 
                 Txt_Estado.Text = "Activo";
 
@@ -336,6 +415,18 @@ namespace ProyectoAsis22K26Nominas
 
                 int filasModificadas = comando.ExecuteNonQuery();
 
+
+                if (filasModificadas > 0)
+                {
+                    Bitacora.Registrar(
+                        "Modificación de empleado",
+                        SesionUsuario.Usuario +
+                        " modificó los datos del empleado seleccionado."
+                    );
+
+                    MessageBox.Show("Cambios guardados correctamente.");
+                }
+
                 if (filasModificadas > 0)
                 {
                     MessageBox.Show("Datos personales y laborales actualizados correctamente.");
@@ -373,6 +464,20 @@ namespace ProyectoAsis22K26Nominas
 
         private void Btn_Bajas_Click(object sender, EventArgs e)
         {
+            if (!permisoActual.Eliminar)
+            {
+                MessageBox.Show(
+                    "Solo el gerente puede dar de baja empleados.",
+                    "Acceso denegado",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
+                return;
+            }
+
+            // Aquí continúa tu código actual de baja
+
             if (codigoEmpleado == 0)
             {
                 MessageBox.Show("Primero debe buscar un empleado.");
@@ -411,7 +516,19 @@ namespace ProyectoAsis22K26Nominas
                 MySqlCommand comando = new MySqlCommand(sql, conexion);
                 comando.Parameters.AddWithValue("@codigo", codigoEmpleado);
 
-                comando.ExecuteNonQuery();
+                int filasAfectadas = comando.ExecuteNonQuery();
+
+                if (filasAfectadas > 0)
+                {
+                    Bitacora.Registrar(
+                        "Baja de empleado",
+                        SesionUsuario.Usuario +
+                        " dio de baja al empleado seleccionado."
+                    );
+
+                    MessageBox.Show("Empleado dado de baja correctamente.");
+                }
+
 
                 Txt_Estado.Text = "Inactivo";
 

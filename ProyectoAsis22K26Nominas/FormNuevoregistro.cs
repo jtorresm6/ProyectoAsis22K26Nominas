@@ -16,6 +16,7 @@ namespace ProyectoAsis22K26Nominas
     {
         private bool esEdicion = false;
         private bool esNuevo = false;
+        private object comando;
 
         // 1. Relación Departamentos -> Puestos
         private readonly Dictionary<string, List<string>> mapaDepartamentosPuestos = new Dictionary<string, List<string>>()
@@ -72,6 +73,21 @@ namespace ProyectoAsis22K26Nominas
             CargarComboboxes();
             EstablecerEstadoInicial();
             await CargarTablaEmpleadosAsync();
+
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso("FormNuevoregistro"
+       );
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_agregar.Enabled = permiso.Crear;
+            Btn_guardar.Enabled = permiso.Modificar;
+
         }
 
         #region Configuración de Estado y Controles
@@ -234,6 +250,7 @@ namespace ProyectoAsis22K26Nominas
 
             esNuevo = true;
             esEdicion = false;
+
         }
 
         private async void Btn_guardar_Click(object sender, EventArgs e)
@@ -252,6 +269,8 @@ namespace ProyectoAsis22K26Nominas
             {
                 await ActualizarEmpleadoAsync();
             }
+
+
         }
 
         private async Task InsertarEmpleadoAsync()
@@ -279,6 +298,10 @@ namespace ProyectoAsis22K26Nominas
                                 idComun = Convert.ToInt32(await cmdNext.ExecuteScalarAsync());
                             }
                         }
+
+
+
+
 
                         // Verificación de duplicados (ID y DPI)
                         string queryCheck = @"SELECT 
@@ -363,7 +386,22 @@ namespace ProyectoAsis22K26Nominas
 
                         tran.Commit();
 
-                        MessageBox.Show($"Empleado, Departamento y Puesto guardados con éxito con el ID común: {idComun}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Bitacora.Registrar(
+                            "Registro de empleado",
+                            SesionUsuario.Usuario +
+                            " registró al empleado " +
+                            Txt_nombre.Text.Trim() + " " +
+                            Txt_apellidos.Text.Trim() +
+                            " con ID " + idComun + "."
+                        );
+
+                        MessageBox.Show(
+                            $"Empleado, Departamento y Puesto guardados con éxito con el ID común: {idComun}",
+                            "Éxito",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                        );
+
                         EstablecerEstadoInicial();
                         await CargarTablaEmpleadosAsync();
                     }
@@ -452,7 +490,22 @@ namespace ProyectoAsis22K26Nominas
 
                         tran.Commit();
 
-                        MessageBox.Show("Información del Empleado, Departamento y Puesto actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Bitacora.Registrar(
+                            "Modificación de empleado",
+                            SesionUsuario.Usuario +
+                            " modificó al empleado " +
+                            Txt_nombre.Text.Trim() + " " +
+                            Txt_apellidos.Text.Trim() +
+                            " con ID " + idComun + "."
+                        );
+
+                        MessageBox.Show(
+                            "Información del Empleado, Departamento y Puesto actualizada correctamente.",
+                            "Éxito",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                        );
+
                         EstablecerEstadoInicial();
                         await CargarTablaEmpleadosAsync();
                     }

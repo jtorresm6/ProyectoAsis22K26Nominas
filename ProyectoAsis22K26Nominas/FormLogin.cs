@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using MySql.Data.MySqlClient;
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -56,44 +57,131 @@ namespace ProyectoAsis22K26Nominas
 
         private void Btn_ingresar_Click(object sender, EventArgs e)
         {
-            string user = Txt_usuario.Text.Trim();
-            string pass = Txt_password.Text.Trim();
+            string usuario = Txt_usuario.Text.Trim();
+            string contrasena = Txt_password.Text.Trim();
 
-            // Validar que no dejen campos vacíos
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+            if (usuario == "" || contrasena == "")
             {
-                MessageBox.Show("Por favor complete todos los campos.", "Campos Vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Ingrese el usuario y la contraseña.",
+                    "Datos incompletos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
                 return;
             }
 
-            // VALIDACIÓN DE USUARIOS Y ROLES 
-            if (user == "admin" && pass == "123")
-            {
-                SesionUsuario.NombreCompleto = "Administrador del Sistema";
-                SesionUsuario.Usuario = user;
-                SesionUsuario.Rol = "Admin";
+            bool ingresoCorrecto = false;
 
-                this.DialogResult = DialogResult.OK; 
-            }
-            else if (user == "secre" && pass == "123")
+            try
             {
-                SesionUsuario.NombreCompleto = "Secretaria General";
-                SesionUsuario.Usuario = user;
-                SesionUsuario.Rol = "Secretaria";
+                using (MySqlConnection conexion =
+                    ConexionBD.ObtenerConexion())
+                {
+                    conexion.Open();
 
-                this.DialogResult = DialogResult.OK;
-            }
-            else if (user == "rrhh" && pass == "123")
-            {
-                SesionUsuario.NombreCompleto = "Encargado de RRHH";
-                SesionUsuario.Usuario = user;
-                SesionUsuario.Rol = "RRHH";
+                    string consulta =
+                        @"select
+                    u.cmp_id_usuario,
+                    u.cmp_nombre as Usuario,
+                    u.cmp_id_rol,
+                    r.cmp_nombre as nombre_rol,
+                    concat(
+                        e.cmp_nombre,
+                        ' ',
+                        e.cmp_apellido
+                    ) as nombre_completo
+                  from tbl_Usuarios u
+                  inner join tbl_Roles r
+                    on u.cmp_id_rol = r.cmp_id_rol
+                  inner join tbl_Empleados e
+                    on u.cmp_id_empleado =
+                       e.cmp_id_empleado
+                  where u.cmp_nombre = @usuario
+                  and u.cmp_contras = @contrasena
+                  limit 1;";
 
-                this.DialogResult = DialogResult.OK;
+                    using (MySqlCommand comando =
+                        new MySqlCommand(consulta, conexion))
+                    {
+                        comando.Parameters.AddWithValue(
+                            "@usuario",
+                            usuario
+                        );
+
+                        comando.Parameters.AddWithValue(
+                            "@contrasena",
+                            contrasena
+                        );
+
+                        using (MySqlDataReader lector =
+                            comando.ExecuteReader())
+                        {
+                            if (lector.Read())
+                            {
+                                SesionUsuario.IdUsuario =
+                                    Convert.ToInt32(
+                                        lector["cmp_id_usuario"]
+                                    );
+
+                                SesionUsuario.Usuario =
+                                    lector["Usuario"].ToString();
+
+                                SesionUsuario.IdRol =
+                                    Convert.ToInt32(
+                                        lector["cmp_id_rol"]
+                                    );
+
+                                SesionUsuario.Rol =
+                                    lector["nombre_rol"].ToString();
+
+
+                                ingresoCorrecto = true;
+                            }
+                        }
+                    }
+                }
+
+                if (ingresoCorrecto)
+                {
+                    Bitacora.Registrar(
+                        "Inicio de sesión",
+                        "El usuario " +
+                        SesionUsuario.Usuario +
+                        " inició sesión correctamente."
+                    );
+
+                    MessageBox.Show(
+                        "Bienvenido/a " +
+                         SesionUsuario.Usuario,
+                        "Inicio de sesión",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Usuario o contraseña incorrectos.",
+                        "Inicio de sesión",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Usuario o contraseña incorrectos.", "Error de Autenticación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Error al iniciar sesión: " +
+                    ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 

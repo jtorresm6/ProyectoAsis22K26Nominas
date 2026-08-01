@@ -98,7 +98,8 @@ namespace ProyectoAsis22K26Nominas
 
         //Mensaje default del sistema que se muestra al abrir el centro de ayuda, antes de seleccionar alguna opción.
 
-        private void Formhelp_Load(object sender, EventArgs e) {
+        private void Formhelp_Load(object sender, EventArgs e)
+        {
             Rtb_Info.ReadOnly = true;
 
             Rtb_Info.Text =
@@ -108,7 +109,22 @@ namespace ProyectoAsis22K26Nominas
                 "Si se quiere ver información mas detallada sobre el sistema, seleccionar el botón " +
                 "'Manual en PDF' para una mejor visualización. ";
 
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso("Formhelp"
+            );
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_Pdf.Enabled = permiso.Ver;
+
         }
+
+        
 
         private void Btn_Cerrar_Click(object sender, EventArgs e) {
             this.Close();

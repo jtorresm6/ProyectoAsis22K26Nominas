@@ -136,6 +136,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="GestionarPermisos.cs" />
+    <Compile Include="Permisos.cs" />
     <Compile Include="ConexionBD.cs" />
     <Compile Include="CrystalReport2.cs">
       <AutoGen>True</AutoGen>
@@ -249,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormBitacora.resx">
+      <DependentUpon>FormBitacora.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormControlSaldos.resx">
       <DependentUpon>FormControlSaldos.cs</DependentUpon>

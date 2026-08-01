@@ -173,8 +173,6 @@ namespace ProyectoAsis22K26Nominas
                     }
 
              
-                    string qExiste = "SELECT cmp_id_asistencia, cmp_hora_entrada FROM tbl_Asistencias WHERE cmp_id_empleado = @idEmp AND cmp_fecha = @fecha LIMIT 1;";
-
                     int idAsistenciaExistente = 0;
                     TimeSpan horaEntradaExistente = TimeSpan.Zero;
 

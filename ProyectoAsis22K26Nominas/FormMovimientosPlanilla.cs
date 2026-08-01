@@ -40,6 +40,20 @@ namespace ProyectoAsis22K26Nominas
             Cbo_Buscar_Campo.SelectedIndex = 0;
 
             Txt_Nombre_Empleado.ReadOnly = true;
+
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso("FormMovimientosPlanilla"
+            );
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_Guardar.Enabled = permiso.Modificar;
+            Btn_Modificar.Enabled = permiso.Modificar;
         }
 
         private void CargarTipoMovimiento()

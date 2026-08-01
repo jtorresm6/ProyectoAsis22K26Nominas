@@ -38,6 +38,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Name = "FormControlSaldos";
             this.Text = "FormControlSaldos";
+            this.Load += new System.EventHandler(this.FormControlSaldos_Load);
             this.ResumeLayout(false);
 
         }

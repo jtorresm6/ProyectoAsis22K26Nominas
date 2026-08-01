@@ -57,6 +57,20 @@ namespace ProyectoAsis22K26Nominas
             Dgv_Detalle_Planilla.AllowUserToAddRows = false;
             Dgv_Detalle_Planilla.ReadOnly = true;
             Dgv_Detalle_Planilla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso( "FormGenerarPlanilla"
+       );
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_Generar.Enabled = permiso.Crear;
+
         }
 
         private void GenerarPlanilla()
@@ -147,6 +161,12 @@ namespace ProyectoAsis22K26Nominas
             }
 
             GenerarPlanilla();
+
+            Bitacora.Registrar(
+        "Generación de planilla",
+        SesionUsuario.Usuario +
+        " generó una nueva planilla."
+    );
         }
 
         private void Btn_Limpiar_Click(object sender, EventArgs e)

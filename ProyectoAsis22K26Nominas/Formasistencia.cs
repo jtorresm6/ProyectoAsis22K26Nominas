@@ -24,7 +24,7 @@ namespace ProyectoAsis22K26Nominas
 
             timer_reloj.Start();
 
-       
+
             Cbo_tipregistro.Items.Clear();
             Cbo_tipregistro.Items.Add("Entrada Normal");
             Cbo_tipregistro.Items.Add("Salida Normal");
@@ -32,8 +32,21 @@ namespace ProyectoAsis22K26Nominas
             Cbo_tipregistro.Items.Add("Permiso / Justificado");
             Cbo_tipregistro.SelectedIndex = 0;
 
-  
+
             await CargarTablaAsistenciasAsync();
+
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso("Formasistencia"
+             );
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_registrar.Enabled = permiso.Crear;
         }
 
         private void timer_reloj_Tick(object sender, EventArgs e)
@@ -144,124 +157,302 @@ namespace ProyectoAsis22K26Nominas
         {
             string codigoTxt = Txt_codempleado.Text.Trim();
 
-            if (string.IsNullOrEmpty(codigoTxt) || !int.TryParse(codigoTxt, out int idEmpleado))
+            if (string.IsNullOrEmpty(codigoTxt) ||
+                !int.TryParse(codigoTxt, out int idEmpleado))
             {
-                MessageBox.Show("Debe ingresar un código de empleado válido antes de registrar.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Debe ingresar un código de empleado válido antes de registrar.",
+                    "Atención",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+
                 return;
             }
 
             string fechaSel = Dpt_fecha.Value.ToString("yyyy-MM-dd");
-            string tipoRegistro = Cbo_tipregistro.SelectedItem?.ToString() ?? "Entrada Normal";
+
+            string tipoRegistro =
+                Cbo_tipregistro.SelectedItem?.ToString()
+                ?? "Entrada Normal";
+
             TimeSpan horaActual = DateTime.Now.TimeOfDay;
 
             try
             {
-                using (MySqlConnection con = ConexionBD.ObtenerConexion())
+                using (MySqlConnection con =
+                    ConexionBD.ObtenerConexion())
                 {
                     await con.OpenAsync();
 
-                    string qCheckEmp = "SELECT COUNT(*) FROM tbl_Empleados WHERE cmp_id_empleado = @idEmp;";
-                    using (MySqlCommand cmdCheck = new MySqlCommand(qCheckEmp, con))
+                    string qCheckEmp =
+                        "SELECT COUNT(*) " +
+                        "FROM tbl_Empleados " +
+                        "WHERE cmp_id_empleado = @idEmp;";
+
+                    using (MySqlCommand cmdCheck =
+                        new MySqlCommand(qCheckEmp, con))
                     {
-                        cmdCheck.Parameters.AddWithValue("@idEmp", idEmpleado);
-                        long count = Convert.ToInt64(await cmdCheck.ExecuteScalarAsync());
+                        cmdCheck.Parameters.AddWithValue(
+                            "@idEmp",
+                            idEmpleado
+                        );
+
+                        long count =
+                            Convert.ToInt64(
+                                await cmdCheck.ExecuteScalarAsync()
+                            );
+
                         if (count == 0)
                         {
-                            MessageBox.Show("El código de empleado no existe en la base de datos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(
+                                "El código de empleado no existe en la base de datos.",
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error
+                            );
+
                             return;
                         }
                     }
 
-             
-                    string qExiste = "SELECT cmp_id_asistencia, cmp_hora_entrada FROM tbl_Asistencias WHERE cmp_id_empleado = @idEmp AND cmp_fecha = @fecha LIMIT 1;";
+                    string qExiste =
+                        "SELECT cmp_id_asistencia, cmp_hora_entrada " +
+                        "FROM tbl_Asistencias " +
+                        "WHERE cmp_id_empleado = @idEmp " +
+                        "AND cmp_fecha = @fecha " +
+                        "LIMIT 1;";
 
                     int idAsistenciaExistente = 0;
                     TimeSpan horaEntradaExistente = TimeSpan.Zero;
 
-                    using (MySqlCommand cmdExiste = new MySqlCommand(qExiste, con))
+                    using (MySqlCommand cmdExiste =
+                        new MySqlCommand(qExiste, con))
                     {
-                        cmdExiste.Parameters.AddWithValue("@idEmp", idEmpleado);
-                        cmdExiste.Parameters.AddWithValue("@fecha", fechaSel);
+                        cmdExiste.Parameters.AddWithValue(
+                            "@idEmp",
+                            idEmpleado
+                        );
 
-                        using (MySqlDataReader reader = (MySqlDataReader)await cmdExiste.ExecuteReaderAsync())
+                        cmdExiste.Parameters.AddWithValue(
+                            "@fecha",
+                            fechaSel
+                        );
+
+                        using (MySqlDataReader reader =
+                            (MySqlDataReader)
+                            await cmdExiste.ExecuteReaderAsync())
                         {
                             if (await reader.ReadAsync())
                             {
-                                idAsistenciaExistente = Convert.ToInt32(reader["cmp_id_asistencia"]);
+                                idAsistenciaExistente =
+                                    Convert.ToInt32(
+                                        reader["cmp_id_asistencia"]
+                                    );
+
                                 if (reader["cmp_hora_entrada"] != DBNull.Value)
                                 {
-                                    horaEntradaExistente = (TimeSpan)reader["cmp_hora_entrada"];
+                                    horaEntradaExistente =
+                                        (TimeSpan)
+                                        reader["cmp_hora_entrada"];
                                 }
                             }
                         }
                     }
 
-    
                     if (tipoRegistro == "Salida Normal")
                     {
                         if (idAsistenciaExistente == 0)
                         {
-                            MessageBox.Show("No se puede registrar la salida porque no existe una entrada registrada para este día.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(
+                                "No se puede registrar la salida porque no existe una entrada registrada para este día.",
+                                "Atención",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            );
+
                             return;
                         }
 
-        
-                        double totalHoras = (horaActual - horaEntradaExistente).TotalHours;
-                        decimal horasTrabajadas = (decimal)Math.Max(0, Math.Round(totalHoras, 2));
-                        decimal horasExtra = (decimal)Math.Max(0, Math.Round(totalHoras > 8 ? totalHoras - 8 : 0, 2));
+                        double totalHoras =
+                            (horaActual - horaEntradaExistente)
+                            .TotalHours;
 
-                        string qUpdate = @"UPDATE tbl_Asistencias 
-                                           SET cmp_hora_salida = @hSalida, 
-                                               cmp_horas_trabajadas = @hTrab, 
-                                               cmp_horas_extra = @hExtra, 
-                                               cmp_observaciones = IF(cmp_observaciones IS NULL OR cmp_observaciones = '', @obs, CONCAT(cmp_observaciones, ' | ', @obs))
-                                           WHERE cmp_id_asistencia = @idAsis;";
+                        decimal horasTrabajadas =
+                            (decimal)Math.Max(
+                                0,
+                                Math.Round(totalHoras, 2)
+                            );
 
-                        using (MySqlCommand cmdUpd = new MySqlCommand(qUpdate, con))
+                        decimal horasExtra =
+                            (decimal)Math.Max(
+                                0,
+                                Math.Round(
+                                    totalHoras > 8
+                                        ? totalHoras - 8
+                                        : 0,
+                                    2
+                                )
+                            );
+
+                        string qUpdate =
+                            @"UPDATE tbl_Asistencias 
+                      SET cmp_hora_salida = @hSalida,
+                          cmp_horas_trabajadas = @hTrab,
+                          cmp_horas_extra = @hExtra,
+                          cmp_observaciones =
+                          IF(
+                              cmp_observaciones IS NULL
+                              OR cmp_observaciones = '',
+                              @obs,
+                              CONCAT(
+                                  cmp_observaciones,
+                                  ' | ',
+                                  @obs
+                              )
+                          )
+                      WHERE cmp_id_asistencia = @idAsis;";
+
+                        using (MySqlCommand cmdUpd =
+                            new MySqlCommand(qUpdate, con))
                         {
-                            cmdUpd.Parameters.AddWithValue("@hSalida", horaActual);
-                            cmdUpd.Parameters.AddWithValue("@hTrab", horasTrabajadas);
-                            cmdUpd.Parameters.AddWithValue("@hExtra", horasExtra);
-                            cmdUpd.Parameters.AddWithValue("@obs", tipoRegistro);
-                            cmdUpd.Parameters.AddWithValue("@idAsis", idAsistenciaExistente);
+                            cmdUpd.Parameters.AddWithValue(
+                                "@hSalida",
+                                horaActual
+                            );
 
-                            await cmdUpd.ExecuteNonQueryAsync();
+                            cmdUpd.Parameters.AddWithValue(
+                                "@hTrab",
+                                horasTrabajadas
+                            );
+
+                            cmdUpd.Parameters.AddWithValue(
+                                "@hExtra",
+                                horasExtra
+                            );
+
+                            cmdUpd.Parameters.AddWithValue(
+                                "@obs",
+                                tipoRegistro
+                            );
+
+                            cmdUpd.Parameters.AddWithValue(
+                                "@idAsis",
+                                idAsistenciaExistente
+                            );
+
+                            int filasAfectadas =
+                                await cmdUpd.ExecuteNonQueryAsync();
+
+                            if (filasAfectadas > 0)
+                            {
+                                Bitacora.Registrar(
+                                    "Registro de salida",
+                                    SesionUsuario.Usuario +
+                                    " registró la salida del empleado ID " +
+                                    idEmpleado + "."
+                                );
+                            }
                         }
                     }
-
                     else
                     {
                         if (idAsistenciaExistente > 0)
                         {
-                            MessageBox.Show("Ya existe una entrada registrada para este empleado en la fecha seleccionada.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show(
+                                "Ya existe una entrada registrada para este empleado en la fecha seleccionada.",
+                                "Atención",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            );
+
                             return;
                         }
 
                         int minutosTardanza = 0;
-                        TimeSpan horaLimite = new TimeSpan(8, 0, 0);
+                        TimeSpan horaLimite =
+                            new TimeSpan(8, 0, 0);
 
-                        if (tipoRegistro == "Llegada Tardía" || horaActual > horaLimite)
+                        if (tipoRegistro == "Llegada Tardía" ||
+                            horaActual > horaLimite)
                         {
-                            minutosTardanza = (int)Math.Max(0, (horaActual - horaLimite).TotalMinutes);
+                            minutosTardanza =
+                                (int)Math.Max(
+                                    0,
+                                    (horaActual - horaLimite)
+                                    .TotalMinutes
+                                );
                         }
 
-                        string qInsert = @"INSERT INTO tbl_Asistencias 
-                                           (cmp_fecha, cmp_hora_entrada, cmp_minutos_tardanza, cmp_observaciones, cmp_id_empleado) 
-                                           VALUES (@fecha, @hEntrada, @minTardanza, @obs, @idEmp);";
+                        string qInsert =
+                            @"INSERT INTO tbl_Asistencias
+                      (
+                          cmp_fecha,
+                          cmp_hora_entrada,
+                          cmp_minutos_tardanza,
+                          cmp_observaciones,
+                          cmp_id_empleado
+                      )
+                      VALUES
+                      (
+                          @fecha,
+                          @hEntrada,
+                          @minTardanza,
+                          @obs,
+                          @idEmp
+                      );";
 
-                        using (MySqlCommand cmdIns = new MySqlCommand(qInsert, con))
+                        using (MySqlCommand cmdIns =
+                            new MySqlCommand(qInsert, con))
                         {
-                            cmdIns.Parameters.AddWithValue("@fecha", fechaSel);
-                            cmdIns.Parameters.AddWithValue("@hEntrada", horaActual);
-                            cmdIns.Parameters.AddWithValue("@minTardanza", minutosTardanza);
-                            cmdIns.Parameters.AddWithValue("@obs", tipoRegistro); 
-                            cmdIns.Parameters.AddWithValue("@idEmp", idEmpleado);
+                            cmdIns.Parameters.AddWithValue(
+                                "@fecha",
+                                fechaSel
+                            );
 
-                            await cmdIns.ExecuteNonQueryAsync();
+                            cmdIns.Parameters.AddWithValue(
+                                "@hEntrada",
+                                horaActual
+                            );
+
+                            cmdIns.Parameters.AddWithValue(
+                                "@minTardanza",
+                                minutosTardanza
+                            );
+
+                            cmdIns.Parameters.AddWithValue(
+                                "@obs",
+                                tipoRegistro
+                            );
+
+                            cmdIns.Parameters.AddWithValue(
+                                "@idEmp",
+                                idEmpleado
+                            );
+
+                            int filasAfectadas =
+                                await cmdIns.ExecuteNonQueryAsync();
+
+                            if (filasAfectadas > 0)
+                            {
+                                Bitacora.Registrar(
+                                    "Registro de entrada",
+                                    SesionUsuario.Usuario +
+                                    " registró " +
+                                    tipoRegistro +
+                                    " para el empleado ID " +
+                                    idEmpleado + "."
+                                );
+                            }
                         }
                     }
 
-                    MessageBox.Show($"Registro de {tipoRegistro} completado con éxito para el empleado ID {idEmpleado}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(
+                        $"Registro de {tipoRegistro} completado con éxito para el empleado ID {idEmpleado}.",
+                        "Éxito",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
 
                     LimpiarCampos();
                     await CargarTablaAsistenciasAsync();
@@ -269,9 +460,16 @@ namespace ProyectoAsis22K26Nominas
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar la asistencia: " + ex.Message, "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Error al registrar la asistencia: " +
+                    ex.Message,
+                    "Error BD",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
+        
 
    
         private void Btn_limpiar_Click_1(object sender, EventArgs e)

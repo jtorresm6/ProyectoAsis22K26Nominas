@@ -136,13 +136,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     <Compile Include="Class1.cs" />
     <Compile Include="GestionarPermisos.cs" />
     <Compile Include="Permisos.cs" />
->>>>>>> c538409 (Actualización completa de permisos, clases para los usuarios, permisos y bitacora)
     <Compile Include="ConexionBD.cs" />
 =======
     <Compile Include="Class1.cs" />

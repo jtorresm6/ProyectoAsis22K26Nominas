@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 //Parte trabajada por: Jose Javier Torres Martinez - Carné: 0901-23-1091
-//Curso:Análisis de Sistemas II
+//Curso: Análisis de Sistemas II
 //Fecha de creación: 23-07-2026
-//Fecha de última modificación: 27-07-2026
+//Fecha de última modificación: 31-07-2026
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -16,7 +16,6 @@ namespace ProyectoAsis22K26Nominas
     {
         private bool esEdicion = false;
         private bool esNuevo = false;
-        private object comando;
 
         // 1. Relación Departamentos -> Puestos
         private readonly Dictionary<string, List<string>> mapaDepartamentosPuestos = new Dictionary<string, List<string>>()
@@ -74,9 +73,7 @@ namespace ProyectoAsis22K26Nominas
             EstablecerEstadoInicial();
             await CargarTablaEmpleadosAsync();
 
-            FormularioPermisos permiso =
-            GestionarPermisos.ObtenerPermiso("FormNuevoregistro"
-       );
+            FormularioPermisos permiso = GestionarPermisos.ObtenerPermiso("FormNuevoregistro");
 
             if (!permiso.Ver)
             {
@@ -87,7 +84,6 @@ namespace ProyectoAsis22K26Nominas
 
             Btn_agregar.Enabled = permiso.Crear;
             Btn_guardar.Enabled = permiso.Modificar;
-
         }
 
         #region Configuración de Estado y Controles
@@ -117,7 +113,7 @@ namespace ProyectoAsis22K26Nominas
 
             Txt_idempleado.Enabled = habilitado;
             Txt_identificacion.Enabled = habilitado;
-            Txt_nit.Enabled = habilitado; // <-- Habilitar / deshabilitar NIT
+            Txt_nit.Enabled = habilitado;
             Txt_nombre.Enabled = habilitado;
             Txt_apellidos.Enabled = habilitado;
             Txt_telefono.Enabled = habilitado;
@@ -153,7 +149,7 @@ namespace ProyectoAsis22K26Nominas
         {
             Txt_idempleado.Clear();
             Txt_identificacion.Clear();
-            Txt_nit.Clear(); // <-- Limpiar NIT
+            Txt_nit.Clear();
             Txt_nombre.Clear();
             Txt_apellidos.Clear();
             Txt_telefono.Clear();
@@ -210,6 +206,71 @@ namespace ProyectoAsis22K26Nominas
 
         #endregion
 
+        #region Métodos para Obtener y Llenar Campos
+
+        /// <summary>
+        /// Método asignador que llena todos los controles del formulario con los parámetros provistos.
+        /// </summary>
+        private void LlenarCamposFormulario(
+            string id, string dpi, string nit, string nombre, string apellido,
+            string direccion, string salario, DateTime fechaNac, DateTime fechaCont,
+            string depto, string puesto, string estado, string telefono, string correo)
+        {
+            Txt_idempleado.Text = id;
+            Txt_idempleado.Enabled = false;
+
+            Txt_identificacion.Text = dpi;
+            Txt_nit.Text = nit;
+            Txt_nombre.Text = nombre;
+            Txt_apellidos.Text = apellido;
+            Txt_direccion.Text = direccion;
+            Txt_salario.Text = salario;
+            Txt_telefono.Text = telefono;
+            Txt_correo.Text = correo;
+
+            Dtp_fechnacimiento.Value = fechaNac;
+            Dtp_fechcontratacion.Value = fechaCont;
+
+            if (Cbo_Departamento.Items.Contains(depto))
+                Cbo_Departamento.SelectedItem = depto;
+
+            if (Cbo_puesto.Items.Contains(puesto))
+                Cbo_puesto.SelectedItem = puesto;
+
+            if (Cbo_estado.Items.Contains(estado))
+                Cbo_estado.SelectedItem = estado;
+        }
+
+        /// <summary>
+        /// Obtiene el teléfono del empleado desde la tabla tbl_Telefonos.
+        /// </summary>
+        private async Task<string> ObtenerTelefonoEmpleadoAsync(int idEmpleado, MySqlConnection con)
+        {
+            string query = "SELECT cmp_telefono FROM tbl_Telefonos WHERE cmp_id_empleado = @id LIMIT 1;";
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@id", idEmpleado);
+                object result = await cmd.ExecuteScalarAsync();
+                return result != null && result != DBNull.Value ? result.ToString() : string.Empty;
+            }
+        }
+
+        /// <summary>
+        /// Obtiene el correo del empleado desde la tabla tbl_Correos.
+        /// </summary>
+        private async Task<string> ObtenerCorreoEmpleadoAsync(int idEmpleado, MySqlConnection con)
+        {
+            string query = "SELECT cmp_correo FROM tbl_Correos WHERE cmp_id_empleado = @id LIMIT 1;";
+            using (MySqlCommand cmd = new MySqlCommand(query, con))
+            {
+                cmd.Parameters.AddWithValue("@id", idEmpleado);
+                object result = await cmd.ExecuteScalarAsync();
+                return result != null && result != DBNull.Value ? result.ToString() : string.Empty;
+            }
+        }
+
+        #endregion
+
         #region Eventos de Controles y Sincronización de IDs
 
         private void Txt_idempleado_TextChanged(object sender, EventArgs e)
@@ -241,6 +302,38 @@ namespace ProyectoAsis22K26Nominas
 
         #endregion
 
+        #region Métodos de Validación
+
+        private bool CampoEstaVacio(TextBox campo, string nombreCampo)
+        {
+            if (string.IsNullOrWhiteSpace(campo.Text))
+            {
+                MessageBox.Show($"Debe ingresar {nombreCampo}.", "Campo requerido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                campo.Focus();
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Valida que TODOS los TextBox del formulario contengan datos.
+        /// </summary>
+        private bool ValidarCamposFormulario()
+        {
+            if (CampoEstaVacio(Txt_identificacion, "el DPI / Identificación")) return false;
+            if (CampoEstaVacio(Txt_nit, "el NIT")) return false;
+            if (CampoEstaVacio(Txt_nombre, "el Nombre")) return false;
+            if (CampoEstaVacio(Txt_apellidos, "los Apellidos")) return false;
+            if (CampoEstaVacio(Txt_telefono, "el Teléfono")) return false;
+            if (CampoEstaVacio(Txt_direccion, "la Dirección")) return false;
+            if (CampoEstaVacio(Txt_correo, "el Correo electrónico")) return false;
+            if (CampoEstaVacio(Txt_salario, "el Salario Base")) return false;
+
+            return true;
+        }
+
+        #endregion
+
         #region Botones de Acción y Operaciones CRUD
 
         private void Btn_agregar_Click(object sender, EventArgs e)
@@ -250,16 +343,12 @@ namespace ProyectoAsis22K26Nominas
 
             esNuevo = true;
             esEdicion = false;
-
         }
 
         private async void Btn_guardar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Txt_identificacion.Text.Trim()) || string.IsNullOrEmpty(Txt_nombre.Text.Trim()))
-            {
-                MessageBox.Show("Complete al menos el DPI y el Nombre del empleado.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            // Se realiza la validación completa de todos los campos de texto
+            if (!ValidarCamposFormulario()) return;
 
             if (esNuevo)
             {
@@ -269,8 +358,6 @@ namespace ProyectoAsis22K26Nominas
             {
                 await ActualizarEmpleadoAsync();
             }
-
-
         }
 
         private async Task InsertarEmpleadoAsync()
@@ -298,10 +385,6 @@ namespace ProyectoAsis22K26Nominas
                                 idComun = Convert.ToInt32(await cmdNext.ExecuteScalarAsync());
                             }
                         }
-
-
-
-
 
                         // Verificación de duplicados (ID y DPI)
                         string queryCheck = @"SELECT 
@@ -349,18 +432,17 @@ namespace ProyectoAsis22K26Nominas
                         }
 
                         // 2. Insertar en tbl_Puestos
-                        string queryPuesto = "INSERT INTO tbl_Puestos (cmp_id_puesto, cmp_nombre, cmp_descripcion, cmp_salario_base, cmp_id_departamento) VALUES (@idPuesto, @nombrePuesto, @descPuesto, @salarioPuesto, @idDeptoPuesto);";
+                        string queryPuesto = "INSERT INTO tbl_Puestos (cmp_id_puesto, cmp_nombre, cmp_descripcion, cmp_salario_base) VALUES (@idPuesto, @nombrePuesto, @descPuesto, @salarioPuesto);";
                         using (MySqlCommand cmdP = new MySqlCommand(queryPuesto, con, tran))
                         {
                             cmdP.Parameters.AddWithValue("@idPuesto", idComun);
                             cmdP.Parameters.AddWithValue("@nombrePuesto", puestoNombre);
                             cmdP.Parameters.AddWithValue("@descPuesto", descPuesto);
                             cmdP.Parameters.AddWithValue("@salarioPuesto", salarioBase);
-                            cmdP.Parameters.AddWithValue("@idDeptoPuesto", idComun);
                             await cmdP.ExecuteNonQueryAsync();
                         }
 
-                        // 3. Insertar en tbl_Empleados (INCLUYE NIT)
+                        // 3. Insertar en tbl_Empleados
                         string queryEmp = @"INSERT INTO tbl_Empleados 
                                            (cmp_id_empleado, cmp_dpi, cmp_nit, cmp_nombre, cmp_apellido, cmp_fecha_nacimiento, cmp_direccion, cmp_fecha_contratacion, cmp_estado, cmp_id_departamento, cmp_id_puesto) 
                                            VALUES (@idEmp, @dpi, @nit, @nombre, @apellido, @fNac, @direccion, @fCont, @estado, @idDeptoEmp, @idPuestoEmp);";
@@ -369,7 +451,7 @@ namespace ProyectoAsis22K26Nominas
                         {
                             cmdE.Parameters.AddWithValue("@idEmp", idComun);
                             cmdE.Parameters.AddWithValue("@dpi", Txt_identificacion.Text.Trim());
-                            cmdE.Parameters.AddWithValue("@nit", Txt_nit.Text.Trim()); // <-- Asignar NIT
+                            cmdE.Parameters.AddWithValue("@nit", Txt_nit.Text.Trim());
                             cmdE.Parameters.AddWithValue("@nombre", Txt_nombre.Text.Trim());
                             cmdE.Parameters.AddWithValue("@apellido", Txt_apellidos.Text.Trim());
                             cmdE.Parameters.AddWithValue("@fNac", Dtp_fechnacimiento.Value.ToString("yyyy-MM-dd"));
@@ -445,18 +527,17 @@ namespace ProyectoAsis22K26Nominas
                         }
 
                         // 2. Actualizar tbl_Puestos
-                        string qPuesto = "UPDATE tbl_Puestos SET cmp_nombre = @nombre, cmp_descripcion = @desc, cmp_salario_base = @salario, cmp_id_departamento = @idDepto WHERE cmp_id_puesto = @id";
+                        string qPuesto = "UPDATE tbl_Puestos SET cmp_nombre = @nombre, cmp_descripcion = @desc, cmp_salario_base = @salario WHERE cmp_id_puesto = @id";
                         using (MySqlCommand cmdP = new MySqlCommand(qPuesto, con, tran))
                         {
                             cmdP.Parameters.AddWithValue("@nombre", puestoNombre);
                             cmdP.Parameters.AddWithValue("@desc", descPuesto);
                             cmdP.Parameters.AddWithValue("@salario", salarioBase);
-                            cmdP.Parameters.AddWithValue("@idDepto", idComun);
                             cmdP.Parameters.AddWithValue("@id", idComun);
                             await cmdP.ExecuteNonQueryAsync();
                         }
 
-                        // 3. Actualizar tbl_Empleados (INCLUYE NIT)
+                        // 3. Actualizar tbl_Empleados
                         string qEmp = @"UPDATE tbl_Empleados 
                                         SET cmp_dpi = @dpi,
                                             cmp_nit = @nit,
@@ -473,7 +554,7 @@ namespace ProyectoAsis22K26Nominas
                         using (MySqlCommand cmdE = new MySqlCommand(qEmp, con, tran))
                         {
                             cmdE.Parameters.AddWithValue("@dpi", Txt_identificacion.Text.Trim());
-                            cmdE.Parameters.AddWithValue("@nit", Txt_nit.Text.Trim()); // <-- Actualizar NIT
+                            cmdE.Parameters.AddWithValue("@nit", Txt_nit.Text.Trim());
                             cmdE.Parameters.AddWithValue("@nombre", Txt_nombre.Text.Trim());
                             cmdE.Parameters.AddWithValue("@apellido", Txt_apellidos.Text.Trim());
                             cmdE.Parameters.AddWithValue("@fNac", Dtp_fechnacimiento.Value.ToString("yyyy-MM-dd"));
@@ -594,6 +675,10 @@ namespace ProyectoAsis22K26Nominas
                                      INNER JOIN tbl_Puestos p ON e.cmp_id_puesto = p.cmp_id_puesto
                                      WHERE e.cmp_id_empleado = @id";
 
+                    string idStr = "", dpi = "", nit = "", nombre = "", apellido = "", direccion = "", salario = "", depto = "", puesto = "", estado = "";
+                    DateTime fNac = DateTime.Now, fCont = DateTime.Now;
+                    bool encontrado = false;
+
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@id", idEmpleado);
@@ -601,42 +686,46 @@ namespace ProyectoAsis22K26Nominas
                         {
                             if (await reader.ReadAsync())
                             {
-                                BloquearControles(false);
-
-                                string idStr = reader["cmp_id_empleado"].ToString();
-                                Txt_idempleado.Text = idStr;
-                                Txt_idempleado.Enabled = false;
-
-                                Txt_identificacion.Text = reader["cmp_dpi"].ToString();
-                                Txt_nit.Text = reader["cmp_nit"] != DBNull.Value ? reader["cmp_nit"].ToString() : ""; // <-- Cargar NIT
-                                Txt_nombre.Text = reader["cmp_nombre"].ToString();
-                                Txt_apellidos.Text = reader["cmp_apellido"].ToString();
-                                Txt_direccion.Text = reader["cmp_direccion"].ToString();
-                                Txt_salario.Text = reader["salario"].ToString();
+                                idStr = reader["cmp_id_empleado"].ToString();
+                                dpi = reader["cmp_dpi"].ToString();
+                                nit = reader["cmp_nit"] != DBNull.Value ? reader["cmp_nit"].ToString() : "";
+                                nombre = reader["cmp_nombre"].ToString();
+                                apellido = reader["cmp_apellido"].ToString();
+                                direccion = reader["cmp_direccion"].ToString();
+                                salario = reader["salario"].ToString();
 
                                 if (reader["cmp_fecha_nacimiento"] != DBNull.Value)
-                                    Dtp_fechnacimiento.Value = Convert.ToDateTime(reader["cmp_fecha_nacimiento"]);
+                                    fNac = Convert.ToDateTime(reader["cmp_fecha_nacimiento"]);
 
                                 if (reader["cmp_fecha_contratacion"] != DBNull.Value)
-                                    Dtp_fechcontratacion.Value = Convert.ToDateTime(reader["cmp_fecha_contratacion"]);
+                                    fCont = Convert.ToDateTime(reader["cmp_fecha_contratacion"]);
 
-                                string nombreDepto = reader["departamento"].ToString();
-                                string nombrePuesto = reader["puesto"].ToString();
-                                string estadoEmpleado = reader["cmp_estado"] != DBNull.Value ? reader["cmp_estado"].ToString() : "Activo";
+                                depto = reader["departamento"].ToString();
+                                puesto = reader["puesto"].ToString();
+                                estado = reader["cmp_estado"] != DBNull.Value ? reader["cmp_estado"].ToString() : "Activo";
 
-                                if (Cbo_Departamento.Items.Contains(nombreDepto))
-                                    Cbo_Departamento.SelectedItem = nombreDepto;
-
-                                if (Cbo_puesto.Items.Contains(nombrePuesto))
-                                    Cbo_puesto.SelectedItem = nombrePuesto;
-
-                                if (Cbo_estado.Items.Contains(estadoEmpleado))
-                                    Cbo_estado.SelectedItem = estadoEmpleado;
-
-                                esEdicion = true;
-                                esNuevo = false;
+                                encontrado = true;
                             }
                         }
+                    }
+
+                    if (encontrado)
+                    {
+                        // Obtiene teléfono y correo llamando a sus respectivos métodos
+                        string telefono = await ObtenerTelefonoEmpleadoAsync(idEmpleado, con);
+                        string correo = await ObtenerCorreoEmpleadoAsync(idEmpleado, con);
+
+                        BloquearControles(false);
+
+                        // Llena todos los campos usando el método centralizado
+                        LlenarCamposFormulario(
+                            idStr, dpi, nit, nombre, apellido,
+                            direccion, salario, fNac, fCont,
+                            depto, puesto, estado, telefono, correo
+                        );
+
+                        esEdicion = true;
+                        esNuevo = false;
                     }
                 }
             }
@@ -653,7 +742,7 @@ namespace ProyectoAsis22K26Nominas
         private void Txt_nombre_TextChanged(object sender, EventArgs e) { }
         private void Txt_apellidos_TextChanged(object sender, EventArgs e) { }
         private void Txt_identificacion_TextChanged(object sender, EventArgs e) { }
-        private void Txt_nit_TextChanged(object sender, EventArgs e) { } // Evento del TextBox NIT
+        private void Txt_nit_TextChanged(object sender, EventArgs e) { }
         private void Txt_telefono_TextChanged(object sender, EventArgs e) { }
         private void Txt_direccion_TextChanged(object sender, EventArgs e) { }
         private void Txt_correo_TextChanged(object sender, EventArgs e) { }

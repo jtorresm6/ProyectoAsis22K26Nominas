@@ -39,12 +39,12 @@
             this.Dgv_Bitacora.AllowUserToAddRows = false;
             this.Dgv_Bitacora.AllowUserToDeleteRows = false;
             this.Dgv_Bitacora.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Dgv_Bitacora.Location = new System.Drawing.Point(35, 86);
+            this.Dgv_Bitacora.Location = new System.Drawing.Point(23, 67);
             this.Dgv_Bitacora.Name = "Dgv_Bitacora";
             this.Dgv_Bitacora.ReadOnly = true;
             this.Dgv_Bitacora.RowHeadersWidth = 51;
             this.Dgv_Bitacora.RowTemplate.Height = 24;
-            this.Dgv_Bitacora.Size = new System.Drawing.Size(902, 150);
+            this.Dgv_Bitacora.Size = new System.Drawing.Size(1036, 243);
             this.Dgv_Bitacora.TabIndex = 0;
             // 
             // label1
@@ -52,7 +52,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(362, 22);
+            this.label1.Location = new System.Drawing.Point(426, 32);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(229, 32);
             this.label1.TabIndex = 1;
@@ -61,7 +61,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(408, 280);
+            this.button1.Location = new System.Drawing.Point(480, 343);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(134, 42);
             this.button1.TabIndex = 2;
@@ -74,7 +74,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(976, 450);
+            this.ClientSize = new System.Drawing.Size(1083, 536);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Dgv_Bitacora);

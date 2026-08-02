@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-
+    
 namespace ProyectoAsis22K26Nominas
 {
+    //Parte trabajada por Diego Alejandro Cheng Peña - carné: 0901-22-8091
+    //Curso:Análisis de sistemas II
+    //Fecha de creación: 24-07-2026
+    //Fecha de última modificación 02-08-2026
     public partial class FormHistorialPagos : Form
     {
         private Label lblDesde;
@@ -16,12 +19,15 @@ namespace ProyectoAsis22K26Nominas
         private DataGridView dgvHistorialPagos;
         private Button btnFiltrar;
 
-        private string conexion = "server=localhost;database=db_sistema_nominas;uid=root;pwd=;";
-
         public FormHistorialPagos()
         {
             InitializeComponent();
             InicializarControles();
+        }
+
+        private void FormHistorialPagos_Load(object sender, EventArgs e)
+        {
+            // Carga los datos cuando el formulario ya se ha renderizado
             CargarHistorialPagos();
         }
 
@@ -36,18 +42,15 @@ namespace ProyectoAsis22K26Nominas
             dgvHistorialPagos = new DataGridView();
             btnFiltrar = new Button();
 
-
             lblDesde.Text = "Desde:";
             lblDesde.Location = new Point(20, 20);
             lblDesde.AutoSize = true;
             lblDesde.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             lblDesde.ForeColor = Color.WhiteSmoke;
 
-
             dtpDesde.Location = new Point(80, 15);
             dtpDesde.Size = new Size(140, 25);
             dtpDesde.Format = DateTimePickerFormat.Short;
-
 
             lblHasta.Text = "Hasta:";
             lblHasta.Location = new Point(245, 20);
@@ -55,11 +58,9 @@ namespace ProyectoAsis22K26Nominas
             lblHasta.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             lblHasta.ForeColor = Color.WhiteSmoke;
 
-
             dtpHasta.Location = new Point(305, 15);
             dtpHasta.Size = new Size(140, 25);
             dtpHasta.Format = DateTimePickerFormat.Short;
-
 
             btnFiltrar.Name = "btnFiltrar";
             btnFiltrar.Text = "Filtrar";
@@ -72,7 +73,6 @@ namespace ProyectoAsis22K26Nominas
             btnFiltrar.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             btnFiltrar.Cursor = Cursors.Hand;
             btnFiltrar.Click += BtnFiltrar_Click;
-
 
             dgvHistorialPagos.Location = new Point(20, 70);
             dgvHistorialPagos.Size = new Size(760, 360);
@@ -89,14 +89,12 @@ namespace ProyectoAsis22K26Nominas
             dgvHistorialPagos.RowHeadersVisible = false;
             dgvHistorialPagos.EnableHeadersVisualStyles = false;
 
-
             dgvHistorialPagos.ColumnHeadersHeight = 38;
             dgvHistorialPagos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvHistorialPagos.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(235, 22, 86);
             dgvHistorialPagos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             dgvHistorialPagos.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             dgvHistorialPagos.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
 
             dgvHistorialPagos.DefaultCellStyle.BackColor = Color.FromArgb(40, 37, 54);
             dgvHistorialPagos.DefaultCellStyle.ForeColor = Color.WhiteSmoke;
@@ -107,7 +105,6 @@ namespace ProyectoAsis22K26Nominas
             dgvHistorialPagos.RowsDefaultCellStyle.BackColor = Color.FromArgb(40, 37, 54);
             dgvHistorialPagos.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(48, 45, 62);
 
-
             Controls.Add(lblDesde);
             Controls.Add(dtpDesde);
             Controls.Add(lblHasta);
@@ -116,32 +113,30 @@ namespace ProyectoAsis22K26Nominas
             Controls.Add(dgvHistorialPagos);
         }
 
-
         private void CargarHistorialPagos()
         {
             try
             {
-                using (MySqlConnection cn = new MySqlConnection(conexion))
+                using (MySqlConnection cn = ConexionBD.ObtenerConexion())
                 {
                     cn.Open();
 
                     string query = @"
                     SELECT
-                        p.cmp_fecha_pago AS Fecha,
-                        CONCAT(e.cmp_nombre,' ',e.cmp_apellido) AS Empleado,
-                        p.cmp_forma_pago AS TipoPago,
-                        p.cmp_numero_recibo AS Transferencia,
-                        p.cmp_monto_pagado AS Monto
+                        p.fecha_pago AS Fecha,
+                        CONCAT(e.nombre_emp, ' ', e.apellido_emp) AS Empleado,
+                        p.forma_pago AS TipoPago,
+                        p.numero_recibo AS Transferencia,
+                        p.monto_pago AS Monto
                     FROM tbl_pagos p
-                    INNER JOIN tbl_detalle_planilla d
-                    ON p.cmp_id_detalle_planilla = d.cmp_id_detalle_planilla
+                    INNER JOIN tbl_planilla_detalle d
+                    ON p.id_planilla = d.id_planilla AND p.id_empleado = d.id_empleado
                     INNER JOIN tbl_empleados e
-                    ON d.cmp_id_empleado = e.cmp_id_empleado";
+                    ON d.id_empleado = e.id_empleado
+                    ORDER BY p.fecha_pago DESC";
 
                     MySqlCommand cmd = new MySqlCommand(query, cn);
-
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-
                     DataTable dt = new DataTable();
 
                     da.Fill(dt);
@@ -153,12 +148,11 @@ namespace ProyectoAsis22K26Nominas
             {
                 MessageBox.Show(
                     ex.Message,
-                    "Error de conexión",
+                    "Error de conexión con la base de datos",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }
         }
-
 
         private void BtnFiltrar_Click(object sender, EventArgs e)
         {
@@ -174,36 +168,36 @@ namespace ProyectoAsis22K26Nominas
                 return;
             }
 
-
             try
             {
-                using (MySqlConnection cn = new MySqlConnection(conexion))
+                using (MySqlConnection cn = ConexionBD.ObtenerConexion())
                 {
                     cn.Open();
 
                     string query = @"
                     SELECT
-                        p.cmp_fecha_pago AS Fecha,
-                        CONCAT(e.cmp_nombre,' ',e.cmp_apellido) AS Empleado,
-                        p.cmp_forma_pago AS TipoPago,
-                        p.cmp_numero_recibo AS Transferencia,
-                        p.cmp_monto_pagado AS Monto
+                        p.fecha_pago AS Fecha,
+                        CONCAT(e.nombre_emp, ' ', e.apellido_emp) AS Empleado,
+                        p.forma_pago AS TipoPago,
+                        p.numero_recibo AS Transferencia,
+                        p.monto_pago AS Monto
                     FROM tbl_pagos p
-                    INNER JOIN tbl_detalle_planilla d
-                    ON p.cmp_id_detalle_planilla = d.cmp_id_detalle_planilla
+                    INNER JOIN tbl_planilla_detalle d
+                    ON p.id_planilla = d.id_planilla AND p.id_empleado = d.id_empleado
                     INNER JOIN tbl_empleados e
-                    ON d.cmp_id_empleado = e.cmp_id_empleado
-                    WHERE p.cmp_fecha_pago BETWEEN @desde AND @hasta";
+                    ON d.id_empleado = e.id_empleado
+                    WHERE p.fecha_pago BETWEEN @desde AND @hasta
+                    ORDER BY p.fecha_pago DESC";
 
+                    // Ajuste de rango para abarcar todo el día límite (hasta las 23:59:59)
+                    DateTime fechaDesde = dtpDesde.Value.Date;
+                    DateTime fechaHasta = dtpHasta.Value.Date.AddDays(1).AddSeconds(-1);
 
                     MySqlCommand cmd = new MySqlCommand(query, cn);
-
-                    cmd.Parameters.AddWithValue("@desde", dtpDesde.Value.Date);
-                    cmd.Parameters.AddWithValue("@hasta", dtpHasta.Value.Date);
-
+                    cmd.Parameters.AddWithValue("@desde", fechaDesde);
+                    cmd.Parameters.AddWithValue("@hasta", fechaHasta);
 
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-
                     DataTable dt = new DataTable();
 
                     da.Fill(dt);
@@ -215,7 +209,7 @@ namespace ProyectoAsis22K26Nominas
             {
                 MessageBox.Show(
                     ex.Message,
-                    "Error",
+                    "Error al filtrar los datos",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
             }

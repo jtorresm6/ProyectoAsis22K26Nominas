@@ -1,19 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-//Parte trabajada por: Matthew Andreé Juárez Xoy - Carné: 0901-23-4250
-//Curso:Análisis de Sistemas II
-//Fecha de creación: 26-07-2026
-//Fecha de última modificación: 27-07-2026
+// Parte trabajada por: Matthew Andreé Juárez Xoy - Carné: 0901-23-4250
+// Curso: Análisis de Sistemas II
+// Fecha de creación: 26-07-2026
+// Fecha de última modificación: 27-07-2026
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -34,39 +27,43 @@ namespace ProyectoAsis22K26Nominas
 
             try
             {
-                // Se corrigió 'Conexion' a 'ConexionBD'
                 using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
                 {
                     conexion.Open();
 
-                    string query = @"SELECT cmp_id_planilla, 
-                                            cmp_periodo_inicio, 
-                                            cmp_periodo_fin, 
-                                            cmp_fecha_generacion, 
-                                            cmp_estado, 
-                                            cmp_total_ingresos, 
-                                            cmp_total_descuentos, 
-                                            cmp_total_pagar, 
-                                            cmp_observaciones 
-                                     FROM tbl_Planilla 
-                                     WHERE cmp_id_usuario = @idUsuario";
+                    // Se agregan alias (AS) para que coincidan exactamente con el encabezado que necesitas
+                    string query = @"SELECT 
+                                        id_planilla AS 'ID', 
+                                        fecha_inicio AS 'Inicio', 
+                                        fecha_fin AS 'Fin', 
+                                        fecha_generacion AS 'Fecha de Generacion', 
+                                        estado_planilla AS 'Estado', 
+                                        total_percepciones AS 'Ingresos', 
+                                        total_deducciones AS 'Descuentos', 
+                                        total_neto AS 'Total a Pagar', 
+                                        observaciones_planilla AS 'Observaciones' 
+                                     FROM tbl_planillas 
+                                     WHERE id_usuario = @idUsuario";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, conexion))
                     {
                         cmd.Parameters.AddWithValue("@idUsuario", Txt_Usuario.Text.Trim());
 
-                        MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-
-                        adaptador.Fill(dt);
-
-                        // Asigna los nuevos datos al DataGridView
-                        Dgv_Historial_Nomina.DataSource = null;
-                        Dgv_Historial_Nomina.DataSource = dt;
-
-                        if (dt.Rows.Count == 0)
+                        using (MySqlDataAdapter adaptador = new MySqlDataAdapter(cmd))
                         {
-                            MessageBox.Show("No se encontraron registros para este usuario.", "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            DataTable dt = new DataTable();
+                            adaptador.Fill(dt);
+
+                            // Limpiamos las columnas vacías creadas en el Diseñador
+                            Dgv_Historial_Nomina.Columns.Clear();
+
+                            // Asignamos el DataTable directamente
+                            Dgv_Historial_Nomina.DataSource = dt;
+
+                            if (dt.Rows.Count == 0)
+                            {
+                                MessageBox.Show("No se encontraron registros para este usuario.", "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
                         }
                     }
                 }
@@ -80,12 +77,11 @@ namespace ProyectoAsis22K26Nominas
         private void FormHistorialNomina_Load(object sender, EventArgs e)
         {
             FormularioPermisos permiso =
-            GestionarPermisos.ObtenerPermiso("FormMovimientosPlanilla"
-            );
+                GestionarPermisos.ObtenerPermiso("FormHistorialNomina");
 
             if (!permiso.Ver)
             {
-                MessageBox.Show("No tiene permiso para este formulario.");
+                MessageBox.Show("No tiene permiso para este formulario.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Close();
                 return;
             }
@@ -93,5 +89,4 @@ namespace ProyectoAsis22K26Nominas
             Btn_Buscar.Enabled = permiso.Ver;
         }
     }
-    
 }

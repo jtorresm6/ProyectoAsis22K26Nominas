@@ -8,7 +8,7 @@ using System.Windows.Forms;
 //Parte trabajada por: Jose Javier Torres Martinez - Carné: 0901-23-1091
 //Curso: Análisis de Sistemas II
 //Fecha de creación: 23-07-2026
-//Fecha de última modificación: 31-07-2026
+//Fecha de última modificación: 03-08-2026
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -102,8 +102,8 @@ namespace ProyectoAsis22K26Nominas
             }
 
             Cbo_estado.Items.Clear();
-            Cbo_estado.Items.Add("Activo");
-            Cbo_estado.Items.Add("Inactivo");
+            Cbo_estado.Items.Add("activo");
+            Cbo_estado.Items.Add("inactivo");
             Cbo_estado.SelectedIndex = 0;
         }
 
@@ -174,18 +174,18 @@ namespace ProyectoAsis22K26Nominas
                 {
                     await con.OpenAsync();
                     string query = @"SELECT 
-                                        e.cmp_id_empleado AS 'ID', 
-                                        e.cmp_dpi AS 'DPI',
-                                        e.cmp_nit AS 'NIT',
-                                        e.cmp_nombre AS 'Nombre', 
-                                        e.cmp_apellido AS 'Apellido', 
-                                        e.cmp_estado AS 'Estado',
-                                        d.cmp_nombre AS 'Departamento',
-                                        p.cmp_nombre AS 'Puesto',
-                                        p.cmp_salario_base AS 'Salario'
-                                     FROM tbl_Empleados e
-                                     INNER JOIN tbl_Departamentos d ON e.cmp_id_departamento = d.cmp_id_departamento
-                                     INNER JOIN tbl_Puestos p ON e.cmp_id_puesto = p.cmp_id_puesto";
+                                        e.id_empleado AS 'ID', 
+                                        e.dpi_emp AS 'DPI',
+                                        e.nit_emp AS 'NIT',
+                                        e.nombre_emp AS 'Nombre', 
+                                        e.apellido_emp AS 'Apellido', 
+                                        e.estado_emp AS 'Estado',
+                                        d.nombre_depto AS 'Departamento',
+                                        p.nombre_puesto AS 'Puesto',
+                                        p.salario_base AS 'Salario'
+                                     FROM tbl_empleados e
+                                     INNER JOIN tbl_puestos p ON e.id_puesto = p.id_puesto
+                                     INNER JOIN tbl_departamentos d ON p.id_departamento = d.id_departamento";
 
                     using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
@@ -208,9 +208,6 @@ namespace ProyectoAsis22K26Nominas
 
         #region Métodos para Obtener y Llenar Campos
 
-        /// <summary>
-        /// Método asignador que llena todos los controles del formulario con los parámetros provistos.
-        /// </summary>
         private void LlenarCamposFormulario(
             string id, string dpi, string nit, string nombre, string apellido,
             string direccion, string salario, DateTime fechaNac, DateTime fechaCont,
@@ -241,12 +238,9 @@ namespace ProyectoAsis22K26Nominas
                 Cbo_estado.SelectedItem = estado;
         }
 
-        /// <summary>
-        /// Obtiene el teléfono del empleado desde la tabla tbl_Telefonos.
-        /// </summary>
         private async Task<string> ObtenerTelefonoEmpleadoAsync(int idEmpleado, MySqlConnection con)
         {
-            string query = "SELECT cmp_telefono FROM tbl_Telefonos WHERE cmp_id_empleado = @id LIMIT 1;";
+            string query = "SELECT numero_tel FROM tbl_telefonos WHERE id_empleado = @id LIMIT 1;";
             using (MySqlCommand cmd = new MySqlCommand(query, con))
             {
                 cmd.Parameters.AddWithValue("@id", idEmpleado);
@@ -255,12 +249,9 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        /// <summary>
-        /// Obtiene el correo del empleado desde la tabla tbl_Correos.
-        /// </summary>
         private async Task<string> ObtenerCorreoEmpleadoAsync(int idEmpleado, MySqlConnection con)
         {
-            string query = "SELECT cmp_correo FROM tbl_Correos WHERE cmp_id_empleado = @id LIMIT 1;";
+            string query = "SELECT correo FROM tbl_correos WHERE id_empleado = @id LIMIT 1;";
             using (MySqlCommand cmd = new MySqlCommand(query, con))
             {
                 cmd.Parameters.AddWithValue("@id", idEmpleado);
@@ -315,9 +306,6 @@ namespace ProyectoAsis22K26Nominas
             return false;
         }
 
-        /// <summary>
-        /// Valida que TODOS los TextBox del formulario contengan datos.
-        /// </summary>
         private bool ValidarCamposFormulario()
         {
             if (CampoEstaVacio(Txt_identificacion, "el DPI / Identificación")) return false;
@@ -347,7 +335,6 @@ namespace ProyectoAsis22K26Nominas
 
         private async void Btn_guardar_Click(object sender, EventArgs e)
         {
-            // Se realiza la validación completa de todos los campos de texto
             if (!ValidarCamposFormulario()) return;
 
             if (esNuevo)
@@ -375,10 +362,10 @@ namespace ProyectoAsis22K26Nominas
                         if (idComun == 0)
                         {
                             string qNextId = @"SELECT GREATEST(
-                                                IFNULL((SELECT MAX(cmp_id_empleado) FROM tbl_Empleados), 0),
-                                                IFNULL((SELECT MAX(cmp_id_departamento) FROM tbl_Departamentos), 0),
-                                                IFNULL((SELECT MAX(cmp_id_puesto) FROM tbl_Puestos), 0)
-                                               ) + 1;";
+                                        IFNULL((SELECT MAX(id_empleado) FROM tbl_empleados), 0),
+                                        IFNULL((SELECT MAX(id_departamento) FROM tbl_departamentos), 0),
+                                        IFNULL((SELECT MAX(id_puesto) FROM tbl_puestos), 0)
+                                       ) + 1;";
 
                             using (MySqlCommand cmdNext = new MySqlCommand(qNextId, con, tran))
                             {
@@ -386,23 +373,21 @@ namespace ProyectoAsis22K26Nominas
                             }
                         }
 
-                        // Verificación de duplicados (ID y DPI)
-                        string queryCheck = @"SELECT 
-                                                (SELECT COUNT(*) FROM tbl_Empleados WHERE cmp_id_empleado = @idCheck) +
-                                                (SELECT COUNT(*) FROM tbl_Departamentos WHERE cmp_id_departamento = @idCheck) +
-                                                (SELECT COUNT(*) FROM tbl_Puestos WHERE cmp_id_puesto = @idCheck) +
-                                                (SELECT COUNT(*) FROM tbl_Empleados WHERE cmp_dpi = @dpiCheck) AS Total;";
+                        // Verificación de duplicado únicamente por ID
+                        string queryCheckId = @"SELECT 
+                                        (SELECT COUNT(*) FROM tbl_empleados WHERE id_empleado = @idCheck) +
+                                        (SELECT COUNT(*) FROM tbl_departamentos WHERE id_departamento = @idCheck) +
+                                        (SELECT COUNT(*) FROM tbl_puestos WHERE id_puesto = @idCheck) AS Total;";
 
-                        using (MySqlCommand cmdCheck = new MySqlCommand(queryCheck, con, tran))
+                        using (MySqlCommand cmdCheck = new MySqlCommand(queryCheckId, con, tran))
                         {
                             cmdCheck.Parameters.AddWithValue("@idCheck", idComun);
-                            cmdCheck.Parameters.AddWithValue("@dpiCheck", Txt_identificacion.Text.Trim());
 
                             long totalCoincidencias = Convert.ToInt64(await cmdCheck.ExecuteScalarAsync());
 
                             if (totalCoincidencias > 0)
                             {
-                                MessageBox.Show($"El ID ({idComun}) o el DPI ya existen en la base de datos. Ingrese otro.", "Registro Existente", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show($"El ID {idComun} ya existe en la base de datos. Ingrese otro ID.", "ID Existente", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 tran.Rollback();
                                 return;
                             }
@@ -421,8 +406,7 @@ namespace ProyectoAsis22K26Nominas
                         decimal salarioBase = 0;
                         decimal.TryParse(Txt_salario.Text.Trim(), out salarioBase);
 
-                        // 1. Insertar en tbl_Departamentos
-                        string queryDepto = "INSERT INTO tbl_Departamentos (cmp_id_departamento, cmp_nombre, cmp_descripcion) VALUES (@idDepto, @nombreDepto, @descDepto);";
+                        string queryDepto = "INSERT INTO tbl_departamentos (id_departamento, nombre_depto, descripcion_depto, estado_depto) VALUES (@idDepto, @nombreDepto, @descDepto, true);";
                         using (MySqlCommand cmdD = new MySqlCommand(queryDepto, con, tran))
                         {
                             cmdD.Parameters.AddWithValue("@idDepto", idComun);
@@ -431,21 +415,20 @@ namespace ProyectoAsis22K26Nominas
                             await cmdD.ExecuteNonQueryAsync();
                         }
 
-                        // 2. Insertar en tbl_Puestos
-                        string queryPuesto = "INSERT INTO tbl_Puestos (cmp_id_puesto, cmp_nombre, cmp_descripcion, cmp_salario_base) VALUES (@idPuesto, @nombrePuesto, @descPuesto, @salarioPuesto);";
+                        string queryPuesto = "INSERT INTO tbl_puestos (id_puesto, nombre_puesto, descripcion_puesto, salario_base, estado_puesto, id_departamento) VALUES (@idPuesto, @nombrePuesto, @descPuesto, @salarioPuesto, true, @idDepto);";
                         using (MySqlCommand cmdP = new MySqlCommand(queryPuesto, con, tran))
                         {
                             cmdP.Parameters.AddWithValue("@idPuesto", idComun);
                             cmdP.Parameters.AddWithValue("@nombrePuesto", puestoNombre);
                             cmdP.Parameters.AddWithValue("@descPuesto", descPuesto);
                             cmdP.Parameters.AddWithValue("@salarioPuesto", salarioBase);
+                            cmdP.Parameters.AddWithValue("@idDepto", idComun);
                             await cmdP.ExecuteNonQueryAsync();
                         }
 
-                        // 3. Insertar en tbl_Empleados
-                        string queryEmp = @"INSERT INTO tbl_Empleados 
-                                           (cmp_id_empleado, cmp_dpi, cmp_nit, cmp_nombre, cmp_apellido, cmp_fecha_nacimiento, cmp_direccion, cmp_fecha_contratacion, cmp_estado, cmp_id_departamento, cmp_id_puesto) 
-                                           VALUES (@idEmp, @dpi, @nit, @nombre, @apellido, @fNac, @direccion, @fCont, @estado, @idDeptoEmp, @idPuestoEmp);";
+                        string queryEmp = @"INSERT INTO tbl_empleados 
+                                   (id_empleado, dpi_emp, nit_emp, nombre_emp, apellido_emp, fecha_nacimiento, direccion_emp, fecha_contratacion, estado_emp, id_puesto) 
+                                   VALUES (@idEmp, @dpi, @nit, @nombre, @apellido, @fNac, @direccion, @fCont, @estado, @idPuestoEmp);";
 
                         using (MySqlCommand cmdE = new MySqlCommand(queryEmp, con, tran))
                         {
@@ -457,8 +440,7 @@ namespace ProyectoAsis22K26Nominas
                             cmdE.Parameters.AddWithValue("@fNac", Dtp_fechnacimiento.Value.ToString("yyyy-MM-dd"));
                             cmdE.Parameters.AddWithValue("@direccion", Txt_direccion.Text.Trim());
                             cmdE.Parameters.AddWithValue("@fCont", Dtp_fechcontratacion.Value.ToString("yyyy-MM-dd"));
-                            cmdE.Parameters.AddWithValue("@estado", Cbo_estado.SelectedItem?.ToString() ?? "Activo");
-                            cmdE.Parameters.AddWithValue("@idDeptoEmp", idComun);
+                            cmdE.Parameters.AddWithValue("@estado", Cbo_estado.SelectedItem?.ToString() ?? "activo");
                             cmdE.Parameters.AddWithValue("@idPuestoEmp", idComun);
 
                             await cmdE.ExecuteNonQueryAsync();
@@ -478,7 +460,7 @@ namespace ProyectoAsis22K26Nominas
                         );
 
                         MessageBox.Show(
-                            $"Empleado, Departamento y Puesto guardados con éxito con el ID común: {idComun}",
+                            $"Empleado guardado con éxito con el ID: {idComun}",
                             "Éxito",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information
@@ -495,7 +477,6 @@ namespace ProyectoAsis22K26Nominas
                 }
             }
         }
-
         private async Task ActualizarEmpleadoAsync()
         {
             using (MySqlConnection con = ConexionBD.ObtenerConexion())
@@ -516,8 +497,8 @@ namespace ProyectoAsis22K26Nominas
                         decimal salarioBase = 0;
                         decimal.TryParse(Txt_salario.Text.Trim(), out salarioBase);
 
-                        // 1. Actualizar tbl_Departamentos
-                        string qDepto = "UPDATE tbl_Departamentos SET cmp_nombre = @nombre, cmp_descripcion = @desc WHERE cmp_id_departamento = @id";
+                        // 1. Actualizar tbl_departamentos
+                        string qDepto = "UPDATE tbl_departamentos SET nombre_depto = @nombre, descripcion_depto = @desc WHERE id_departamento = @id";
                         using (MySqlCommand cmdD = new MySqlCommand(qDepto, con, tran))
                         {
                             cmdD.Parameters.AddWithValue("@nombre", deptoNombre);
@@ -526,8 +507,8 @@ namespace ProyectoAsis22K26Nominas
                             await cmdD.ExecuteNonQueryAsync();
                         }
 
-                        // 2. Actualizar tbl_Puestos
-                        string qPuesto = "UPDATE tbl_Puestos SET cmp_nombre = @nombre, cmp_descripcion = @desc, cmp_salario_base = @salario WHERE cmp_id_puesto = @id";
+                        // 2. Actualizar tbl_puestos
+                        string qPuesto = "UPDATE tbl_puestos SET nombre_puesto = @nombre, descripcion_puesto = @desc, salario_base = @salario WHERE id_puesto = @id";
                         using (MySqlCommand cmdP = new MySqlCommand(qPuesto, con, tran))
                         {
                             cmdP.Parameters.AddWithValue("@nombre", puestoNombre);
@@ -537,19 +518,18 @@ namespace ProyectoAsis22K26Nominas
                             await cmdP.ExecuteNonQueryAsync();
                         }
 
-                        // 3. Actualizar tbl_Empleados
-                        string qEmp = @"UPDATE tbl_Empleados 
-                                        SET cmp_dpi = @dpi,
-                                            cmp_nit = @nit,
-                                            cmp_nombre = @nombre,
-                                            cmp_apellido = @apellido,
-                                            cmp_fecha_nacimiento = @fNac,
-                                            cmp_direccion = @direccion,
-                                            cmp_fecha_contratacion = @fCont,
-                                            cmp_estado = @estado,
-                                            cmp_id_departamento = @idDepto,
-                                            cmp_id_puesto = @idPuesto
-                                        WHERE cmp_id_empleado = @idEmp";
+                        // 3. Actualizar tbl_empleados
+                        string qEmp = @"UPDATE tbl_empleados 
+                                        SET dpi_emp = @dpi,
+                                            nit_emp = @nit,
+                                            nombre_emp = @nombre,
+                                            apellido_emp = @apellido,
+                                            fecha_nacimiento = @fNac,
+                                            direccion_emp = @direccion,
+                                            fecha_contratacion = @fCont,
+                                            estado_emp = @estado,
+                                            id_puesto = @idPuesto
+                                        WHERE id_empleado = @idEmp";
 
                         using (MySqlCommand cmdE = new MySqlCommand(qEmp, con, tran))
                         {
@@ -560,8 +540,7 @@ namespace ProyectoAsis22K26Nominas
                             cmdE.Parameters.AddWithValue("@fNac", Dtp_fechnacimiento.Value.ToString("yyyy-MM-dd"));
                             cmdE.Parameters.AddWithValue("@direccion", Txt_direccion.Text.Trim());
                             cmdE.Parameters.AddWithValue("@fCont", Dtp_fechcontratacion.Value.ToString("yyyy-MM-dd"));
-                            cmdE.Parameters.AddWithValue("@estado", Cbo_estado.SelectedItem?.ToString() ?? "Activo");
-                            cmdE.Parameters.AddWithValue("@idDepto", idComun);
+                            cmdE.Parameters.AddWithValue("@estado", Cbo_estado.SelectedItem?.ToString() ?? "activo");
                             cmdE.Parameters.AddWithValue("@idPuesto", idComun);
                             cmdE.Parameters.AddWithValue("@idEmp", idComun);
                             await cmdE.ExecuteNonQueryAsync();
@@ -603,7 +582,7 @@ namespace ProyectoAsis22K26Nominas
         {
             if (!string.IsNullOrEmpty(Txt_telefono.Text.Trim()))
             {
-                string queryTel = "INSERT INTO tbl_Telefonos (cmp_telefono, cmp_id_empleado) VALUES (@tel, @idEmp)";
+                string queryTel = "INSERT INTO tbl_telefonos (numero_tel, id_empleado) VALUES (@tel, @idEmp)";
                 using (MySqlCommand cmd = new MySqlCommand(queryTel, con, tran))
                 {
                     cmd.Parameters.AddWithValue("@tel", Txt_telefono.Text.Trim());
@@ -614,7 +593,7 @@ namespace ProyectoAsis22K26Nominas
 
             if (!string.IsNullOrEmpty(Txt_correo.Text.Trim()))
             {
-                string queryCor = "INSERT INTO tbl_Correos (cmp_correo, cmp_id_empleado) VALUES (@correo, @idEmp)";
+                string queryCor = "INSERT INTO tbl_correos (correo, id_empleado) VALUES (@correo, @idEmp)";
                 using (MySqlCommand cmd = new MySqlCommand(queryCor, con, tran))
                 {
                     cmd.Parameters.AddWithValue("@correo", Txt_correo.Text.Trim());
@@ -626,13 +605,13 @@ namespace ProyectoAsis22K26Nominas
 
         private async Task ActualizarContactoAsync(MySqlConnection con, MySqlTransaction tran, int idEmpleado)
         {
-            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_Telefonos WHERE cmp_id_empleado = @id", con, tran))
+            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_telefonos WHERE id_empleado = @id", con, tran))
             {
                 cmd.Parameters.AddWithValue("@id", idEmpleado);
                 await cmd.ExecuteNonQueryAsync();
             }
 
-            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_Correos WHERE cmp_id_empleado = @id", con, tran))
+            using (MySqlCommand cmd = new MySqlCommand("DELETE FROM tbl_correos WHERE id_empleado = @id", con, tran))
             {
                 cmd.Parameters.AddWithValue("@id", idEmpleado);
                 await cmd.ExecuteNonQueryAsync();
@@ -669,11 +648,11 @@ namespace ProyectoAsis22K26Nominas
                 using (MySqlConnection con = ConexionBD.ObtenerConexion())
                 {
                     await con.OpenAsync();
-                    string query = @"SELECT e.*, d.cmp_nombre AS departamento, p.cmp_nombre AS puesto, p.cmp_salario_base AS salario
-                                     FROM tbl_Empleados e
-                                     INNER JOIN tbl_Departamentos d ON e.cmp_id_departamento = d.cmp_id_departamento
-                                     INNER JOIN tbl_Puestos p ON e.cmp_id_puesto = p.cmp_id_puesto
-                                     WHERE e.cmp_id_empleado = @id";
+                    string query = @"SELECT e.*, d.nombre_depto AS departamento, p.nombre_puesto AS puesto, p.salario_base AS salario
+                                     FROM tbl_empleados e
+                                     INNER JOIN tbl_puestos p ON e.id_puesto = p.id_puesto
+                                     INNER JOIN tbl_departamentos d ON p.id_departamento = d.id_departamento
+                                     WHERE e.id_empleado = @id";
 
                     string idStr = "", dpi = "", nit = "", nombre = "", apellido = "", direccion = "", salario = "", depto = "", puesto = "", estado = "";
                     DateTime fNac = DateTime.Now, fCont = DateTime.Now;
@@ -686,23 +665,23 @@ namespace ProyectoAsis22K26Nominas
                         {
                             if (await reader.ReadAsync())
                             {
-                                idStr = reader["cmp_id_empleado"].ToString();
-                                dpi = reader["cmp_dpi"].ToString();
-                                nit = reader["cmp_nit"] != DBNull.Value ? reader["cmp_nit"].ToString() : "";
-                                nombre = reader["cmp_nombre"].ToString();
-                                apellido = reader["cmp_apellido"].ToString();
-                                direccion = reader["cmp_direccion"].ToString();
+                                idStr = reader["id_empleado"].ToString();
+                                dpi = reader["dpi_emp"].ToString();
+                                nit = reader["nit_emp"] != DBNull.Value ? reader["nit_emp"].ToString() : "";
+                                nombre = reader["nombre_emp"].ToString();
+                                apellido = reader["apellido_emp"].ToString();
+                                direccion = reader["direccion_emp"].ToString();
                                 salario = reader["salario"].ToString();
 
-                                if (reader["cmp_fecha_nacimiento"] != DBNull.Value)
-                                    fNac = Convert.ToDateTime(reader["cmp_fecha_nacimiento"]);
+                                if (reader["fecha_nacimiento"] != DBNull.Value)
+                                    fNac = Convert.ToDateTime(reader["fecha_nacimiento"]);
 
-                                if (reader["cmp_fecha_contratacion"] != DBNull.Value)
-                                    fCont = Convert.ToDateTime(reader["cmp_fecha_contratacion"]);
+                                if (reader["fecha_contratacion"] != DBNull.Value)
+                                    fCont = Convert.ToDateTime(reader["fecha_contratacion"]);
 
                                 depto = reader["departamento"].ToString();
                                 puesto = reader["puesto"].ToString();
-                                estado = reader["cmp_estado"] != DBNull.Value ? reader["cmp_estado"].ToString() : "Activo";
+                                estado = reader["estado_emp"] != DBNull.Value ? reader["estado_emp"].ToString() : "activo";
 
                                 encontrado = true;
                             }
@@ -711,13 +690,11 @@ namespace ProyectoAsis22K26Nominas
 
                     if (encontrado)
                     {
-                        // Obtiene teléfono y correo llamando a sus respectivos métodos
                         string telefono = await ObtenerTelefonoEmpleadoAsync(idEmpleado, con);
                         string correo = await ObtenerCorreoEmpleadoAsync(idEmpleado, con);
 
                         BloquearControles(false);
 
-                        // Llena todos los campos usando el método centralizado
                         LlenarCamposFormulario(
                             idStr, dpi, nit, nombre, apellido,
                             direccion, salario, fNac, fCont,
@@ -756,5 +733,130 @@ namespace ProyectoAsis22K26Nominas
         private void Cbo_puesto_SelectedIndexChanged(object sender, EventArgs e) { }
 
         #endregion
+
+        private async void Btn_eliminar_Click(object sender, EventArgs e)
+        {
+            FormularioPermisos permiso = GestionarPermisos.ObtenerPermiso("FormNuevoregistro");
+            if (!permiso.Eliminar)
+            {
+                MessageBox.Show("No tiene permisos para eliminar registros del sistema.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            // Si el cuadro de texto del ID está bloqueado o deshabilitado, se desbloquea para ingresar el ID
+            if (!Txt_idempleado.Enabled || Txt_idempleado.ReadOnly)
+            {
+                Txt_idempleado.Enabled = true;
+                Txt_idempleado.ReadOnly = false;
+                Txt_idempleado.Clear();
+                Txt_idempleado.Focus();
+                MessageBox.Show("Ingrese el ID del empleado a eliminar y presione nuevamente el botón 'Eliminar'.", "Ingrese ID", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            string inputId = Txt_idempleado.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(inputId) || !int.TryParse(inputId, out int idEmpleado))
+            {
+                MessageBox.Show("Debe ingresar un ID de empleado válido.", "ID Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Txt_idempleado.Focus();
+                return;
+            }
+
+            DialogResult confirmacion = MessageBox.Show(
+                $"¿Está seguro de que desea eliminar al empleado con ID {idEmpleado}?\n\nEsta acción es permanente y no podrá recuperar los datos.",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning,
+                MessageBoxDefaultButton.Button2
+            );
+
+            if (confirmacion != DialogResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                using (MySqlConnection con = ConexionBD.ObtenerConexion())
+                {
+                    await con.OpenAsync();
+                    using (MySqlTransaction tran = con.BeginTransaction())
+                    {
+                        try
+                        {
+                            string qCheck = "SELECT nombre_emp, apellido_emp FROM tbl_empleados WHERE id_empleado = @id;";
+                            string nombreCompleto = "";
+
+                            using (MySqlCommand cmdCheck = new MySqlCommand(qCheck, con, tran))
+                            {
+                                cmdCheck.Parameters.AddWithValue("@id", idEmpleado);
+                                using (var reader = await cmdCheck.ExecuteReaderAsync())
+                                {
+                                    if (await reader.ReadAsync())
+                                    {
+                                        nombreCompleto = $"{reader["nombre_emp"]} {reader["apellido_emp"]}";
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show($"No se encontró ningún empleado registrado con el ID {idEmpleado}.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        tran.Rollback();
+                                        return;
+                                    }
+                                }
+                            }
+
+                            using (MySqlCommand cmdTel = new MySqlCommand("DELETE FROM tbl_telefonos WHERE id_empleado = @id;", con, tran))
+                            {
+                                cmdTel.Parameters.AddWithValue("@id", idEmpleado);
+                                await cmdTel.ExecuteNonQueryAsync();
+                            }
+
+                            using (MySqlCommand cmdCor = new MySqlCommand("DELETE FROM tbl_correos WHERE id_empleado = @id;", con, tran))
+                            {
+                                cmdCor.Parameters.AddWithValue("@id", idEmpleado);
+                                await cmdCor.ExecuteNonQueryAsync();
+                            }
+
+                            using (MySqlCommand cmdEmp = new MySqlCommand("DELETE FROM tbl_empleados WHERE id_empleado = @id;", con, tran))
+                            {
+                                cmdEmp.Parameters.AddWithValue("@id", idEmpleado);
+                                await cmdEmp.ExecuteNonQueryAsync();
+                            }
+
+                            using (MySqlCommand cmdPuesto = new MySqlCommand("DELETE FROM tbl_puestos WHERE id_puesto = @id;", con, tran))
+                            {
+                                cmdPuesto.Parameters.AddWithValue("@id", idEmpleado);
+                                await cmdPuesto.ExecuteNonQueryAsync();
+                            }
+
+                            using (MySqlCommand cmdDepto = new MySqlCommand("DELETE FROM tbl_departamentos WHERE id_departamento = @id;", con, tran))
+                            {
+                                cmdDepto.Parameters.AddWithValue("@id", idEmpleado);
+                                await cmdDepto.ExecuteNonQueryAsync();
+                            }
+
+                            tran.Commit();
+
+                            Bitacora.Registrar("Eliminación de empleado", $"{SesionUsuario.Usuario} eliminó al empleado {nombreCompleto} (ID: {idEmpleado}).");
+
+                            MessageBox.Show($"El empleado '{nombreCompleto}' ha sido eliminado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            EstablecerEstadoInicial();
+                            await CargarTablaEmpleadosAsync();
+                        }
+                        catch (Exception ex)
+                        {
+                            tran.Rollback();
+                            MessageBox.Show("Error al eliminar el registro: " + ex.Message, "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error de conexión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

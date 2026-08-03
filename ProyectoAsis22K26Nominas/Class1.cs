@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -7,35 +8,32 @@ namespace ProyectoAsis22K26Nominas
     {
         public static void Registrar(string accion, string descripcion)
         {
-            using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
+            try
             {
-                conexion.Open();
-
-                string consulta =
-                    "insert into tbl_Bitacora " +
-                    "(cmp_fecha, cmp_accion, cmp_descripcion, cmp_id_usuario) " +
-                    "values (now(), @accion, @descripcion, @idUsuario);";
-
-                using (MySqlCommand comando =
-                    new MySqlCommand(consulta, conexion))
+                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
                 {
-                    comando.Parameters.AddWithValue(
-                        "@accion",
-                        accion
-                    );
+                    conexion.Open();
 
-                    comando.Parameters.AddWithValue(
-                        "@descripcion",
-                        descripcion
-                    );
+                    // Consulta SQL con los nombres actualizados de la nueva BD
+                    string consulta = @"INSERT INTO tbl_bitacora 
+                                        (fecha_bitacora, accion_bitacora, descripcion_bitacora, id_usuario) 
+                                        VALUES 
+                                        (NOW(), @accion, @descripcion, @idUsuario);";
 
-                    comando.Parameters.AddWithValue(
-                        "@idUsuario",
-                        SesionUsuario.IdUsuario
-                    );
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@accion", accion);
+                        comando.Parameters.AddWithValue("@descripcion", descripcion);
+                        comando.Parameters.AddWithValue("@idUsuario", SesionUsuario.IdUsuario);
 
-                    comando.ExecuteNonQuery();
+                        comando.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                // Captura el error en la consola de depuración para evitar interrumpir la app si falla la bitácora
+                System.Diagnostics.Debug.WriteLine("Error al registrar bitácora: " + ex.Message);
             }
         }
     }

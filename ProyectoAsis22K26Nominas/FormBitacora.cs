@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
 using System.Windows.Forms;
@@ -25,38 +21,28 @@ namespace ProyectoAsis22K26Nominas
         {
             try
             {
-                using (MySqlConnection conexion =
-                    ConexionBD.ObtenerConexion())
+                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
                 {
                     conexion.Open();
 
-                    string consulta =
-                        @"select
-                    b.cmp_id_bitacora as Codigo,
-                    b.cmp_fecha as Fecha,
-                    u.cmp_nombre as Usuario,
-                    concat(e.cmp_nombre,' ',e.cmp_apellido) as Empleado,
-                    r.cmp_nombre as Rol,
-                    b.cmp_direccion_ip as IP,
-                    b.cmp_nombre_formulario as Formulario,
-                    b.cmp_tabla_afectada as Tabla,
-                    b.cmp_accion as Accion,
-                    b.cmp_descripcion as Descripcion
-                from tbl_Bitacora b
-                inner join tbl_Usuarios u
-                    on b.cmp_id_usuario = u.cmp_id_usuario
-                inner join tbl_Empleados e
-                    on u.cmp_id_empleado = e.cmp_id_empleado
-                inner join tbl_Roles r
-                    on u.cmp_id_rol = r.cmp_id_rol
-                order by b.cmp_fecha desc;";
+                    // Se consulta directamente la vista 'vw_bitacora' creada en MySQL
+                    string consulta = @"SELECT 
+                                            id_bitacora AS Codigo,
+                                            fecha_bitacora AS Fecha,
+                                            nombre_usuario AS Usuario,
+                                            nombre_empleado AS Empleado,
+                                            nombre_rol AS Rol,
+                                            direccion_ip AS IP,
+                                            nombre_formulario AS Formulario,
+                                            tabla_afectada AS Tabla,
+                                            accion_bitacora AS Accion,
+                                            descripcion_bitacora AS Descripcion
+                                        FROM vw_bitacora
+                                        ORDER BY fecha_bitacora DESC;";
 
-                    using (MySqlCommand comando =
-                        new MySqlCommand(consulta, conexion))
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
                     {
-                        MySqlDataAdapter adaptador =
-                            new MySqlDataAdapter(comando);
-
+                        MySqlDataAdapter adaptador = new MySqlDataAdapter(comando);
                         DataTable tabla = new DataTable();
 
                         adaptador.Fill(tabla);
@@ -69,7 +55,7 @@ namespace ProyectoAsis22K26Nominas
             {
                 MessageBox.Show(
                     "Error al cargar la bitácora: " + ex.Message,
-                    "Error",
+                    "Error BD",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );

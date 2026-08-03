@@ -190,6 +190,7 @@
             // 
             // Btn_Reactivar
             // 
+            this.Btn_Reactivar.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.Btn_Reactivar.Location = new System.Drawing.Point(972, 589);
             this.Btn_Reactivar.Margin = new System.Windows.Forms.Padding(4);
             this.Btn_Reactivar.Name = "Btn_Reactivar";
@@ -197,7 +198,7 @@
             this.Btn_Reactivar.TabIndex = 12;
             this.Btn_Reactivar.Text = "Reactivar";
             this.Btn_Reactivar.UseVisualStyleBackColor = true;
-            this.Btn_Reactivar.Click += new System.EventHandler(this.button4_Click);
+            this.Btn_Reactivar.Click += new System.EventHandler(this.Btn_reactivar_Click);
             // 
             // Btn_Limpiar
             // 

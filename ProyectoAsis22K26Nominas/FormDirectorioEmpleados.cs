@@ -5,12 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-
-//Parte trabajada por: Jose Javier Torres Martinez - Carné: 0901-23-1091
-//Curso:Análisis de Sistemas II
-//Fecha de creación: 23-07-2026
-//Fecha de última modificación: 27-07-2026
+// Parte trabajada por: Jose Javier Torres Martinez - Carné: 0901-23-1091
+// Curso: Análisis de Sistemas II
+// Fecha de creación: 23-07-2026
+// Fecha de última modificación: 27-07-2026
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -26,8 +24,7 @@ namespace ProyectoAsis22K26Nominas
             LimpiarFiltros();
 
             FormularioPermisos permiso =
-            GestionarPermisos.ObtenerPermiso("FormDirectorioEmpleados"
-            );
+            GestionarPermisos.ObtenerPermiso("FormDirectorioEmpleados");
 
             if (!permiso.Ver)
             {
@@ -75,127 +72,85 @@ namespace ProyectoAsis22K26Nominas
         {
             try
             {
-                using (MySqlConnection conexion =
-                    ConexionBD.ObtenerConexion())
+                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
                 {
                     await conexion.OpenAsync();
 
-                    string consulta =
-                        @"select
-                    e.cmp_id_empleado,
-                    e.cmp_dpi,
-                    e.cmp_nombre,
-                    e.cmp_apellido,
-                    e.cmp_fecha_nacimiento,
-                    e.cmp_direccion,
-                    e.cmp_fecha_contratacion,
-                    e.cmp_estado,
-                    e.cmp_id_departamento,
-                    e.cmp_id_puesto,
-                    d.cmp_nombre as departamento,
-                    p.cmp_nombre as puesto,
-                    p.cmp_salario_base as salario,
-                    t.cmp_telefono as telefono,
-                    c.cmp_correo as correo
-                  from tbl_Empleados e
-                  inner join tbl_Departamentos d
-                    on e.cmp_id_departamento =
-                       d.cmp_id_departamento
-                  inner join tbl_Puestos p
-                    on e.cmp_id_puesto =
-                       p.cmp_id_puesto
-                  left join tbl_Telefonos t
-                    on e.cmp_id_empleado =
-                       t.cmp_id_empleado
-                  left join tbl_Correos c
-                    on e.cmp_id_empleado =
-                       c.cmp_id_empleado
-                  where e.cmp_id_empleado = @idEmpleado
-                  limit 1;";
+                    string consulta = @"
+                        SELECT
+                            e.id_empleado,
+                            e.dpi_emp,
+                            e.nombre_emp,
+                            e.apellido_emp,
+                            e.fecha_nacimiento,
+                            e.direccion_emp,
+                            e.fecha_contratacion,
+                            e.estado_emp,
+                            p.id_departamento,
+                            e.id_puesto,
+                            d.nombre_depto AS departamento,
+                            p.nombre_puesto AS puesto,
+                            p.salario_base AS salario,
+                            t.numero_tel AS telefono,
+                            c.correo AS correo
+                        FROM tbl_empleados e
+                        INNER JOIN tbl_puestos p 
+                            ON e.id_puesto = p.id_puesto
+                        INNER JOIN tbl_departamentos d 
+                            ON p.id_departamento = d.id_departamento
+                        LEFT JOIN tbl_telefonos t 
+                            ON e.id_empleado = t.id_empleado
+                        LEFT JOIN tbl_correos c 
+                            ON e.id_empleado = c.id_empleado
+                        WHERE e.id_empleado = @idEmpleado
+                        LIMIT 1;";
 
-                    using (MySqlCommand comando =
-                        new MySqlCommand(consulta, conexion))
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
                     {
-                        comando.Parameters.AddWithValue(
-                            "@idEmpleado",
-                            Txt_idempleado.Text.Trim()
-                        );
+                        comando.Parameters.AddWithValue("@idEmpleado", Txt_idempleado.Text.Trim());
 
-                        using (MySqlDataReader lector =
-                            (MySqlDataReader)
-                            await comando.ExecuteReaderAsync())
+                        using (MySqlDataReader lector = (MySqlDataReader)await comando.ExecuteReaderAsync())
                         {
                             if (await lector.ReadAsync())
                             {
-                                Txt_idempleado.Text =
-                                    lector["cmp_id_empleado"].ToString();
+                                Txt_idempleado.Text = lector["id_empleado"].ToString();
+                                Txt_identificacion.Text = lector["dpi_emp"].ToString();
+                                Txt_nombre.Text = lector["nombre_emp"].ToString();
+                                Txt_apellidos.Text = lector["apellido_emp"].ToString();
+                                Txt_direccion.Text = lector["direccion_emp"].ToString();
+                                Txt_estado.Text = lector["estado_emp"].ToString();
 
-                                Txt_identificacion.Text =
-                                    lector["cmp_dpi"].ToString();
+                                Txt_iddepartamento.Text = lector["id_departamento"].ToString();
+                                Txt_idpuesto.Text = lector["id_puesto"].ToString();
 
-                                Txt_nombre.Text =
-                                    lector["cmp_nombre"].ToString();
-
-                                Txt_apellidos.Text =
-                                    lector["cmp_apellido"].ToString();
-
-                                Txt_direccion.Text =
-                                    lector["cmp_direccion"].ToString();
-
-                                Txt_estado.Text =
-                                    lector["cmp_estado"].ToString();
-
-                                Txt_iddepartamento.Text =
-                                    lector["cmp_id_departamento"].ToString();
-
-                                Txt_idpuesto.Text =
-                                    lector["cmp_id_puesto"].ToString();
-
-                                Txt_departamento.Text =
-                                    lector["departamento"] != DBNull.Value
+                                Txt_departamento.Text = lector["departamento"] != DBNull.Value
                                     ? lector["departamento"].ToString()
                                     : "";
 
-                                Txt_puesto.Text =
-                                    lector["puesto"] != DBNull.Value
+                                Txt_puesto.Text = lector["puesto"] != DBNull.Value
                                     ? lector["puesto"].ToString()
                                     : "";
 
-                                Txt_salario.Text =
-                                    lector["salario"] != DBNull.Value
+                                Txt_salario.Text = lector["salario"] != DBNull.Value
                                     ? lector["salario"].ToString()
                                     : "";
 
-                                Txt_telefono.Text =
-                                    lector["telefono"] != DBNull.Value
+                                Txt_telefono.Text = lector["telefono"] != DBNull.Value
                                     ? lector["telefono"].ToString()
                                     : "";
 
-                                Txt_correo.Text =
-                                    lector["correo"] != DBNull.Value
+                                Txt_correo.Text = lector["correo"] != DBNull.Value
                                     ? lector["correo"].ToString()
                                     : "";
 
-                                if (lector["cmp_fecha_nacimiento"]
-                                    != DBNull.Value)
+                                if (lector["fecha_nacimiento"] != DBNull.Value)
                                 {
-                                    Dtp_fechnacimiento.Value =
-                                        Convert.ToDateTime(
-                                            lector[
-                                                "cmp_fecha_nacimiento"
-                                            ]
-                                        );
+                                    Dtp_fechnacimiento.Value = Convert.ToDateTime(lector["fecha_nacimiento"]);
                                 }
 
-                                if (lector["cmp_fecha_contratacion"]
-                                    != DBNull.Value)
+                                if (lector["fecha_contratacion"] != DBNull.Value)
                                 {
-                                    Dtp_fechcontratacion.Value =
-                                        Convert.ToDateTime(
-                                            lector[
-                                                "cmp_fecha_contratacion"
-                                            ]
-                                        );
+                                    Dtp_fechcontratacion.Value = Convert.ToDateTime(lector["fecha_contratacion"]);
                                 }
 
                                 Bitacora.Registrar(
@@ -227,8 +182,7 @@ namespace ProyectoAsis22K26Nominas
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Error al buscar empleado: " +
-                    ex.Message,
+                    "Error al buscar empleado: " + ex.Message,
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error

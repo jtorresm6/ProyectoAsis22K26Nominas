@@ -22,7 +22,15 @@ namespace ProyectoAsis22K26Nominas
         }
 
         private void FormDirectorioEmpleados_Load(object sender, EventArgs e)
+
         {
+
+            Dtp_fechnacimiento.Format = DateTimePickerFormat.Custom;
+            Dtp_fechnacimiento.CustomFormat = "dd/MM/yyyy";
+
+            Dtp_fechcontratacion.Format = DateTimePickerFormat.Custom;
+            Dtp_fechcontratacion.CustomFormat = "dd/MM/yyyy";
+
             LimpiarFiltros();
 
             FormularioPermisos permiso =
@@ -275,6 +283,76 @@ namespace ProyectoAsis22K26Nominas
         #endregion
 
         private void Btn_exportar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Lbl_nombre_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_apellidos_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_identificacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_telefono_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_direccion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_correo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_Departamento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_salario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_puesto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_idregistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_idpusto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
 
         }

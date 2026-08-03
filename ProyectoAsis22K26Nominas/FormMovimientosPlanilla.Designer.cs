@@ -76,7 +76,6 @@ namespace ProyectoAsis22K26Nominas
             this.Lbl_Periodo.Size = new System.Drawing.Size(89, 16);
             this.Lbl_Periodo.TabIndex = 12;
             this.Lbl_Periodo.Text = "Periodo Inicio";
-            this.Lbl_Periodo.Click += new System.EventHandler(this.Lbl_Periodo_Click);
             // 
             // Lbl_Codigo_Empleado
             // 
@@ -220,8 +219,7 @@ namespace ProyectoAsis22K26Nominas
             this.Txt_Monto.Name = "Txt_Monto";
             this.Txt_Monto.Size = new System.Drawing.Size(127, 22);
             this.Txt_Monto.TabIndex = 33;
-            this.Txt_Monto.TextChanged += new System.EventHandler(this.Txt_Monto_TextChanged);
-            // 
+             // 
             // Btn_Guardar
             // 
             this.Btn_Guardar.Location = new System.Drawing.Point(785, 316);

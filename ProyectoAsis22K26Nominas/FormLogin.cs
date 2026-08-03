@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
-using MySql.Data.MySqlClient;
+using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -16,7 +11,6 @@ namespace ProyectoAsis22K26Nominas
     {
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
-
 
         public FormLogin()
         {
@@ -47,12 +41,10 @@ namespace ProyectoAsis22K26Nominas
 
         private void Txt_usuario_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void Txt_password_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void Btn_ingresar_Click(object sender, EventArgs e)
@@ -60,7 +52,7 @@ namespace ProyectoAsis22K26Nominas
             string usuario = Txt_usuario.Text.Trim();
             string contrasena = Txt_password.Text.Trim();
 
-            if (usuario == "" || contrasena == "")
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
             {
                 MessageBox.Show(
                     "Ingrese el usuario y la contraseña.",
@@ -68,7 +60,6 @@ namespace ProyectoAsis22K26Nominas
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning
                 );
-
                 return;
             }
 
@@ -76,66 +67,40 @@ namespace ProyectoAsis22K26Nominas
 
             try
             {
-                using (MySqlConnection conexion =
-                    ConexionBD.ObtenerConexion())
+                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
                 {
                     conexion.Open();
 
-                    string consulta =
-                        @"select
-                    u.cmp_id_usuario,
-                    u.cmp_nombre as Usuario,
-                    u.cmp_id_rol,
-                    r.cmp_nombre as nombre_rol,
-                    concat(
-                        e.cmp_nombre,
-                        ' ',
-                        e.cmp_apellido
-                    ) as nombre_completo
-                  from tbl_Usuarios u
-                  inner join tbl_Roles r
-                    on u.cmp_id_rol = r.cmp_id_rol
-                  inner join tbl_Empleados e
-                    on u.cmp_id_empleado =
-                       e.cmp_id_empleado
-                  where u.cmp_nombre = @usuario
-                  and u.cmp_contras = @contrasena
-                  limit 1;";
+                    // Consulta adaptada exactamente a la nueva base de datos BD_ProyectoNominas
+                    string consulta = @"SELECT
+                                            u.id_usuario,
+                                            u.nombre_usuario AS Usuario,
+                                            u.id_rol,
+                                            r.nombre_rol,
+                                            CONCAT(e.nombre_emp, ' ', e.apellido_emp) AS nombre_completo
+                                        FROM tbl_usuarios u
+                                        INNER JOIN tbl_roles r 
+                                            ON u.id_rol = r.id_rol
+                                        INNER JOIN tbl_empleados e 
+                                            ON u.id_empleado = e.id_empleado
+                                        WHERE u.nombre_usuario = @usuario
+                                          AND u.contrasena = @contrasena
+                                          AND u.estado_usuario = 1
+                                        LIMIT 1;";
 
-                    using (MySqlCommand comando =
-                        new MySqlCommand(consulta, conexion))
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
                     {
-                        comando.Parameters.AddWithValue(
-                            "@usuario",
-                            usuario
-                        );
+                        comando.Parameters.AddWithValue("@usuario", usuario);
+                        comando.Parameters.AddWithValue("@contrasena", contrasena);
 
-                        comando.Parameters.AddWithValue(
-                            "@contrasena",
-                            contrasena
-                        );
-
-                        using (MySqlDataReader lector =
-                            comando.ExecuteReader())
+                        using (MySqlDataReader lector = comando.ExecuteReader())
                         {
                             if (lector.Read())
                             {
-                                SesionUsuario.IdUsuario =
-                                    Convert.ToInt32(
-                                        lector["cmp_id_usuario"]
-                                    );
-
-                                SesionUsuario.Usuario =
-                                    lector["Usuario"].ToString();
-
-                                SesionUsuario.IdRol =
-                                    Convert.ToInt32(
-                                        lector["cmp_id_rol"]
-                                    );
-
-                                SesionUsuario.Rol =
-                                    lector["nombre_rol"].ToString();
-
+                                SesionUsuario.IdUsuario = Convert.ToInt32(lector["id_usuario"]);
+                                SesionUsuario.Usuario = lector["Usuario"].ToString();
+                                SesionUsuario.IdRol = Convert.ToInt32(lector["id_rol"]);
+                                SesionUsuario.Rol = lector["nombre_rol"].ToString();
 
                                 ingresoCorrecto = true;
                             }
@@ -147,14 +112,11 @@ namespace ProyectoAsis22K26Nominas
                 {
                     Bitacora.Registrar(
                         "Inicio de sesión",
-                        "El usuario " +
-                        SesionUsuario.Usuario +
-                        " inició sesión correctamente."
+                        "El usuario " + SesionUsuario.Usuario + " inició sesión correctamente."
                     );
 
                     MessageBox.Show(
-                        "Bienvenido/a " +
-                         SesionUsuario.Usuario,
+                        "Bienvenido/a " + SesionUsuario.Usuario,
                         "Inicio de sesión",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information
@@ -166,7 +128,7 @@ namespace ProyectoAsis22K26Nominas
                 else
                 {
                     MessageBox.Show(
-                        "Usuario o contraseña incorrectos.",
+                        "Usuario o contraseña incorrectos, o usuario inactivo.",
                         "Inicio de sesión",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning
@@ -176,9 +138,8 @@ namespace ProyectoAsis22K26Nominas
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Error al iniciar sesión: " +
-                    ex.Message,
-                    "Error",
+                    "Error al iniciar sesión: " + ex.Message,
+                    "Error BD",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );

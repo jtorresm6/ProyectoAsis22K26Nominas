@@ -255,7 +255,7 @@
             this.Btn_exportar.Size = new System.Drawing.Size(130, 50);
             this.Btn_exportar.TabIndex = 43;
             this.Btn_exportar.Text = "Exportar";
-            this.Btn_exportar.UseVisualStyleBackColor = false;
+            this.Btn_exportar.UseVisualStyleBackColor = true;
             this.Btn_exportar.Click += new System.EventHandler(this.Btn_exportar_Click);
             // 
             // Btn_Buscar

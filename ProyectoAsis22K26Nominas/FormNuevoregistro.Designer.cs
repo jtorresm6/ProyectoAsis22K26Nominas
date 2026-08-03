@@ -66,6 +66,7 @@ namespace ProyectoAsis22K26Nominas
             this.Lbl_estado = new System.Windows.Forms.Label();
             this.Txt_nit = new System.Windows.Forms.TextBox();
             this.Lbl_nit = new System.Windows.Forms.Label();
+            this.Btn_eliminar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_empleados)).BeginInit();
             this.SuspendLayout();
             // 
@@ -289,7 +290,7 @@ namespace ProyectoAsis22K26Nominas
             // 
             // Btn_limpiar
             // 
-            this.Btn_limpiar.Location = new System.Drawing.Point(650, 400);
+            this.Btn_limpiar.Location = new System.Drawing.Point(579, 421);
             this.Btn_limpiar.Name = "Btn_limpiar";
             this.Btn_limpiar.Size = new System.Drawing.Size(75, 23);
             this.Btn_limpiar.TabIndex = 28;
@@ -402,12 +403,24 @@ namespace ProyectoAsis22K26Nominas
             this.Lbl_nit.TabIndex = 39;
             this.Lbl_nit.Text = "Nit";
             // 
+            // Btn_eliminar
+            // 
+            this.Btn_eliminar.AutoEllipsis = true;
+            this.Btn_eliminar.Location = new System.Drawing.Point(726, 421);
+            this.Btn_eliminar.Name = "Btn_eliminar";
+            this.Btn_eliminar.Size = new System.Drawing.Size(75, 23);
+            this.Btn_eliminar.TabIndex = 40;
+            this.Btn_eliminar.Text = "Eliminar";
+            this.Btn_eliminar.UseVisualStyleBackColor = true;
+            this.Btn_eliminar.Click += new System.EventHandler(this.Btn_eliminar_Click);
+            // 
             // FormNuevoregistro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
             this.ClientSize = new System.Drawing.Size(1169, 549);
+            this.Controls.Add(this.Btn_eliminar);
             this.Controls.Add(this.Lbl_nit);
             this.Controls.Add(this.Txt_nit);
             this.Controls.Add(this.Lbl_estado);
@@ -493,5 +506,6 @@ namespace ProyectoAsis22K26Nominas
         private System.Windows.Forms.Label Lbl_estado;
         private System.Windows.Forms.TextBox Txt_nit;
         private System.Windows.Forms.Label Lbl_nit;
+        private System.Windows.Forms.Button Btn_eliminar;
     }
 }

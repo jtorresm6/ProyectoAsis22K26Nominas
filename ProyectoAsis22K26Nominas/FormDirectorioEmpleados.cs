@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,11 +25,10 @@ namespace ProyectoAsis22K26Nominas
 
         {
 
-            Dtp_fechnacimiento.Format = DateTimePickerFormat.Custom;
-            Dtp_fechnacimiento.CustomFormat = "dd/MM/yyyy";
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Fecha, 20);
+            Redondear(Pnl_Laboral, 20);
 
-            Dtp_fechcontratacion.Format = DateTimePickerFormat.Custom;
-            Dtp_fechcontratacion.CustomFormat = "dd/MM/yyyy";
 
             LimpiarFiltros();
 
@@ -237,6 +238,24 @@ namespace ProyectoAsis22K26Nominas
         #endregion
 
         private void Btn_exportar_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

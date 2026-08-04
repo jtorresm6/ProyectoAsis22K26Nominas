@@ -862,5 +862,40 @@ namespace ProyectoAsis22K26Nominas
                 MessageBox.Show("Error de conexión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void Lbl_direccion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_fechnacimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_fechcontartacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_Departamento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_idregistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_estado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_nit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

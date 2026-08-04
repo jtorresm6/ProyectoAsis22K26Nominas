@@ -379,5 +379,10 @@ namespace ProyectoAsis22K26Nominas
         // Métodos de apoyo requeridos para prevenir errores CS1061 del Diseñador
         private void Lbl_Periodo_Click(object sender, EventArgs e) { }
         private void Txt_Monto_TextChanged(object sender, EventArgs e) { }
+
+        private void Lbl_Codigo_Empleado_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 //Parte trabajada por: Natali Sofia Montenegro Portillo - Carné: 0901-23-10017
 //Curso: Análisis de Sistemas II
@@ -22,6 +24,10 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormMantenimientoEmpleado_Load(object sender, EventArgs e)
         {
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Emple, 20);
+            Redondear(Pnl_Laboral, 20);
+
             permisoActual = GestionarPermisos.ObtenerPermiso("FormMantenimientoEmpleado");
 
             if (!permisoActual.Ver)
@@ -567,5 +573,23 @@ namespace ProyectoAsis22K26Nominas
         private void label3_Click(object sender, EventArgs e) { }
         private void label4_Click(object sender, EventArgs e) { }
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e) { }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+        private void Txt_Datos_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

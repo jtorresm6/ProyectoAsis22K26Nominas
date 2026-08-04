@@ -16,5 +16,10 @@ namespace ProyectoAsis22K26Nominas
         {
             InitializeComponent();
         }
+
+        private void FormControlSaldos_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

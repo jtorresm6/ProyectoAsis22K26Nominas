@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+
 //Parte trabajada por Diego Alejandro Cheng Peña - carné: 0901-22-8091
 //Curso:Análisis de sistemas II
 //Fecha de creación: 24-07-2026
@@ -123,17 +124,15 @@ namespace ProyectoAsis22K26Nominas
 
                     string query = @"
                     SELECT
-                        p.cmp_fecha_pago AS Fecha,
-                        CONCAT(e.cmp_nombre, ' ', e.cmp_apellido) AS Empleado,
-                        p.cmp_forma_pago AS TipoPago,
-                        p.cmp_numero_recibo AS Transferencia,
-                        p.cmp_monto_pagado AS Monto
-                    FROM tbl_Pagos p
-                    INNER JOIN tbl_Detalle_Planilla d
-                    ON p.cmp_id_detalle_planilla = d.cmp_id_detalle_planilla
-                    INNER JOIN tbl_Empleados e
-                    ON d.cmp_id_empleado = e.cmp_id_empleado
-                    ORDER BY p.cmp_fecha_pago DESC";
+                        p.fecha_pago AS Fecha,
+                        CONCAT(e.nombre_emp, ' ', e.apellido_emp) AS Empleado,
+                        p.forma_pago AS TipoPago,
+                        p.numero_recibo AS Transferencia,
+                        p.monto_pago AS Monto
+                    FROM tbl_pagos p
+                    INNER JOIN tbl_empleados e
+                        ON p.id_empleado = e.id_empleado
+                    ORDER BY p.fecha_pago DESC";
 
                     MySqlCommand cmd = new MySqlCommand(query, cn);
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -176,18 +175,16 @@ namespace ProyectoAsis22K26Nominas
 
                     string query = @"
                     SELECT
-                        p.cmp_fecha_pago AS Fecha,
-                        CONCAT(e.cmp_nombre, ' ', e.cmp_apellido) AS Empleado,
-                        p.cmp_forma_pago AS TipoPago,
-                        p.cmp_numero_recibo AS Transferencia,
-                        p.cmp_monto_pagado AS Monto
-                    FROM tbl_Pagos p
-                    INNER JOIN tbl_Detalle_Planilla d
-                    ON p.cmp_id_detalle_planilla = d.cmp_id_detalle_planilla
-                    INNER JOIN tbl_Empleados e
-                    ON d.cmp_id_empleado = e.cmp_id_empleado
-                    WHERE p.cmp_fecha_pago BETWEEN @desde AND @hasta
-                    ORDER BY p.cmp_fecha_pago DESC";
+                        p.fecha_pago AS Fecha,
+                        CONCAT(e.nombre_emp, ' ', e.apellido_emp) AS Empleado,
+                        p.forma_pago AS TipoPago,
+                        p.numero_recibo AS Transferencia,
+                        p.monto_pago AS Monto
+                    FROM tbl_pagos p
+                    INNER JOIN tbl_empleados e
+                        ON p.id_empleado = e.id_empleado
+                    WHERE p.fecha_pago BETWEEN @desde AND @hasta
+                    ORDER BY p.fecha_pago DESC";
 
                     // Ajuste de rango para abarcar todo el día límite (hasta las 23:59:59)
                     DateTime fechaDesde = dtpDesde.Value.Date;

@@ -5,13 +5,12 @@ using System.IO;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-namespace ProyectoAsis22K26Nominas
-
-
 //Parte trabajada por Diego Alejandro Cheng Peña - carné: 0901-22-8091
 //Curso:Análisis de sistemas II
 //Fecha de creación: 24-07-2026
 //Fecha de última modificación 27-07-2026
+
+namespace ProyectoAsis22K26Nominas
 {
     public partial class FormHistorialVacaciones : Form
     {
@@ -91,13 +90,13 @@ namespace ProyectoAsis22K26Nominas
 
                     string query = @"
                     SELECT
-                        v.cmp_fecha_inicio AS 'Fecha Inicio',
-                        v.cmp_fecha_fin AS 'Fecha Fin',
-                        v.cmp_cantidad_dias AS 'Días',
-                        v.cmp_motivo AS 'Motivo',
-                        v.cmp_estado AS 'Estado'
-                    FROM tbl_Vacaciones v
-                    ORDER BY v.cmp_fecha_inicio DESC";
+                        v.fecha_inicio AS 'Fecha Inicio',
+                        v.fecha_fin AS 'Fecha Fin',
+                        v.dias_solicitados AS 'Días',
+                        v.motivo_vacacion AS 'Motivo',
+                        v.estado_vacacion AS 'Estado'
+                    FROM tbl_vacaciones v
+                    ORDER BY v.fecha_inicio DESC";
 
                     MySqlCommand cmd = new MySqlCommand(query, cn);
                     MySqlDataAdapter da = new MySqlDataAdapter(cmd);

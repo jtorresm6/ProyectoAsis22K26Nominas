@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -15,7 +11,6 @@ namespace ProyectoAsis22K26Nominas
     {
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
-
 
         public FormLogin()
         {
@@ -46,54 +41,108 @@ namespace ProyectoAsis22K26Nominas
 
         private void Txt_usuario_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void Txt_password_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void Btn_ingresar_Click(object sender, EventArgs e)
         {
-            string user = Txt_usuario.Text.Trim();
-            string pass = Txt_password.Text.Trim();
+            string usuario = Txt_usuario.Text.Trim();
+            string contrasena = Txt_password.Text.Trim();
 
-            // Validar que no dejen campos vacíos
-            if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
+            if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(contrasena))
             {
-                MessageBox.Show("Por favor complete todos los campos.", "Campos Vacíos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(
+                    "Ingrese el usuario y la contraseña.",
+                    "Datos incompletos",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
                 return;
             }
 
-            // VALIDACIÓN DE USUARIOS Y ROLES 
-            if (user == "admin" && pass == "123")
-            {
-                SesionUsuario.NombreCompleto = "Administrador del Sistema";
-                SesionUsuario.Usuario = user;
-                SesionUsuario.Rol = "Admin";
+            bool ingresoCorrecto = false;
 
-                this.DialogResult = DialogResult.OK; 
-            }
-            else if (user == "secre" && pass == "123")
+            try
             {
-                SesionUsuario.NombreCompleto = "Secretaria General";
-                SesionUsuario.Usuario = user;
-                SesionUsuario.Rol = "Secretaria";
+                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
+                {
+                    conexion.Open();
 
-                this.DialogResult = DialogResult.OK;
-            }
-            else if (user == "rrhh" && pass == "123")
-            {
-                SesionUsuario.NombreCompleto = "Encargado de RRHH";
-                SesionUsuario.Usuario = user;
-                SesionUsuario.Rol = "RRHH";
+                    // Consulta adaptada exactamente a la nueva base de datos BD_ProyectoNominas
+                    string consulta = @"SELECT
+                                            u.id_usuario,
+                                            u.nombre_usuario AS Usuario,
+                                            u.id_rol,
+                                            r.nombre_rol,
+                                            CONCAT(e.nombre_emp, ' ', e.apellido_emp) AS nombre_completo
+                                        FROM tbl_usuarios u
+                                        INNER JOIN tbl_roles r 
+                                            ON u.id_rol = r.id_rol
+                                        INNER JOIN tbl_empleados e 
+                                            ON u.id_empleado = e.id_empleado
+                                        WHERE u.nombre_usuario = @usuario
+                                          AND u.contrasena = @contrasena
+                                          AND u.estado_usuario = 1
+                                        LIMIT 1;";
 
-                this.DialogResult = DialogResult.OK;
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
+                    {
+                        comando.Parameters.AddWithValue("@usuario", usuario);
+                        comando.Parameters.AddWithValue("@contrasena", contrasena);
+
+                        using (MySqlDataReader lector = comando.ExecuteReader())
+                        {
+                            if (lector.Read())
+                            {
+                                SesionUsuario.IdUsuario = Convert.ToInt32(lector["id_usuario"]);
+                                SesionUsuario.Usuario = lector["Usuario"].ToString();
+                                SesionUsuario.IdRol = Convert.ToInt32(lector["id_rol"]);
+                                SesionUsuario.Rol = lector["nombre_rol"].ToString();
+
+                                ingresoCorrecto = true;
+                            }
+                        }
+                    }
+                }
+
+                if (ingresoCorrecto)
+                {
+                    Bitacora.Registrar(
+                        "Inicio de sesión",
+                        "El usuario " + SesionUsuario.Usuario + " inició sesión correctamente."
+                    );
+
+                    MessageBox.Show(
+                        "Bienvenido/a " + SesionUsuario.Usuario,
+                        "Inicio de sesión",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information
+                    );
+
+                    DialogResult = DialogResult.OK;
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(
+                        "Usuario o contraseña incorrectos, o usuario inactivo.",
+                        "Inicio de sesión",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning
+                    );
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Usuario o contraseña incorrectos.", "Error de Autenticación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Error al iniciar sesión: " + ex.Message,
+                    "Error BD",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 

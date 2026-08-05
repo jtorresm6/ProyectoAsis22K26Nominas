@@ -396,5 +396,8 @@
   <ItemGroup>
     <None Include="imagenes\empleados.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BD_nominas\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

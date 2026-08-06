@@ -587,6 +587,7 @@ namespace ProyectoAsis22K26Nominas
 
             control.Region = new Region(path);
         }
+
         private void Txt_Datos_TextChanged(object sender, EventArgs e)
         {
 

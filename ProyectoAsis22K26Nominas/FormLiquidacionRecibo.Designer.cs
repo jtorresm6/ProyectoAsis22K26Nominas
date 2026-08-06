@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLiquidacionRecibo));
             this.Txt_Empleado = new System.Windows.Forms.TextBox();
             this.Btn_Buscar = new System.Windows.Forms.Button();
             this.Lbl_Empleado = new System.Windows.Forms.Label();
@@ -53,19 +54,21 @@
             this.cmp_estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmp_observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Liquidacion_Recibo)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Txt_Empleado
             // 
-            this.Txt_Empleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_Empleado.Location = new System.Drawing.Point(282, 175);
+            this.Txt_Empleado.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txt_Empleado.Location = new System.Drawing.Point(393, 165);
             this.Txt_Empleado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txt_Empleado.Name = "Txt_Empleado";
-            this.Txt_Empleado.Size = new System.Drawing.Size(220, 28);
+            this.Txt_Empleado.Size = new System.Drawing.Size(220, 30);
             this.Txt_Empleado.TabIndex = 7;
             // 
             // Btn_Buscar
@@ -74,8 +77,9 @@
             this.Btn_Buscar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
             this.Btn_Buscar.FlatAppearance.BorderSize = 3;
             this.Btn_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Buscar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Buscar.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_Buscar.Location = new System.Drawing.Point(551, 171);
+            this.Btn_Buscar.Location = new System.Drawing.Point(655, 155);
             this.Btn_Buscar.Name = "Btn_Buscar";
             this.Btn_Buscar.Size = new System.Drawing.Size(113, 40);
             this.Btn_Buscar.TabIndex = 6;
@@ -86,22 +90,22 @@
             // Lbl_Empleado
             // 
             this.Lbl_Empleado.AutoSize = true;
-            this.Lbl_Empleado.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Empleado.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Empleado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Lbl_Empleado.Location = new System.Drawing.Point(38, 178);
+            this.Lbl_Empleado.Location = new System.Drawing.Point(163, 169);
             this.Lbl_Empleado.Name = "Lbl_Empleado";
-            this.Lbl_Empleado.Size = new System.Drawing.Size(215, 23);
+            this.Lbl_Empleado.Size = new System.Drawing.Size(214, 26);
             this.Lbl_Empleado.TabIndex = 5;
-            this.Lbl_Empleado.Text = "Ingrese el ID del Empleado";
+            this.Lbl_Empleado.Text = "Ingrese el ID del Empleado:";
             // 
             // Dgv_Liquidacion_Recibo
             // 
             this.Dgv_Liquidacion_Recibo.AllowUserToAddRows = false;
             this.Dgv_Liquidacion_Recibo.AllowUserToDeleteRows = false;
             this.Dgv_Liquidacion_Recibo.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            this.Dgv_Liquidacion_Recibo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
+            this.Dgv_Liquidacion_Recibo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
             this.Dgv_Liquidacion_Recibo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -109,14 +113,14 @@
             this.Dgv_Liquidacion_Recibo.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
             this.Dgv_Liquidacion_Recibo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Dgv_Liquidacion_Recibo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(38)))), ((int)(((byte)(52)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dgv_Liquidacion_Recibo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(38)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Liquidacion_Recibo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.Dgv_Liquidacion_Recibo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dgv_Liquidacion_Recibo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cmp_id_liquidacion,
@@ -135,14 +139,14 @@
             this.cmp_fecha_pago,
             this.cmp_estado,
             this.cmp_observaciones});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dgv_Liquidacion_Recibo.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Liquidacion_Recibo.DefaultCellStyle = dataGridViewCellStyle11;
             this.Dgv_Liquidacion_Recibo.EnableHeadersVisualStyles = false;
             this.Dgv_Liquidacion_Recibo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Dgv_Liquidacion_Recibo.Location = new System.Drawing.Point(24, 266);
@@ -152,9 +156,9 @@
             this.Dgv_Liquidacion_Recibo.ReadOnly = true;
             this.Dgv_Liquidacion_Recibo.RowHeadersVisible = false;
             this.Dgv_Liquidacion_Recibo.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            this.Dgv_Liquidacion_Recibo.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+            this.Dgv_Liquidacion_Recibo.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.Dgv_Liquidacion_Recibo.RowTemplate.Height = 38;
             this.Dgv_Liquidacion_Recibo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.Dgv_Liquidacion_Recibo.Size = new System.Drawing.Size(965, 383);
@@ -291,22 +295,33 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1015, 100);
-            this.panel1.TabIndex = 79;
+            this.panel1.TabIndex = 85;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(37, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(73, 71);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 72;
+            this.pictureBox1.TabStop = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
-            this.label6.Location = new System.Drawing.Point(58, 63);
+            this.label6.Location = new System.Drawing.Point(121, 63);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(438, 20);
+            this.label6.Size = new System.Drawing.Size(538, 26);
             this.label6.TabIndex = 72;
             this.label6.Text = "Consulte, edite y administre la información de los empleados.";
             // 
@@ -315,7 +330,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label5.Location = new System.Drawing.Point(33, 0);
+            this.label5.Location = new System.Drawing.Point(116, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(396, 54);
             this.label5.TabIndex = 75;
@@ -338,6 +353,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Liquidacion_Recibo)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,6 +382,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cmp_estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmp_observaciones;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
     }

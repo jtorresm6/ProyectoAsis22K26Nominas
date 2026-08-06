@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,6 +22,8 @@ namespace ProyectoAsis22K26Nominas
 
         private async void Formasistencia_Load(object sender, EventArgs e)
         {
+
+            Redondear(Pnl_Asis, 20);
             timer_reloj.Start();
 
             Cbo_tipregistro.Items.Clear();
@@ -379,6 +383,20 @@ namespace ProyectoAsis22K26Nominas
 
             if (Cbo_tipregistro.Items.Count > 0) Cbo_tipregistro.SelectedIndex = 0;
             Txt_codempleado.Focus();
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
         }
 
         private void Dgv_asistenicas_CellContentClick(object sender, DataGridViewCellEventArgs e)

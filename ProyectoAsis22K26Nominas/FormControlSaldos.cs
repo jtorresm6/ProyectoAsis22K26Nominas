@@ -1,13 +1,14 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 // Parte trabajada por: Julio Roberto Rosales Mejía - Carné: 0901-23-1426
 // Curso: Análisis de Sistemas II
@@ -42,6 +43,10 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormControlSaldos_Load(object sender, EventArgs e)
         {
+
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Vac, 20);
+
             try
             {
                 this.StartPosition = FormStartPosition.CenterScreen;
@@ -291,5 +296,29 @@ namespace ProyectoAsis22K26Nominas
         private void Lbl_Buscar_Click(object sender, EventArgs e) { }
         private void Gb_Busqueda_Trabajador_Enter(object sender, EventArgs e) { }
         private void Gb_Saldo_Vacaciones_Enter(object sender, EventArgs e) { }
+
+        private void Btn_Refrescar_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
+        private void Pnl_Vac_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

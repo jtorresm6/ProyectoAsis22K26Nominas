@@ -1,13 +1,14 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 // Parte trabajada por: Julio Roberto Rosales Mejía - Carné: 0901-23-1426
 // Curso: Análisis de Sistemas II
@@ -32,8 +33,6 @@ namespace ProyectoAsis22K26Nominas
 
             // Configurar eventos
             this.Cbo_Empleado.SelectedIndexChanged += new EventHandler(Cbo_Empleado_SelectedIndexChanged);
-            this.Dtp_Fecha_Inicio.ValueChanged += new EventHandler(Dtp_Fecha_Inicio_ValueChanged);
-            this.Dtp_Fecha_Fin.ValueChanged += new EventHandler(Dtp_Fecha_Fin_ValueChanged);
             this.Btn_Guardar.Click += new EventHandler(Btn_Guardar_Click);
             this.Btn_Aprobar.Click += new EventHandler(Btn_Aprobar_Click);
             this.Btn_Rechazar.Click += new EventHandler(Btn_Rechazar_Click);
@@ -49,11 +48,13 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormSolicitudVacaciones_Load(object sender, EventArgs e)
         {
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Registr, 20);
+            Redondear(Pnl_Solis, 20);
             try
             {
                 this.StartPosition = FormStartPosition.CenterScreen;
-                Dtp_Fecha_Inicio.Value = DateTime.Today;
-                Dtp_Fecha_Fin.Value = DateTime.Today;
+
 
                 CargarEmpleados();
                 CargarSolicitudes();
@@ -199,7 +200,7 @@ namespace ProyectoAsis22K26Nominas
                 if (diasDisponibles < 0) diasDisponibles = 0;
 
                 Lbl_Dias_Disponibles.Text = diasDisponibles + " días";
-                CalcularDias();
+
             }
             catch (Exception ex)
             {
@@ -209,36 +210,7 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-        // 5. CALCULAR DÍAS SOLICITADOS
-        private void CalcularDias()
-        {
-            try
-            {
-                DateTime inicio = Dtp_Fecha_Inicio.Value;
-                DateTime fin = Dtp_Fecha_Fin.Value;
 
-                if (fin < inicio)
-                {
-                    Txt_Dias_Solicitados.Text = "0";
-                    return;
-                }
-
-                int dias = 0;
-                DateTime fecha = inicio;
-                while (fecha <= fin)
-                {
-                    if (fecha.DayOfWeek != DayOfWeek.Saturday && fecha.DayOfWeek != DayOfWeek.Sunday)
-                        dias++;
-                    fecha = fecha.AddDays(1);
-                }
-
-                Txt_Dias_Solicitados.Text = dias.ToString();
-            }
-            catch
-            {
-                Txt_Dias_Solicitados.Text = "0";
-            }
-        }
 
         // 6. VALIDAR ANTES DE GUARDAR
         private bool Validar()
@@ -251,11 +223,6 @@ namespace ProyectoAsis22K26Nominas
                 return false;
             }
 
-            if (Dtp_Fecha_Fin.Value < Dtp_Fecha_Inicio.Value)
-            {
-                MessageBox.Show("La fecha final debe ser mayor a la inicial.");
-                return false;
-            }
 
             int dias = 0;
             if (!int.TryParse(Txt_Dias_Solicitados.Text, out dias) || dias <= 0)
@@ -302,8 +269,6 @@ namespace ProyectoAsis22K26Nominas
 
                     MySqlCommand cmd = new MySqlCommand(sql, conexion);
                     cmd.Parameters.AddWithValue("@fecha", DateTime.Today);
-                    cmd.Parameters.AddWithValue("@inicio", Dtp_Fecha_Inicio.Value);
-                    cmd.Parameters.AddWithValue("@fin", Dtp_Fecha_Fin.Value);
                     cmd.Parameters.AddWithValue("@dias", Convert.ToInt32(Txt_Dias_Solicitados.Text));
                     cmd.Parameters.AddWithValue("@motivo", Txt_Motivo.Text.Trim());
                     cmd.Parameters.AddWithValue("@empleado", idEmpleado);
@@ -407,8 +372,6 @@ namespace ProyectoAsis22K26Nominas
         {
             Cbo_Empleado.SelectedIndex = -1;
             Txt_Motivo.Clear();
-            Dtp_Fecha_Inicio.Value = DateTime.Today;
-            Dtp_Fecha_Fin.Value = DateTime.Today;
             Txt_Dias_Solicitados.Text = "0";
             Lbl_Dias_Disponibles.Text = "0 días";
             diasDisponibles = 0;
@@ -434,14 +397,43 @@ namespace ProyectoAsis22K26Nominas
 
         private void Dtp_Fecha_Inicio_ValueChanged(object sender, EventArgs e)
         {
-            if (ObtenerIdEmpleadoSeleccionado() != 0)
-                CalcularDias();
+            if (ObtenerIdEmpleadoSeleccionado() != 0) { return; }
+
         }
 
         private void Dtp_Fecha_Fin_ValueChanged(object sender, EventArgs e)
         {
-            if (ObtenerIdEmpleadoSeleccionado() != 0)
-                CalcularDias();
+            if (ObtenerIdEmpleadoSeleccionado() != 0) { return; }
+
+        }
+
+        private void Gbo_Empleado_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Guardar_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Aprobar_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
         }
     }
 }

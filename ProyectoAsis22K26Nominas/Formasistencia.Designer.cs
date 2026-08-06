@@ -37,6 +37,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Formasistencia));
             this.Txt_codempleado = new System.Windows.Forms.TextBox();
             this.Dpt_fecha = new System.Windows.Forms.DateTimePicker();
             this.Cbo_tipregistro = new System.Windows.Forms.ComboBox();
@@ -48,46 +49,52 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.Pnl_Asis = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.Dgv_Movimientos = new System.Windows.Forms.DataGridView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_asistenicas)).BeginInit();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.Pnl_Asis.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Movimientos)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Txt_codempleado
             // 
             this.Txt_codempleado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_codempleado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_codempleado.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txt_codempleado.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_codempleado.ForeColor = System.Drawing.Color.White;
             this.Txt_codempleado.Location = new System.Drawing.Point(189, 510);
             this.Txt_codempleado.Name = "Txt_codempleado";
-            this.Txt_codempleado.Size = new System.Drawing.Size(157, 30);
+            this.Txt_codempleado.Size = new System.Drawing.Size(173, 30);
             this.Txt_codempleado.TabIndex = 0;
             // 
             // Dpt_fecha
             // 
+            this.Dpt_fecha.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Dpt_fecha.CalendarFont = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dpt_fecha.CustomFormat = "dd/MM/yyyy";
             this.Dpt_fecha.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dpt_fecha.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.Dpt_fecha.Location = new System.Drawing.Point(695, 510);
+            this.Dpt_fecha.Location = new System.Drawing.Point(660, 377);
             this.Dpt_fecha.Name = "Dpt_fecha";
-            this.Dpt_fecha.Size = new System.Drawing.Size(179, 30);
+            this.Dpt_fecha.Size = new System.Drawing.Size(178, 30);
             this.Dpt_fecha.TabIndex = 4;
             // 
             // Cbo_tipregistro
             // 
             this.Cbo_tipregistro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
             this.Cbo_tipregistro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Cbo_tipregistro.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Cbo_tipregistro.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cbo_tipregistro.ForeColor = System.Drawing.SystemColors.Menu;
             this.Cbo_tipregistro.FormattingEnabled = true;
-            this.Cbo_tipregistro.Location = new System.Drawing.Point(399, 510);
+            this.Cbo_tipregistro.Location = new System.Drawing.Point(380, 373);
             this.Cbo_tipregistro.Name = "Cbo_tipregistro";
-            this.Cbo_tipregistro.Size = new System.Drawing.Size(240, 31);
+            this.Cbo_tipregistro.Size = new System.Drawing.Size(240, 34);
             this.Cbo_tipregistro.TabIndex = 5;
             // 
             // Btn_registrar
@@ -96,11 +103,11 @@
             this.Btn_registrar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_registrar.FlatAppearance.BorderSize = 0;
             this.Btn_registrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_registrar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_registrar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_registrar.ForeColor = System.Drawing.Color.White;
-            this.Btn_registrar.Location = new System.Drawing.Point(988, 271);
+            this.Btn_registrar.Location = new System.Drawing.Point(967, 138);
             this.Btn_registrar.Name = "Btn_registrar";
-            this.Btn_registrar.Size = new System.Drawing.Size(170, 45);
+            this.Btn_registrar.Size = new System.Drawing.Size(147, 45);
             this.Btn_registrar.TabIndex = 7;
             this.Btn_registrar.Text = "Registrar";
             this.Btn_registrar.UseVisualStyleBackColor = false;
@@ -111,11 +118,11 @@
             this.Btn_limpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(58)))));
             this.Btn_limpiar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.Btn_limpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_limpiar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_limpiar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_limpiar.ForeColor = System.Drawing.Color.White;
-            this.Btn_limpiar.Location = new System.Drawing.Point(988, 350);
+            this.Btn_limpiar.Location = new System.Drawing.Point(967, 217);
             this.Btn_limpiar.Name = "Btn_limpiar";
-            this.Btn_limpiar.Size = new System.Drawing.Size(170, 45);
+            this.Btn_limpiar.Size = new System.Drawing.Size(147, 45);
             this.Btn_limpiar.TabIndex = 8;
             this.Btn_limpiar.Text = "Limpiar";
             this.Btn_limpiar.UseVisualStyleBackColor = false;
@@ -144,7 +151,7 @@
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -174,16 +181,17 @@
             // 
             this.Lbl_idempelado.AutoSize = true;
             this.Lbl_idempelado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
-            this.Lbl_idempelado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_idempelado.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_idempelado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Lbl_idempelado.Location = new System.Drawing.Point(75, 515);
+            this.Lbl_idempelado.Location = new System.Drawing.Point(45, 380);
             this.Lbl_idempelado.Name = "Lbl_idempelado";
-            this.Lbl_idempelado.Size = new System.Drawing.Size(94, 20);
+            this.Lbl_idempelado.Size = new System.Drawing.Size(110, 26);
             this.Lbl_idempelado.TabIndex = 48;
-            this.Lbl_idempelado.Text = "Id empleado";
+            this.Lbl_idempelado.Text = "Id empleado:";
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -195,11 +203,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
-            this.label6.Location = new System.Drawing.Point(58, 63);
+            this.label6.Location = new System.Drawing.Point(121, 63);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(438, 20);
+            this.label6.Size = new System.Drawing.Size(538, 26);
             this.label6.TabIndex = 72;
             this.label6.Text = "Consulte, edite y administre la información de los empleados.";
             // 
@@ -208,32 +216,37 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label5.Location = new System.Drawing.Point(33, 0);
+            this.label5.Location = new System.Drawing.Point(116, 9);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(230, 54);
             this.label5.TabIndex = 75;
             this.label5.Text = "Asistencias";
             // 
-            // panel2
+            // Pnl_Asis
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.Dgv_Movimientos);
-            this.panel2.Location = new System.Drawing.Point(27, 132);
-            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1159, 446);
-            this.panel2.TabIndex = 81;
+            this.Pnl_Asis.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
+            this.Pnl_Asis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Pnl_Asis.Controls.Add(this.label8);
+            this.Pnl_Asis.Controls.Add(this.Lbl_idempelado);
+            this.Pnl_Asis.Controls.Add(this.Btn_limpiar);
+            this.Pnl_Asis.Controls.Add(this.Dgv_Movimientos);
+            this.Pnl_Asis.Controls.Add(this.Btn_registrar);
+            this.Pnl_Asis.Controls.Add(this.Dpt_fecha);
+            this.Pnl_Asis.Controls.Add(this.Cbo_tipregistro);
+            this.Pnl_Asis.Location = new System.Drawing.Point(27, 132);
+            this.Pnl_Asis.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Pnl_Asis.Name = "Pnl_Asis";
+            this.Pnl_Asis.Size = new System.Drawing.Size(1159, 446);
+            this.Pnl_Asis.TabIndex = 81;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
             this.label8.Location = new System.Drawing.Point(18, 13);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(171, 20);
+            this.label8.Size = new System.Drawing.Size(208, 26);
             this.label8.TabIndex = 71;
             this.label8.Text = "Registro de Asistencias";
             // 
@@ -279,6 +292,16 @@
             this.Dgv_Movimientos.Size = new System.Drawing.Size(923, 225);
             this.Dgv_Movimientos.TabIndex = 39;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(37, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(73, 71);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 72;
+            this.pictureBox1.TabStop = false;
+            // 
             // Formasistencia
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -286,14 +309,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.ClientSize = new System.Drawing.Size(1218, 685);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Lbl_idempelado);
             this.Controls.Add(this.Dgv_asistenicas);
-            this.Controls.Add(this.Btn_limpiar);
-            this.Controls.Add(this.Btn_registrar);
-            this.Controls.Add(this.Cbo_tipregistro);
-            this.Controls.Add(this.Dpt_fecha);
             this.Controls.Add(this.Txt_codempleado);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.Pnl_Asis);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "Formasistencia";
             this.Text = "Formhelp";
@@ -301,9 +319,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_asistenicas)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.Pnl_Asis.ResumeLayout(false);
+            this.Pnl_Asis.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Movimientos)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -322,8 +341,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel Pnl_Asis;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DataGridView Dgv_Movimientos;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

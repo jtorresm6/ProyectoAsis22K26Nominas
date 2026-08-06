@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMantenimientoEmpleado));
             this.Lbl_Buscar = new System.Windows.Forms.Label();
             this.Cbo_Busqueda = new System.Windows.Forms.ComboBox();
             this.Txt_Datos = new System.Windows.Forms.TextBox();
@@ -64,30 +65,32 @@
             this.Txt_Dep = new System.Windows.Forms.TextBox();
             this.Txt_Puesto = new System.Windows.Forms.TextBox();
             this.Txt_Estado = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.Pnl_Personal = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.Pnl_Emple = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.Pnl_Laboral = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.Pnl_Personal.SuspendLayout();
             this.Pnl_Emple.SuspendLayout();
             this.Pnl_Laboral.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Lbl_Buscar
             // 
             this.Lbl_Buscar.AutoSize = true;
-            this.Lbl_Buscar.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_Buscar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Buscar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Buscar.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Buscar.Location = new System.Drawing.Point(60, 59);
             this.Lbl_Buscar.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Buscar.Name = "Lbl_Buscar";
-            this.Lbl_Buscar.Size = new System.Drawing.Size(82, 20);
+            this.Lbl_Buscar.Size = new System.Drawing.Size(97, 26);
             this.Lbl_Buscar.TabIndex = 1;
             this.Lbl_Buscar.Text = "Buscar por:";
             // 
@@ -95,23 +98,23 @@
             // 
             this.Cbo_Busqueda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Cbo_Busqueda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.Cbo_Busqueda.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Cbo_Busqueda.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Cbo_Busqueda.FormattingEnabled = true;
             this.Cbo_Busqueda.Items.AddRange(new object[] {
             "Codigo",
             "DPI",
             "NIT"});
-            this.Cbo_Busqueda.Location = new System.Drawing.Point(157, 54);
+            this.Cbo_Busqueda.Location = new System.Drawing.Point(165, 52);
             this.Cbo_Busqueda.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Cbo_Busqueda.Name = "Cbo_Busqueda";
-            this.Cbo_Busqueda.Size = new System.Drawing.Size(162, 31);
+            this.Cbo_Busqueda.Size = new System.Drawing.Size(162, 34);
             this.Cbo_Busqueda.TabIndex = 2;
             // 
             // Txt_Datos
             // 
             this.Txt_Datos.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Datos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Datos.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Datos.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Datos.ForeColor = System.Drawing.Color.White;
             this.Txt_Datos.Location = new System.Drawing.Point(349, 55);
             this.Txt_Datos.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -125,6 +128,7 @@
             this.Btn_Buscar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
             this.Btn_Buscar.FlatAppearance.BorderSize = 0;
             this.Btn_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Buscar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Buscar.ForeColor = System.Drawing.Color.White;
             this.Btn_Buscar.Location = new System.Drawing.Point(616, 52);
             this.Btn_Buscar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -140,8 +144,9 @@
             this.Btn_Actu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(58)))));
             this.Btn_Actu.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.Btn_Actu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Actu.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Actu.ForeColor = System.Drawing.Color.White;
-            this.Btn_Actu.Location = new System.Drawing.Point(146, 830);
+            this.Btn_Actu.Location = new System.Drawing.Point(141, 827);
             this.Btn_Actu.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Btn_Actu.Name = "Btn_Actu";
             this.Btn_Actu.Size = new System.Drawing.Size(140, 42);
@@ -155,6 +160,7 @@
             this.Btn_Bajas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(58)))));
             this.Btn_Bajas.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
             this.Btn_Bajas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Bajas.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Bajas.ForeColor = System.Drawing.Color.White;
             this.Btn_Bajas.Location = new System.Drawing.Point(745, 50);
             this.Btn_Bajas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -170,6 +176,7 @@
             this.Btn_Reactivar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(58)))));
             this.Btn_Reactivar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(205)))), ((int)(((byte)(100)))));
             this.Btn_Reactivar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Reactivar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Reactivar.Location = new System.Drawing.Point(745, 111);
             this.Btn_Reactivar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Btn_Reactivar.Name = "Btn_Reactivar";
@@ -184,8 +191,9 @@
             this.Btn_Limpiar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(58)))));
             this.Btn_Limpiar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.Btn_Limpiar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Limpiar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Limpiar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Limpiar.Location = new System.Drawing.Point(333, 830);
+            this.Btn_Limpiar.Location = new System.Drawing.Point(317, 827);
             this.Btn_Limpiar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Btn_Limpiar.Name = "Btn_Limpiar";
             this.Btn_Limpiar.Size = new System.Drawing.Size(140, 42);
@@ -197,12 +205,12 @@
             // Lbl_Cod_Emp
             // 
             this.Lbl_Cod_Emp.AutoSize = true;
-            this.Lbl_Cod_Emp.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_Cod_Emp.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Cod_Emp.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Cod_Emp.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Cod_Emp.Location = new System.Drawing.Point(8, 62);
             this.Lbl_Cod_Emp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Cod_Emp.Name = "Lbl_Cod_Emp";
-            this.Lbl_Cod_Emp.Size = new System.Drawing.Size(154, 20);
+            this.Lbl_Cod_Emp.Size = new System.Drawing.Size(174, 26);
             this.Lbl_Cod_Emp.TabIndex = 2;
             this.Lbl_Cod_Emp.Text = "Código de Empleado:";
             // 
@@ -212,12 +220,12 @@
             this.Btn_Guardar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_Guardar.FlatAppearance.BorderSize = 0;
             this.Btn_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Btn_Guardar.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Btn_Guardar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Guardar.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.Btn_Guardar.Location = new System.Drawing.Point(524, 830);
+            this.Btn_Guardar.Location = new System.Drawing.Point(502, 827);
             this.Btn_Guardar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Btn_Guardar.Name = "Btn_Guardar";
-            this.Btn_Guardar.Size = new System.Drawing.Size(170, 42);
+            this.Btn_Guardar.Size = new System.Drawing.Size(183, 42);
             this.Btn_Guardar.TabIndex = 16;
             this.Btn_Guardar.Text = "Guardar Cambios";
             this.Btn_Guardar.UseVisualStyleBackColor = false;
@@ -228,8 +236,9 @@
             this.Btn_Cancelar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(58)))));
             this.Btn_Cancelar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
             this.Btn_Cancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Cancelar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Cancelar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Cancelar.Location = new System.Drawing.Point(736, 830);
+            this.Btn_Cancelar.Location = new System.Drawing.Point(721, 827);
             this.Btn_Cancelar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Btn_Cancelar.Name = "Btn_Cancelar";
             this.Btn_Cancelar.Size = new System.Drawing.Size(140, 42);
@@ -242,7 +251,7 @@
             // 
             this.Txt_Cod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Cod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Cod.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Cod.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Cod.ForeColor = System.Drawing.Color.White;
             this.Txt_Cod.Location = new System.Drawing.Point(12, 97);
             this.Txt_Cod.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -254,108 +263,108 @@
             // Dtp_Fecha_Nac
             // 
             this.Dtp_Fecha_Nac.CustomFormat = "dd/MM/yyyy";
-            this.Dtp_Fecha_Nac.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Dtp_Fecha_Nac.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dtp_Fecha_Nac.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.Dtp_Fecha_Nac.Location = new System.Drawing.Point(349, 279);
             this.Dtp_Fecha_Nac.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Dtp_Fecha_Nac.Name = "Dtp_Fecha_Nac";
-            this.Dtp_Fecha_Nac.Size = new System.Drawing.Size(134, 27);
+            this.Dtp_Fecha_Nac.Size = new System.Drawing.Size(222, 30);
             this.Dtp_Fecha_Nac.TabIndex = 12;
             this.Dtp_Fecha_Nac.ValueChanged += new System.EventHandler(this.Dtp_Fecha_Nac_ValueChanged);
             // 
             // Lbl_DPI
             // 
             this.Lbl_DPI.AutoSize = true;
-            this.Lbl_DPI.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_DPI.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_DPI.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_DPI.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_DPI.Location = new System.Drawing.Point(8, 154);
             this.Lbl_DPI.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_DPI.Name = "Lbl_DPI";
-            this.Lbl_DPI.Size = new System.Drawing.Size(35, 20);
+            this.Lbl_DPI.Size = new System.Drawing.Size(39, 26);
             this.Lbl_DPI.TabIndex = 18;
             this.Lbl_DPI.Text = "DPI:";
             // 
             // Lbl_NIT
             // 
             this.Lbl_NIT.AutoSize = true;
-            this.Lbl_NIT.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_NIT.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_NIT.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_NIT.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_NIT.Location = new System.Drawing.Point(8, 244);
             this.Lbl_NIT.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_NIT.Name = "Lbl_NIT";
-            this.Lbl_NIT.Size = new System.Drawing.Size(35, 20);
+            this.Lbl_NIT.Size = new System.Drawing.Size(38, 26);
             this.Lbl_NIT.TabIndex = 19;
             this.Lbl_NIT.Text = "NIT:";
             // 
             // Lbl_Nombre
             // 
             this.Lbl_Nombre.AutoSize = true;
-            this.Lbl_Nombre.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_Nombre.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Nombre.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Nombre.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Nombre.Location = new System.Drawing.Point(345, 62);
             this.Lbl_Nombre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Nombre.Name = "Lbl_Nombre";
-            this.Lbl_Nombre.Size = new System.Drawing.Size(73, 20);
+            this.Lbl_Nombre.Size = new System.Drawing.Size(84, 26);
             this.Lbl_Nombre.TabIndex = 20;
             this.Lbl_Nombre.Text = "Nombres:";
             // 
             // Lbl_Apellido
             // 
             this.Lbl_Apellido.AutoSize = true;
-            this.Lbl_Apellido.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_Apellido.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Apellido.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Apellido.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Apellido.Location = new System.Drawing.Point(345, 154);
             this.Lbl_Apellido.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Apellido.Name = "Lbl_Apellido";
-            this.Lbl_Apellido.Size = new System.Drawing.Size(75, 20);
+            this.Lbl_Apellido.Size = new System.Drawing.Size(84, 26);
             this.Lbl_Apellido.TabIndex = 21;
             this.Lbl_Apellido.Text = "Apellidos:";
             // 
             // Lbl_Fecha_Nac
             // 
             this.Lbl_Fecha_Nac.AutoSize = true;
-            this.Lbl_Fecha_Nac.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_Fecha_Nac.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Fecha_Nac.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Fecha_Nac.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Fecha_Nac.Location = new System.Drawing.Point(345, 244);
             this.Lbl_Fecha_Nac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Fecha_Nac.Name = "Lbl_Fecha_Nac";
-            this.Lbl_Fecha_Nac.Size = new System.Drawing.Size(152, 20);
+            this.Lbl_Fecha_Nac.Size = new System.Drawing.Size(175, 26);
             this.Lbl_Fecha_Nac.TabIndex = 22;
             this.Lbl_Fecha_Nac.Text = "Fecha de Nacimiento:";
             // 
             // Lbl_Dir
             // 
             this.Lbl_Dir.AutoSize = true;
-            this.Lbl_Dir.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_Dir.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Dir.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Dir.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Dir.Location = new System.Drawing.Point(612, 62);
             this.Lbl_Dir.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Dir.Name = "Lbl_Dir";
-            this.Lbl_Dir.Size = new System.Drawing.Size(75, 20);
+            this.Lbl_Dir.Size = new System.Drawing.Size(87, 26);
             this.Lbl_Dir.TabIndex = 23;
             this.Lbl_Dir.Text = "Dirección:";
             // 
             // Lbl_Tel
             // 
             this.Lbl_Tel.AutoSize = true;
-            this.Lbl_Tel.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_Tel.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Tel.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Tel.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Tel.Location = new System.Drawing.Point(612, 154);
             this.Lbl_Tel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Tel.Name = "Lbl_Tel";
-            this.Lbl_Tel.Size = new System.Drawing.Size(76, 20);
+            this.Lbl_Tel.Size = new System.Drawing.Size(88, 26);
             this.Lbl_Tel.TabIndex = 24;
             this.Lbl_Tel.Text = "Teléfonos:";
             // 
             // Lbl_Corr
             // 
             this.Lbl_Corr.AutoSize = true;
-            this.Lbl_Corr.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.Lbl_Corr.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Corr.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Corr.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Corr.Location = new System.Drawing.Point(612, 244);
             this.Lbl_Corr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Corr.Name = "Lbl_Corr";
-            this.Lbl_Corr.Size = new System.Drawing.Size(63, 20);
+            this.Lbl_Corr.Size = new System.Drawing.Size(76, 26);
             this.Lbl_Corr.TabIndex = 25;
             this.Lbl_Corr.Text = "Correos:";
             // 
@@ -363,7 +372,7 @@
             // 
             this.Txt_DPI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_DPI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_DPI.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_DPI.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_DPI.ForeColor = System.Drawing.Color.White;
             this.Txt_DPI.Location = new System.Drawing.Point(12, 186);
             this.Txt_DPI.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -376,7 +385,7 @@
             // 
             this.Txt_NIT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_NIT.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_NIT.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_NIT.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_NIT.ForeColor = System.Drawing.Color.White;
             this.Txt_NIT.Location = new System.Drawing.Point(12, 280);
             this.Txt_NIT.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -389,7 +398,7 @@
             // 
             this.Txt_Nombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Nombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Nombre.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Nombre.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Nombre.ForeColor = System.Drawing.Color.White;
             this.Txt_Nombre.Location = new System.Drawing.Point(349, 97);
             this.Txt_Nombre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -402,7 +411,7 @@
             // 
             this.Txt_Apellido.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Apellido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Apellido.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Apellido.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Apellido.ForeColor = System.Drawing.Color.White;
             this.Txt_Apellido.Location = new System.Drawing.Point(349, 186);
             this.Txt_Apellido.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -415,7 +424,7 @@
             // 
             this.Txt_Dir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Dir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Dir.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Dir.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Dir.ForeColor = System.Drawing.Color.White;
             this.Txt_Dir.Location = new System.Drawing.Point(616, 97);
             this.Txt_Dir.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -428,7 +437,7 @@
             // 
             this.Txt_Tel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Tel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Tel.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Tel.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Tel.ForeColor = System.Drawing.Color.White;
             this.Txt_Tel.Location = new System.Drawing.Point(616, 186);
             this.Txt_Tel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -441,7 +450,7 @@
             // 
             this.Txt_Corr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Corr.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Corr.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Corr.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Corr.ForeColor = System.Drawing.Color.White;
             this.Txt_Corr.Location = new System.Drawing.Point(616, 276);
             this.Txt_Corr.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -454,12 +463,12 @@
             // 
             this.Lbl_Fecha_Cont.AutoSize = true;
             this.Lbl_Fecha_Cont.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
-            this.Lbl_Fecha_Cont.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Fecha_Cont.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Fecha_Cont.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Fecha_Cont.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Fecha_Cont.Location = new System.Drawing.Point(15, 62);
             this.Lbl_Fecha_Cont.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Fecha_Cont.Name = "Lbl_Fecha_Cont";
-            this.Lbl_Fecha_Cont.Size = new System.Drawing.Size(142, 18);
+            this.Lbl_Fecha_Cont.Size = new System.Drawing.Size(166, 26);
             this.Lbl_Fecha_Cont.TabIndex = 33;
             this.Lbl_Fecha_Cont.Text = "Fecha Contratación:";
             // 
@@ -467,12 +476,12 @@
             // 
             this.Lbl_Departamento.AutoSize = true;
             this.Lbl_Departamento.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
-            this.Lbl_Departamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Departamento.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Departamento.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Departamento.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Departamento.Location = new System.Drawing.Point(15, 124);
             this.Lbl_Departamento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Departamento.Name = "Lbl_Departamento";
-            this.Lbl_Departamento.Size = new System.Drawing.Size(106, 18);
+            this.Lbl_Departamento.Size = new System.Drawing.Size(125, 26);
             this.Lbl_Departamento.TabIndex = 34;
             this.Lbl_Departamento.Text = "Departamento:";
             // 
@@ -480,12 +489,12 @@
             // 
             this.Lbl_Puesto.AutoSize = true;
             this.Lbl_Puesto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
-            this.Lbl_Puesto.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Puesto.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Puesto.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Puesto.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Puesto.Location = new System.Drawing.Point(419, 67);
             this.Lbl_Puesto.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Puesto.Name = "Lbl_Puesto";
-            this.Lbl_Puesto.Size = new System.Drawing.Size(59, 18);
+            this.Lbl_Puesto.Size = new System.Drawing.Size(66, 26);
             this.Lbl_Puesto.TabIndex = 35;
             this.Lbl_Puesto.Text = "Puesto:";
             // 
@@ -493,24 +502,24 @@
             // 
             this.Lbl_Estado.AutoSize = true;
             this.Lbl_Estado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
-            this.Lbl_Estado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Lbl_Estado.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.Lbl_Estado.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Estado.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.Lbl_Estado.Location = new System.Drawing.Point(419, 124);
             this.Lbl_Estado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Lbl_Estado.Name = "Lbl_Estado";
-            this.Lbl_Estado.Size = new System.Drawing.Size(59, 18);
+            this.Lbl_Estado.Size = new System.Drawing.Size(66, 26);
             this.Lbl_Estado.TabIndex = 36;
             this.Lbl_Estado.Text = "Estado:";
             // 
             // Dtp_Fecha_Cont
             // 
             this.Dtp_Fecha_Cont.CustomFormat = "dd/MM/yyyy";
-            this.Dtp_Fecha_Cont.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Dtp_Fecha_Cont.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Dtp_Fecha_Cont.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.Dtp_Fecha_Cont.Location = new System.Drawing.Point(180, 61);
+            this.Dtp_Fecha_Cont.Location = new System.Drawing.Point(189, 61);
             this.Dtp_Fecha_Cont.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Dtp_Fecha_Cont.Name = "Dtp_Fecha_Cont";
-            this.Dtp_Fecha_Cont.Size = new System.Drawing.Size(153, 27);
+            this.Dtp_Fecha_Cont.Size = new System.Drawing.Size(202, 30);
             this.Dtp_Fecha_Cont.TabIndex = 37;
             this.Dtp_Fecha_Cont.ValueChanged += new System.EventHandler(this.Dtp_Fecha_Cont_ValueChanged);
             // 
@@ -518,9 +527,9 @@
             // 
             this.Txt_Dep.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Dep.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Dep.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Dep.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Dep.ForeColor = System.Drawing.Color.White;
-            this.Txt_Dep.Location = new System.Drawing.Point(170, 743);
+            this.Txt_Dep.Location = new System.Drawing.Point(148, 119);
             this.Txt_Dep.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Txt_Dep.Name = "Txt_Dep";
             this.Txt_Dep.Size = new System.Drawing.Size(243, 30);
@@ -531,9 +540,9 @@
             // 
             this.Txt_Puesto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Puesto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Puesto.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Puesto.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Puesto.ForeColor = System.Drawing.Color.White;
-            this.Txt_Puesto.Location = new System.Drawing.Point(481, 57);
+            this.Txt_Puesto.Location = new System.Drawing.Point(493, 58);
             this.Txt_Puesto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Txt_Puesto.Name = "Txt_Puesto";
             this.Txt_Puesto.Size = new System.Drawing.Size(194, 30);
@@ -544,46 +553,14 @@
             // 
             this.Txt_Estado.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.Txt_Estado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Txt_Estado.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.Txt_Estado.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Txt_Estado.ForeColor = System.Drawing.Color.White;
-            this.Txt_Estado.Location = new System.Drawing.Point(481, 119);
+            this.Txt_Estado.Location = new System.Drawing.Point(493, 119);
             this.Txt_Estado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Txt_Estado.Name = "Txt_Estado";
             this.Txt_Estado.Size = new System.Drawing.Size(194, 30);
             this.Txt_Estado.TabIndex = 40;
             this.Txt_Estado.TextChanged += new System.EventHandler(this.Txt_Estado_TextChanged);
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1015, 100);
-            this.panel1.TabIndex = 75;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
-            this.label6.Location = new System.Drawing.Point(60, 54);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(438, 20);
-            this.label6.TabIndex = 72;
-            this.label6.Text = "Consulte, edite y administre la información de los empleados.";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.label5.Location = new System.Drawing.Point(33, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(530, 54);
-            this.label5.TabIndex = 75;
-            this.label5.Text = "Mantenimiento Empleados";
             // 
             // Pnl_Personal
             // 
@@ -603,11 +580,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
             this.label2.Location = new System.Drawing.Point(18, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(179, 20);
+            this.label2.Size = new System.Drawing.Size(220, 26);
             this.label2.TabIndex = 71;
             this.label2.Text = "Búsqueda de Empleados";
             // 
@@ -643,12 +620,12 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
             this.label1.Location = new System.Drawing.Point(18, 16);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label1.Size = new System.Drawing.Size(196, 20);
+            this.label1.Size = new System.Drawing.Size(240, 26);
             this.label1.TabIndex = 72;
             this.label1.Text = "Información de Empleados";
             // 
@@ -657,6 +634,7 @@
             this.Pnl_Laboral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(37)))));
             this.Pnl_Laboral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pnl_Laboral.Controls.Add(this.label3);
+            this.Pnl_Laboral.Controls.Add(this.Txt_Dep);
             this.Pnl_Laboral.Controls.Add(this.Txt_Estado);
             this.Pnl_Laboral.Controls.Add(this.Lbl_Fecha_Cont);
             this.Pnl_Laboral.Controls.Add(this.Txt_Puesto);
@@ -675,14 +653,57 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
             this.label3.Location = new System.Drawing.Point(18, 11);
             this.label3.Name = "label3";
             this.label3.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.label3.Size = new System.Drawing.Size(151, 20);
+            this.label3.Size = new System.Drawing.Size(184, 26);
             this.label3.TabIndex = 73;
             this.label3.Text = "Informacion Laboral";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1015, 100);
+            this.panel1.TabIndex = 85;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(37, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(73, 71);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 72;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
+            this.label6.Location = new System.Drawing.Point(121, 63);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(538, 26);
+            this.label6.TabIndex = 72;
+            this.label6.Text = "Consulte, edite y administre la información de los empleados.";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label5.Location = new System.Drawing.Point(116, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(530, 54);
+            this.label5.TabIndex = 75;
+            this.label5.Text = "Mantenimiento Empleados";
             // 
             // FormMantenimientoEmpleado
             // 
@@ -691,7 +712,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(17)))), ((int)(((byte)(26)))));
             this.ClientSize = new System.Drawing.Size(1015, 895);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Txt_Dep);
             this.Controls.Add(this.Btn_Cancelar);
             this.Controls.Add(this.Btn_Guardar);
             this.Controls.Add(this.Btn_Limpiar);
@@ -705,16 +725,16 @@
             this.Name = "FormMantenimientoEmpleado";
             this.Text = "G";
             this.Load += new System.EventHandler(this.FormMantenimientoEmpleado_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.Pnl_Personal.ResumeLayout(false);
             this.Pnl_Personal.PerformLayout();
             this.Pnl_Emple.ResumeLayout(false);
             this.Pnl_Emple.PerformLayout();
             this.Pnl_Laboral.ResumeLayout(false);
             this.Pnl_Laboral.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -755,14 +775,15 @@
         private System.Windows.Forms.TextBox Txt_Dep;
         private System.Windows.Forms.TextBox Txt_Puesto;
         private System.Windows.Forms.TextBox Txt_Estado;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel Pnl_Personal;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel Pnl_Emple;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel Pnl_Laboral;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }

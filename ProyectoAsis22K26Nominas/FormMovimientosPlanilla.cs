@@ -1,7 +1,9 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
 
 // Roger Yankhel de Jesús Herrera Alcántara 09a01-23-2429 
 // Fecha de creacion: 25/07/2026
@@ -22,6 +24,8 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormMovimientosPlanilla_Load(object sender, EventArgs e)
         {
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Plani, 20);
             CargarTipoMovimiento();
 
             Cbo_Buscar_Campo.Items.Clear();
@@ -383,6 +387,20 @@ namespace ProyectoAsis22K26Nominas
         private void Lbl_Codigo_Empleado_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
         }
     }
 }

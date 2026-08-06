@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 // Roger Yankhel de Jesús Herrera Alcántara 0901-23-2429 
@@ -39,6 +41,9 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormGenerarPlanilla_Load(object sender, EventArgs e)
         {
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Detalle, 20);
+
             Txt_Total_Ingresos.ReadOnly = true;
             Txt_Total_Descuentos.ReadOnly = true;
             Txt_Total_Paga.ReadOnly = true;
@@ -172,6 +177,25 @@ namespace ProyectoAsis22K26Nominas
         private void FormGenerarPlanilla_Load_1(object sender, EventArgs e) { }
 
         private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }

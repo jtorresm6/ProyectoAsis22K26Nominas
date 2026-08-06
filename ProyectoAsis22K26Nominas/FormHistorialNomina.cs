@@ -89,6 +89,7 @@ namespace ProyectoAsis22K26Nominas
             Btn_Buscar.Enabled = permiso.Ver;
         }
 
+
         private void Dgv_Historial_Nomina_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 

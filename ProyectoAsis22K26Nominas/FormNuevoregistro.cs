@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -70,6 +72,7 @@ namespace ProyectoAsis22K26Nominas
 
         private async void FormNuevoregistro_Load(object sender, EventArgs e)
         {
+            Redondear(Pnl_Personal, 20);
             CargarComboboxes();
             EstablecerEstadoInicial();
             await CargarTablaEmpleadosAsync();
@@ -863,6 +866,20 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
         private void Lbl_direccion_Click(object sender, EventArgs e)
         {
 
@@ -894,6 +911,11 @@ namespace ProyectoAsis22K26Nominas
         }
 
         private void Lbl_nit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pnl_Personal_Paint(object sender, PaintEventArgs e)
         {
 
         }

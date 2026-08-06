@@ -20,6 +20,10 @@ namespace ProyectoAsis22K26Nominas
         public FormMantenimientoEmpleado()
         {
             InitializeComponent();
+
+            // Activar scrollbar automática para ver el formulario completo
+            this.AutoScroll = true;
+            this.AutoScrollMinSize = new Size(0, 850); // Ajusta la altura según tus paneles
         }
 
         private void FormMantenimientoEmpleado_Load(object sender, EventArgs e)
@@ -313,7 +317,6 @@ namespace ProyectoAsis22K26Nominas
 
                         if (filasModificadas > 0)
                         {
-                            // Actualizar teléfono si ingresó uno
                             if (!string.IsNullOrWhiteSpace(Txt_Tel.Text))
                             {
                                 using (MySqlCommand cmdTel = new MySqlCommand(sqlTel, conexion))
@@ -324,7 +327,6 @@ namespace ProyectoAsis22K26Nominas
                                 }
                             }
 
-                            // Actualizar correo si ingresó uno
                             if (!string.IsNullOrWhiteSpace(Txt_Corr.Text))
                             {
                                 using (MySqlCommand cmdCorreo = new MySqlCommand(sqlCorreo, conexion))
@@ -371,7 +373,6 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
-     
         private void Btn_reactivar_Click(object sender, EventArgs e)
         {
             if (!permisoActual.Eliminar)
@@ -425,10 +426,8 @@ namespace ProyectoAsis22K26Nominas
                                 SesionUsuario.Usuario + " reactivó al empleado ID " + codigoEmpleado + "."
                             );
 
-                            // 1. Actualizar el estado visualmente
                             Txt_Estado.Text = "activo";
 
-                            // 2. Desactivar el botón de Reactivar y activar el de Bajas
                             Btn_Reactivar.Enabled = false;
                             Btn_Bajas.Enabled = permisoActual.Eliminar;
 

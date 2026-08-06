@@ -65,7 +65,6 @@ namespace ProyectoAsis22K26Nominas
                                         DATE_FORMAT(a.fecha_asistencia, '%d/%m/%Y') AS 'Fecha',
                                         TIME_FORMAT(a.hora_entrada, '%r') AS 'Hora Entrada',
                                         TIME_FORMAT(a.hora_salida, '%r') AS 'Hora Salida',
-                                        a.minutos_tardanza AS 'Min. Tardanza',
                                         a.horas_trabajadas AS 'Horas Trab.',
                                         a.horas_extra AS 'Horas Extra',
                                         a.observaciones_asistencia AS 'Observaciones'

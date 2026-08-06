@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
+using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
@@ -16,8 +13,15 @@ namespace ProyectoAsis22K26Nominas
             InitializeComponent();
         }
 
+        private void FormBitacora_Load(object sender, EventArgs e)
+        {
+            // Carga automáticamente los datos al abrir el formulario
+            CargarBitacora();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
+            // Botón manual para refrescar los datos
             CargarBitacora();
         }
 
@@ -29,7 +33,7 @@ namespace ProyectoAsis22K26Nominas
                 {
                     conexion.Open();
 
-                    // Se consulta directamente la vista 'vw_bitacora' creada en MySQL
+                    // Se eliminaron 'nombre_formulario' y 'tabla_afectada' de la consulta
                     string consulta = @"SELECT 
                                             id_bitacora AS Codigo,
                                             fecha_bitacora AS Fecha,
@@ -37,12 +41,10 @@ namespace ProyectoAsis22K26Nominas
                                             nombre_empleado AS Empleado,
                                             nombre_rol AS Rol,
                                             direccion_ip AS IP,
-                                            nombre_formulario AS Formulario,
-                                            tabla_afectada AS Tabla,
                                             accion_bitacora AS Accion,
                                             descripcion_bitacora AS Descripcion
                                         FROM vw_bitacora
-                                        ORDER BY fecha_bitacora DESC;";
+                                        ORDER BY id_bitacora DESC, fecha_bitacora DESC;";
 
                     using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
                     {

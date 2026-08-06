@@ -39,6 +39,10 @@ namespace ProyectoAsis22K26Nominas
             this.Btn_Limpiar.Click += new EventHandler(Btn_Limpiar_Click);
             this.Btn_Refrescar.Click += new EventHandler(Btn_Refrescar_Click);
 
+            // Eventos para calcular días automáticamente al cambiar fechas
+            this.Dtp_Fecha_Inicio.ValueChanged += new EventHandler(Dtp_Fecha_Inicio_ValueChanged);
+            this.Dtp_Fecha_Fin.ValueChanged += new EventHandler(Dtp_Fecha_Fin_ValueChanged);
+
             // Configurar DataGridView
             Dgv_Solicitudes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             Dgv_Solicitudes.ReadOnly = true;
@@ -54,7 +58,6 @@ namespace ProyectoAsis22K26Nominas
             try
             {
                 this.StartPosition = FormStartPosition.CenterScreen;
-
 
                 CargarEmpleados();
                 CargarSolicitudes();
@@ -167,7 +170,6 @@ namespace ProyectoAsis22K26Nominas
 
                 using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
                 {
-                    // Asegurar que la conexión se encuentre abierta
                     if (conexion.State != ConnectionState.Open)
                     {
                         conexion.Open();
@@ -201,6 +203,8 @@ namespace ProyectoAsis22K26Nominas
 
                 Lbl_Dias_Disponibles.Text = diasDisponibles + " días";
 
+                // Recalcular días si las fechas ya estaban ingresadas
+                CalcularDiasSolicitados();
             }
             catch (Exception ex)
             {
@@ -210,7 +214,22 @@ namespace ProyectoAsis22K26Nominas
             }
         }
 
+        // 5. CÁLCULO DE DÍAS SOLICITADOS BASADO EN FECHAS
+        private void CalcularDiasSolicitados()
+        {
+            DateTime inicio = Dtp_Fecha_Inicio.Value.Date;
+            DateTime fin = Dtp_Fecha_Fin.Value.Date;
 
+            if (fin < inicio)
+            {
+                Txt_Dias_Solicitados.Text = "0";
+                return;
+            }
+
+            // Sumamos 1 día para incluir tanto la fecha de inicio como la fecha fin (ejemplo: del 10 al 20 son 11 días)
+            int diasCalculados = (fin - inicio).Days + 1;
+            Txt_Dias_Solicitados.Text = diasCalculados.ToString();
+        }
 
         // 6. VALIDAR ANTES DE GUARDAR
         private bool Validar()
@@ -219,27 +238,32 @@ namespace ProyectoAsis22K26Nominas
 
             if (idEmpleado == 0)
             {
-                MessageBox.Show("Seleccione un empleado.");
+                MessageBox.Show("Seleccione un empleado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
+            if (Dtp_Fecha_Fin.Value.Date < Dtp_Fecha_Inicio.Value.Date)
+            {
+                MessageBox.Show("La fecha de fin no puede ser anterior a la fecha de inicio.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
 
             int dias = 0;
             if (!int.TryParse(Txt_Dias_Solicitados.Text, out dias) || dias <= 0)
             {
-                MessageBox.Show("Los días deben ser mayores a 0.");
+                MessageBox.Show("Los días solicitados deben ser mayores a 0.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             if (dias > diasDisponibles)
             {
-                MessageBox.Show($"Días insuficientes. Disponibles: {diasDisponibles}");
+                MessageBox.Show($"Días insuficientes. Solicitó {dias} días, pero solo tiene {diasDisponibles} días disponibles.", "Días Excedidos", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(Txt_Motivo.Text))
             {
-                MessageBox.Show("Ingrese un motivo.");
+                MessageBox.Show("Ingrese un motivo para la solicitud.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
@@ -269,6 +293,8 @@ namespace ProyectoAsis22K26Nominas
 
                     MySqlCommand cmd = new MySqlCommand(sql, conexion);
                     cmd.Parameters.AddWithValue("@fecha", DateTime.Today);
+                    cmd.Parameters.AddWithValue("@inicio", Dtp_Fecha_Inicio.Value.Date);
+                    cmd.Parameters.AddWithValue("@fin", Dtp_Fecha_Fin.Value.Date);
                     cmd.Parameters.AddWithValue("@dias", Convert.ToInt32(Txt_Dias_Solicitados.Text));
                     cmd.Parameters.AddWithValue("@motivo", Txt_Motivo.Text.Trim());
                     cmd.Parameters.AddWithValue("@empleado", idEmpleado);
@@ -325,6 +351,9 @@ namespace ProyectoAsis22K26Nominas
 
                 MessageBox.Show("✅ Solicitud aprobada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarSolicitudes();
+
+                // Actualizar contador de días disponibles si hay un empleado seleccionado
+                MostrarDiasDisponibles();
             }
             catch (Exception ex)
             {
@@ -360,6 +389,9 @@ namespace ProyectoAsis22K26Nominas
 
                 MessageBox.Show("Solicitud rechazada.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 CargarSolicitudes();
+
+                // Actualizar contador de días disponibles por si estaba en otro estado
+                MostrarDiasDisponibles();
             }
             catch (Exception ex)
             {
@@ -375,6 +407,8 @@ namespace ProyectoAsis22K26Nominas
             Txt_Dias_Solicitados.Text = "0";
             Lbl_Dias_Disponibles.Text = "0 días";
             diasDisponibles = 0;
+            Dtp_Fecha_Inicio.Value = DateTime.Today;
+            Dtp_Fecha_Fin.Value = DateTime.Today;
         }
 
         // BOTÓN LIMPIAR
@@ -387,6 +421,7 @@ namespace ProyectoAsis22K26Nominas
         private void Btn_Refrescar_Click(object sender, EventArgs e)
         {
             CargarSolicitudes();
+            MostrarDiasDisponibles();
         }
 
         // EVENTOS DE CONTROLES
@@ -397,29 +432,12 @@ namespace ProyectoAsis22K26Nominas
 
         private void Dtp_Fecha_Inicio_ValueChanged(object sender, EventArgs e)
         {
-            if (ObtenerIdEmpleadoSeleccionado() != 0) { return; }
-
+            CalcularDiasSolicitados();
         }
 
         private void Dtp_Fecha_Fin_ValueChanged(object sender, EventArgs e)
         {
-            if (ObtenerIdEmpleadoSeleccionado() != 0) { return; }
-
-        }
-
-        private void Gbo_Empleado_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Btn_Guardar_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Btn_Aprobar_Click_1(object sender, EventArgs e)
-        {
-
+            CalcularDiasSolicitados();
         }
 
         private void Redondear(Control control, int radio)
@@ -435,5 +453,13 @@ namespace ProyectoAsis22K26Nominas
 
             control.Region = new Region(path);
         }
+        private void Btn_Guardar_Click_1(object sender, EventArgs e)
+        {
+        }
+
+        private void Btn_Aprobar_Click_1(object sender, EventArgs e)
+        {
+        }
     }
+
 }

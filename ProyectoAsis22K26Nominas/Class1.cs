@@ -1,36 +1,50 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Net;
 using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
 {
     public static class Bitacora
     {
-        public static void Registrar(string accion, string descripcion)
+        public static void Registrar(string accion, string descripcion, string formulario = null, string tabla = null, int? idRegistro = null)
         {
             try
             {
-                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
+                // Si por alguna razón el usuario aún no tiene ID, se evita lanzar la excepción
+                if (SesionUsuario.IdUsuario <= 0) return;
+
+                string ipLocal = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0].ToString();
+                string nombreEquipo = Environment.MachineName;
+
+                using (MySqlConnection con = ConexionBD.ObtenerConexion())
                 {
-                    conexion.Open();
+                    con.Open();
 
-                    // Consulta SQL con los nombres actualizados de la nueva BD
-                    string consulta = @"INSERT INTO tbl_bitacora 
-                                        (fecha_bitacora, accion_bitacora, descripcion_bitacora, id_usuario) 
-                                        VALUES 
-                                        (NOW(), @accion, @descripcion, @idUsuario);";
+                    // Se incluye 'id_usuario' y 'NOW()' para guardar la fecha y hora exacta del sistema
+                    string query = @"INSERT INTO tbl_bitacora 
+                                    (id_usuario, fecha_bitacora, accion_bitacora, descripcion_bitacora, nombre_formulario, tabla_afectada, id_registro, direccion_ip, nombre_equipo) 
+                                    VALUES 
+                                    (@idUsuario, NOW(), @accion, @descripcion, @formulario, @tabla, @idReg, @ip, @equipo);";
 
-                    using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
+                    using (MySqlCommand cmd = new MySqlCommand(query, con))
                     {
+                        cmd.Parameters.AddWithValue("@idUsuario", SesionUsuario.IdUsuario);
+                        cmd.Parameters.AddWithValue("@accion", accion);
+                        cmd.Parameters.AddWithValue("@descripcion", descripcion);
+                        cmd.Parameters.AddWithValue("@formulario", (object)formulario ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@tabla", (object)tabla ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@idReg", (object)idRegistro ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@ip", ipLocal);
+                        cmd.Parameters.AddWithValue("@equipo", nombreEquipo);
 
-                        comando.ExecuteNonQuery();
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Captura el error en la consola de depuración para evitar interrumpir la app si falla la bitácora
-                System.Diagnostics.Debug.WriteLine("Error al registrar bitácora: " + ex.Message);
+                System.Diagnostics.Debug.WriteLine("Error Bitácora: " + ex.Message);
             }
         }
     }

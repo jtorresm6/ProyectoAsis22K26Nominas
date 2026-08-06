@@ -76,18 +76,32 @@ namespace ProyectoAsis22K26Nominas
                 conexion.Open();
 
                 string consulta = @"
-                    SELECT
-                        e.id_empleado,
-                        CONCAT(e.nombre_emp, ' ', e.apellido_emp) AS Empleado,
-                        p.nombre_puesto AS Puesto,
-                        p.salario_base
-                    FROM tbl_empleados e
-                    INNER JOIN tbl_puestos p
-                        ON e.id_puesto = p.id_puesto
-                    WHERE e.estado_emp = 'activo';";
+SELECT
+    e.id_empleado,
+    CONCAT(e.nombre_emp,' ',e.apellido_emp) AS Empleado,
+    pu.nombre_puesto AS Puesto,
+    SUM(pd.salario_base) AS SalarioBase,
+    SUM(pd.total_percepciones) AS Ingresos,
+    SUM(pd.total_deducciones) AS Descuentos,
+    SUM(pd.salario_neto) AS Neto
+FROM tbl_planillas pl
+INNER JOIN tbl_planilla_detalle pd
+    ON pl.id_planilla = pd.id_planilla
+INNER JOIN tbl_empleados e
+    ON pd.id_empleado = e.id_empleado
+INNER JOIN tbl_puestos pu
+    ON e.id_puesto = pu.id_puesto
+WHERE pl.fecha_inicio <= @fin
+AND pl.fecha_fin >= @inicio
+GROUP BY
+    e.id_empleado,
+    Empleado,
+    Puesto
+ORDER BY Empleado;";
 
                 comando = new MySqlCommand(consulta, conexion);
-
+                comando.Parameters.AddWithValue("@inicio", Dtp_Fecha_Inicio.Value.Date);
+                comando.Parameters.AddWithValue("@fin", Dtp_Fecha_Fin.Value.Date);
                 using (MySqlDataReader lector = comando.ExecuteReader())
                 {
                     decimal totalIngresos = 0;
@@ -99,12 +113,11 @@ namespace ProyectoAsis22K26Nominas
                         int idEmpleado = Convert.ToInt32(lector["id_empleado"]);
                         string empleado = lector["Empleado"].ToString();
                         string puesto = lector["Puesto"].ToString();
-                        decimal salarioBase = Convert.ToDecimal(lector["salario_base"]);
 
-                        // CÁLCULOS
-                        decimal ingresos = salarioBase;
-                        decimal descuentos = 0;
-                        decimal salarioNeto = ingresos - descuentos;
+                        decimal salarioBase = Convert.ToDecimal(lector["SalarioBase"]);
+                        decimal ingresos = Convert.ToDecimal(lector["Ingresos"]);
+                        decimal descuentos = Convert.ToDecimal(lector["Descuentos"]);
+                        decimal salarioNeto = Convert.ToDecimal(lector["Neto"]);
 
                         totalIngresos += ingresos;
                         totalDescuentos += descuentos;
@@ -200,7 +213,7 @@ namespace ProyectoAsis22K26Nominas
 
         }
 
-        private void Dgv_Detalle_Planilla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

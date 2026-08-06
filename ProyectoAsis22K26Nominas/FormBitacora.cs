@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
@@ -15,13 +16,43 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormBitacora_Load(object sender, EventArgs e)
         {
-            // Carga automáticamente los datos al abrir el formulario
             CargarBitacora();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // Se ejecuta cuando el formulario ya tomó su tamaño completo en la pantalla
+        private void FormBitacora_Shown(object sender, EventArgs e)
         {
-            // Botón manual para refrescar los datos
+            AcomodarBotonAbajo();
+        }
+
+        private void FormBitacora_Resize(object sender, EventArgs e)
+        {
+            AcomodarBotonAbajo();
+        }
+
+        private void AcomodarBotonAbajo()
+        {
+            if (Dgv_Bitacora == null || Btn_actualizar == null) return;
+
+            // 1. Quitar anclajes para tomar control total por código
+            Dgv_Bitacora.Anchor = AnchorStyles.None;
+            Btn_actualizar.Anchor = AnchorStyles.None;
+
+            // 2. Acortar la altura de la tabla para dejar 80 píxeles libres abajo
+            Dgv_Bitacora.Height = this.ClientSize.Height - Dgv_Bitacora.Top - 80;
+
+            // 3. Forzar al botón a colocarse a 20 píxeles del borde inferior
+            Btn_actualizar.Top = this.ClientSize.Height - Btn_actualizar.Height - 20;
+
+            // 4. Centrar el botón horizontalmente respecto a la tabla
+            Btn_actualizar.Left = Dgv_Bitacora.Left + (Dgv_Bitacora.Width - Btn_actualizar.Width) / 2;
+
+            // 5. Asegurar que quede por encima de cualquier otro elemento
+            Btn_actualizar.BringToFront();
+        }
+
+        private void Btn_actualizar_click(object sender, EventArgs e)
+        {
             CargarBitacora();
         }
 
@@ -33,7 +64,6 @@ namespace ProyectoAsis22K26Nominas
                 {
                     conexion.Open();
 
-                    // Se eliminaron 'nombre_formulario' y 'tabla_afectada' de la consulta
                     string consulta = @"SELECT 
                                             id_bitacora AS Codigo,
                                             fecha_bitacora AS Fecha,
@@ -66,6 +96,11 @@ namespace ProyectoAsis22K26Nominas
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        private void Dgv_Bitacora_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

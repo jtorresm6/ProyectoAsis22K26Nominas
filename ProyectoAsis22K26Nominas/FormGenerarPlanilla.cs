@@ -1,20 +1,221 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+
+// Roger Yankhel de Jesús Herrera Alcántara 0901-23-2429 
+// Fecha de creacion: 25/07/2026
+// Fecha de finalizacion: 27/07/2026
 
 namespace ProyectoAsis22K26Nominas
 {
     public partial class FormGenerarPlanilla : Form
     {
+        MySqlConnection conexion;
+        MySqlCommand comando;
+
+        int idPlanillaSeleccionada = 0;
+
         public FormGenerarPlanilla()
         {
             InitializeComponent();
+            CrearColumnas();
+        }
+
+        private void CrearColumnas()
+        {
+            Dgv_Detalle_Planilla.Columns.Clear();
+
+            Dgv_Detalle_Planilla.Columns.Add("ID", "ID");
+            Dgv_Detalle_Planilla.Columns.Add("Empleado", "Empleado");
+            Dgv_Detalle_Planilla.Columns.Add("Puesto", "Puesto");
+            Dgv_Detalle_Planilla.Columns.Add("SalarioBase", "Salario Base");
+            Dgv_Detalle_Planilla.Columns.Add("Ingresos", "Ingresos");
+            Dgv_Detalle_Planilla.Columns.Add("Descuentos", "Descuentos");
+            Dgv_Detalle_Planilla.Columns.Add("Neto", "Salario Neto");
+
+            Dgv_Detalle_Planilla.Columns["ID"].Visible = false;
+        }
+
+        private void FormGenerarPlanilla_Load(object sender, EventArgs e)
+        {
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Detalle, 20);
+
+            Txt_Total_Ingresos.ReadOnly = true;
+            Txt_Total_Descuentos.ReadOnly = true;
+            Txt_Total_Paga.ReadOnly = true;
+
+            Dgv_Detalle_Planilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            Dgv_Detalle_Planilla.AllowUserToAddRows = false;
+            Dgv_Detalle_Planilla.ReadOnly = true;
+            Dgv_Detalle_Planilla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            FormularioPermisos permiso =
+                GestionarPermisos.ObtenerPermiso("FormGenerarPlanilla");
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
+                return;
+            }
+
+            Btn_Generar.Enabled = permiso.Crear;
+        }
+
+        private void GenerarPlanilla()
+        {
+            try
+            {
+                Dgv_Detalle_Planilla.Rows.Clear();
+
+                conexion = ConexionBD.ObtenerConexion();
+                conexion.Open();
+
+                string consulta = @"
+SELECT
+    e.id_empleado,
+    CONCAT(e.nombre_emp,' ',e.apellido_emp) AS Empleado,
+    pu.nombre_puesto AS Puesto,
+    SUM(pd.salario_base) AS SalarioBase,
+    SUM(pd.total_percepciones) AS Ingresos,
+    SUM(pd.total_deducciones) AS Descuentos,
+    SUM(pd.salario_neto) AS Neto
+FROM tbl_planillas pl
+INNER JOIN tbl_planilla_detalle pd
+    ON pl.id_planilla = pd.id_planilla
+INNER JOIN tbl_empleados e
+    ON pd.id_empleado = e.id_empleado
+INNER JOIN tbl_puestos pu
+    ON e.id_puesto = pu.id_puesto
+WHERE pl.fecha_inicio <= @fin
+AND pl.fecha_fin >= @inicio
+GROUP BY
+    e.id_empleado,
+    Empleado,
+    Puesto
+ORDER BY Empleado;";
+
+                comando = new MySqlCommand(consulta, conexion);
+                comando.Parameters.AddWithValue("@inicio", Dtp_Fecha_Inicio.Value.Date);
+                comando.Parameters.AddWithValue("@fin", Dtp_Fecha_Fin.Value.Date);
+                using (MySqlDataReader lector = comando.ExecuteReader())
+                {
+                    decimal totalIngresos = 0;
+                    decimal totalDescuentos = 0;
+                    decimal totalPagar = 0;
+
+                    while (lector.Read())
+                    {
+                        int idEmpleado = Convert.ToInt32(lector["id_empleado"]);
+                        string empleado = lector["Empleado"].ToString();
+                        string puesto = lector["Puesto"].ToString();
+
+                        decimal salarioBase = Convert.ToDecimal(lector["SalarioBase"]);
+                        decimal ingresos = Convert.ToDecimal(lector["Ingresos"]);
+                        decimal descuentos = Convert.ToDecimal(lector["Descuentos"]);
+                        decimal salarioNeto = Convert.ToDecimal(lector["Neto"]);
+
+                        totalIngresos += ingresos;
+                        totalDescuentos += descuentos;
+                        totalPagar += salarioNeto;
+
+                        Dgv_Detalle_Planilla.Rows.Add(
+                            idEmpleado,
+                            empleado,
+                            puesto,
+                            salarioBase,
+                            ingresos,
+                            descuentos,
+                            salarioNeto
+                        );
+                    }
+
+                    Txt_Total_Ingresos.Text = totalIngresos.ToString("N2");
+                    Txt_Total_Descuentos.Text = totalDescuentos.ToString("N2");
+                    Txt_Total_Paga.Text = totalPagar.ToString("N2");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al generar planilla: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (conexion != null && conexion.State == ConnectionState.Open)
+                {
+                    conexion.Close();
+                }
+            }
+        }
+
+        private void Dpt_Fecha_Inicio_ValueChanged(object sender, EventArgs e) { }
+
+        private void Lbl_Empleado_Click(object sender, EventArgs e) { }
+
+        private void Btn_Generar_Click(object sender, EventArgs e)
+        {
+            if (Dtp_Fecha_Inicio.Value.Date > Dtp_Fecha_Fin.Value.Date)
+            {
+                MessageBox.Show("La fecha de inicio no puede ser mayor a la fecha final.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            GenerarPlanilla();
+
+            Bitacora.Registrar(
+                "Generación de planilla",
+                SesionUsuario.Usuario + " generó una nueva planilla."
+            );
+        }
+
+        private void Btn_Limpiar_Click(object sender, EventArgs e)
+        {
+            // Reiniciar fechas
+            Dtp_Fecha_Inicio.Value = DateTime.Now;
+            Dtp_Fecha_Fin.Value = DateTime.Now;
+
+            // Limpiar totales
+            Txt_Total_Ingresos.Text = "0.00";
+            Txt_Total_Descuentos.Text = "0.00";
+            Txt_Total_Paga.Text = "0.00";
+
+            // Limpiar tabla
+            Dgv_Detalle_Planilla.Rows.Clear();
+        }
+
+        private void FormGenerarPlanilla_Load_1(object sender, EventArgs e) { }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

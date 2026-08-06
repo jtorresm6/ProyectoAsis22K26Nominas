@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLiquidacionRecibo));
             this.Txt_Empleado = new System.Windows.Forms.TextBox();
             this.Btn_Buscar = new System.Windows.Forms.Button();
             this.Lbl_Empleado = new System.Windows.Forms.Label();
@@ -48,15 +53,22 @@
             this.cmp_fecha_pago = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmp_estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmp_observaciones = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Liquidacion_Recibo)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Txt_Empleado
             // 
-            this.Txt_Empleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Txt_Empleado.Location = new System.Drawing.Point(318, 52);
+            this.Txt_Empleado.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Txt_Empleado.Location = new System.Drawing.Point(393, 165);
+            this.Txt_Empleado.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Txt_Empleado.Name = "Txt_Empleado";
-            this.Txt_Empleado.Size = new System.Drawing.Size(168, 32);
+            this.Txt_Empleado.Size = new System.Drawing.Size(220, 30);
             this.Txt_Empleado.TabIndex = 7;
             // 
             // Btn_Buscar
@@ -65,11 +77,11 @@
             this.Btn_Buscar.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(7)))), ((int)(((byte)(17)))));
             this.Btn_Buscar.FlatAppearance.BorderSize = 3;
             this.Btn_Buscar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Btn_Buscar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Buscar.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Btn_Buscar.Location = new System.Drawing.Point(547, 45);
-            this.Btn_Buscar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Btn_Buscar.Location = new System.Drawing.Point(655, 155);
             this.Btn_Buscar.Name = "Btn_Buscar";
-            this.Btn_Buscar.Size = new System.Drawing.Size(127, 50);
+            this.Btn_Buscar.Size = new System.Drawing.Size(113, 40);
             this.Btn_Buscar.TabIndex = 6;
             this.Btn_Buscar.Text = "Buscar";
             this.Btn_Buscar.UseVisualStyleBackColor = false;
@@ -78,16 +90,38 @@
             // Lbl_Empleado
             // 
             this.Lbl_Empleado.AutoSize = true;
-            this.Lbl_Empleado.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Lbl_Empleado.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Lbl_Empleado.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Lbl_Empleado.Location = new System.Drawing.Point(24, 55);
+            this.Lbl_Empleado.Location = new System.Drawing.Point(163, 169);
             this.Lbl_Empleado.Name = "Lbl_Empleado";
-            this.Lbl_Empleado.Size = new System.Drawing.Size(275, 26);
+            this.Lbl_Empleado.Size = new System.Drawing.Size(214, 26);
             this.Lbl_Empleado.TabIndex = 5;
-            this.Lbl_Empleado.Text = "Ingrese el ID del Empleado";
+            this.Lbl_Empleado.Text = "Ingrese el ID del Empleado:";
             // 
             // Dgv_Liquidacion_Recibo
             // 
+            this.Dgv_Liquidacion_Recibo.AllowUserToAddRows = false;
+            this.Dgv_Liquidacion_Recibo.AllowUserToDeleteRows = false;
+            this.Dgv_Liquidacion_Recibo.AllowUserToResizeColumns = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            this.Dgv_Liquidacion_Recibo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.Dgv_Liquidacion_Recibo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Dgv_Liquidacion_Recibo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.Dgv_Liquidacion_Recibo.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            this.Dgv_Liquidacion_Recibo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Dgv_Liquidacion_Recibo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.Dgv_Liquidacion_Recibo.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(38)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Liquidacion_Recibo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.Dgv_Liquidacion_Recibo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dgv_Liquidacion_Recibo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cmp_id_liquidacion,
@@ -106,15 +140,31 @@
             this.cmp_fecha_pago,
             this.cmp_estado,
             this.cmp_observaciones});
-            this.Dgv_Liquidacion_Recibo.Location = new System.Drawing.Point(29, 168);
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Liquidacion_Recibo.DefaultCellStyle = dataGridViewCellStyle7;
+            this.Dgv_Liquidacion_Recibo.EnableHeadersVisualStyles = false;
+            this.Dgv_Liquidacion_Recibo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+            this.Dgv_Liquidacion_Recibo.Location = new System.Drawing.Point(24, 266);
+            this.Dgv_Liquidacion_Recibo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Dgv_Liquidacion_Recibo.MultiSelect = false;
             this.Dgv_Liquidacion_Recibo.Name = "Dgv_Liquidacion_Recibo";
             this.Dgv_Liquidacion_Recibo.ReadOnly = true;
             this.Dgv_Liquidacion_Recibo.RowHeadersVisible = false;
-            this.Dgv_Liquidacion_Recibo.RowHeadersWidth = 62;
-            this.Dgv_Liquidacion_Recibo.RowTemplate.Height = 28;
+            this.Dgv_Liquidacion_Recibo.RowHeadersWidth = 51;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            this.Dgv_Liquidacion_Recibo.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            this.Dgv_Liquidacion_Recibo.RowTemplate.Height = 38;
             this.Dgv_Liquidacion_Recibo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Dgv_Liquidacion_Recibo.Size = new System.Drawing.Size(749, 163);
+            this.Dgv_Liquidacion_Recibo.Size = new System.Drawing.Size(1046, 494);
             this.Dgv_Liquidacion_Recibo.TabIndex = 8;
+            this.Dgv_Liquidacion_Recibo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_Liquidacion_Recibo_CellContentClick);
             // 
             // cmp_id_liquidacion
             // 
@@ -123,7 +173,6 @@
             this.cmp_id_liquidacion.MinimumWidth = 8;
             this.cmp_id_liquidacion.Name = "cmp_id_liquidacion";
             this.cmp_id_liquidacion.ReadOnly = true;
-            this.cmp_id_liquidacion.Width = 81;
             // 
             // cmp_fecha_calculo
             // 
@@ -132,7 +181,6 @@
             this.cmp_fecha_calculo.MinimumWidth = 8;
             this.cmp_fecha_calculo.Name = "cmp_fecha_calculo";
             this.cmp_fecha_calculo.ReadOnly = true;
-            this.cmp_fecha_calculo.Width = 81;
             // 
             // cmp_fecha_retiro
             // 
@@ -141,7 +189,6 @@
             this.cmp_fecha_retiro.MinimumWidth = 8;
             this.cmp_fecha_retiro.Name = "cmp_fecha_retiro";
             this.cmp_fecha_retiro.ReadOnly = true;
-            this.cmp_fecha_retiro.Width = 81;
             // 
             // cmp_motivo_retiro
             // 
@@ -150,7 +197,6 @@
             this.cmp_motivo_retiro.MinimumWidth = 8;
             this.cmp_motivo_retiro.Name = "cmp_motivo_retiro";
             this.cmp_motivo_retiro.ReadOnly = true;
-            this.cmp_motivo_retiro.Width = 80;
             // 
             // cmp_salario_pendiente
             // 
@@ -159,7 +205,6 @@
             this.cmp_salario_pendiente.MinimumWidth = 8;
             this.cmp_salario_pendiente.Name = "cmp_salario_pendiente";
             this.cmp_salario_pendiente.ReadOnly = true;
-            this.cmp_salario_pendiente.Width = 82;
             // 
             // cmp_indemnizacion
             // 
@@ -168,7 +213,6 @@
             this.cmp_indemnizacion.MinimumWidth = 8;
             this.cmp_indemnizacion.Name = "cmp_indemnizacion";
             this.cmp_indemnizacion.ReadOnly = true;
-            this.cmp_indemnizacion.Width = 81;
             // 
             // cmp_vacaciones_pendientes
             // 
@@ -177,7 +221,6 @@
             this.cmp_vacaciones_pendientes.MinimumWidth = 8;
             this.cmp_vacaciones_pendientes.Name = "cmp_vacaciones_pendientes";
             this.cmp_vacaciones_pendientes.ReadOnly = true;
-            this.cmp_vacaciones_pendientes.Width = 81;
             // 
             // cmp_aguinaldo_pendiente
             // 
@@ -186,7 +229,6 @@
             this.cmp_aguinaldo_pendiente.MinimumWidth = 8;
             this.cmp_aguinaldo_pendiente.Name = "cmp_aguinaldo_pendiente";
             this.cmp_aguinaldo_pendiente.ReadOnly = true;
-            this.cmp_aguinaldo_pendiente.Width = 81;
             // 
             // cmp_bono_14_pendiente
             // 
@@ -195,7 +237,6 @@
             this.cmp_bono_14_pendiente.MinimumWidth = 8;
             this.cmp_bono_14_pendiente.Name = "cmp_bono_14_pendiente";
             this.cmp_bono_14_pendiente.ReadOnly = true;
-            this.cmp_bono_14_pendiente.Width = 81;
             // 
             // cmp_otros_ingresos
             // 
@@ -204,7 +245,6 @@
             this.cmp_otros_ingresos.MinimumWidth = 8;
             this.cmp_otros_ingresos.Name = "cmp_otros_ingresos";
             this.cmp_otros_ingresos.ReadOnly = true;
-            this.cmp_otros_ingresos.Width = 150;
             // 
             // cmp_total_descuentos
             // 
@@ -213,7 +253,6 @@
             this.cmp_total_descuentos.MinimumWidth = 8;
             this.cmp_total_descuentos.Name = "cmp_total_descuentos";
             this.cmp_total_descuentos.ReadOnly = true;
-            this.cmp_total_descuentos.Width = 150;
             // 
             // cmp_total_liquidacion
             // 
@@ -222,7 +261,6 @@
             this.cmp_total_liquidacion.MinimumWidth = 8;
             this.cmp_total_liquidacion.Name = "cmp_total_liquidacion";
             this.cmp_total_liquidacion.ReadOnly = true;
-            this.cmp_total_liquidacion.Width = 150;
             // 
             // cmp_numero_recibo
             // 
@@ -231,7 +269,6 @@
             this.cmp_numero_recibo.MinimumWidth = 8;
             this.cmp_numero_recibo.Name = "cmp_numero_recibo";
             this.cmp_numero_recibo.ReadOnly = true;
-            this.cmp_numero_recibo.Width = 150;
             // 
             // cmp_fecha_pago
             // 
@@ -240,7 +277,6 @@
             this.cmp_fecha_pago.MinimumWidth = 8;
             this.cmp_fecha_pago.Name = "cmp_fecha_pago";
             this.cmp_fecha_pago.ReadOnly = true;
-            this.cmp_fecha_pago.Width = 150;
             // 
             // cmp_estado
             // 
@@ -249,7 +285,6 @@
             this.cmp_estado.MinimumWidth = 8;
             this.cmp_estado.Name = "cmp_estado";
             this.cmp_estado.ReadOnly = true;
-            this.cmp_estado.Width = 150;
             // 
             // cmp_observaciones
             // 
@@ -258,22 +293,68 @@
             this.cmp_observaciones.MinimumWidth = 8;
             this.cmp_observaciones.Name = "cmp_observaciones";
             this.cmp_observaciones.ReadOnly = true;
-            this.cmp_observaciones.Width = 150;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pictureBox1);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.label5);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1096, 100);
+            this.panel1.TabIndex = 85;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(37, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(73, 71);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 72;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
+            this.label6.Location = new System.Drawing.Point(121, 63);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(509, 26);
+            this.label6.TabIndex = 72;
+            this.label6.Text = "Genere liquidaciones y recibos de pago de los empleados.";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label5.Location = new System.Drawing.Point(116, 9);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(396, 54);
+            this.label5.TabIndex = 75;
+            this.label5.Text = "Liquidación y Pagos";
             // 
             // FormLiquidacionRecibo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(900, 562);
+            this.ClientSize = new System.Drawing.Size(1096, 895);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Dgv_Liquidacion_Recibo);
             this.Controls.Add(this.Txt_Empleado);
             this.Controls.Add(this.Btn_Buscar);
             this.Controls.Add(this.Lbl_Empleado);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormLiquidacionRecibo";
             this.Text = "FormLiquidacionRecibo";
+            this.Load += new System.EventHandler(this.FormLiquidacionRecibo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.Dgv_Liquidacion_Recibo)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -301,5 +382,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cmp_fecha_pago;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmp_estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn cmp_observaciones;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
     }
 }

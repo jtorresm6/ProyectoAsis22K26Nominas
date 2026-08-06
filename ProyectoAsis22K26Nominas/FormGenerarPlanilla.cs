@@ -199,5 +199,10 @@ namespace ProyectoAsis22K26Nominas
         {
 
         }
+
+        private void Dgv_Detalle_Planilla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

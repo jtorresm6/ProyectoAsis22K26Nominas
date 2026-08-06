@@ -690,9 +690,9 @@
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
             this.label6.Location = new System.Drawing.Point(121, 63);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(538, 26);
+            this.label6.Size = new System.Drawing.Size(576, 26);
             this.label6.TabIndex = 72;
-            this.label6.Text = "Consulte, edite y administre la información de los empleados.";
+            this.label6.Text = "Modifique y actualice la información registrada de los empleados.";
             // 
             // label5
             // 

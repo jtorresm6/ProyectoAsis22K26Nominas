@@ -28,6 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormControlSaldos));
             this.Cbo_Buscar_Empleado = new System.Windows.Forms.ComboBox();
             this.Lbl_Buscar_Empleado = new System.Windows.Forms.Label();
@@ -160,11 +163,30 @@
             this.Dgv_Saldo_Vacaciones.AllowUserToAddRows = false;
             this.Dgv_Saldo_Vacaciones.AllowUserToDeleteRows = false;
             this.Dgv_Saldo_Vacaciones.AllowUserToResizeRows = false;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Empty;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Poppins", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Empty;
+            this.Dgv_Saldo_Vacaciones.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.Dgv_Saldo_Vacaciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.Dgv_Saldo_Vacaciones.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.Dgv_Saldo_Vacaciones.BackgroundColor = System.Drawing.Color.White;
-            this.Dgv_Saldo_Vacaciones.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Dgv_Saldo_Vacaciones.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(38)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Saldo_Vacaciones.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.Dgv_Saldo_Vacaciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Poppins", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Saldo_Vacaciones.DefaultCellStyle = dataGridViewCellStyle6;
             this.Dgv_Saldo_Vacaciones.Location = new System.Drawing.Point(14, 82);
             this.Dgv_Saldo_Vacaciones.MultiSelect = false;
             this.Dgv_Saldo_Vacaciones.Name = "Dgv_Saldo_Vacaciones";
@@ -204,9 +226,9 @@
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
             this.label6.Location = new System.Drawing.Point(121, 63);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(538, 26);
+            this.label6.Size = new System.Drawing.Size(524, 26);
             this.label6.TabIndex = 72;
-            this.label6.Text = "Consulte, edite y administre la información de los empleados.";
+            this.label6.Text = "Consulte y administre los saldos disponibles de vacaciones.";
             // 
             // label5
             // 
@@ -215,9 +237,9 @@
             this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label5.Location = new System.Drawing.Point(116, 9);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(354, 54);
+            this.label5.Size = new System.Drawing.Size(361, 54);
             this.label5.TabIndex = 75;
-            this.label5.Text = "Control de Saldos";
+            this.label5.Text = "Saldos Vacaciones";
             // 
             // FormControlSaldos
             // 

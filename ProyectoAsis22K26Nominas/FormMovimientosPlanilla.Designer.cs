@@ -29,10 +29,10 @@ namespace ProyectoAsis22K26Nominas
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMovimientosPlanilla));
             this.Lbl_Empleado = new System.Windows.Forms.Label();
             this.Lbl_Periodo = new System.Windows.Forms.Label();
@@ -294,7 +294,7 @@ namespace ProyectoAsis22K26Nominas
             this.Btn_Guardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Guardar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Guardar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Guardar.Location = new System.Drawing.Point(407, 834);
+            this.Btn_Guardar.Location = new System.Drawing.Point(437, 932);
             this.Btn_Guardar.Name = "Btn_Guardar";
             this.Btn_Guardar.Size = new System.Drawing.Size(127, 36);
             this.Btn_Guardar.TabIndex = 36;
@@ -309,7 +309,7 @@ namespace ProyectoAsis22K26Nominas
             this.Btn_Eliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Eliminar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Eliminar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Eliminar.Location = new System.Drawing.Point(600, 834);
+            this.Btn_Eliminar.Location = new System.Drawing.Point(630, 932);
             this.Btn_Eliminar.Name = "Btn_Eliminar";
             this.Btn_Eliminar.Size = new System.Drawing.Size(127, 36);
             this.Btn_Eliminar.TabIndex = 38;
@@ -324,7 +324,7 @@ namespace ProyectoAsis22K26Nominas
             this.Btn_Modificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Btn_Modificar.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Btn_Modificar.ForeColor = System.Drawing.Color.White;
-            this.Btn_Modificar.Location = new System.Drawing.Point(221, 834);
+            this.Btn_Modificar.Location = new System.Drawing.Point(251, 932);
             this.Btn_Modificar.Name = "Btn_Modificar";
             this.Btn_Modificar.Size = new System.Drawing.Size(127, 36);
             this.Btn_Modificar.TabIndex = 37;
@@ -337,8 +337,8 @@ namespace ProyectoAsis22K26Nominas
             this.Dgv_Movimientos.AllowUserToAddRows = false;
             this.Dgv_Movimientos.AllowUserToDeleteRows = false;
             this.Dgv_Movimientos.AllowUserToResizeColumns = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(45)))));
-            this.Dgv_Movimientos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(45)))));
+            this.Dgv_Movimientos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.Dgv_Movimientos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -346,22 +346,23 @@ namespace ProyectoAsis22K26Nominas
             this.Dgv_Movimientos.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
             this.Dgv_Movimientos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Dgv_Movimientos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dgv_Movimientos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.Dgv_Movimientos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Movimientos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.Dgv_Movimientos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dgv_Movimientos.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Movimientos.DefaultCellStyle = dataGridViewCellStyle3;
             this.Dgv_Movimientos.EnableHeadersVisualStyles = false;
             this.Dgv_Movimientos.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Dgv_Movimientos.Location = new System.Drawing.Point(22, 46);
@@ -369,12 +370,12 @@ namespace ProyectoAsis22K26Nominas
             this.Dgv_Movimientos.Name = "Dgv_Movimientos";
             this.Dgv_Movimientos.ReadOnly = true;
             this.Dgv_Movimientos.RowHeadersWidth = 51;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            this.Dgv_Movimientos.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.White;
+            this.Dgv_Movimientos.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.Dgv_Movimientos.RowTemplate.Height = 24;
             this.Dgv_Movimientos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Dgv_Movimientos.Size = new System.Drawing.Size(923, 225);
+            this.Dgv_Movimientos.Size = new System.Drawing.Size(923, 305);
             this.Dgv_Movimientos.TabIndex = 39;
             this.Dgv_Movimientos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Data_Movimientos_CellClick);
             // 
@@ -437,10 +438,10 @@ namespace ProyectoAsis22K26Nominas
             this.Pnl_Plani.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Pnl_Plani.Controls.Add(this.label8);
             this.Pnl_Plani.Controls.Add(this.Dgv_Movimientos);
-            this.Pnl_Plani.Location = new System.Drawing.Point(12, 517);
+            this.Pnl_Plani.Location = new System.Drawing.Point(12, 538);
             this.Pnl_Plani.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Pnl_Plani.Name = "Pnl_Plani";
-            this.Pnl_Plani.Size = new System.Drawing.Size(971, 296);
+            this.Pnl_Plani.Size = new System.Drawing.Size(971, 371);
             this.Pnl_Plani.TabIndex = 80;
             // 
             // label8
@@ -512,7 +513,7 @@ namespace ProyectoAsis22K26Nominas
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(1015, 895);
+            this.ClientSize = new System.Drawing.Size(1015, 995);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Btn_Modificar);
             this.Controls.Add(this.Btn_Eliminar);

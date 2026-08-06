@@ -134,7 +134,7 @@ namespace ProyectoAsis22K26Nominas
 
         private void Btn_Pdf_Click(object sender, EventArgs e) {
             string ruta = Application.StartupPath +
-              "\\Manuales\\Nominas.pdf";
+              "\\Manuales\\Manual de usuario.pdf";
 
             if (File.Exists(ruta))
             {

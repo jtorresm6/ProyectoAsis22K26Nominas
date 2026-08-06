@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLiquidacionRecibo));
             this.Txt_Empleado = new System.Windows.Forms.TextBox();
             this.Btn_Buscar = new System.Windows.Forms.Button();
@@ -102,10 +102,10 @@
             // 
             this.Dgv_Liquidacion_Recibo.AllowUserToAddRows = false;
             this.Dgv_Liquidacion_Recibo.AllowUserToDeleteRows = false;
-            this.Dgv_Liquidacion_Recibo.AllowUserToResizeRows = false;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(45)))));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.White;
-            this.Dgv_Liquidacion_Recibo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle9;
+            this.Dgv_Liquidacion_Recibo.AllowUserToResizeColumns = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(32)))), ((int)(((byte)(45)))));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
+            this.Dgv_Liquidacion_Recibo.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.Dgv_Liquidacion_Recibo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -113,14 +113,15 @@
             this.Dgv_Liquidacion_Recibo.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
             this.Dgv_Liquidacion_Recibo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Dgv_Liquidacion_Recibo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(38)))), ((int)(((byte)(52)))));
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.Dgv_Liquidacion_Recibo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
+            this.Dgv_Liquidacion_Recibo.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(38)))), ((int)(((byte)(52)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Dgv_Liquidacion_Recibo.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.Dgv_Liquidacion_Recibo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Dgv_Liquidacion_Recibo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cmp_id_liquidacion,
@@ -139,14 +140,14 @@
             this.cmp_fecha_pago,
             this.cmp_estado,
             this.cmp_observaciones});
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.Dgv_Liquidacion_Recibo.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(35)))), ((int)(((byte)(90)))));
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.Dgv_Liquidacion_Recibo.DefaultCellStyle = dataGridViewCellStyle7;
             this.Dgv_Liquidacion_Recibo.EnableHeadersVisualStyles = false;
             this.Dgv_Liquidacion_Recibo.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
             this.Dgv_Liquidacion_Recibo.Location = new System.Drawing.Point(24, 266);
@@ -155,13 +156,13 @@
             this.Dgv_Liquidacion_Recibo.Name = "Dgv_Liquidacion_Recibo";
             this.Dgv_Liquidacion_Recibo.ReadOnly = true;
             this.Dgv_Liquidacion_Recibo.RowHeadersVisible = false;
-            this.Dgv_Liquidacion_Recibo.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
-            this.Dgv_Liquidacion_Recibo.RowsDefaultCellStyle = dataGridViewCellStyle12;
+            this.Dgv_Liquidacion_Recibo.RowHeadersWidth = 51;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(26)))), ((int)(((byte)(37)))));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            this.Dgv_Liquidacion_Recibo.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.Dgv_Liquidacion_Recibo.RowTemplate.Height = 38;
             this.Dgv_Liquidacion_Recibo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.Dgv_Liquidacion_Recibo.Size = new System.Drawing.Size(965, 383);
+            this.Dgv_Liquidacion_Recibo.Size = new System.Drawing.Size(1046, 494);
             this.Dgv_Liquidacion_Recibo.TabIndex = 8;
             this.Dgv_Liquidacion_Recibo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_Liquidacion_Recibo_CellContentClick);
             // 
@@ -301,7 +302,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1015, 100);
+            this.panel1.Size = new System.Drawing.Size(1096, 100);
             this.panel1.TabIndex = 85;
             // 
             // pictureBox1
@@ -321,9 +322,9 @@
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(30)))), ((int)(((byte)(90)))));
             this.label6.Location = new System.Drawing.Point(121, 63);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(538, 26);
+            this.label6.Size = new System.Drawing.Size(509, 26);
             this.label6.TabIndex = 72;
-            this.label6.Text = "Consulte, edite y administre la información de los empleados.";
+            this.label6.Text = "Genere liquidaciones y recibos de pago de los empleados.";
             // 
             // label5
             // 
@@ -341,7 +342,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(21)))), ((int)(((byte)(32)))));
-            this.ClientSize = new System.Drawing.Size(1015, 895);
+            this.ClientSize = new System.Drawing.Size(1096, 895);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Dgv_Liquidacion_Recibo);
             this.Controls.Add(this.Txt_Empleado);

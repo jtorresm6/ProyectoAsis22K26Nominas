@@ -330,8 +330,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Manuales\Manual de usuario.pdf" />
-    <None Include="Manuales\Nominas.pdf" />
     <None Include="Manual_Ayuda.chm">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -399,6 +397,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BD_nominas\" />
+    <Folder Include="manual\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -452,5 +452,10 @@ namespace ProyectoAsis22K26Nominas
             if (ObtenerIdEmpleadoSeleccionado() != 0)
                 CalcularDias();
         }
+
+        private void Txt_Dias_Solicitados_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -158,6 +158,7 @@
             this.Txt_Dias_Solicitados.Size = new System.Drawing.Size(100, 22);
             this.Txt_Dias_Solicitados.TabIndex = 5;
             this.Txt_Dias_Solicitados.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Txt_Dias_Solicitados.TextChanged += new System.EventHandler(this.Txt_Dias_Solicitados_TextChanged);
             // 
             // Lbl_Dias_Solicitados
             // 
@@ -268,7 +269,6 @@
             this.Btn_Refrescar.TabIndex = 7;
             this.Btn_Refrescar.Text = "Refrescar";
             this.Btn_Refrescar.UseVisualStyleBackColor = true;
-            //this.Btn_Refrescar.Click += new System.EventHandler(this.button1_Click);
             // 
             // Btn_Limpiar
             // 
@@ -278,7 +278,6 @@
             this.Btn_Limpiar.TabIndex = 8;
             this.Btn_Limpiar.Text = "Limpiar";
             this.Btn_Limpiar.UseVisualStyleBackColor = true;
-            //this.Btn_Limpiar.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // FormSolicitudVacaciones
             // 

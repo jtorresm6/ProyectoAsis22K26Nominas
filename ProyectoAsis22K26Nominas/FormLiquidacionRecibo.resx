@@ -117,4 +117,88 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="cmp_id_liquidacion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_fecha_calculo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_fecha_retiro.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_motivo_retiro.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_salario_pendiente.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_indemnizacion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_vacaciones_pendientes.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_aguinaldo_pendiente.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_bono_14_pendiente.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_otros_ingresos.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_total_descuentos.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_total_liquidacion.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_numero_recibo.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_fecha_pago.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_estado.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmp_observaciones.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        aP8kDHgKkAAAAABJRU5ErkJggg==
+</value>
+  </data>
 </root>

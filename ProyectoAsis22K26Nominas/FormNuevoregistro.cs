@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +18,7 @@ namespace ProyectoAsis22K26Nominas
     {
         private bool esEdicion = false;
         private bool esNuevo = false;
+        private object comando;
 
         // 1. Relación Departamentos -> Puestos
         private readonly Dictionary<string, List<string>> mapaDepartamentosPuestos = new Dictionary<string, List<string>>()
@@ -69,6 +72,7 @@ namespace ProyectoAsis22K26Nominas
 
         private async void FormNuevoregistro_Load(object sender, EventArgs e)
         {
+            Redondear(Pnl_Personal, 20);
             CargarComboboxes();
             EstablecerEstadoInicial();
             await CargarTablaEmpleadosAsync();
@@ -331,6 +335,7 @@ namespace ProyectoAsis22K26Nominas
 
             esNuevo = true;
             esEdicion = false;
+
         }
 
         private async void Btn_guardar_Click(object sender, EventArgs e)
@@ -345,6 +350,8 @@ namespace ProyectoAsis22K26Nominas
             {
                 await ActualizarEmpleadoAsync();
             }
+
+
         }
 
         private async Task InsertarEmpleadoAsync()
@@ -857,6 +864,60 @@ namespace ProyectoAsis22K26Nominas
             {
                 MessageBox.Show("Error de conexión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
+        private void Lbl_direccion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_fechnacimiento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_fechcontartacion_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_Departamento_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_idregistro_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_estado_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_nit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pnl_Personal_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

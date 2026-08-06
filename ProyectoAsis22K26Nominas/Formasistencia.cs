@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,6 +22,8 @@ namespace ProyectoAsis22K26Nominas
 
         private async void Formasistencia_Load(object sender, EventArgs e)
         {
+
+            Redondear(Pnl_Asis, 20);
             timer_reloj.Start();
 
             Cbo_tipregistro.Items.Clear();
@@ -61,7 +65,6 @@ namespace ProyectoAsis22K26Nominas
                                         DATE_FORMAT(a.fecha_asistencia, '%d/%m/%Y') AS 'Fecha',
                                         TIME_FORMAT(a.hora_entrada, '%r') AS 'Hora Entrada',
                                         TIME_FORMAT(a.hora_salida, '%r') AS 'Hora Salida',
-                                        a.minutos_tardanza AS 'Min. Tardanza',
                                         a.horas_trabajadas AS 'Horas Trab.',
                                         a.horas_extra AS 'Horas Extra',
                                         a.observaciones_asistencia AS 'Observaciones'
@@ -147,7 +150,8 @@ namespace ProyectoAsis22K26Nominas
         {
             string codigoTxt = Txt_codempleado.Text.Trim();
 
-            if (string.IsNullOrEmpty(codigoTxt) || !int.TryParse(codigoTxt, out int idEmpleado))
+            if (string.IsNullOrEmpty(codigoTxt) ||
+                !int.TryParse(codigoTxt, out int idEmpleado))
             {
                 MessageBox.Show(
                     "Debe ingresar un código de empleado válido antes de registrar.",
@@ -166,7 +170,8 @@ namespace ProyectoAsis22K26Nominas
 
             try
             {
-                using (MySqlConnection con = ConexionBD.ObtenerConexion())
+                using (MySqlConnection con =
+                    ConexionBD.ObtenerConexion())
                 {
                     await con.OpenAsync();
 
@@ -199,12 +204,22 @@ namespace ProyectoAsis22K26Nominas
                     bool existeRegistro = false;
                     TimeSpan horaEntradaExistente = TimeSpan.Zero;
 
-                    using (MySqlCommand cmdExiste = new MySqlCommand(qExiste, con))
+                    using (MySqlCommand cmdExiste =
+                        new MySqlCommand(qExiste, con))
                     {
-                        cmdExiste.Parameters.AddWithValue("@idEmp", idEmpleado);
-                        cmdExiste.Parameters.AddWithValue("@fecha", fechaSel);
+                        cmdExiste.Parameters.AddWithValue(
+                            "@idEmp",
+                            idEmpleado
+                        );
 
-                        using (MySqlDataReader reader = (MySqlDataReader)await cmdExiste.ExecuteReaderAsync())
+                        cmdExiste.Parameters.AddWithValue(
+                            "@fecha",
+                            fechaSel
+                        );
+
+                        using (MySqlDataReader reader =
+                            (MySqlDataReader)
+                            await cmdExiste.ExecuteReaderAsync())
                         {
                             if (await reader.ReadAsync())
                             {
@@ -247,7 +262,8 @@ namespace ProyectoAsis22K26Nominas
                                                observaciones_asistencia = IF(observaciones_asistencia IS NULL OR observaciones_asistencia = '', @obs, CONCAT(observaciones_asistencia, ' | ', @obs))
                                            WHERE id_empleado = @idEmp AND fecha_asistencia = @fecha;";
 
-                        using (MySqlCommand cmdUpd = new MySqlCommand(qUpdate, con))
+                        using (MySqlCommand cmdUpd =
+                            new MySqlCommand(qUpdate, con))
                         {
                             cmdUpd.Parameters.AddWithValue("@hSalida", horaActual);
                             cmdUpd.Parameters.AddWithValue("@hTrab", horasTrabajadas);
@@ -281,11 +297,18 @@ namespace ProyectoAsis22K26Nominas
                         }
 
                         int minutosTardanza = 0;
-                        TimeSpan horaLimite = new TimeSpan(8, 0, 0);
+                        TimeSpan horaLimite =
+                            new TimeSpan(8, 0, 0);
 
-                        if (tipoRegistro == "Llegada Tardía" || horaActual > horaLimite)
+                        if (tipoRegistro == "Llegada Tardía" ||
+                            horaActual > horaLimite)
                         {
-                            minutosTardanza = (int)Math.Max(0, (horaActual - horaLimite).TotalMinutes);
+                            minutosTardanza =
+                                (int)Math.Max(
+                                    0,
+                                    (horaActual - horaLimite)
+                                    .TotalMinutes
+                                );
                         }
 
                         string qInsert = @"INSERT INTO tbl_asistencias
@@ -305,7 +328,8 @@ namespace ProyectoAsis22K26Nominas
                                               @obs
                                           );";
 
-                        using (MySqlCommand cmdIns = new MySqlCommand(qInsert, con))
+                        using (MySqlCommand cmdIns =
+                            new MySqlCommand(qInsert, con))
                         {
                             cmdIns.Parameters.AddWithValue("@idEmp", idEmpleado);
                             cmdIns.Parameters.AddWithValue("@fecha", fechaSel);
@@ -358,6 +382,20 @@ namespace ProyectoAsis22K26Nominas
 
             if (Cbo_tipregistro.Items.Count > 0) Cbo_tipregistro.SelectedIndex = 0;
             Txt_codempleado.Focus();
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
         }
 
         private void Dgv_asistenicas_CellContentClick(object sender, DataGridViewCellEventArgs e)

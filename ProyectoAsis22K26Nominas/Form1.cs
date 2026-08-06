@@ -185,9 +185,8 @@ namespace ProyectoAsis22K26Nominas
 
         private void AplicarPermisos()
         {
-            // =====================================================
+
             // EMPLEADOS
-            // =====================================================
 
             bool verNuevoEmpleado =
                 TienePermisoVer("FormNuevoregistro");
@@ -208,9 +207,8 @@ namespace ProyectoAsis22K26Nominas
                 verMantenimiento;
 
 
-            // =====================================================
+
             // NÓMINA
-            // =====================================================
 
             bool verMovimientos =
                 TienePermisoVer("FormMovimientosPlanilla");
@@ -231,10 +229,7 @@ namespace ProyectoAsis22K26Nominas
                 verHistorialNomina;
 
 
-            // =====================================================
             // VACACIONES
-            // =====================================================
-
             bool verSolicitudVacaciones =
                 TienePermisoVer("FormSolicitudVacaciones");
 
@@ -254,10 +249,7 @@ namespace ProyectoAsis22K26Nominas
                 verHistorialVacaciones;
 
 
-            // =====================================================
             // PAGOS
-            // =====================================================
-
             bool verLiquidaciones =
                 TienePermisoVer("FormLiquidacionRecibo");
 
@@ -272,9 +264,8 @@ namespace ProyectoAsis22K26Nominas
                 verHistorialPagos;
 
 
-            // =====================================================
+
             // ASISTENCIA
-            // =====================================================
 
             bool verAsistencia =
                 TienePermisoVer("Formasistencia");
@@ -286,18 +277,13 @@ namespace ProyectoAsis22K26Nominas
             Btn_asistencia.Visible = verAsistencia;
 
 
-            // =====================================================
-            // AYUDA
-            // =====================================================
 
+            // AYUDA
             Btn_Help.Visible =
                 TienePermisoVer("Formhelp");
 
 
-            // =====================================================
             // BITÁCORA
-            // =====================================================
-
             button1.Visible =
                 TienePermisoVer("FormBitacora");
 
@@ -312,10 +298,8 @@ namespace ProyectoAsis22K26Nominas
 
 
 
-        // =====================================================
-        // MENÚS PRINCIPALES
-        // =====================================================
 
+        // MENÚS PRINCIPALES
         private void Btn_empleado_Click(
             object sender,
             EventArgs e
@@ -356,9 +340,7 @@ namespace ProyectoAsis22K26Nominas
             showSubMenu(Pnl_asistencia);
         }
 
-        // =====================================================
         // EMPLEADOS
-        // =====================================================
 
         private void Btn_nuevempleado_Click(
             object sender,
@@ -396,10 +378,8 @@ namespace ProyectoAsis22K26Nominas
             hideSubMenu();
         }
 
-        // =====================================================
-        // NÓMINA
-        // =====================================================
 
+        // NÓMINA
         private void Btn_movplanilla_Click(
             object sender,
             EventArgs e
@@ -436,9 +416,8 @@ namespace ProyectoAsis22K26Nominas
             hideSubMenu();
         }
 
-        // =====================================================
+
         // VACACIONES
-        // =====================================================
 
         private void Btn_nvsolicitud_Click(
             object sender,
@@ -476,9 +455,7 @@ namespace ProyectoAsis22K26Nominas
             hideSubMenu();
         }
 
-        // =====================================================
         // PAGOS
-        // =====================================================
 
         private void Btn_luiquidrecibos_Click(
             object sender,
@@ -504,9 +481,8 @@ namespace ProyectoAsis22K26Nominas
             hideSubMenu();
         }
 
-        // =====================================================
+
         // ASISTENCIA
-        // =====================================================
 
         private void Btn_asistencia_Click(
             object sender,
@@ -520,9 +496,8 @@ namespace ProyectoAsis22K26Nominas
             hideSubMenu();
         }
 
-        // =====================================================
+
         // AYUDA Y BITÁCORA
-        // =====================================================
 
         private void Btn_Help_Click(
             object sender,
@@ -548,22 +523,46 @@ namespace ProyectoAsis22K26Nominas
             hideSubMenu();
         }
 
-        // =====================================================
-        // SALIR
-        // =====================================================
 
-        private void Btn_exit_Click(
-            object sender,
-            EventArgs e
-        )
+        // SALIR
+
+        private void Btn_exit_Click(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.Cancel;
-            this.Close();
+            // 1. Registrar la salida en la bitácora antes de limpiar la sesión
+            if (SesionUsuario.IdUsuario > 0)
+            {
+                Bitacora.Registrar(
+                    "Cierre de sesión",
+                    "El usuario " + SesionUsuario.Usuario + " cerró sesión correctamente."
+                );
+            }
+
+            // 2. Limpiar las variables estáticas de la sesión activa
+            SesionUsuario.IdUsuario = 0;
+            SesionUsuario.Usuario = string.Empty;
+            SesionUsuario.IdRol = 0;
+            SesionUsuario.Rol = string.Empty;
+
+            // 3. Ocultar la ventana actual y abrir la pantalla de Login
+            this.Hide();
+
+            FormLogin login = new FormLogin();
+
+        
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                
+                this.Show();
+            }
+            else
+            {
+                
+                this.Close();
+            }
         }
 
-        // =====================================================
+
         // EVENTOS VACÍOS DEL DISEÑADOR
-        // =====================================================
 
         private void panel1_Paint(
             object sender,

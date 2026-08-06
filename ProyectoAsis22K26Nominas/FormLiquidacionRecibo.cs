@@ -104,5 +104,10 @@ namespace ProyectoAsis22K26Nominas
 
             Btn_Buscar.Enabled = permiso.Ver;
         }
+
+        private void Dgv_Liquidacion_Recibo_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

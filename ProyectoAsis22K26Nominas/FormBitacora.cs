@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace ProyectoAsis22K26Nominas
@@ -12,7 +14,44 @@ namespace ProyectoAsis22K26Nominas
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void FormBitacora_Load(object sender, EventArgs e)
+        {
+            CargarBitacora();
+        }
+
+        // Se ejecuta cuando el formulario ya tomó su tamaño completo en la pantalla
+        private void FormBitacora_Shown(object sender, EventArgs e)
+        {
+            AcomodarBotonAbajo();
+        }
+
+        private void FormBitacora_Resize(object sender, EventArgs e)
+        {
+            AcomodarBotonAbajo();
+        }
+
+        private void AcomodarBotonAbajo()
+        {
+            if (Dgv_Bitacora == null || Btn_actualizar == null) return;
+
+            // 1. Quitar anclajes para tomar control total por código
+            Dgv_Bitacora.Anchor = AnchorStyles.None;
+            Btn_actualizar.Anchor = AnchorStyles.None;
+
+            // 2. Acortar la altura de la tabla para dejar 80 píxeles libres abajo
+            Dgv_Bitacora.Height = this.ClientSize.Height - Dgv_Bitacora.Top - 80;
+
+            // 3. Forzar al botón a colocarse a 20 píxeles del borde inferior
+            Btn_actualizar.Top = this.ClientSize.Height - Btn_actualizar.Height - 20;
+
+            // 4. Centrar el botón horizontalmente respecto a la tabla
+            Btn_actualizar.Left = Dgv_Bitacora.Left + (Dgv_Bitacora.Width - Btn_actualizar.Width) / 2;
+
+            // 5. Asegurar que quede por encima de cualquier otro elemento
+            Btn_actualizar.BringToFront();
+        }
+
+        private void Btn_actualizar_click(object sender, EventArgs e)
         {
             CargarBitacora();
         }
@@ -25,7 +64,6 @@ namespace ProyectoAsis22K26Nominas
                 {
                     conexion.Open();
 
-                    // Se consulta directamente la vista 'vw_bitacora' creada en MySQL
                     string consulta = @"SELECT 
                                             id_bitacora AS Codigo,
                                             fecha_bitacora AS Fecha,
@@ -33,12 +71,10 @@ namespace ProyectoAsis22K26Nominas
                                             nombre_empleado AS Empleado,
                                             nombre_rol AS Rol,
                                             direccion_ip AS IP,
-                                            nombre_formulario AS Formulario,
-                                            tabla_afectada AS Tabla,
                                             accion_bitacora AS Accion,
                                             descripcion_bitacora AS Descripcion
                                         FROM vw_bitacora
-                                        ORDER BY fecha_bitacora DESC;";
+                                        ORDER BY id_bitacora DESC, fecha_bitacora DESC;";
 
                     using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
                     {
@@ -60,6 +96,11 @@ namespace ProyectoAsis22K26Nominas
                     MessageBoxIcon.Error
                 );
             }
+        }
+
+        private void Dgv_Bitacora_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -16,26 +16,20 @@ namespace ProyectoAsis22K26Nominas
         {
             InitializeComponent();
 
-            // Modo oscuro barra título
-            // 1. Activa el modo oscuro base
             int useDarkMode = 1;
             DwmSetWindowAttribute(this.Handle, 20, ref useDarkMode, sizeof(int));
 
-            // 2. Asigna el color RGB (11, 7, 17) a la Barra de Título
             int captionColor = ColorTranslator.ToWin32(Color.FromArgb(11, 7, 17));
             DwmSetWindowAttribute(this.Handle, 35, ref captionColor, sizeof(int));
 
-            // 3. Pone el texto de la barra de título en color Blanco para contrastar
             int textColor = ColorTranslator.ToWin32(Color.White);
             DwmSetWindowAttribute(this.Handle, 36, ref textColor, sizeof(int));
 
-            // 4. Aplica también el color al fondo de la ventana principal
             this.BackColor = Color.FromArgb(11, 7, 17);
         }
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            // Centra la pantalla de login al iniciar
             this.StartPosition = FormStartPosition.CenterScreen;
         }
 
@@ -71,17 +65,16 @@ namespace ProyectoAsis22K26Nominas
                 {
                     conexion.Open();
 
-                    // Consulta adaptada exactamente a la nueva base de datos BD_ProyectoNominas
                     string consulta = @"SELECT
                                             u.id_usuario,
                                             u.nombre_usuario AS Usuario,
                                             u.id_rol,
                                             r.nombre_rol,
-                                            CONCAT(e.nombre_emp, ' ', e.apellido_emp) AS nombre_completo
+                                            CONCAT(IFNULL(e.nombre_emp, ''), ' ', IFNULL(e.apellido_emp, '')) AS nombre_completo
                                         FROM tbl_usuarios u
                                         INNER JOIN tbl_roles r 
                                             ON u.id_rol = r.id_rol
-                                        INNER JOIN tbl_empleados e 
+                                        LEFT JOIN tbl_empleados e 
                                             ON u.id_empleado = e.id_empleado
                                         WHERE u.nombre_usuario = @usuario
                                           AND u.contrasena = @contrasena
@@ -97,6 +90,7 @@ namespace ProyectoAsis22K26Nominas
                         {
                             if (lector.Read())
                             {
+                                // 1. Cargar datos en la sesión activa
                                 SesionUsuario.IdUsuario = Convert.ToInt32(lector["id_usuario"]);
                                 SesionUsuario.Usuario = lector["Usuario"].ToString();
                                 SesionUsuario.IdRol = Convert.ToInt32(lector["id_rol"]);
@@ -110,9 +104,11 @@ namespace ProyectoAsis22K26Nominas
 
                 if (ingresoCorrecto)
                 {
+                    // 2. Registrar en la bitácora pasando el nombre del formulario ("FormLogin")
                     Bitacora.Registrar(
                         "Inicio de sesión",
-                        "El usuario " + SesionUsuario.Usuario + " inició sesión correctamente."
+                        "El usuario " + SesionUsuario.Usuario + " inició sesión correctamente.",
+                        "FormLogin"
                     );
 
                     MessageBox.Show(

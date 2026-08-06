@@ -1,6 +1,8 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,6 +23,17 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormDirectorioEmpleados_Load(object sender, EventArgs e)
         {
+            // Ajustar visualización si el formulario es muy grande para la pantalla
+            this.AutoScroll = true;
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            // Bloquear edición de todos los controles excepto id_empleado
+            ConfigurarSoloLectura();
+
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Fecha, 20);
+            Redondear(Pnl_Laboral, 20);
+
             LimpiarFiltros();
 
             FormularioPermisos permiso =
@@ -34,10 +47,34 @@ namespace ProyectoAsis22K26Nominas
             }
 
             Btn_Buscar.Enabled = permiso.Ver;
-            Btn_exportar.Enabled = permiso.Modificar;
         }
 
         #region Métodos de Carga e Inicialización
+
+        // Bloquea los campos para que solo se use Txt_idempleado como buscador
+        private void ConfigurarSoloLectura()
+        {
+            Txt_idempleado.ReadOnly = false;
+
+            Txt_identificacion.ReadOnly = true;
+            Txt_nombre.ReadOnly = true;
+            Txt_apellidos.ReadOnly = true;
+            Txt_telefono.ReadOnly = true;
+            Txt_direccion.ReadOnly = true;
+            Txt_correo.ReadOnly = true;
+            Txt_salario.ReadOnly = true;
+
+            Txt_departamento.ReadOnly = true;
+            Txt_iddepartamento.ReadOnly = true;
+
+            Txt_puesto.ReadOnly = true;
+            Txt_idpuesto.ReadOnly = true;
+
+            Txt_estado.ReadOnly = true;
+
+            Dtp_fechnacimiento.Enabled = false;
+            Dtp_fechcontratacion.Enabled = false;
+        }
 
         private void LimpiarFiltros()
         {
@@ -196,6 +233,19 @@ namespace ProyectoAsis22K26Nominas
 
         private async void Btn_Buscar_Click(object sender, EventArgs e)
         {
+            // Validar que se haya ingresado el ID antes de consultar la base de datos
+            if (string.IsNullOrWhiteSpace(Txt_idempleado.Text))
+            {
+                MessageBox.Show(
+                    "Para buscar ingrese el ID del empleado.",
+                    "Advertencia",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                Txt_idempleado.Focus();
+                return;
+            }
+
             await BuscarEmpleadoAsync();
         }
 
@@ -229,6 +279,25 @@ namespace ProyectoAsis22K26Nominas
         #endregion
 
         private void Btn_exportar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

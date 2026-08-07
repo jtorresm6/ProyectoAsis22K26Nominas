@@ -1,27 +1,20 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
-//Parte trabajada por: Julio Roberto Rosales Mejía - Carné: 0901-23-1426
-//Curso:Análisis de Sistemas II
-//Fecha de creación: 27/07/2026
-//Fecha de última modificación: 31/07/2026
-
-
 namespace ProyectoAsis22K26Nominas
 {
     public partial class FormControlSaldos : Form
     {
-        // Variables globales
-        private int idEmpleadoSeleccionado = 0;
-
         public FormControlSaldos()
         {
             InitializeComponent();
@@ -311,11 +304,6 @@ namespace ProyectoAsis22K26Nominas
             ActualizarSaldos();
         }
 
-        // ---- Botón Refrescar ----
-        private void Btn_Refrescar_Click(object sender, EventArgs e)
-        {
-            Dtp_Dia_Vacaciones.Value = DateTime.Today;
-            ActualizarSaldos();
         }
 
         

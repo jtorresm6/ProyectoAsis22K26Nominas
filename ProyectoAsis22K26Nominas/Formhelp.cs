@@ -98,7 +98,8 @@ namespace ProyectoAsis22K26Nominas
 
         //Mensaje default del sistema que se muestra al abrir el centro de ayuda, antes de seleccionar alguna opción.
 
-        private void Formhelp_Load(object sender, EventArgs e) {
+        private void Formhelp_Load(object sender, EventArgs e)
+        {
             Rtb_Info.ReadOnly = true;
 
             Rtb_Info.Text =
@@ -108,25 +109,68 @@ namespace ProyectoAsis22K26Nominas
                 "Si se quiere ver información mas detallada sobre el sistema, seleccionar el botón " +
                 "'Manual en PDF' para una mejor visualización. ";
 
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso("Formhelp"
+            );
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_Pdf.Enabled = permiso.Ver;
+
         }
+
+        
 
         private void Btn_Cerrar_Click(object sender, EventArgs e) {
             this.Close();
         }
 
-        //Llamar el .pdf de nuestro manual de usuario, el cual se encuentra en una carpeta de manuales.
 
-        private void Btn_Pdf_Click(object sender, EventArgs e) {
-            string ruta = Application.StartupPath +
-              "\\Manuales\\Nominas.pdf";
+        private void Btn_Pdf_Click(object sender, EventArgs e)
+        {
 
-            if (File.Exists(ruta))
+            string rutaEjecutable = Path.Combine(Application.StartupPath, "manual", "Manual_de_usuario.pdf");
+
+            string rutaProyecto = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..\manual\Manual_de_usuario.pdf"));
+
+
+            string rutaAbsoluta = @"C:\Users\josej\source\repos\ProyectoAsis22K26Nominas\ProyectoAsis22K26Nominas\manual\Manual_de_usuario.pdf";
+
+            string rutaFinal = "";
+
+            if (File.Exists(rutaEjecutable))
             {
-                Process.Start(ruta);
+                rutaFinal = rutaEjecutable;
+            }
+            else if (File.Exists(rutaProyecto))
+            {
+                rutaFinal = rutaProyecto;
+            }
+            else if (File.Exists(rutaAbsoluta))
+            {
+                rutaFinal = rutaAbsoluta;
+            }
+
+            // Abrir el archivo si existe
+            if (!string.IsNullOrEmpty(rutaFinal))
+            {
+                try
+                {
+                    Process.Start(new ProcessStartInfo(rutaFinal) { UseShellExecute = true });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al intentar abrir el PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("No se encontró el archivo PDF.");
+                MessageBox.Show("No se encontró el archivo 'Manual_de_usuario.pdf' en la carpeta 'manual'.", "Archivo no encontrado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }

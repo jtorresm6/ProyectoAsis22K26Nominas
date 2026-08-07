@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-
-
 
 // Roger Yankhel de Jesús Herrera Alcántara 0901-23-2429 
 // Fecha de creacion: 25/07/2026
@@ -21,8 +15,6 @@ namespace ProyectoAsis22K26Nominas
     {
         MySqlConnection conexion;
         MySqlCommand comando;
-        MySqlDataAdapter adaptador;
-        DataTable tabla;
 
         int idPlanillaSeleccionada = 0;
 
@@ -49,6 +41,9 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormGenerarPlanilla_Load(object sender, EventArgs e)
         {
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Detalle, 20);
+
             Txt_Total_Ingresos.ReadOnly = true;
             Txt_Total_Descuentos.ReadOnly = true;
             Txt_Total_Paga.ReadOnly = true;
@@ -57,6 +52,18 @@ namespace ProyectoAsis22K26Nominas
             Dgv_Detalle_Planilla.AllowUserToAddRows = false;
             Dgv_Detalle_Planilla.ReadOnly = true;
             Dgv_Detalle_Planilla.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            FormularioPermisos permiso =
+                GestionarPermisos.ObtenerPermiso("FormGenerarPlanilla");
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Close();
+                return;
+            }
+
+            Btn_Generar.Enabled = permiso.Crear;
         }
 
         private void GenerarPlanilla()
@@ -69,84 +76,100 @@ namespace ProyectoAsis22K26Nominas
                 conexion.Open();
 
                 string consulta = @"
-        SELECT
-        e.cmp_id_empleado,
-        CONCAT(e.cmp_nombre,' ',e.cmp_apellido) AS Empleado,
-        p.cmp_nombre AS Puesto,
-        p.cmp_salario_base
-        FROM tbl_Empleados e
-        INNER JOIN tbl_Puestos p
-        ON e.cmp_id_puesto = p.cmp_id_puesto
-        WHERE e.cmp_estado='activo'";
+SELECT
+    e.id_empleado,
+    CONCAT(e.nombre_emp,' ',e.apellido_emp) AS Empleado,
+    pu.nombre_puesto AS Puesto,
+    SUM(pd.salario_base) AS SalarioBase,
+    SUM(pd.total_percepciones) AS Ingresos,
+    SUM(pd.total_deducciones) AS Descuentos,
+    SUM(pd.salario_neto) AS Neto
+FROM tbl_planillas pl
+INNER JOIN tbl_planilla_detalle pd
+    ON pl.id_planilla = pd.id_planilla
+INNER JOIN tbl_empleados e
+    ON pd.id_empleado = e.id_empleado
+INNER JOIN tbl_puestos pu
+    ON e.id_puesto = pu.id_puesto
+WHERE pl.fecha_inicio <= @fin
+AND pl.fecha_fin >= @inicio
+GROUP BY
+    e.id_empleado,
+    Empleado,
+    Puesto
+ORDER BY Empleado;";
 
                 comando = new MySqlCommand(consulta, conexion);
-
-                MySqlDataReader lector = comando.ExecuteReader();
-
-                decimal totalIngresos = 0;
-                decimal totalDescuentos = 0;
-                decimal totalPagar = 0;
-
-                while (lector.Read())
+                comando.Parameters.AddWithValue("@inicio", Dtp_Fecha_Inicio.Value.Date);
+                comando.Parameters.AddWithValue("@fin", Dtp_Fecha_Fin.Value.Date);
+                using (MySqlDataReader lector = comando.ExecuteReader())
                 {
-                    int idEmpleado = Convert.ToInt32(lector["cmp_id_empleado"]);
-                    string empleado = lector["Empleado"].ToString();
-                    string puesto = lector["Puesto"].ToString();
-                    decimal salarioBase = Convert.ToDecimal(lector["cmp_salario_base"]);
+                    decimal totalIngresos = 0;
+                    decimal totalDescuentos = 0;
+                    decimal totalPagar = 0;
 
-                    // CALCULOS
-                    decimal ingresos = salarioBase;
-                    decimal descuentos = 0;
-                    decimal salarioNeto = ingresos - descuentos;
+                    while (lector.Read())
+                    {
+                        int idEmpleado = Convert.ToInt32(lector["id_empleado"]);
+                        string empleado = lector["Empleado"].ToString();
+                        string puesto = lector["Puesto"].ToString();
 
-                    totalIngresos += ingresos;
-                    totalDescuentos += descuentos;
-                    totalPagar += salarioNeto;
+                        decimal salarioBase = Convert.ToDecimal(lector["SalarioBase"]);
+                        decimal ingresos = Convert.ToDecimal(lector["Ingresos"]);
+                        decimal descuentos = Convert.ToDecimal(lector["Descuentos"]);
+                        decimal salarioNeto = Convert.ToDecimal(lector["Neto"]);
 
-                    Dgv_Detalle_Planilla.Rows.Add(
-                        idEmpleado,
-                        empleado,
-                        puesto,
-                        salarioBase,
-                        ingresos,
-                        descuentos,
-                        salarioNeto
-                    );
+                        totalIngresos += ingresos;
+                        totalDescuentos += descuentos;
+                        totalPagar += salarioNeto;
+
+                        Dgv_Detalle_Planilla.Rows.Add(
+                            idEmpleado,
+                            empleado,
+                            puesto,
+                            salarioBase,
+                            ingresos,
+                            descuentos,
+                            salarioNeto
+                        );
+                    }
+
+                    Txt_Total_Ingresos.Text = totalIngresos.ToString("N2");
+                    Txt_Total_Descuentos.Text = totalDescuentos.ToString("N2");
+                    Txt_Total_Paga.Text = totalPagar.ToString("N2");
                 }
-
-                lector.Close();
-                conexion.Close();
-
-                Txt_Total_Ingresos.Text = totalIngresos.ToString("N2");
-                Txt_Total_Descuentos.Text = totalDescuentos.ToString("N2");
-                Txt_Total_Paga.Text = totalPagar.ToString("N2");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
-
+                MessageBox.Show("Error al generar planilla: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
                 if (conexion != null && conexion.State == ConnectionState.Open)
+                {
                     conexion.Close();
+                }
             }
         }
 
-        private void Dpt_Fecha_Inicio_ValueChanged(object sender, EventArgs e)
-        {
-        }
+        private void Dpt_Fecha_Inicio_ValueChanged(object sender, EventArgs e) { }
 
-        private void Lbl_Empleado_Click(object sender, EventArgs e)
-        {
-        }
+        private void Lbl_Empleado_Click(object sender, EventArgs e) { }
 
         private void Btn_Generar_Click(object sender, EventArgs e)
         {
             if (Dtp_Fecha_Inicio.Value.Date > Dtp_Fecha_Fin.Value.Date)
             {
-                MessageBox.Show("La fecha de inicio no puede ser mayor a la fecha final.");
+                MessageBox.Show("La fecha de inicio no puede ser mayor a la fecha final.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             GenerarPlanilla();
+
+            Bitacora.Registrar(
+                "Generación de planilla",
+                SesionUsuario.Usuario + " generó una nueva planilla."
+            );
         }
 
         private void Btn_Limpiar_Click(object sender, EventArgs e)
@@ -164,7 +187,33 @@ namespace ProyectoAsis22K26Nominas
             Dgv_Detalle_Planilla.Rows.Clear();
         }
 
-        private void FormGenerarPlanilla_Load_1(object sender, EventArgs e)
+        private void FormGenerarPlanilla_Load_1(object sender, EventArgs e) { }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }

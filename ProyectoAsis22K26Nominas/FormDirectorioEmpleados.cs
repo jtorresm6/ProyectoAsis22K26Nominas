@@ -1,16 +1,16 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-
-//Parte trabajada por: Jose Javier Torres Martinez - Carné: 0901-23-1091
-//Curso:Análisis de Sistemas II
-//Fecha de creación: 23-07-2026
-//Fecha de última modificación: 27-07-2026
+// Parte trabajada por: Jose Javier Torres Martinez - Carné: 0901-23-1091
+// Curso: Análisis de Sistemas II
+// Fecha de creación: 23-07-2026
+// Fecha de última modificación: 27-07-2026
 
 namespace ProyectoAsis22K26Nominas
 {
@@ -23,10 +23,58 @@ namespace ProyectoAsis22K26Nominas
 
         private void FormDirectorioEmpleados_Load(object sender, EventArgs e)
         {
+            // Ajustar visualización si el formulario es muy grande para la pantalla
+            this.AutoScroll = true;
+            this.StartPosition = FormStartPosition.CenterScreen;
+
+            // Bloquear edición de todos los controles excepto id_empleado
+            ConfigurarSoloLectura();
+
+            Redondear(Pnl_Personal, 20);
+            Redondear(Pnl_Fecha, 20);
+            Redondear(Pnl_Laboral, 20);
+
             LimpiarFiltros();
+
+            FormularioPermisos permiso =
+            GestionarPermisos.ObtenerPermiso("FormDirectorioEmpleados");
+
+            if (!permiso.Ver)
+            {
+                MessageBox.Show("No tiene permiso para este formulario.");
+                Close();
+                return;
+            }
+
+            Btn_Buscar.Enabled = permiso.Ver;
         }
 
         #region Métodos de Carga e Inicialización
+
+        // Bloquea los campos para que solo se use Txt_idempleado como buscador
+        private void ConfigurarSoloLectura()
+        {
+            Txt_idempleado.ReadOnly = false;
+
+            Txt_identificacion.ReadOnly = true;
+            Txt_nombre.ReadOnly = true;
+            Txt_apellidos.ReadOnly = true;
+            Txt_telefono.ReadOnly = true;
+            Txt_direccion.ReadOnly = true;
+            Txt_correo.ReadOnly = true;
+            Txt_salario.ReadOnly = true;
+
+            Txt_departamento.ReadOnly = true;
+            Txt_iddepartamento.ReadOnly = true;
+
+            Txt_puesto.ReadOnly = true;
+            Txt_idpuesto.ReadOnly = true;
+
+            Txt_estado.ReadOnly = true;
+
+            Dtp_fechnacimiento.Enabled = false;
+            Dtp_fechcontratacion.Enabled = false;
+        }
 
         private void LimpiarFiltros()
         {
@@ -61,127 +109,108 @@ namespace ProyectoAsis22K26Nominas
         {
             try
             {
-                using (MySqlConnection con = ConexionBD.ObtenerConexion())
+                using (MySqlConnection conexion = ConexionBD.ObtenerConexion())
                 {
-                    await con.OpenAsync();
+                    await conexion.OpenAsync();
 
-                    StringBuilder query = new StringBuilder(@"
-                        SELECT e.*, 
-                               d.cmp_nombre AS departamento, 
-                               p.cmp_nombre AS puesto, 
-                               p.cmp_salario_base AS salario,
-                               (SELECT cmp_telefono FROM tbl_Telefonos WHERE cmp_id_empleado = e.cmp_id_empleado LIMIT 1) AS telefono,
-                               (SELECT cmp_correo FROM tbl_Correos WHERE cmp_id_empleado = e.cmp_id_empleado LIMIT 1) AS correo
-                        FROM tbl_Empleados e
-                        LEFT JOIN tbl_Departamentos d ON e.cmp_id_departamento = d.cmp_id_departamento
-                        LEFT JOIN tbl_Puestos p ON e.cmp_id_puesto = p.cmp_id_puesto
-                        WHERE 1=1 ");
+                    string consulta = @"
+                        SELECT
+                            e.id_empleado,
+                            e.dpi_emp,
+                            e.nombre_emp,
+                            e.apellido_emp,
+                            e.fecha_nacimiento,
+                            e.direccion_emp,
+                            e.fecha_contratacion,
+                            e.estado_emp,
+                            p.id_departamento,
+                            e.id_puesto,
+                            d.nombre_depto AS departamento,
+                            p.nombre_puesto AS puesto,
+                            p.salario_base AS salario,
+                            t.numero_tel AS telefono,
+                            c.correo AS correo
+                        FROM tbl_empleados e
+                        INNER JOIN tbl_puestos p 
+                            ON e.id_puesto = p.id_puesto
+                        INNER JOIN tbl_departamentos d 
+                            ON p.id_departamento = d.id_departamento
+                        LEFT JOIN tbl_telefonos t 
+                            ON e.id_empleado = t.id_empleado
+                        LEFT JOIN tbl_correos c 
+                            ON e.id_empleado = c.id_empleado
+                        WHERE e.id_empleado = @idEmpleado
+                        LIMIT 1;";
 
-                    using (MySqlCommand cmd = new MySqlCommand())
+                    using (MySqlCommand comando = new MySqlCommand(consulta, conexion))
                     {
-                        // Filtro ID Empleado
-                        if (int.TryParse(Txt_idempleado.Text.Trim(), out int idEmp))
+                        comando.Parameters.AddWithValue("@idEmpleado", Txt_idempleado.Text.Trim());
+
+                        using (MySqlDataReader lector = (MySqlDataReader)await comando.ExecuteReaderAsync())
                         {
-                            query.Append(" AND e.cmp_id_empleado = @idEmp");
-                            cmd.Parameters.AddWithValue("@idEmp", idEmp);
-                        }
-
-                        // Filtro DPI / Identificación
-                        if (!string.IsNullOrWhiteSpace(Txt_identificacion.Text))
-                        {
-                            query.Append(" AND e.cmp_dpi LIKE @dpi");
-                            cmd.Parameters.AddWithValue("@dpi", "%" + Txt_identificacion.Text.Trim() + "%");
-                        }
-
-                        // Filtro Nombre
-                        if (!string.IsNullOrWhiteSpace(Txt_nombre.Text))
-                        {
-                            query.Append(" AND e.cmp_nombre LIKE @nombre");
-                            cmd.Parameters.AddWithValue("@nombre", "%" + Txt_nombre.Text.Trim() + "%");
-                        }
-
-                        // Filtro Apellido
-                        if (!string.IsNullOrWhiteSpace(Txt_apellidos.Text))
-                        {
-                            query.Append(" AND e.cmp_apellido LIKE @apellido");
-                            cmd.Parameters.AddWithValue("@apellido", "%" + Txt_apellidos.Text.Trim() + "%");
-                        }
-
-                        // Filtro ID Departamento
-                        if (int.TryParse(Txt_iddepartamento.Text.Trim(), out int idDepto))
-                        {
-                            query.Append(" AND e.cmp_id_departamento = @idDepto");
-                            cmd.Parameters.AddWithValue("@idDepto", idDepto);
-                        }
-
-                        // Filtro Nombre Departamento
-                        if (!string.IsNullOrWhiteSpace(Txt_departamento.Text))
-                        {
-                            query.Append(" AND d.cmp_nombre LIKE @depto");
-                            cmd.Parameters.AddWithValue("@depto", "%" + Txt_departamento.Text.Trim() + "%");
-                        }
-
-                        // Filtro ID Puesto
-                        if (int.TryParse(Txt_idpuesto.Text.Trim(), out int idPuesto))
-                        {
-                            query.Append(" AND e.cmp_id_puesto = @idPuesto");
-                            cmd.Parameters.AddWithValue("@idPuesto", idPuesto);
-                        }
-
-                        // Filtro Nombre Puesto
-                        if (!string.IsNullOrWhiteSpace(Txt_puesto.Text))
-                        {
-                            query.Append(" AND p.cmp_nombre LIKE @puesto");
-                            cmd.Parameters.AddWithValue("@puesto", "%" + Txt_puesto.Text.Trim() + "%");
-                        }
-
-                        // Filtro Estado
-                        if (!string.IsNullOrWhiteSpace(Txt_estado.Text))
-                        {
-                            query.Append(" AND e.cmp_estado LIKE @estado");
-                            cmd.Parameters.AddWithValue("@estado", "%" + Txt_estado.Text.Trim() + "%");
-                        }
-
-                        query.Append(" LIMIT 1;");
-
-                        cmd.Connection = con;
-                        cmd.CommandText = query.ToString();
-
-                        using (MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync())
-                        {
-                            if (await reader.ReadAsync())
+                            if (await lector.ReadAsync())
                             {
-                                // Datos de Empleado
-                                Txt_idempleado.Text = reader["cmp_id_empleado"].ToString();
-                                Txt_identificacion.Text = reader["cmp_dpi"].ToString();
-                                Txt_nombre.Text = reader["cmp_nombre"].ToString();
-                                Txt_apellidos.Text = reader["cmp_apellido"].ToString();
-                                Txt_direccion.Text = reader["cmp_direccion"].ToString();
-                                Txt_estado.Text = reader["cmp_estado"].ToString();
+                                Txt_idempleado.Text = lector["id_empleado"].ToString();
+                                Txt_identificacion.Text = lector["dpi_emp"].ToString();
+                                Txt_nombre.Text = lector["nombre_emp"].ToString();
+                                Txt_apellidos.Text = lector["apellido_emp"].ToString();
+                                Txt_direccion.Text = lector["direccion_emp"].ToString();
+                                Txt_estado.Text = lector["estado_emp"].ToString();
 
-                                // IDs Relacionales
-                                Txt_iddepartamento.Text = reader["cmp_id_departamento"].ToString();
-                                Txt_idpuesto.Text = reader["cmp_id_puesto"].ToString();
+                                Txt_iddepartamento.Text = lector["id_departamento"].ToString();
+                                Txt_idpuesto.Text = lector["id_puesto"].ToString();
 
-                                // Nombres y Detalles Relacionados
-                                Txt_departamento.Text = reader["departamento"] != DBNull.Value ? reader["departamento"].ToString() : string.Empty;
-                                Txt_puesto.Text = reader["puesto"] != DBNull.Value ? reader["puesto"].ToString() : string.Empty;
-                                Txt_salario.Text = reader["salario"] != DBNull.Value ? reader["salario"].ToString() : string.Empty;
+                                Txt_departamento.Text = lector["departamento"] != DBNull.Value
+                                    ? lector["departamento"].ToString()
+                                    : "";
 
-                                // Contacto
-                                Txt_telefono.Text = reader["telefono"] != DBNull.Value ? reader["telefono"].ToString() : string.Empty;
-                                Txt_correo.Text = reader["correo"] != DBNull.Value ? reader["correo"].ToString() : string.Empty;
+                                Txt_puesto.Text = lector["puesto"] != DBNull.Value
+                                    ? lector["puesto"].ToString()
+                                    : "";
 
-                                // Fechas
-                                if (reader["cmp_fecha_nacimiento"] != DBNull.Value)
-                                    Dtp_fechnacimiento.Value = Convert.ToDateTime(reader["cmp_fecha_nacimiento"]);
+                                Txt_salario.Text = lector["salario"] != DBNull.Value
+                                    ? lector["salario"].ToString()
+                                    : "";
 
-                                if (reader["cmp_fecha_contratacion"] != DBNull.Value)
-                                    Dtp_fechcontratacion.Value = Convert.ToDateTime(reader["cmp_fecha_contratacion"]);
+                                Txt_telefono.Text = lector["telefono"] != DBNull.Value
+                                    ? lector["telefono"].ToString()
+                                    : "";
+
+                                Txt_correo.Text = lector["correo"] != DBNull.Value
+                                    ? lector["correo"].ToString()
+                                    : "";
+
+                                if (lector["fecha_nacimiento"] != DBNull.Value)
+                                {
+                                    Dtp_fechnacimiento.Value = Convert.ToDateTime(lector["fecha_nacimiento"]);
+                                }
+
+                                if (lector["fecha_contratacion"] != DBNull.Value)
+                                {
+                                    Dtp_fechcontratacion.Value = Convert.ToDateTime(lector["fecha_contratacion"]);
+                                }
+
+                                Bitacora.Registrar(
+                                    "Consulta de empleado",
+                                    "El usuario " +
+                                    SesionUsuario.Usuario +
+                                    " consultó los datos del empleado " +
+                                    Txt_nombre.Text.Trim() +
+                                    " " +
+                                    Txt_apellidos.Text.Trim() +
+                                    ", código " +
+                                    Txt_idempleado.Text.Trim() +
+                                    "."
+                                );
                             }
                             else
                             {
-                                MessageBox.Show("No se encontró ningún empleado con los datos ingresados.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show(
+                                    "No se encontró el empleado.",
+                                    "Búsqueda",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Information
+                                );
                             }
                         }
                     }
@@ -189,7 +218,12 @@ namespace ProyectoAsis22K26Nominas
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al buscar empleado: " + ex.Message, "Error BD", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(
+                    "Error al buscar empleado: " + ex.Message,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
             }
         }
 
@@ -199,6 +233,19 @@ namespace ProyectoAsis22K26Nominas
 
         private async void Btn_Buscar_Click(object sender, EventArgs e)
         {
+            // Validar que se haya ingresado el ID antes de consultar la base de datos
+            if (string.IsNullOrWhiteSpace(Txt_idempleado.Text))
+            {
+                MessageBox.Show(
+                    "Para buscar ingrese el ID del empleado.",
+                    "Advertencia",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                Txt_idempleado.Focus();
+                return;
+            }
+
             await BuscarEmpleadoAsync();
         }
 
@@ -230,5 +277,29 @@ namespace ProyectoAsis22K26Nominas
         private void textBox3_TextChanged(object sender, EventArgs e) { }
 
         #endregion
+
+        private void Btn_exportar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Redondear(Control control, int radio)
+        {
+            GraphicsPath path = new GraphicsPath();
+
+            path.AddArc(0, 0, radio, radio, 180, 90);
+            path.AddArc(control.Width - radio, 0, radio, radio, 270, 90);
+            path.AddArc(control.Width - radio, control.Height - radio, radio, radio, 0, 90);
+            path.AddArc(0, control.Height - radio, radio, radio, 90, 90);
+
+            path.CloseAllFigures();
+
+            control.Region = new Region(path);
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

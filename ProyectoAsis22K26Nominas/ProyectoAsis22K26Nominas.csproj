@@ -168,101 +168,101 @@
       <DependentUpon>CrystalReport2.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Frm_Principal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Frm_Principal.Designer.cs">
+      <DependentUpon>Frm_Principal.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormBitacora.cs">
+    <Compile Include="Frm_Bitacora.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormBitacora.Designer.cs">
-      <DependentUpon>FormBitacora.cs</DependentUpon>
+    <Compile Include="Frm_Bitacora.Designer.cs">
+      <DependentUpon>Frm_Bitacora.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormControlSaldos.cs">
+    <Compile Include="Frm_Controlsaldos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormControlSaldos.Designer.cs">
-      <DependentUpon>FormControlSaldos.cs</DependentUpon>
+    <Compile Include="Frm_Controlsaldos.Designer.cs">
+      <DependentUpon>Frm_Controlsaldos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormDirectorioEmpleados.cs">
+    <Compile Include="Frm_DirectorioEmpleados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormDirectorioEmpleados.Designer.cs">
-      <DependentUpon>FormDirectorioEmpleados.cs</DependentUpon>
+    <Compile Include="Frm_DirectorioEmpleados.Designer.cs">
+      <DependentUpon>Frm_DirectorioEmpleados.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormGenerarPlanilla.cs">
+    <Compile Include="Frm_GenerarPlanilla.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormGenerarPlanilla.Designer.cs">
-      <DependentUpon>FormGenerarPlanilla.cs</DependentUpon>
+    <Compile Include="Frm_GenerarPlanilla.Designer.cs">
+      <DependentUpon>Frm_GenerarPlanilla.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formasistencia.cs">
+    <Compile Include="Frm_Asistencias.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formasistencia.Designer.cs">
-      <DependentUpon>Formasistencia.cs</DependentUpon>
+    <Compile Include="Frm_Asistencias.Designer.cs">
+      <DependentUpon>Frm_Asistencias.cs</DependentUpon>
     </Compile>
-    <Compile Include="Formhelp.cs">
+    <Compile Include="Frm_help.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formhelp.Designer.cs">
-      <DependentUpon>Formhelp.cs</DependentUpon>
+    <Compile Include="Frm_help.Designer.cs">
+      <DependentUpon>Frm_help.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormHistorialNomina.cs">
+    <Compile Include="Frm_HistorialNomina.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormHistorialNomina.Designer.cs">
-      <DependentUpon>FormHistorialNomina.cs</DependentUpon>
+    <Compile Include="Frm_HistorialNomina.Designer.cs">
+      <DependentUpon>Frm_HistorialNomina.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormHistorialPagos.cs">
+    <Compile Include="Frm_HistorialPagos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormHistorialPagos.Designer.cs">
-      <DependentUpon>FormHistorialPagos.cs</DependentUpon>
+    <Compile Include="Frm_HistorialPagos.Designer.cs">
+      <DependentUpon>Frm_HistorialPagos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormHistorialVacaciones.cs">
+    <Compile Include="Frm_HistorialVacaciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormHistorialVacaciones.Designer.cs">
-      <DependentUpon>FormHistorialVacaciones.cs</DependentUpon>
+    <Compile Include="Frm_HistorialVacaciones.Designer.cs">
+      <DependentUpon>Frm_HistorialVacaciones.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLiquidacionRecibo.cs">
+    <Compile Include="Frm_LiquidacionRecibo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLiquidacionRecibo.Designer.cs">
-      <DependentUpon>FormLiquidacionRecibo.cs</DependentUpon>
+    <Compile Include="Frm_LiquidacionRecibo.Designer.cs">
+      <DependentUpon>Frm_LiquidacionRecibo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormLogin.cs">
+    <Compile Include="Frm_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormLogin.Designer.cs">
-      <DependentUpon>FormLogin.cs</DependentUpon>
+    <Compile Include="Frm_Login.Designer.cs">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMantenimientoEmpleado.cs">
+    <Compile Include="Frm_MantenimientoEmpleado.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMantenimientoEmpleado.Designer.cs">
-      <DependentUpon>FormMantenimientoEmpleado.cs</DependentUpon>
+    <Compile Include="Frm_MantenimientoEmpleado.Designer.cs">
+      <DependentUpon>Frm_MantenimientoEmpleado.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormMovimientosPlanilla.cs">
+    <Compile Include="Frm_MovimientosPlanilla.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormMovimientosPlanilla.Designer.cs">
-      <DependentUpon>FormMovimientosPlanilla.cs</DependentUpon>
+    <Compile Include="Frm_MovimientosPlanilla.Designer.cs">
+      <DependentUpon>Frm_MovimientosPlanilla.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormNuevoregistro.cs">
+    <Compile Include="Frm_Nuevoregistro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormNuevoregistro.Designer.cs">
-      <DependentUpon>FormNuevoregistro.cs</DependentUpon>
+    <Compile Include="Frm_Nuevoregistro.Designer.cs">
+      <DependentUpon>Frm_Nuevoregistro.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormSolicitudVacaciones.cs">
+    <Compile Include="Frm_SolicitudVacaciones.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormSolicitudVacaciones.Designer.cs">
-      <DependentUpon>FormSolicitudVacaciones.cs</DependentUpon>
+    <Compile Include="Frm_SolicitudVacaciones.Designer.cs">
+      <DependentUpon>Frm_SolicitudVacaciones.cs</DependentUpon>
     </Compile>
     <Compile Include="materialform.cs" />
     <Compile Include="Program.cs" />
@@ -272,53 +272,53 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CrystalReport2.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_Principal.resx">
+      <DependentUpon>Frm_Principal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormBitacora.resx">
-      <DependentUpon>FormBitacora.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_Bitacora.resx">
+      <DependentUpon>Frm_Bitacora.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormControlSaldos.resx">
-      <DependentUpon>FormControlSaldos.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_Controlsaldos.resx">
+      <DependentUpon>Frm_Controlsaldos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormDirectorioEmpleados.resx">
-      <DependentUpon>FormDirectorioEmpleados.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_DirectorioEmpleados.resx">
+      <DependentUpon>Frm_DirectorioEmpleados.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormGenerarPlanilla.resx">
-      <DependentUpon>FormGenerarPlanilla.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_GenerarPlanilla.resx">
+      <DependentUpon>Frm_GenerarPlanilla.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formasistencia.resx">
-      <DependentUpon>Formasistencia.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_Asistencias.resx">
+      <DependentUpon>Frm_Asistencias.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Formhelp.resx">
-      <DependentUpon>Formhelp.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_help.resx">
+      <DependentUpon>Frm_help.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormHistorialNomina.resx">
-      <DependentUpon>FormHistorialNomina.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_HistorialNomina.resx">
+      <DependentUpon>Frm_HistorialNomina.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormHistorialPagos.resx">
-      <DependentUpon>FormHistorialPagos.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_HistorialPagos.resx">
+      <DependentUpon>Frm_HistorialPagos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormHistorialVacaciones.resx">
-      <DependentUpon>FormHistorialVacaciones.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_HistorialVacaciones.resx">
+      <DependentUpon>Frm_HistorialVacaciones.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormLiquidacionRecibo.resx">
-      <DependentUpon>FormLiquidacionRecibo.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_LiquidacionRecibo.resx">
+      <DependentUpon>Frm_LiquidacionRecibo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormLogin.resx">
-      <DependentUpon>FormLogin.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_Login.resx">
+      <DependentUpon>Frm_Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMantenimientoEmpleado.resx">
-      <DependentUpon>FormMantenimientoEmpleado.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_MantenimientoEmpleado.resx">
+      <DependentUpon>Frm_MantenimientoEmpleado.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormMovimientosPlanilla.resx">
-      <DependentUpon>FormMovimientosPlanilla.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_MovimientosPlanilla.resx">
+      <DependentUpon>Frm_MovimientosPlanilla.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormNuevoregistro.resx">
-      <DependentUpon>FormNuevoregistro.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_Nuevoregistro.resx">
+      <DependentUpon>Frm_Nuevoregistro.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormSolicitudVacaciones.resx">
-      <DependentUpon>FormSolicitudVacaciones.cs</DependentUpon>
+    <EmbeddedResource Include="Frm_SolicitudVacaciones.resx">
+      <DependentUpon>Frm_SolicitudVacaciones.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

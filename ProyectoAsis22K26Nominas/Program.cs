@@ -18,13 +18,13 @@ namespace ProyectoAsis22K26Nominas
             Application.SetCompatibleTextRenderingDefault(false);
 
             // 1. Instanciamos el formulario de Login dentro de un 'using' para liberar memoria al cerrar
-            using (FormLogin login = new FormLogin())
+            using (Frm_Login login = new Frm_Login())
             {
                 // 2. Mostramos el Login como ventana modal
                 if (login.ShowDialog() == DialogResult.OK)
                 {
                     // Si el login fue exitoso, abrimos el Form1 principal
-                    Application.Run(new Form1());
+                    Application.Run(new Frm_Principal());
                 }
                 else
                 {
